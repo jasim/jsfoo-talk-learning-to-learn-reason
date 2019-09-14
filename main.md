@@ -1,18 +1,19 @@
 ---
 author:
-- Lincoln Mullen
-subtitle: Doing DH Institute
-title: Spatial History
+- Jasim A Basheer
+subtitle: Thinking with Types
+title: Learning to learn ReasonML
 titlepage-note: |
-  This is a the note that goes on the title page. This talk is to be 
-  given at Doing DH.
-institute: George Mason University
+  Talk for JsFoo 2019
+institute: "@jasim_ab"
 fontsize: 17pt
 ...
 
 # Don't be afraid of telling lies; be afraid of failing to communicate the truth
 
-\note{}
+\note{
+  HELLO!
+}
 
 ---
 
@@ -51,13 +52,47 @@ vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
 no sea takimata sanctus est Lorem ipsum dolor sit amet.
 }
 
+---
+
+## First step
+
+``` {.javascript}
+switch (play.type) {
+  case "tragedy":  
+    return new TragedyCalculator(
+      aPerformance, aPlay
+    );
+    
+  case "comedy":
+    thisAmount = 30000;
+    if (perf.audience > 20) {
+      thisAmount += 10000 + 500 * (perf.audience - 20);
+    }
+    thisAmount += 300 * perf.audience;
+    break;
+  default:
+    throw new Error(`unknown type: ${play.type}`);
+}
+```
+
+\note{
+This might be easier in R or Ruby.
+}
+
+---
+
 ## Code example
 
-``` {.ruby}
-puts "Hello world."
-def my_awesome_variable
-  puts "My awesome variable"
-end
+``` {.javascript}
+type type_ =
+  | Tragedy
+  | Comedy;
+
+type play = {
+  name: string,
+  audience: int,
+  type_,
+};
 ```
 
 \note{
