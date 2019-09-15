@@ -20,39 +20,147 @@ institute: "@jasim_ab"
 fontsize: 17pt
 ...
 
-# Reason is a new syntax on top of OCaml
+# Reason is OCaml
+
+::: notes
+
+Reason is a new syntax on top of the OCaml programming language. 
+
+:::
+
+---
 
 ## OCaml
 
-\note{
-  Reason is a new syntax on top of OCaml.
-  OCaml is a language that has been around for over 20 years. But its syntax is very different to most languages that we know.
-  
-  Jordan Walke, who wrote React at Facebook, he wanted to be able to use OCaml for all his work, including innovation on React itself.
-  
-  But since the OCaml syntax was going to be a problem in commercial adoption, he went ahead and created Reason, with a syntax that is very similar to the ES6 Javascript syntax that we're used to. But it is all actually OCaml underneath.
+* First released in 1990 in France
 
-  So I'll use both Reason and OCaml interchangeably in this presentation, depending on what fits the context better.
-}
+* ISWIM syntax (OCaml, Haskell)
 
-# What can we build with Reason?
+(most languages including ES6 follow ALGOL style)
 
-### Jane Street
+::: notes
 
-We can build high-frequency stock exchanges 
+OCaml was first released about 20 years ago, and it has been in active development ever since.
 
-\note{
-  So the first question is whether it is actually useful? What can we build with this language?
+But its syntax is a little different from most languages that we know.
 
-  We can build high-frequency stock exchanges with OCaml. If you Google for OCaml, you'll come across Jane Street, who is the largest production user of OCaml apart from Facebook, and they do billions of dollars worth of trading in systems written in OCaml.
-}
+:::
+
+---
+
+## OCaml sample code
+
+``` {.ocaml}
+let rec read_and_accumulate accum =
+  let line = In_channel.input_line In_channel.stdin in
+  match line with
+  | None -> accum
+  | Some x -> read_and_accumulate (accum +. Float.of_string x)
+
+let () =
+  printf "Total: %F\n" (read_and_accumulate 0.)  
+```
+
+::: notes
+
+Jordan Walke, who wrote React at Facebook, he wanted to be able to use OCaml for all his programming, including further work on React itself.
+
+But since the OCaml syntax was unfamiliar to mainstream programmers, he went ahead and created Reason, with a syntax that is very similar to the ES6 Javascript syntax which we're used to. But it is all actually OCaml underneath.
+
+:::
+
+---
+
+## Same code, in Reason
+
+``` {.javascript}
+let rec read_and_accumulate = accum => {
+  let line = In_channel.input_line(In_channel.stdin);
+  switch (line) {
+  | None => accum
+  | Some(x) => read_and_accumulate(accum +. Float.of_string(x))
+  };
+};
+
+let () = printf("Total: %F\n", read_and_accumulate(0.));
+```
+
+::: notes
+
+The point is, underneath, it is the same language and same semantics. So I'll use both Reason and OCaml interchangeably in this presentation, depending on what fits the context better.
+
+:::
+
+---
+
+# What can we build with Reason/OCaml?
+
+::: notes
+
+So the first question is whether it is actually useful? What can we build with this language?
+
+:::
+
+---
+
+## What can we build with Reason/OCaml?
+
+### High-frequency trading software
+
+&nbsp;
+
+![](images/jane-street.png)
+
+::: notes
+
+When you start reading about OCaml, you'll come across Jane Street, who is the largest production user of the language, apart from Facebook, and they do billions of dollars worth of trading, all exclusively in software written in OCaml.
+
+:::
+
+---
+
+## What can we build with Reason/OCaml?
+
+### World's second largest crawler
+
+&nbsp;
+
+![](images/ahrefs.png)
+
+::: notes
+
+If you have done any SEO work, you might be familiar with Ahrefs. They crawl about 5 million pages every minute, just behind Googlebot. They use OCaml for all the back-end infra and Reason on the front-end.
+
+:::
+
+---
+
+## What can we build with Reason/OCaml?
+
+### Compilers
+
+* First version of the Rust compiler
+* Flow (typechecker for Javascript)
+
+&nbsp;
+
+::: notes
+
+OCaml is also particularly nice to write compilers on - in fact anything that deals with a lot of tree manipulation is a great fit.
+:::
+
+---
 
 # Reason is a Typed Functional Programming Language
 
-\note{
+::: notes
+
   Reason is a new syntax on top of OCaml.
   OCaml is a programming language in the Typed Functional paradigm. That paradigm is the most defining feature when contrasted against other languages that we might be familiar with.
-}
+
+:::
+
+---
 
 ## Javascript is Dynamically Typed
 
@@ -66,10 +174,13 @@ _Untyped Functional:_
 
 Clojure, Lisp/Scheme/Racket, **Javascript**
 
-\note{
-  Javascript is a dynamically typed langauge. It is a multi-paradigm language -- we can use ES6's class syntax to write classical object-oriented code, or just use functions as first-class citizens, and write purely function code. 
-}
+::: notes
 
+Javascript is a dynamically typed langauge. It is a multi-paradigm language -- we can use ES6's class syntax to write classical object-oriented code, or just use functions as first-class citizens, and write purely function code. 
+
+:::
+
+---
 
 ## Typed Functional
 
@@ -79,28 +190,34 @@ C++, Java, C#, Scala
 ### Typed Functional Languages
 Haskell, Scala, OCaml (Reason)
 
-\note{
-  Javascript is a dynamically typed langauge. And we can write both object-oriented code as well as purely functional code with it. It is sort-of multi-paradigm there.
-}
+::: notes
 
+Javascript is a dynamically typed langauge. And we can write both object-oriented code as well as purely functional code with it. It is sort-of multi-paradigm there.
 
-
-# Object-oriented vs Typed Functional Code
-
-\note{
-  Let's start with a comparison of how a program looks when done in an
-  untyped, object-oriented manner written in Javascript,
-  vs when it is done in the Typed Functional manner written in Reason.
-  Here on the screen is a JSON with a naive version of the code, and then refactors it into a clean object-oriented version.
-}
+:::
 
 ---
 
 # Object-oriented vs Typed Functional Code
 
-\note{
-  Here on the screen is a snippet of code from the book "Refactoring" by Martin Fowler. This is from the first chapter, he opens with a naive version of the code, and then refactors it into a clean object-oriented version.
-}
+::: notes
+
+Let's start with a comparison of how a program looks when done in an
+untyped, object-oriented manner written in Javascript,
+vs when it is done in the Typed Functional manner written in Reason.
+Here on the screen is a JSON with a naive version of the code, and then refactors it into a clean object-oriented version.
+
+:::
+
+---
+
+# Object-oriented vs Typed Functional Code
+
+::: notes
+
+Here on the screen is a snippet of code from the book "Refactoring" by Martin Fowler. This is from the first chapter, he opens with a naive version of the code, and then refactors it into a clean object-oriented version.
+
+:::
 
 ---
 
@@ -111,16 +228,18 @@ Regular text size
 \tiny Jonathan Sarna, *American Judaism* (New Haven: Yale University
 Press, 2014)
 
-\note{
+::: notes
+
 NOTES: This is a note page and you ought to be able to tell.
-}
+
+::: notes
+
 
 ## Slide with text and footnote
 
 Surely this is true.^[Jane Doe, *Says It Here* (New York: Oxford 
 University Press, 2050).] 
 
-\note{I am sure about this point.}
 
 ## This is a heading
 
@@ -129,15 +248,6 @@ Regular text on a slide:
 -   One
 -   Two
 -   Three
-
-\note{
-More notes:
-
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At
-vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
-no sea takimata sanctus est Lorem ipsum dolor sit amet.
-}
 
 ---
 
@@ -162,9 +272,6 @@ switch (play.type) {
 }
 ```
 
-\note{
-This might be easier in R or Ruby.
-}
 
 ---
 
@@ -182,6 +289,3 @@ type play = {
 };
 ```
 
-\note{
-This might be easier in R or Ruby.
-}
