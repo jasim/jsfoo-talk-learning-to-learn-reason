@@ -6,41 +6,33 @@ title: Learning to learn ReasonML
 titlepage-note: |
   Hello, my name is Jasim, and I'm here today to talk about ReasonML. 
   
-  I don't imagine, that many of us here would've watched any talks or read any blogposts about Driving, before we ever tried to learn it. We just sit behind the wheels and fumble and get stressed out and then slowly build an intuition. And then over time it becomes second nature to us. 
+  Those of you here who have learnt to drive, I don't imagine you would have read any blogposts or watched any talks about it. We just sit behind the wheel, fumble, and get stressed out, and slowly painfully build an intuition. Over time it becomes second nature though.
   
-  Most physical activities are like that. Mental activities are also like that - and it is the same when trying to learn a new programming language as well.
+  Any activity that requires skill is like that. It is the same when trying to learn a new programming language as well.
   
-  But learning a language, particularly a language that is quite different from what we're used to, that requires a significant amount of time and effort. 
+  But learning a language, particularly something that is quite different from what we're used to, will require a significant amount of time and effort. 
   
-  I've found that it also requires an emotional sort of commitment. And once we're emotionally invested, the time and space will just make itself available.
+  I've found that it also requires an emotional sort of commitment. And once we're emotionally invested, it becomes play and then time is no longer a concern.
   
-  My hope today is to help you with that. To show you how Reason is an interesting language, and sort of give you a feel for what it could be to be programming in it. 
+  My hope today is to help you with that. I'll show you the most interesting bits of Reason, and sort of give you a feel for what it could be to be programming in it.
   
 institute: "@jasim_ab"
 fontsize: 17pt
 ...
 
-# Reason is OCaml
+## Reason is OCaml
+
+* First released in 1990 in France
+
+* Fast programs approaching C-like speeds
+
+* ISWIM syntax (OCaml, Haskell) not ALGOL (C, Java, Javascript etc.)
 
 ::: notes
 
 Reason is a new syntax on top of the OCaml programming language. 
 
-:::
-
----
-
-## OCaml
-
-* First released in 1990 in France
-
-* ISWIM syntax (OCaml, Haskell)
-
-(most languages including ES6 follow ALGOL style)
-
-::: notes
-
-OCaml was first released about 20 years ago, and it has been in active development ever since.
+OCaml has a long history - it was first released in 1990 - about 20 years ago. It is a compiled language and produces very performant binaries; it is sort of like GoLang in that respect. 
 
 But its syntax is a little different from most languages that we know.
 
@@ -63,9 +55,7 @@ let () =
 
 ::: notes
 
-Jordan Walke, who wrote React at Facebook, he wanted to be able to use OCaml for all his programming, including further work on React itself.
-
-But since the OCaml syntax was unfamiliar to mainstream programmers, he went ahead and created Reason, with a syntax that is very similar to the ES6 Javascript syntax which we're used to. But it is all actually OCaml underneath.
+Here is a program that reads a list of numbers from the standard input and prints their sum.
 
 :::
 
@@ -87,6 +77,8 @@ let () = printf("Total: %F\n", read_and_accumulate(0.));
 
 ::: notes
 
+Here's the same OCaml code, but in the Reason syntax.
+
 The point is, underneath, it is the same language and same semantics. So I'll use both Reason and OCaml interchangeably in this presentation, depending on what fits the context better.
 
 :::
@@ -97,7 +89,7 @@ The point is, underneath, it is the same language and same semantics. So I'll us
 
 ::: notes
 
-So the first question is whether it is actually useful? What can we build with this language?
+So is it actually useful? This language. What can we build with it? Let me take you through some examples.
 
 :::
 
@@ -113,7 +105,7 @@ So the first question is whether it is actually useful? What can we build with t
 
 ::: notes
 
-When you start reading about OCaml, you'll come across Jane Street, who is the largest production user of the language, apart from Facebook, and they do billions of dollars worth of trading, all exclusively in software written in OCaml.
+When you start reading about OCaml, you'll often come across Jane Street. They are one of the largest production users of the language and they do billions of dollars worth of trading, all with software written in OCaml.
 
 :::
 
@@ -129,7 +121,7 @@ When you start reading about OCaml, you'll come across Jane Street, who is the l
 
 ::: notes
 
-If you have done any SEO work, you might be familiar with Ahrefs. They crawl about 5 million pages every minute, just behind Googlebot. They use OCaml for all the back-end infra and Reason on the front-end.
+If you have done any SEO work, you might be familiar with Ahrefs. They crawl about 5 million pages every minute, and they have the second largest index after Google. They use native OCaml for all the back-end infra and for the front-end web they use Reason.
 
 :::
 
@@ -141,15 +133,61 @@ If you have done any SEO work, you might be familiar with Ahrefs. They crawl abo
 
 * First version of the Rust compiler
 * Flow (typechecker for Javascript)
+* Hack (Facebook's PHP compiler)
 
 &nbsp;
 
 ::: notes
 
-OCaml is also particularly nice to write compilers on - in fact anything that deals with a lot of tree manipulation is a great fit.
+OCaml is also particularly nice to write compilers on - in fact anything that deals with a lot of tree manipulation is a great fit. Rust borrows many ideas from OCaml, and their first compiler was written in the language. Facebook is also a large user of OCaml internally.
+
+5mins
+
 :::
 
 ---
+
+## What can we build with Reason/OCaml?
+
+### Front-end web applications!
+
+* BuckleScript compiles Reason/OCaml to Javascript
+
+/large Reason syntax + BuckleScript compiler = Performant Front-end web applications
+
+::: notes
+
+Those were the traditional applications of OCaml. 
+
+OCaml can also be used to build front-end web applications. That's what this talk is about.
+
+The regular OCaml compiler emits executable binary, but we want Javascript. So there is an OCaml compiler called BuckleScript - it emits performant Javascript. This is readable Javascript and plays nicely with npm.
+
+:::
+
+---
+
+
+
+
+# Object-oriented vs Typed Functional Code
+
+::: notes
+
+Let's start off with a code comparison.
+
+Here's a snippet of code that is object-oriented Javascript, from the book "Refactoring" by Martin Fowler.
+
+:::
+
+---
+
+# Object-oriented vs Typed Functional Code
+
+::: notes
+
+
+:::
 
 # Reason is a Typed Functional Programming Language
 
@@ -193,29 +231,6 @@ Haskell, Scala, OCaml (Reason)
 ::: notes
 
 Javascript is a dynamically typed langauge. And we can write both object-oriented code as well as purely functional code with it. It is sort-of multi-paradigm there.
-
-:::
-
----
-
-# Object-oriented vs Typed Functional Code
-
-::: notes
-
-Let's start with a comparison of how a program looks when done in an
-untyped, object-oriented manner written in Javascript,
-vs when it is done in the Typed Functional manner written in Reason.
-Here on the screen is a JSON with a naive version of the code, and then refactors it into a clean object-oriented version.
-
-:::
-
----
-
-# Object-oriented vs Typed Functional Code
-
-::: notes
-
-Here on the screen is a snippet of code from the book "Refactoring" by Martin Fowler. This is from the first chapter, he opens with a naive version of the code, and then refactors it into a clean object-oriented version.
 
 :::
 
