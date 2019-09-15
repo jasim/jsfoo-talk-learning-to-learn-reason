@@ -1,0 +1,46 @@
+INTENTION:
+  * Brief explanation of what the language is
+  * Motivate with an increasingly compelling set of reasons to learn the language
+  * Deep explanation of what the language is
+  * A strong motivating example
+  * How to learn -- concepts involved
+  * Fin.
+
+Hello,
+
+
+Here on the screen is a snippet of Javascript code from the book "Refactoring" by Martin Fowler. This is a refactored, object-oriented piece of code.
+
+Reason is a Typed Functional Programming language. It has types -- you can specify the shape and structure of your data, and then you can write code knowing that the data always follows those types. It is functional -- so you can work closely with your data, and not have to create classes and deal with state. 
+
+
+This code - it takes a list of plays - comedies and tragedies - and number of people who will be attending them, and tells you how much it costs in total to perform all of them. The cost of each play will depend on whether it is a Tragedy or a Comedy, and how many seats are sold. 
+
+This is not exemplary Javascript, so Martin Fowler refactors it step by step and gives us the final version as follows:
+
+Let's take a quick look at what it does. We'll look at the original version.. Here we iterate over a list of performances, and depending on whether its tragedy or comedy, we compute the amount. The pricing policy is a little involved -- that's what's happening here. 
+
+
+But first let me tell you about OCaml.
+
+OCaml is a programming language that is nice to write compilers on -- the first version of the Rust compiler for example was written in OCaml. 
+
+It is also a systems programming language -- Jane Street for example -- they're a high-frequency trading platform -- they run their entire operations in OCaml. If you have done any SEO work, you might be familiar with Ahrefs. They crawl about 5 million pages every minute. They're also an OCaml shop.
+
+So what is such a language doing on the browser? That's because of Jordan Walke -- he created React -- first in an OCaml-like language (Standard ML) -- then ported it into Javascript -- and now he's back to OCaml to build a  who runs the Reason project. Reason is a new syntax for OCaml built by Jordan Walk and Cheng Lou. It uses the compiler called BuckleScript 
+
+
+Reason is a new syntax on an old language called OCaml. 
+
+
+
+
+Reason is in fact just a new syntax for the 20-year old language called OCaml. Reason's compiler is called BuckleScript, is built on top of OCaml's compiler. OCaml emits native binaries across 
+
+It was made at Facebook, by the Jordan Walke. And he was the person who made React in the first place.
+
+Who uses Reason? Facebook's Messenger uses Reason extensively. 
+Ha
+
+It compiles down into Javascript so we can use it on the browser and also on the server with Node.js.
+
