@@ -147,8 +147,6 @@ OCaml is also particularly nice to write compilers on - in fact anything that de
 
 * BuckleScript compiles Reason/OCaml to Javascript
 
-/large Reason syntax + BuckleScript compiler = Performant Front-end web applications
-
 ::: notes
 
 Those were the traditional applications of OCaml. 
@@ -210,9 +208,9 @@ As you can see BuckleScript required the correct npm module and compiled everyth
 
 ## Javascript vs Reason
 
-* **Javascript**: `this`, variable hoisting, prototypes, ES6 classes, objects, mutations, functions, modules
+* **Javascript**: `this`, variable hoisting, prototypes, ES6 classes, objects, mutations, _functions, modules_
 
-* **Reason**: functions, modules, types
+* **Reason**: _functions, modules, types_
 
 ::: notes
 Javascript however is a large language -- it has far too many concepts -- and that is obvious if you've participated in any Javascript interview. You can ask and be asked so many questions. There is the concept of `this`, there is prototypes and prototype inheritance chains which have their own rules, and there are also classes, objects, and mutation. It also has functions and higher-order functions.
@@ -225,6 +223,7 @@ Reason comparatively is a smaller language. It only has functions, modules, and 
 ## Programming in Reason
 
 Two principles:
+
 1) Write pure functions
 2) Get their types right
 
@@ -245,95 +244,151 @@ But Reason guarantees something else:
 
 "perfection".
 
-Reason functions are "perfect" - what that means is that they do exactly what they need to do; nothing more; nothing less. And they work perfectly reliably all the time, every time.
+Reason functions are "perfect" - what that means is that they do exactly what they need to do; nothing more; nothing less. And they work perfectly reliably, all the time, every time.
 
-That is the notion of perfection that we're going to work with.
+Let's try applying that notion to Javascript functions.
 
 ::: 
 
 ----
-## Imperfect Software
+
+## An Imperfect Function
 
 ``` {.javascript}
-let lastUser = {id: 16}
-```
-
-``` {.javascript}
-let showNext = u => {
-  console.log("You will be user " + (u.id + 1))
+let showNext = lastUser => {
+  console.log("You will be user " + (lastUser.id + 1))
 }
 
-showNext(lastUser)
+showNext({id: 16})
 ```
 
 **_You will be user 17_**
 
 ::: notes
 
-Consider this Javascript function `showNext` - it tells you what your user id could be based on the last user in the system. 
+Consider this function `showNext` - it tells you what your user id could be, based on the last user in the system. 
 
-The code is as simple as it can get. But does it do exactly what it needs to do, nothing more, nothing less? And does it work perfectly reliably all the time, every time? 
+The code is as simple as it can get. 
 
-Basically, will it ever crash in production?
+But does it work perfectly reliably all the time, every time?
+
+Will it ever crash in production?
 
 :::
 
 ----
 
-## Imperfect Software
+## An Imperfect Function
 
-
-**let lastUser = {id: null}**
-
-
-``` {.javascript}
+``` {.text}
 let showNext = u => {
   console.log("You will be user " + (u.id + 1))
 }
 
-showNext(lastUser)
+``` {.javascript}
+showNext({id: null)
+```
+
+::: notes
+What if `id` is null?
+:::
+
+----
+
+## An Imperfect Function
+
+``` {.text}
+let showNext = u => {
+  console.log("You will be user " + (u.id + 1))
+}
+
+``` {.javascript}
+showNext({id: null)
 ```
 
 **_You will be user 1_**
 
 ::: notes
-Okay, what if `id` is null?
-
-Thankfully that works - showNext handles it gracefully.
+Thankfully that works. Our function is resilient to nulls.
 :::
 
 ----
 
-## Imperfect Software
+## An Imperfect Function
 
-
-**let lastUser = {}**
-
-
-``` {.javascript}
+``` {.text}
 let showNext = u => {
   console.log("You will be user " + (u.id + 1))
 }
 
-showNext(lastUser)
+``` {.javascript}
+showNext({id: "193"})
+```
 
+::: notes
+What if id was a string?
+:::
+
+----
+
+
+## An Imperfect Function
+
+``` {.text}
+let showNext = u => {
+  console.log("You will be user " + (u.id + 1))
+}
+
+``` {.javascript}
+showNext({id: "193"})
+```
+
+**_You will be user 1931_**
+
+::: notes
+That's not what we expected. That's one problem with this function.
+:::
+
+---
+
+## An Imperfect Function
+
+``` {.text}
+let showNext = u => {
+  console.log("You will be user " + (u.id + 1))
+}
+
+``` {.javascript}
+showNext({})
+```
+
+::: notes
+Now what happens when the object is empty?
+:::
+
+----
+
+
+## An Imperfect Function
+
+``` {.text}
+let showNext = u => {
+  console.log("You will be user " + (u.id + 1))
+}
+
+``` {.javascript}
+showNext({})
 ```
 
 **_You will be user NaN_**
 
 ::: notes
-What if the object was empty? We get a wrong result. That's one way the function is not perfect.
+This is also a wrong result. Another way the function is not perfect.
 :::
 
 ----
 
-## Imperfect Software
-
-
-**
-let users = []
-
-let lastUser = users[users.length - 1]**
+## An Imperfect Function
 
 
 ``` {.javascript}
@@ -341,22 +396,21 @@ let showNext = u => {
   console.log("You will be user " + (u.id + 1))
 }
 
-showNext(lastUser)
+let users = []
+let lastUser = users[users.length - 1]
 
+showNext(lastUser)
 ```
 
 ::: notes
-What if we called it with an undefined value? Here we have a list of users and we get the last one are getting the last user from a list of users, and the list of users is unfortunately empty. This is a common case where we get an undefined where we don't expect it.
+We now have a list of users and we apply the last one to `showNext`. 
+Unfortunately, the list is empty. What happens now?
 :::
 
 ----
 
-## Imperfect Software
+## An Imperfect Function
 
-
-**
-let users = []
-let lastUser = users[users.length - 1]**
 
 
 ``` {.javascript}
@@ -364,22 +418,45 @@ let showNext = u => {
   console.log("You will be user " + (u.id + 1))
 }
 
-showNext(lastUser)
+let users = []
+let lastUser = users[users.length - 1]
 
+showNext(lastUser)
 ```
 
 **_Uncaught TypeError: Cannot read property 'id' of undefined_**
 
 ::: notes
-Now the function actually crashes. This is the second way where the function is not perfect -- when the parameter is undefined -- and that occurs quite often in production codebases. 
+The function actually crashes. 
+
+This is a common occurence - we fetch a value from an array or an object -- and it doesn't exist -- so we get a null or an undefined, and then we pass that down to other functions.. and things crash in production. To figure out why, you now have to work backwards and trace the entire data-flow till we find where the data went wrong.
 :::
 
 ----
 
-## Imperfect Software
+## An Imperfect Function
 
 
-**let lastUser = {}**
+``` {.javascript}
+showNext()
+showNext({id: "a"})
+showNext({id: {}})
+showNext(undefined)
+showNext(null)
+showNext(0)
+showNext("a")
+showNext([])
+showNext([1])
+showNext(a => a + 1)
+```
+
+::: notes
+Our function is not "perfect". So let's count the number of ways our function breaks. There are, as you can see, quite a few.
+:::
+
+----
+
+## An Imperfect Function
 
 
 ``` {.javascript}
@@ -399,30 +476,7 @@ What if the object was empty? That doesn't crash the function, but it gives us a
 
 ----
 
-## Imperfect Software
-
-
-**let lastUser = {}**
-
-
-``` {.javascript}
-let showNext = u => {
-  console.log("You will be user " + (u.id + 1))
-}
-
-showNext(lastUser)
-
-```
-
-**_You will be user NaN_**
-
-::: notes
-What if the object was empty? That doesn't crash the function, but it gives us an invalid result. That's one way the function is not perfect.
-:::
-
-----
-
-## Imperfect Software
+## An Imperfect Function
 
 
 ``` {.javascript}
@@ -433,7 +487,7 @@ What if the object was empty? That doesn't crash the function, but it gives us a
 
 ----
 
-## Imperfect Software
+## An Imperfect Function
 
 
 ``` {.javascript}
@@ -445,7 +499,7 @@ What if the object was empty? That doesn't crash the function, but it gives us a
 
 ----
 
-## Imperfect Software
+## An Imperfect Function
 
 
 ``` {.javascript}
@@ -457,7 +511,7 @@ What if the object was empty? That doesn't crash the function, but it gives us a
 
 ----
 
-## Imperfect Software
+## An Imperfect Function
 
 
 ``` {.javascript}
@@ -469,7 +523,7 @@ What if the object was empty? That doesn't crash the function, but it gives us a
 
 ----
 
-## Imperfect Software
+## An Imperfect Function
 
 
 ``` {.javascript}
