@@ -229,25 +229,42 @@ Two principles:
 
 ::: notes
 
-The way we program Reason is to write pure functions and call them. That's it. If the types don't match, the compiler will tell us, so we can fix them.
+The way we program Reason is to write our programs as a series of pure functions. That's it. 
 
-How is that an improvement over Javascript? We could write Javascript programs made up of pure functions alone, with an outer shell to I/O. That's a great way to program.
+But how is that an improvement over Javascript? We can write Javascript in a similar manner - with pure functions everywhere, and just an outer shell for all the I/O. That's essentially functional programming, and that's pretty nice.
 
-But Reason guarantees something else:
+But Reason is not only "functional", it is also "typed", and the types guarantees something:
 :::
 
 ----
 
 # Perfection
 
+The perfect computer program -- 
+
 ::: notes
 
 "perfection".
 
-Reason functions are "perfect" - what that means is that they do exactly what they need to do; nothing more; nothing less. And they work perfectly reliably, all the time, every time.
+Reason functions are more "perfect" than functions written in Javascript. The word "perfection" in this context comes from a talk given by Prof. Xavier Leroy, the author of OCaml. 
 
-Let's try applying that notion to Javascript functions.
+:::
 
+---
+
+# Perfection
+
+The perfect computer program -- 
+
+> The one that does exactly what it should do, no more, no less, every time, with perfect reliability, and forever. The kind of perfection that you can get from mathematical definitions, which software is to a large extent, or from philosophical concepts.
+
+> -- paraphrased from "In search of software perfection", 2016 Milner Award lecture by Dr. Xavier Leroy, author of OCaml
+
+::: notes
+
+"A perfect function does exactly what it should do, no more, no less, every time, with perfect reliability, and forever. The kind of perfection that you can get from mathematical definitions, which software is to a large extent, or from philosophical concepts."
+
+Let's first try to apply that notion to functions written in Javascript.
 ::: 
 
 ----
@@ -429,7 +446,7 @@ showNext(lastUser)
 ::: notes
 The function actually crashes. 
 
-This is a common occurence - we fetch a value from an array or an object -- and it doesn't exist -- so we get a null or an undefined, and then we pass that down to other functions.. and things crash in production. To figure out why, you now have to work backwards and trace the entire data-flow till we find where the data went wrong.
+This is a common occurence - we fetch a value from an array or an object -- and it doesn't exist -- so we get a null or an undefined, and then we pass that down to other functions.. and things crash in production. To figure out why, you now have to work backwards and trace the flow of data till we find where it went wrong.
 :::
 
 ----
@@ -451,7 +468,26 @@ showNext(a => a + 1)
 ```
 
 ::: notes
-Our function is not "perfect". So let's count the number of ways our function breaks. There are, as you can see, quite a few.
+There are even more ways this function is invalid. None of invokations here would work correctly.
+:::
+
+----
+
+## An Imperfect Function
+
+
+**The Anna Karenina principle**
+
+> All happy families are alike; each unhappy family is unhappy in its own way. 
+
+``` {.javascript}
+```
+
+::: notes
+
+There are many ways our function can break. But there is exactly one one way it can succeed. 
+
+And that is 
 :::
 
 ----
@@ -460,18 +496,42 @@ Our function is not "perfect". So let's count the number of ways our function br
 
 
 ``` {.javascript}
-let showNext = u => {
-  console.log("You will be user " + (u.id + 1))
+type user = {
+
 }
-
-showNext(lastUser)
-
 ```
 
-**_You will be user NaN_**
+::: notes
+when we pass it an object
+:::
+
+----
+
+
+## An Imperfect Function
+
+
+``` {.javascript}
+type user = {
+  id
+}
+```
 
 ::: notes
-What if the object was empty? That doesn't crash the function, but it gives us an invalid result. That's one way the function is not perfect.
+which has a field `id`
+:::
+
+----
+## A more perfect function, in Reason
+
+``` {.javascript}
+type user = {
+  id: int
+};
+```
+
+::: notes
+that is of type integer
 :::
 
 ----
