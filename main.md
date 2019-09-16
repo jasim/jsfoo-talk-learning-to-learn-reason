@@ -6,15 +6,9 @@ title: Learning to learn ReasonML
 titlepage-note: |
   Hello, my name is Jasim, and I'm here today to talk about ReasonML. 
   
-  Those of you here who have learnt to drive, I don't imagine you would have read any blogposts or watched any talks about it. We just sit behind the wheel, fumble, and get stressed out, and slowly painfully build an intuition. Over time it becomes second nature though.
+  Reason is a Typed Functional programming language, and the types and functions come together in a way that makes better programmers out of ourselves.
   
-  Any activity that requires skill is like that. It is the same when trying to learn a new programming language as well.
-  
-  But learning a language, particularly something that is quite different from what we're used to, will require a significant amount of time and effort. 
-  
-  I've found that it also requires an emotional sort of commitment. And once we're emotionally invested, it becomes play and then time is no longer a concern.
-  
-  My hope today is to help you with that. I'll show you the most interesting bits of Reason, and sort of give you a feel for what it could be to be programming in it.
+  I will show you how that happens, and also give you a feel for what it could be to be programming in it on a day-to-day basis. I will also talk about the most efficient way to learn the language, which is based on my experience learning and struggling with it in the past.
   
 institute: "@jasim_ab"
 fontsize: 17pt
@@ -121,7 +115,7 @@ When you start reading about OCaml, you'll often come across Jane Street. They a
 
 ::: notes
 
-If you have done any SEO work, you might be familiar with Ahrefs. They crawl about 5 million pages every minute, and they have the second largest index after Google. They use native OCaml for all the back-end infra and for the front-end web they use Reason.
+If you have done any SEO work, you might be familiar with Ahrefs. They crawl about 5 million pages every minute, and they have the second largest index just after Google. They use native OCaml for all the back-end infra and for the front-end web they use Reason.
 
 :::
 
@@ -159,9 +153,9 @@ OCaml is also particularly nice to write compilers on - in fact anything that de
 
 Those were the traditional applications of OCaml. 
 
-OCaml can also be used to build front-end web applications. That's what this talk is about.
+OCaml can also be used to build front-end web applications, and that's what this talk is about.
 
-The regular OCaml compiler emits executable binary, but we want Javascript. So there is an OCaml compiler called BuckleScript - it emits performant Javascript. And we can use any npm library in our code.
+The regular OCaml compiler emits executable binary, but we want Javascript so it executes on the browser. So there is an OCaml compiler called BuckleScript that emits performant Javascript. And it lets us use any npm library in the OCaml code almost seamlessly.
 
 :::
 
@@ -182,9 +176,9 @@ if (MomentRe.Moment.isSameWithGranularity(
 ::: notes
 
 This Reason code here - it checks whether the current day is April 1st 2020,
-and shows a message if it is.
+and then shows a message.
 
-It uses the momentjs Javascript library. Now let's see how the BuckleScript output looks.
+It uses the momentjs Javascript library from npm. Now let's see how the BuckleScript output looks.
 
 :::
 
@@ -206,101 +200,297 @@ if (Moment().isSame(MomentRe.moment(undefined, "2020-04-01"), "day")) {
 /*  Not a pure module */
 ```
 
+::: notes
+
+As you can see BuckleScript required the correct npm module and compiled everything to straightforward Javascript. 
+
+:::
+
 ----
 
-# Object-oriented vs Typed Functional Code
+## Javascript vs Reason
+
+* **Javascript**: `this`, variable hoisting, prototypes, ES6 classes, objects, mutations, functions, modules
+
+* **Reason**: functions, modules, types
 
 ::: notes
+Javascript however is a large language -- it has far too many concepts -- and that is obvious if you've participated in any Javascript interview. You can ask and be asked so many questions. There is the concept of `this`, there is prototypes and prototype inheritance chains which have their own rules, and there are also classes, objects, and mutation. It also has functions and higher-order functions.
 
-Let's start off with a code comparison.
-
-Here's a snippet of code that is object-oriented Javascript, from the book "Refactoring" by Martin Fowler.
-
+Reason comparatively is a smaller language. It only has functions, modules, and types.  We don't, for example, concern ourselves with what `this` could be during runtime. In fact a Reason interview would be a rather unexciting event - there aren't that many quirks to the language to deal with.
 :::
 
 ---
 
-# Object-oriented vs Typed Functional Code
+## Programming in Reason
+
+Two principles:
+1) Write pure functions
+2) Get their types right
 
 ::: notes
 
+The way we program Reason is to write pure functions and call them. That's it. If the types don't match, the compiler will tell us, so we can fix them.
+
+How is that an improvement over Javascript? We could write Javascript programs made up of pure functions alone, with an outer shell to I/O. That's a great way to program.
+
+But Reason guarantees something else:
+:::
+
+----
+
+# Perfection
+
+::: notes
+
+"perfection".
+
+Reason functions are "perfect" - what that means is that they do exactly what they need to do; nothing more; nothing less. And they work perfectly reliably all the time, every time.
+
+That is the notion of perfection that we're going to work with.
+
+::: 
+
+----
+## Imperfect Software
+
+``` {.javascript}
+let lastUser = {id: 16}
+```
+
+``` {.javascript}
+let showNext = u => {
+  console.log("You will be user " + (u.id + 1))
+}
+
+showNext(lastUser)
+```
+
+**_You will be user 17_**
+
+::: notes
+
+Consider this Javascript function `showNext` - it tells you what your user id could be based on the last user in the system. 
+
+The code is as simple as it can get. But does it do exactly what it needs to do, nothing more, nothing less? And does it work perfectly reliably all the time, every time? 
+
+Basically, will it ever crash in production?
 
 :::
 
-# Reason is a Typed Functional Programming Language
+----
+
+## Imperfect Software
+
+
+**let lastUser = {id: null}**
+
+
+``` {.javascript}
+let showNext = u => {
+  console.log("You will be user " + (u.id + 1))
+}
+
+showNext(lastUser)
+```
+
+**_You will be user 1_**
 
 ::: notes
+Okay, what if `id` is null?
 
-  Reason is a new syntax on top of OCaml.
-  OCaml is a programming language in the Typed Functional paradigm. That paradigm is the most defining feature when contrasted against other languages that we might be familiar with.
-
+Thankfully that works - showNext handles it gracefully.
 :::
 
----
+----
 
-## Javascript is Dynamically Typed
+## Imperfect Software
 
-_Untyped OO:_
 
-Ruby, Python, **Javascript**
+**let lastUser = {}**
 
-&nbsp;
 
-_Untyped Functional:_
+``` {.javascript}
+let showNext = u => {
+  console.log("You will be user " + (u.id + 1))
+}
 
-Clojure, Lisp/Scheme/Racket, **Javascript**
+showNext(lastUser)
+
+```
+
+**_You will be user NaN_**
 
 ::: notes
-
-Javascript is a dynamically typed langauge. It is a multi-paradigm language -- we can use ES6's class syntax to write classical object-oriented code, or just use functions as first-class citizens, and write purely function code. 
-
+What if the object was empty? We get a wrong result. That's one way the function is not perfect.
 :::
 
----
+----
 
-## Typed Functional
+## Imperfect Software
 
-### Typed Object-Oriented Languages
-C++, Java, C#, Scala
 
-### Typed Functional Languages
-Haskell, Scala, OCaml (Reason)
+**
+let users = []
+
+let lastUser = users[users.length - 1]**
+
+
+``` {.javascript}
+let showNext = u => {
+  console.log("You will be user " + (u.id + 1))
+}
+
+showNext(lastUser)
+
+```
 
 ::: notes
-
-Javascript is a dynamically typed langauge. And we can write both object-oriented code as well as purely functional code with it. It is sort-of multi-paradigm there.
-
+What if we called it with an undefined value? Here we have a list of users and we get the last one are getting the last user from a list of users, and the list of users is unfortunately empty. This is a common case where we get an undefined where we don't expect it.
 :::
 
----
+----
 
-## Slide with text and a note
+## Imperfect Software
 
-Regular text size
 
-\tiny Jonathan Sarna, *American Judaism* (New Haven: Yale University
-Press, 2014)
+**
+let users = []
+let lastUser = users[users.length - 1]**
+
+
+``` {.javascript}
+let showNext = u => {
+  console.log("You will be user " + (u.id + 1))
+}
+
+showNext(lastUser)
+
+```
+
+**_Uncaught TypeError: Cannot read property 'id' of undefined_**
+
+::: notes
+Now the function actually crashes. This is the second way where the function is not perfect -- when the parameter is undefined -- and that occurs quite often in production codebases. 
+:::
+
+----
+
+## Imperfect Software
+
+
+**let lastUser = {}**
+
+
+``` {.javascript}
+let showNext = u => {
+  console.log("You will be user " + (u.id + 1))
+}
+
+showNext(lastUser)
+
+```
+
+**_You will be user NaN_**
+
+::: notes
+What if the object was empty? That doesn't crash the function, but it gives us an invalid result. That's one way the function is not perfect.
+:::
+
+----
+
+## Imperfect Software
+
+
+**let lastUser = {}**
+
+
+``` {.javascript}
+let showNext = u => {
+  console.log("You will be user " + (u.id + 1))
+}
+
+showNext(lastUser)
+
+```
+
+**_You will be user NaN_**
+
+::: notes
+What if the object was empty? That doesn't crash the function, but it gives us an invalid result. That's one way the function is not perfect.
+:::
+
+----
+
+## Imperfect Software
+
+
+``` {.javascript}
+```
+
+::: notes
+:::
+
+----
+
+## Imperfect Software
+
+
+``` {.javascript}
+```
+
+::: notes
+:::
+
+
+----
+
+## Imperfect Software
+
+
+``` {.javascript}
+```
+
+::: notes
+:::
+
+
+----
+
+## Imperfect Software
+
+
+``` {.javascript}
+```
+
+::: notes
+:::
+
+
+----
+
+## Imperfect Software
+
+
+``` {.javascript}
+```
+
+::: notes
+:::
+
+----
+
+## The cost of Drama
+
 
 ::: notes
 
-NOTES: This is a note page and you ought to be able to tell.
-
-::: notes
-
-
-## Slide with text and footnote
-
-Surely this is true.^[Jane Doe, *Says It Here* (New York: Oxford 
-University Press, 2050).] 
+Let's build a tiny invoicing program.
+It is for a drama troupe.
+They put two kinds of plays: Comedies and Tragedies.
+:::
 
 
-## This is a heading
-
-Regular text on a slide:
-
--   One
--   Two
--   Three
 
 ---
 

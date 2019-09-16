@@ -6,13 +6,53 @@ INTENTION:
   * How to learn -- concepts involved
   * Fin.
 
+OUTLINE:
+* What is Reason
+  * Sample code
+  * What can we build with it
+ (5 mins)  
+* Programming in Reason:
+  * Impossible for data to be invalid
+    * Javascript: show id + 1 from object
+    * Reason: it is impossible
+  * Option types
+    * last_user_info = None
+    * Alway handle it
+(10 mins)
+* Learning
+  * Programming in the small
+  * In the large: modules
+  * Tooling:
+    * Just get it running
+    * ReasonReact webpage
+  * Types over FP
+    * This is Haskell. No Monads
+(5 mins)
+* Drama Troupe
+  * Types are a tool for thought
+  * Structure of data
+  * What to compute
+    * Original javascript
+  * How to compute it in Reason
+    * Variants
+  * Show code
+  * Compare with Fowler's class based version
+(10 mins)
+* ReasonReact
+* Systems built with ReasonReact
+  * PupilFirst
+  * Facebook Messenger
+  * Protoship
+* Learning:
+  * Reason homepage
+  * Real World OCaml
+  * learn-reason-workshop
+(5 mins)
+
 Hello,
 
 
 Here on the screen is a snippet of Javascript code from the book "Refactoring" by Martin Fowler. This is a refactored, object-oriented piece of code.
-
-Reason is a Typed Functional Programming language. It has types -- you can specify the shape and structure of your data, and then you can write code knowing that the data always follows those types. It is functional -- so you can work closely with your data, and not have to create classes and deal with state. 
-
 
 This code - it takes a list of plays - comedies and tragedies - and number of people who will be attending them, and tells you how much it costs in total to perform all of them. The cost of each play will depend on whether it is a Tragedy or a Comedy, and how many seats are sold. 
 
