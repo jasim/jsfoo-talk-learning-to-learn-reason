@@ -2,7 +2,10 @@ SLIDES := $(patsubst %.md,%.md.slides.pdf,$(wildcard *.md))
 HANDOUTS := $(patsubst %.md,%.md.handout.pdf,$(wildcard *.md))
 REVEAL := $(patsubst %.md,%.md.reveal.html,$(wildcard *.md))
 
-all : $(SLIDES) $(HANDOUTS) ${REVEAL}
+# add $(SLIDES) $(HANDOUTS) to make PDFs, but make sure
+# to use all png instead of svg..
+
+all : ${REVEAL}
 
 %.md.slides.pdf : %.md
 	pandoc $^ -t beamer --slide-level 2 -o $@

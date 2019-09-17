@@ -1,7 +1,10 @@
 # Running
 
-cd reveal.js && npm start
-make
+    cd reveal.js && npm start
+    make
+
+For speaker notes, press `s` in the presentation
+
 
 # The Slide generation PDF code ORIGINALLY FROM 
 https://gist.github.com/lmullen/c3d4c7883f081ed8692a
