@@ -19,6 +19,11 @@ OUTLINE:
     * last_user_info = None
     * Alway handle it
 (10 mins)
+* How does this make us better programmers?
+  * Most errors are not logical. They are clerical
+  * Types when they are explicit, makes the program clearer
+  * Variants
+  * The code follows the types  
 * Drama Troupe
   * Types are a tool for thought
   * Structure of data
@@ -29,11 +34,6 @@ OUTLINE:
   * Show code
   * Compare with Fowler's class based version
 (10 mins)
-* How does this make us better programmers?
-  * Most errors are not logical. They are clerical
-  * Types when they are explicit, makes the program clearer
-  * Variants
-  * The code follows the types  
 * ReasonReact
   * Full React
   * Systems built with ReasonReact
