@@ -88,7 +88,7 @@ All this stuff: the Sketch plugin, the Adobe XD plugin, the converter, the web U
 
 But before that it was all written in plain Javascript.
 
-We didn't know Reason or Typed FP when we first started working on this product over two years ago. We were forced to learn it. I'll tell you why.
+We didn't know Reason or Typed FP when we first started working on this product over two years ago. We were forced to learn it. Let me tell you why.
 
 :::
 
@@ -102,7 +102,7 @@ We didn't know Reason or Typed FP when we first started working on this product 
 
 ::: notes
 
-Codegen takes raw vector Nodes from design tools. They're absolutely positioned, and is a far way from being responsive HTML and CSS. This is a sample node we extract from Sketch.
+Here's the raw vector node that Codegen extracts from Sketch. They're absolutely positioned, and is a far way from being responsive HTML and CSS.
 
 :::
 
@@ -113,7 +113,7 @@ Codegen takes raw vector Nodes from design tools. They're absolutely positioned,
 
 ::: notes
 
-That raw node has to finally become this HTML and CSS. That's a multi-step process. Here's the pipeline:
+The challenge is to convert that raw node this HTML and CSS. That's a multi-step process. Here's a rough pipeline of how Codegen does it:
 
 :::
 
@@ -123,11 +123,53 @@ That raw node has to finally become this HTML and CSS. That's a multi-step proce
 
 ::: notes
 
-In each step of this pipeline, we decorate the nodes with more info, change their shapes, and generally wrangle with them.
+In each step here, we decorate the nodes with more info, sometimes change their shapes, sometimes merge it with others, and generally wrangle with them quite a bit.
 
-Even within each step the nodes would change their shape. We couldn't keep up with those changes and were making silly mistakes. Worse, because of our programs were muddled, our understanding of the domain was also muddled. 
+Even within each step the nodes would transform into different structures. We couldn't mentally track the flow of data because of all these transformations and were making silly mistakes. Worse, because of our programs were muddled, our very understanding of the domain was degrading.
 
-That was the time around when Jordan Walke, the original author of React, released the first version of Reason. And we're very happy that he did. Learning and adopting the language was a long struggle. But now when I look back on the last 10 years of my programming career, I wonder what I was doing for the first 8, before I learned Reason and Typed functional programming.
+:::
+
+
+------------------
+
+### Reason is released
+
+* Author: Jordan Walke (and Cheng Lou and others)
+* Wrote: React, Reason, and ReasonReact
+
+::: notes
+
+That was the time around when Jordan Walke, the original author of React, released the first version of Reason. ReasonReact is the Reason adapter for the React library. This means you can build React applications with Reason and even mix and match components between Javascript and Reason.
+
+:::
+
+
+------------------
+
+![](images/rwo-cover.png)
+
+::: notes
+
+Learning and adopting the language was a long struggle. It was the early days of Reason so there weren't many resources. We spent countless hours with the Real World OCaml book - excellent book on the language as well the craft of programming itself. There are numerous resources now and much easier to learn the language.
+
+But the struggle was worth it. When I look back on the last 10 years of my programming career, I wonder what I was doing for the first 8, before I learned Reason and Typed functional programming.
+
+And that's why I'm here today to talk about it. 
+
+:::
+
+------------------
+
+### The Talk
+
+
+* Reason: interesting bits
+* How does it feel to program
+* How to get started
+
+::: notes
+
+In this talk I will try to describe the interesting bits of Reason; try to give you a feel for what it is to program with it; and finally leave with a few pointers on how to get started.
 
 :::
 
@@ -146,9 +188,9 @@ That was the time around when Jordan Walke, the original author of React, releas
 
 Reason is a new syntax on top of the OCaml programming language. 
 
-OCaml has a long history - it was first released in 1990 - about 20 years ago. It is a compiled language and produces very performant binaries.
+OCaml has a long history - it was first released in 1990 - about 30 years ago. It is a compiled language and produces very fast binaries.
 
-Its syntax however is distinct from what is used in most popular languages.
+Its syntax however is quite different from most languages that we're used to.
 
 :::
 
@@ -168,7 +210,7 @@ let print_html_table segments =
 
 ::: notes
 
-Here is an OCaml program that prints an HTML table from a 2-dimensional list
+Here is an OCaml program that prints an HTML table from a 2-dimensional list. See that function arguments are separated by spaces, and anonymous functions are created with the `fun` keyboard.
 
 :::
 

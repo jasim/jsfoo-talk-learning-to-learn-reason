@@ -181,16 +181,62 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>and this is how it gets converted to code. This is the Codegen UI, and the rendering is all clean HTML and CSS.</p>
 <p>All this stuff: the Sketch plugin, the Adobe XD plugin, the converter, the web UI, and the code generator – they’re all written in Reason.</p>
 <p>But before that it was all written in plain Javascript.</p>
-<p>We didn’t know Reason or Typed FP when we first started working on this product over two years ago. We were forced to learn it. I’ll tell you why.</p>
+<p>We didn’t know Reason or Typed FP when we first started working on this product over two years ago. We were forced to learn it. Let me tell you why.</p>
 </aside>
 </section>
 <section class="slide level2">
 
-<p><img data-src="images/codegen-vecNode.png" /> <img data-src="images/codegen-htmlNode.png" /> <img data-src="images/codegen-cssNode.png" /></p>
+<h3 id="raw-vector-node">Raw Vector Node</h3>
+<p><img data-src="images/codegen-vecNode.png" /></p>
+<aside class="notes">
+<p>Here’s the raw vector node that Codegen extracts from Sketch. They’re absolutely positioned, and is a far way from being responsive HTML and CSS.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<p><img data-src="images/codegen-htmlNode.png" /> <img data-src="images/codegen-cssNode.png" /></p>
+<aside class="notes">
+<p>The challenge is to convert that raw node this HTML and CSS. That’s a multi-step process. Here’s a rough pipeline of how Codegen does it:</p>
+</aside>
+</section>
+<section class="slide level2">
+
 <p><img data-src="images/codegen-workflow.svg" /></p>
 <aside class="notes">
-<p>had to learn the language because we were struggling to build Codegen otherwise.</p>
-<p>We’re very happy that we switched to Reason. Even though it was a long struggle. Now when I look back on the last 10 years of programming, I wonder what I was doing for the first 8.</p>
+<p>In each step here, we decorate the nodes with more info, sometimes change their shapes, sometimes merge it with others, and generally wrangle with them quite a bit.</p>
+<p>Even within each step the nodes would transform into different structures. We couldn’t mentally track the flow of data because of all these transformations and were making silly mistakes. Worse, because of our programs were muddled, our very understanding of the domain was degrading.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<h3 id="reason-is-released">Reason is released</h3>
+<ul>
+<li>Author: Jordan Walke (and Cheng Lou and others)</li>
+<li>Wrote: React, Reason, and ReasonReact</li>
+</ul>
+<aside class="notes">
+<p>That was the time around when Jordan Walke, the original author of React, released the first version of Reason. ReasonReact is the Reason adapter for the React library. This means you can build React applications with Reason and even mix and match components between Javascript and Reason.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<p><img data-src="images/rwo-cover.png" /></p>
+<aside class="notes">
+<p>Learning and adopting the language was a long struggle. It was the early days of Reason so there weren’t many resources. We spent countless hours with the Real World OCaml book - excellent book on the language as well the craft of programming itself. There are numerous resources now and much easier to learn the language.</p>
+<p>But the struggle was worth it. When I look back on the last 10 years of my programming career, I wonder what I was doing for the first 8, before I learned Reason and Typed functional programming.</p>
+<p>And that’s why I’m here today to talk about it.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<h3 id="the-talk">The Talk</h3>
+<ul>
+<li>Reason: interesting bits</li>
+<li>How does it feel to program</li>
+<li>How to get started</li>
+</ul>
+<aside class="notes">
+<p>In this talk I will try to describe the interesting bits of Reason; try to give you a feel for what it is to program with it; and finally leave with a few pointers on how to get started.</p>
 </aside>
 </section>
 <section id="reason-is-ocaml" class="slide level2">
@@ -202,8 +248,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <aside class="notes">
 <p>Reason is a new syntax on top of the OCaml programming language.</p>
-<p>OCaml has a long history - it was first released in 1990 - about 20 years ago. It is a compiled language and produces very performant binaries.</p>
-<p>Its syntax however is distinct from what is used in most popular languages.</p>
+<p>OCaml has a long history - it was first released in 1990 - about 30 years ago. It is a compiled language and produces very fast binaries.</p>
+<p>Its syntax however is quite different from most languages that we’re used to.</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -218,7 +264,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-8"><a href="#cb2-8"></a>  printf <span class="st">&quot;&lt;/table&gt;</span><span class="ch">\n</span><span class="st">&quot;</span>;</span>
 <span id="cb2-9"><a href="#cb2-9"></a>;;</span></code></pre></div>
 <aside class="notes">
-<p>Here is an OCaml program that prints an HTML table from a 2-dimensional list</p>
+<p>Here is an OCaml program that prints an HTML table from a 2-dimensional list. See that function arguments are separated by spaces, and anonymous functions are created with the <code>fun</code> keyboard.</p>
 </aside>
 </section>
 <section class="slide level2">
