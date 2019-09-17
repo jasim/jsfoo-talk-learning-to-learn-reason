@@ -705,43 +705,10 @@ You will be user -4
 
 We can keep going, but the only way to get the program to compile is to pass `showNext` the correct data. That's the number one promise of Typed FP.
 
-But what about data that comes from outside the program? They might contain invalid data -- how would the compiler catch it?
-
 :::
 
 
 ------------------
-
-``` {.javascript}
-type user = {
-  id: int,
-  name: string,
-};
-let show = u => Js.log(u.id);
-let parse = json => {
-  id:   json |> Json.Decode.field("last_id", Json.Decode.int),
-  name: json |> Json.Decode.field("name",    Json.Decode.string)
-};
-let validJson = {j|{"id":10, "name": "Test"}|j};
-let invalidJson = {j|{"id": 10}|j};
-
-validJson |> Json.parseOrRaise |> parse |> show;
-invalidJson |> Json.parseOrRaise |> parse |> show;
-```
-
-::: notes
-
-Take this code for example. We have defined a type `user`. There is a `show` function that prints the user's id.
-
-And then we have a `parse` function. What we're trying to do is to accept data from outside
-
-:::
-
-
-------------------
-
-
-
 
 &nbsp;
 
@@ -790,7 +757,9 @@ Here someone asked for a tea, and we poured them a coffee. It will compile, but 
 
 But when I started writing typed FP after about a decade of dynamically typed languages, I realized that we programmers are a pretty decent bunch. It is very rare for us to be making logical errors in our code.
 
-Our programs are all broken, make no mistake, but they are broken not because we wrote something when we meant the other. They're borken because of clerical mistakes. Passing the wrong data to the wrong function. The Reason compiler is very good at catching those mistakes. Which is why, "if it compiles, it works".
+Our programs are all broken, make no mistake, but they are broken not because we wrote something when we meant the other. They're borken because of clerical mistakes. Passing the wrong data to the wrong function. 
+
+But the Reason compiler is very good at catching those mistakes, which is why, "if it compiles, it works".
 
 :::
 
@@ -801,61 +770,92 @@ Our programs are all broken, make no mistake, but they are broken not because we
 
 ::: notes
 
+There is also something else to note: the program has no control over what data comes from outside - like a JSON API request, or database contents. What if they don't match our types?
+
+We handle it in Reason by parsing all external data at the application boundary. If they don't fit into our types, we can either handle them gracefully - like give default values for absent data -- or if they are not salvageable, then we can return an error and terminate that request. It never touches our application code.
+
+The guarantee however is that if there are no issues, it gets parsed into our types, and reaches our application.
+
+At that point it is fully typed and we can work with it in the complete knowledge that there will be no data mismatch.
+
 :::
+
 
 ------------------
 
-## The cost of Drama
+### Learning Reason
+
+* Programming in the small
+  * variables, data structures, iteration, functions
+
+![](images/reason-official-docs.png)
 
 
 ::: notes
 
-Let's build a tiny invoicing program.
-It is for a drama troupe.
-They put two kinds of plays: Comedies and Tragedies.
+To become proficient in Reason we have to first learn how to write small programs in it. You should be able to solve a fizzbuzz, read from a file, compute an average -- all these things.
+
+The official Reason documentation is great for this.
+
+:::
+
+
+------------------
+
+### Learning Reason
+
+* Programming in the small
+  * variables, data structures, iteration, functions
+
+* Tooling
+
+
+::: notes
+
+You 
+
 :::
 
 
 
 ------------------
 
-## First step
+* Programming in the large
+  * modules, packages
 
-``` {.javascript}
-switch (play.type) {
-  case "tragedy":  
-    return new TragedyCalculator(
-      aPerformance, aPlay
-    );
-    
-  case "comedy":
-    thisAmount = 30000;
-    if (perf.audience > 20) {
-      thisAmount += 10000 + 500 * (perf.audience - 20);
-    }
-    thisAmount += 300 * perf.audience;
-    break;
-  default:
-    throw new Error(`unknown type: ${play.type}`);
-}
-```
+
+::: notes
+
+:::
 
 
 ------------------
 
-## Code example
+
 
 ``` {.javascript}
-type type_ =
-  | Tragedy
-  | Comedy;
+let plays = {
+  "hamlet": { "name": "Hamlet", "type": "tragedy" },
+  "as-like": { "name": "As You Like It", "type": "comedy" },
+  "othello": { "name": "Othello", "type": "tragedy" }
+}
 
-type play = {
-  name: string,
-  audience: int,
-  type_,
-};
+let invoices = [{
+  "customer": "BigCo",
+  "performances": [
+    { "playID": "hamlet", "audience": 55 },
+    { "playID": "as-like", "audience": 35 },
+    { "playID": "othello", "audience": 40 }]
+}];
 ```
+
+::: notes
+
+
+:::
+
+
+
 
 ------------------
 

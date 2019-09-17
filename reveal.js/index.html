@@ -534,7 +534,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb41"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb41-1"><a href="#cb41-1"></a><span class="at">showNext</span>(a <span class="kw">=&gt;</span> a <span class="op">+</span> <span class="dv">1</span>)<span class="op">;</span></span></code></pre></div>
 <p><img data-src="images/comp-error-fn.png" /></p>
 <aside class="notes">
-<p>Here’s a function instead of the entire <code>user</code> object. Type error again. We can keep going, but the only code that gets compiled is the one that passes the right type to showNext.</p>
+<p>Here’s a function instead of the entire <code>user</code> object. Type error again.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode" id="cb42"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb42-1"><a href="#cb42-1"></a>type user <span class="op">=</span> <span class="op">{</span> <span class="dt">id</span><span class="op">:</span> int <span class="op">};</span></span>
+<span id="cb42-2"><a href="#cb42-2"></a></span>
+<span id="cb42-3"><a href="#cb42-3"></a><span class="kw">let</span> showNext <span class="op">=</span> u <span class="kw">=&gt;</span> <span class="op">{</span></span>
+<span id="cb42-4"><a href="#cb42-4"></a>  <span class="va">Js</span>.<span class="at">log</span>(<span class="st">&quot;You will be user &quot;</span> <span class="op">++</span> <span class="at">string_of_int</span>(<span class="va">u</span>.<span class="at">id</span> <span class="op">+</span> <span class="dv">1</span>))<span class="op">;</span></span>
+<span id="cb42-5"><a href="#cb42-5"></a><span class="op">};</span></span>
+<span id="cb42-6"><a href="#cb42-6"></a></span>
+<span id="cb42-7"><a href="#cb42-7"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="dv">44</span><span class="op">}</span>)<span class="op">;</span></span>
+<span id="cb42-8"><a href="#cb42-8"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="dv">299</span><span class="op">}</span>)<span class="op">;</span></span>
+<span id="cb42-9"><a href="#cb42-9"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="dv">-44</span><span class="op">}</span>)<span class="op">;</span></span></code></pre></div>
+<pre><code>You will be user 45
+You will be user 300
+You will be user -4</code></pre>
+<aside class="notes">
+<p>We can keep going, but the only way to get the program to compile is to pass <code>showNext</code> the correct data. That’s the number one promise of Typed FP.</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -567,57 +585,75 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>logical mistakes are rare</p></li>
 </ul>
 <aside class="notes">
-<p>But the interesting thing that I learnt is that we programmers are a pretty decent bunch. It is rare for us to make logical mistakes. Give ourselves some credit!</p>
-<p>Our programs are all broken, make no mistake, but they are broken not because we wrote something when we meant the other. They’re borken because of clerical mistakes. Passing the wrong data to the wrong function. The Reason compiler is very good at catching those mistakes. Which is why, “if it compiles, it works”.</p>
+<p>But when I started writing typed FP after about a decade of dynamically typed languages, I realized that we programmers are a pretty decent bunch. It is very rare for us to be making logical errors in our code.</p>
+<p>Our programs are all broken, make no mistake, but they are broken not because we wrote something when we meant the other. They’re borken because of clerical mistakes. Passing the wrong data to the wrong function.</p>
+<p>But the Reason compiler is very good at catching those mistakes, which is why, “if it compiles, it works”.</p>
 </aside>
 </section>
 <section class="slide level2">
 
 <p><img data-src="images/parsing-membrane.svg" /></p>
 <aside class="notes">
-
+<p>There is also something else to note: the program has no control over what data comes from outside - like a JSON API request, or database contents. What if they don’t match our types?</p>
+<p>We handle it in Reason by parsing all external data at the application boundary. If they don’t fit into our types, we can either handle them gracefully - like give default values for absent data – or if they are not salvageable, then we can return an error and terminate that request. It never touches our application code.</p>
+<p>The guarantee however is that if there are no issues, it gets parsed into our types, and reaches our application.</p>
+<p>At that point it is fully typed and we can work with it in the complete knowledge that there will be no data mismatch.</p>
 </aside>
-</section>
-<section id="the-cost-of-drama" class="slide level2">
-<h2>The cost of Drama</h2>
-<aside class="notes">
-<p>Let’s build a tiny invoicing program. It is for a drama troupe. They put two kinds of plays: Comedies and Tragedies.</p>
-</aside>
-</section>
-<section id="first-step" class="slide level2">
-<h2>First step</h2>
-<div class="sourceCode" id="cb43"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb43-1"><a href="#cb43-1"></a><span class="cf">switch</span> (<span class="va">play</span>.<span class="at">type</span>) <span class="op">{</span></span>
-<span id="cb43-2"><a href="#cb43-2"></a>  <span class="cf">case</span> <span class="st">&quot;tragedy&quot;</span><span class="op">:</span>  </span>
-<span id="cb43-3"><a href="#cb43-3"></a>    <span class="cf">return</span> <span class="kw">new</span> <span class="at">TragedyCalculator</span>(</span>
-<span id="cb43-4"><a href="#cb43-4"></a>      aPerformance<span class="op">,</span> aPlay</span>
-<span id="cb43-5"><a href="#cb43-5"></a>    )<span class="op">;</span></span>
-<span id="cb43-6"><a href="#cb43-6"></a>    </span>
-<span id="cb43-7"><a href="#cb43-7"></a>  <span class="cf">case</span> <span class="st">&quot;comedy&quot;</span><span class="op">:</span></span>
-<span id="cb43-8"><a href="#cb43-8"></a>    thisAmount <span class="op">=</span> <span class="dv">30000</span><span class="op">;</span></span>
-<span id="cb43-9"><a href="#cb43-9"></a>    <span class="cf">if</span> (<span class="va">perf</span>.<span class="at">audience</span> <span class="op">&gt;</span> <span class="dv">20</span>) <span class="op">{</span></span>
-<span id="cb43-10"><a href="#cb43-10"></a>      thisAmount <span class="op">+=</span> <span class="dv">10000</span> <span class="op">+</span> <span class="dv">500</span> <span class="op">*</span> (<span class="va">perf</span>.<span class="at">audience</span> <span class="op">-</span> <span class="dv">20</span>)<span class="op">;</span></span>
-<span id="cb43-11"><a href="#cb43-11"></a>    <span class="op">}</span></span>
-<span id="cb43-12"><a href="#cb43-12"></a>    thisAmount <span class="op">+=</span> <span class="dv">300</span> <span class="op">*</span> <span class="va">perf</span>.<span class="at">audience</span><span class="op">;</span></span>
-<span id="cb43-13"><a href="#cb43-13"></a>    <span class="cf">break</span><span class="op">;</span></span>
-<span id="cb43-14"><a href="#cb43-14"></a>  <span class="cf">default</span><span class="op">:</span></span>
-<span id="cb43-15"><a href="#cb43-15"></a>    <span class="cf">throw</span> <span class="kw">new</span> <span class="at">Error</span>(<span class="vs">`unknown type: </span><span class="sc">${</span><span class="va">play</span>.<span class="at">type</span><span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span>
-<span id="cb43-16"><a href="#cb43-16"></a><span class="op">}</span></span></code></pre></div>
-</section>
-<section id="code-example" class="slide level2">
-<h2>Code example</h2>
-<div class="sourceCode" id="cb44"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb44-1"><a href="#cb44-1"></a>type type_ <span class="op">=</span></span>
-<span id="cb44-2"><a href="#cb44-2"></a>  <span class="op">|</span> Tragedy</span>
-<span id="cb44-3"><a href="#cb44-3"></a>  <span class="op">|</span> Comedy<span class="op">;</span></span>
-<span id="cb44-4"><a href="#cb44-4"></a></span>
-<span id="cb44-5"><a href="#cb44-5"></a>type play <span class="op">=</span> <span class="op">{</span></span>
-<span id="cb44-6"><a href="#cb44-6"></a>  <span class="dt">name</span><span class="op">:</span> string<span class="op">,</span></span>
-<span id="cb44-7"><a href="#cb44-7"></a>  <span class="dt">audience</span><span class="op">:</span> int<span class="op">,</span></span>
-<span id="cb44-8"><a href="#cb44-8"></a>  type_<span class="op">,</span></span>
-<span id="cb44-9"><a href="#cb44-9"></a><span class="op">};</span></span></code></pre></div>
 </section>
 <section class="slide level2">
 
-<div class="sourceCode" id="cb45"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb45-1"><a href="#cb45-1"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="kw">null</span><span class="op">}</span>)<span class="op">;</span></span></code></pre></div>
+<h3 id="learning-reason">Learning Reason</h3>
+<ul>
+<li>Programming in the small
+<ul>
+<li>variables, data structures, iteration, functions</li>
+</ul></li>
+</ul>
+<p><img data-src="images/reason-official-docs.png" /></p>
+<aside class="notes">
+<p>To become proficient in Reason we have to first learn how to write small programs in it. You should be able to solve a fizzbuzz, read from a file, compute an average – all these things.</p>
+<p>The official Reason documentation is great for this.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<h3 id="learning-reason-1">Learning Reason</h3>
+<ul>
+<li>Programming in the small
+<ul>
+<li>variables, data structures, iteration, functions</li>
+</ul></li>
+<li>Programming in the large
+<ul>
+<li>modules, packages</li>
+</ul></li>
+</ul>
+<aside class="notes">
+
+</aside>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode" id="cb45"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb45-1"><a href="#cb45-1"></a><span class="kw">let</span> plays <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb45-2"><a href="#cb45-2"></a>  <span class="st">&quot;hamlet&quot;</span><span class="op">:</span> <span class="op">{</span> <span class="st">&quot;name&quot;</span><span class="op">:</span> <span class="st">&quot;Hamlet&quot;</span><span class="op">,</span> <span class="st">&quot;type&quot;</span><span class="op">:</span> <span class="st">&quot;tragedy&quot;</span> <span class="op">},</span></span>
+<span id="cb45-3"><a href="#cb45-3"></a>  <span class="st">&quot;as-like&quot;</span><span class="op">:</span> <span class="op">{</span> <span class="st">&quot;name&quot;</span><span class="op">:</span> <span class="st">&quot;As You Like It&quot;</span><span class="op">,</span> <span class="st">&quot;type&quot;</span><span class="op">:</span> <span class="st">&quot;comedy&quot;</span> <span class="op">},</span></span>
+<span id="cb45-4"><a href="#cb45-4"></a>  <span class="st">&quot;othello&quot;</span><span class="op">:</span> <span class="op">{</span> <span class="st">&quot;name&quot;</span><span class="op">:</span> <span class="st">&quot;Othello&quot;</span><span class="op">,</span> <span class="st">&quot;type&quot;</span><span class="op">:</span> <span class="st">&quot;tragedy&quot;</span> <span class="op">}</span></span>
+<span id="cb45-5"><a href="#cb45-5"></a><span class="op">}</span></span>
+<span id="cb45-6"><a href="#cb45-6"></a></span>
+<span id="cb45-7"><a href="#cb45-7"></a><span class="kw">let</span> invoices <span class="op">=</span> [<span class="op">{</span></span>
+<span id="cb45-8"><a href="#cb45-8"></a>  <span class="st">&quot;customer&quot;</span><span class="op">:</span> <span class="st">&quot;BigCo&quot;</span><span class="op">,</span></span>
+<span id="cb45-9"><a href="#cb45-9"></a>  <span class="st">&quot;performances&quot;</span><span class="op">:</span> [</span>
+<span id="cb45-10"><a href="#cb45-10"></a>    <span class="op">{</span> <span class="st">&quot;playID&quot;</span><span class="op">:</span> <span class="st">&quot;hamlet&quot;</span><span class="op">,</span> <span class="st">&quot;audience&quot;</span><span class="op">:</span> <span class="dv">55</span> <span class="op">},</span></span>
+<span id="cb45-11"><a href="#cb45-11"></a>    <span class="op">{</span> <span class="st">&quot;playID&quot;</span><span class="op">:</span> <span class="st">&quot;as-like&quot;</span><span class="op">,</span> <span class="st">&quot;audience&quot;</span><span class="op">:</span> <span class="dv">35</span> <span class="op">},</span></span>
+<span id="cb45-12"><a href="#cb45-12"></a>    <span class="op">{</span> <span class="st">&quot;playID&quot;</span><span class="op">:</span> <span class="st">&quot;othello&quot;</span><span class="op">,</span> <span class="st">&quot;audience&quot;</span><span class="op">:</span> <span class="dv">40</span> <span class="op">}</span>]</span>
+<span id="cb45-13"><a href="#cb45-13"></a><span class="op">}</span>]<span class="op">;</span></span></code></pre></div>
+<aside class="notes">
+
+</aside>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode" id="cb46"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb46-1"><a href="#cb46-1"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="kw">null</span><span class="op">}</span>)<span class="op">;</span></span></code></pre></div>
 <p><img data-src="images/comp-error-1-null.png" /></p>
 <aside class="notes">
 <p>But what about null? What if we pass null to <code>showNext</code>?</p>
