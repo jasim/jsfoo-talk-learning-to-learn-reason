@@ -1,82 +1,146 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="500px" height="500px" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="566px" height="483px" viewBox="0 0 566 483" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 57.1 (83088) - https://sketch.com -->
     <title>codegen-workflow</title>
     <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="200" height="60" rx="10"></rect>
+        <filter x="-3.5%" y="-8.3%" width="107.0%" height="123.3%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <rect id="path-3" x="0" y="0" width="200" height="60" rx="10"></rect>
+        <filter x="-3.5%" y="-8.3%" width="107.0%" height="123.3%" filterUnits="objectBoundingBox" id="filter-4">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <rect id="path-5" x="0" y="0" width="200" height="60" rx="10"></rect>
+        <filter x="-3.5%" y="-8.3%" width="107.0%" height="123.3%" filterUnits="objectBoundingBox" id="filter-6">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <rect id="path-7" x="0" y="0" width="200" height="60" rx="10"></rect>
+        <filter x="-3.5%" y="-8.3%" width="107.0%" height="123.3%" filterUnits="objectBoundingBox" id="filter-8">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <rect id="path-9" x="0" y="0" width="200" height="60" rx="10"></rect>
+        <filter x="-3.5%" y="-8.3%" width="107.0%" height="123.3%" filterUnits="objectBoundingBox" id="filter-10">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <rect id="path-11" x="0" y="0" width="200" height="60" rx="10"></rect>
+        <filter x="-3.5%" y="-8.3%" width="107.0%" height="123.3%" filterUnits="objectBoundingBox" id="filter-12">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
     <g id="codegen-workflow" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <rect fill="#FFFFFF" x="0" y="0" width="500" height="500"></rect>
-        <g id="Group">
-            <g id="Box">
+        <rect fill="#FFFFFF" x="0" y="0" width="566" height="483"></rect>
+        <g id="Group" transform="translate(32.000000, 17.000000)">
+            <g id="Box" transform="translate(0.000000, 135.000000)">
                 <g id="Group">
-                    <rect id="Rectangle" fill="#355279" x="0" y="0" width="194" height="76"></rect>
+                    <g id="Rectangle">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                        <use fill="#4770AA" fill-rule="evenodd" xlink:href="#path-1"></use>
+                    </g>
                     <text id="Vector-design-in-Ske" font-family="SFCompactDisplay-Regular, SF Compact Display" font-size="18" font-weight="normal" letter-spacing="-0.225" fill="#FFFFFF">
-                        <tspan x="45.0699219" y="32.4489796">Vector design</tspan>
-                        <tspan x="14.6676758" y="53.4489796">in Sketch or Adobe XD</tspan>
+                        <tspan x="79.1293945" y="26">Apply </tspan>
+                        <tspan x="72.9339844" y="47">layouts</tspan>
                     </text>
                 </g>
             </g>
-            <g id="Box" transform="translate(0.000000, 138.845554)">
+            <g id="Box" transform="translate(303.000000, 15.000000)">
                 <g id="Group">
-                    <rect id="Rectangle" fill="#355279" x="0" y="0" width="194" height="76"></rect>
+                    <g id="Rectangle">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-4)" xlink:href="#path-3"></use>
+                        <use fill="#4770AA" fill-rule="evenodd" xlink:href="#path-3"></use>
+                    </g>
                     <text id="Vector-design-in-Ske" font-family="SFCompactDisplay-Regular, SF Compact Display" font-size="18" font-weight="normal" letter-spacing="-0.225" fill="#FFFFFF">
-                        <tspan x="76.0083008" y="32.4489796">Apply </tspan>
-                        <tspan x="69.8128906" y="53.4489796">layouts</tspan>
+                        <tspan x="69.0755859" y="26">Cleanup </tspan>
+                        <tspan x="52.4053711" y="47">vector layers</tspan>
                     </text>
                 </g>
             </g>
-            <g id="Box" transform="translate(305.597579, 0.000000)">
+            <g id="Box" transform="translate(303.000000, 135.000000)">
                 <g id="Group">
-                    <rect id="Rectangle" fill="#355279" x="0" y="0" width="194" height="76"></rect>
+                    <g id="Rectangle">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-6)" xlink:href="#path-5"></use>
+                        <use fill="#4770AA" fill-rule="evenodd" xlink:href="#path-5"></use>
+                    </g>
                     <text id="Vector-design-in-Ske" font-family="SFCompactDisplay-Regular, SF Compact Display" font-size="18" font-weight="normal" letter-spacing="-0.225" fill="#FFFFFF">
-                        <tspan x="65.9544922" y="32.4489796">Cleanup </tspan>
-                        <tspan x="49.2842773" y="53.4489796">vector layers</tspan>
+                        <tspan x="67.7334961" y="26">Discover </tspan>
+                        <tspan x="72.9339844" y="47">layouts</tspan>
                     </text>
                 </g>
             </g>
-            <g id="Box" transform="translate(306.354009, 138.845554)">
+            <g id="Box" transform="translate(0.000000, 257.000000)">
                 <g id="Group">
-                    <rect id="Rectangle" fill="#355279" x="0" y="0" width="194" height="76"></rect>
+                    <g id="Rectangle">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-8)" xlink:href="#path-7"></use>
+                        <use fill="#4770AA" fill-rule="evenodd" xlink:href="#path-7"></use>
+                    </g>
                     <text id="Vector-design-in-Ske" font-family="SFCompactDisplay-Regular, SF Compact Display" font-size="18" font-weight="normal" letter-spacing="-0.225" fill="#FFFFFF">
-                        <tspan x="64.6124023" y="32.4489796">Discover </tspan>
-                        <tspan x="69.8128906" y="53.4489796">layouts</tspan>
+                        <tspan x="26.7474609" y="26">Compute and apply </tspan>
+                        <tspan x="85.2017578" y="47">CSS</tspan>
+                    </text>
+                </g>
+            </g>
+            <g id="Box" transform="translate(303.000000, 255.000000)">
+                <g id="Group">
+                    <g id="Rectangle">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-10)" xlink:href="#path-9"></use>
+                        <use fill="#4770AA" fill-rule="evenodd" xlink:href="#path-9"></use>
+                    </g>
+                    <text id="Vector-design-in-Ske" font-family="SFCompactDisplay-Regular, SF Compact Display" font-size="18" font-weight="normal" letter-spacing="-0.225" fill="#FFFFFF">
+                        <tspan x="28.6107422" y="26">Normalize CSS and </tspan>
+                        <tspan x="19.9640625" y="47">extract design scales</tspan>
+                    </text>
+                </g>
+            </g>
+            <g id="Box" transform="translate(303.000000, 375.000000)">
+                <g id="Group">
+                    <g id="Rectangle">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-12)" xlink:href="#path-11"></use>
+                        <use fill="#4770AA" fill-rule="evenodd" xlink:href="#path-11"></use>
+                    </g>
+                    <text id="Vector-design-in-Ske" font-family="SFCompactDisplay-Regular, SF Compact Display" font-size="18" font-weight="normal" letter-spacing="-0.225" fill="#FFFFFF">
+                        <tspan x="65.7603516" y="26">Generate </tspan>
+                        <tspan x="63.3134766" y="47">final code</tspan>
+                    </text>
+                </g>
+            </g>
+            <path id="Line" d="M254.782958,30.9033092 L283.762102,45.4449459 L254.741306,59.9032793 L254.758,47.903 L165.350421,47.7748779 L165.357602,42.7748831 L254.765,42.903 L254.782958,30.9033092 Z" fill="#F54E4E" fill-rule="nonzero"></path>
+            <path id="Line" d="M238.354009,150.273011 L238.354,162.273 L297.354009,162.273011 L297.354009,167.273011 L238.354,167.273 L238.354009,179.273011 L209.354009,164.773011 L238.354009,150.273011 Z" fill="#F54E4E" fill-rule="nonzero"></path>
+            <path id="Line" d="M261.580045,271.36009 L290.343717,286.323419 L261.114852,300.356359 L261.307,288.357 L202.314937,287.411475 L202.395143,282.412118 L261.387,283.358 L261.580045,271.36009 Z" fill="#F54E4E" fill-rule="nonzero"></path>
+            <path id="Line" d="M405.318804,84.199913 L405.441,102.156 L417.440584,102.074483 L403.138043,131.172375 L388.441254,102.271607 L400.441,102.189 L400.318919,84.2338999 L405.318804,84.199913 Z" fill="#F54E4E" fill-rule="nonzero"></path>
+            <path id="Line" d="M95.3188035,204.199913 L95.441,222.156 L107.440584,222.074483 L93.1380432,251.172375 L78.4412539,222.271607 L90.441,222.189 L90.3189191,204.2339 L95.3188035,204.199913 Z" fill="#F54E4E" fill-rule="nonzero"></path>
+            <path id="Line" d="M405.318804,324.199913 L405.441,342.156 L417.440584,342.074483 L403.138043,371.172375 L388.441254,342.271607 L400.441,342.189 L400.318919,324.2339 L405.318804,324.199913 Z" fill="#F54E4E" fill-rule="nonzero"></path>
+            <g id="DataCircle" transform="translate(59.000000, 0.000000)">
+                <g id="Group-2">
+                    <circle id="Oval" fill="#DF2020" cx="45" cy="45" r="45"></circle>
+                    <text id="Vector-design" font-family="SFCompactDisplay-Regular, SF Compact Display" font-size="18" font-weight="normal" letter-spacing="-0.225" fill="#FFFFFF">
+                        <tspan x="20.8185547" y="41">Vector </tspan>
+                        <tspan x="19.5617188" y="62">design</tspan>
+                    </text>
+                </g>
+            </g>
+            <path id="Line" d="M197.48036,391.039241 L197.496,403.038 L286.496616,402.918841 L286.503379,407.918837 L197.503,408.038 L197.519588,420.039215 L168.5,405.578455 L197.48036,391.039241 Z" fill="#F54E4E" fill-rule="nonzero"></path>
+            <g id="DataCircle" transform="translate(56.000000, 360.000000)">
+                <g id="Group-2">
+                    <circle id="Oval" fill="#DF2020" cx="45" cy="45" r="45"></circle>
+                    <text id="Vector-design" font-family="SFCompactDisplay-Regular, SF Compact Display" font-size="18" font-weight="normal" letter-spacing="-0.225" fill="#FFFFFF">
+                        <tspan x="7.89951172" y="41">HTML and </tspan>
+                        <tspan x="30.2017578" y="62">CSS</tspan>
                     </text>
                 </g>
             </g>
         </g>
-        <g id="Group" transform="translate(0.000000, 280.811232)">
-            <g id="Box">
-                <g id="Group">
-                    <rect id="Rectangle" fill="#355279" x="0" y="0" width="194" height="76"></rect>
-                    <text id="Vector-design-in-Ske" font-family="SFCompactDisplay-Regular, SF Compact Display" font-size="18" font-weight="normal" letter-spacing="-0.225" fill="#FFFFFF">
-                        <tspan x="23.6263672" y="32.4489796">Compute and apply </tspan>
-                        <tspan x="82.0806641" y="53.4489796">CSS</tspan>
-                    </text>
-                </g>
-            </g>
-            <g id="Box" transform="translate(305.597579, 0.000000)">
-                <g id="Group">
-                    <rect id="Rectangle" fill="#355279" x="0" y="0" width="194" height="76"></rect>
-                    <text id="Vector-design-in-Ske" font-family="SFCompactDisplay-Regular, SF Compact Display" font-size="18" font-weight="normal" letter-spacing="-0.225" fill="#FFFFFF">
-                        <tspan x="25.4896484" y="32.4489796">Normalize CSS and </tspan>
-                        <tspan x="16.8429687" y="53.4489796">extract design scales</tspan>
-                    </text>
-                </g>
-            </g>
-            <g id="Box" transform="translate(306.354009, 142.745710)">
-                <g id="Group">
-                    <rect id="Rectangle" fill="#355279" x="0" y="0" width="194" height="76"></rect>
-                    <text id="Vector-design-in-Ske" font-family="SFCompactDisplay-Regular, SF Compact Display" font-size="18" font-weight="normal" letter-spacing="-0.225" fill="#FFFFFF">
-                        <tspan x="28.6185547" y="32.4489796">Render final HTML </tspan>
-                        <tspan x="65.9193359" y="53.4489796">and CSS</tspan>
-                    </text>
-                </g>
-            </g>
-        </g>
-        <path id="Line" d="M277.465479,304.94307 L306.475794,319.422421 L277.486124,333.943062 L277.477,321.943 L195.00178,322.001779 L194.998221,317.00178 L277.474,316.943 L277.465479,304.94307 Z" fill="#458D95" fill-rule="nonzero"></path>
-        <path id="Line" d="M277.490859,24.0819734 L306.475794,38.6120634 L277.460761,53.0819578 L277.472,41.082 L195.997407,40.997404 L196.002596,35.9974067 L277.478,36.082 L277.490859,24.0819734 Z" fill="#458D95" fill-rule="nonzero"></path>
-        <path id="Line" d="M223,161 L223,173 L304,173 L304,178 L223,178 L223,190 L194,175.5 L223,161 Z" fill="#458D95" fill-rule="nonzero"></path>
-        <path id="Line" d="M404.90468,76.2673564 L405.117,109.94 L417.117864,109.864209 L402.801959,138.955528 L388.118446,110.048013 L400.118,109.972 L399.90478,76.2990467 L404.90468,76.2673564 Z" fill="#458D95" fill-rule="nonzero"></path>
-        <path id="Line" d="M94.7685222,216.672973 L94.981,250.345 L106.981706,250.269825 L92.6658014,279.361144 L77.9822889,250.453629 L89.981,250.377 L89.7686226,216.704663 L94.7685222,216.672973 Z" fill="#458D95" fill-rule="nonzero"></path>
-        <path id="Line" d="M404.90468,357.85862 L405.117,391.531 L417.117864,391.455472 L402.801959,420.546792 L388.118446,391.639276 L400.118,391.563 L399.90478,357.89031 L404.90468,357.85862 Z" fill="#458D95" fill-rule="nonzero"></path>
     </g>
 </svg>

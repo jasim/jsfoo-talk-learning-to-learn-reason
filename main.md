@@ -1106,6 +1106,20 @@ You
 
 ------------------
 
+#### Refactoring (2nd edition) 
+#### by Martin Fowler
+
+![](images/refactoring-cover.jpg)
+
+::: notes
+
+
+
+:::
+
+
+------------------
+
 
 
 ``` {.javascript}
