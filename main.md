@@ -119,6 +119,8 @@ If you have done any SEO work, you might be familiar with Ahrefs. They crawl abo
 
 #### Compilers
 
+&nbsp;
+
 * First version of the Rust compiler
 * Flow (typechecker for Javascript)
 * Hack (Facebook's PHP compiler)
@@ -135,9 +137,14 @@ OCaml is also particularly nice to write compilers on - in fact anything that de
 
 ---
 
-#### Front-end web applications!
+## Front-end web applications!
 
-* BuckleScript compiles Reason/OCaml to Javascript
+&nbsp;
+
+Compile Reason into clean performant Javascript
+
+#### using the BuckleScript compiler
+
 
 ::: notes
 
@@ -285,7 +292,7 @@ But does it work perfectly reliably all the time, every time? Will it ever crash
 
 ----
 
-``` {.text}
+``` {.javascript}
 let showNext = u => {
   console.log("You will be user " + (u.id + 1))
 }
@@ -304,7 +311,7 @@ What if `id` is null?
 ----
 
 
-``` {.text}
+``` {.javascript}
 let showNext = u => {
   console.log("You will be user " + (u.id + 1))
 }
@@ -326,7 +333,7 @@ Thankfully that works. Our function is resilient to nulls.
 
 ----
 
-``` {.text}
+``` {.javascript}
 let showNext = u => {
   console.log("You will be user " + (u.id + 1))
 }
@@ -344,7 +351,7 @@ What if id was a string?
 
 ----
 
-``` {.text}
+``` {.javascript}
 let showNext = u => {
   console.log("You will be user " + (u.id + 1))
 }
@@ -366,7 +373,7 @@ It doesn't crash, but the result isn't what we wanted.
 
 ---
 
-``` {.text}
+``` {.javascript}
 let showNext = u => {
   console.log("You will be user " + (u.id + 1))
 }
@@ -384,7 +391,7 @@ Now what happens when the object is empty?
 
 ----
 
-``` {.text}
+``` {.javascript}
 let showNext = u => {
   console.log("You will be user " + (u.id + 1))
 }
@@ -410,7 +417,9 @@ This is also a wrong result.
 let showNext = u => {
   console.log("You will be user " + (u.id + 1))
 }
+```
 
+``` {.javascript}
 let users = []
 let lastUser = users[users.length - 1]
 
@@ -431,7 +440,9 @@ But unfortunately, the list is empty. What happens now?
 let showNext = u => {
   console.log("You will be user " + (u.id + 1))
 }
+```
 
+``` {.javascript}
 let users = []
 let lastUser = users[users.length - 1]
 
@@ -474,11 +485,26 @@ Okay, to make a long story short, none of the invokations here would work correc
 ----
 
 
+---
+
+``` {.javascript}
+showNext({id: 112})
+```
+
+```
+You will be user 113
+```
+
 ::: notes
 
-There is only exactly one way the function can succeed. And that is 
+The only way the function can succeed is when it receives an object which has a field `id`, which has an integer value.
 
+The proposition that Reason makes is that if we explicitly mention this fact in the codebase -- as a type definition -- then it will make sure that the function is never called with anything else.
+
+Let's see how that works.
 :::
+
+
 
 ----
 
@@ -490,7 +516,7 @@ type user = {
 
 ::: notes
 
-when we pass it an object
+Here is a Reason type definition; we're saying that there is a type called user
 
 :::
 
@@ -518,16 +544,39 @@ type user = {
 
 ::: notes
 
-which is of type integer.
+whose values are always integers.
 
-This is how types are defined in Reason. Let's also write the Reason version of `showNext`.
+Now let's write `showNext` in Reason.
 
 :::
 
 ----
 
 ``` {.javascript}
-type user = {id: int};
+type user = {
+  id: int
+};
+
+let showNext = u => {
+  Js.log("You will be user " ++ string_of_int(u.id + 1));
+};
+```
+
+::: notes
+
+Here we had to explicitly cast the integer to string, but otherwise the 
+Reason version looks very similar to how we wrote that function in ES6. 
+
+:::
+
+
+
+---
+
+``` {.javascript}
+type user = {
+  id: int
+};
 
 let showNext = u => {
   Js.log("You will be user " ++ string_of_int(u.id + 1));
@@ -542,17 +591,18 @@ You will be user 16
 
 ::: notes
 
-As you can see, the Reason version of the code looks very similar to ES6. 
-
-We have just added a type definition, and a type coercion.
-
-Let's now try to break it like we did with the Javascript version.
+Let us now try to break this like we did with the Javascript version.
 
 :::
 
 ----
 
+
 ``` {.javascript}
+type user = { id: int };
+let showNext = u => {
+  Js.log("You will be user " ++ string_of_int(u.id + 1));
+};
 showNext({id: "abc"});
 ```
 
@@ -560,7 +610,7 @@ showNext({id: "abc"});
 
 ::: notes
 
-Yes it breaks! However that is a compile-time error. Let's unpack that a bit.
+Yes it breaks! But that is a compile-time breakage. 
 
 The Reason compiler inferred that the function `showNext` expects a value of type `user`. This is because showNext relies on the `id` field, and there are no other types in the vicinity that has an `id` field apart from the type `user`.
 

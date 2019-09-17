@@ -19,7 +19,8 @@ newJsRevealInit = <<TEXTMARK
       
       Reveal.initialize({
         history: true,
-        transition: 'none',
+        transition: 'fade',
+        transitionSpeed: 'fast',
         center: false,
         dependencies: [
           { src: './lib/js/classList.js', condition: function() { return !document.body.classList; } },
@@ -44,7 +45,12 @@ newCssLoad = <<TEXTMARK
     box-shadow: none;
     background-color: transparent;
     border: none;
-  }</style>
+  }
+  
+  .reveal .slides section {
+    transition-duration: 200ms !important; 
+  }
+  </style>
 TEXTMARK
 
 filename = ARGV[0]
