@@ -58,6 +58,12 @@ OUTLINE:
     * Reason homepage
     * Real World OCaml
     * learn-reason-workshop
+* Conclude
+  * no null -- `option` separate topic
+  * variants -- Hari's talk
+  * Makes you a good programmer
+  * See data clearly. Think better.
+  * Less work, more happiness.
 (5 mins)
 
 Hello,

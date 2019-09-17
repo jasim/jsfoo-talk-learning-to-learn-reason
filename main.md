@@ -132,10 +132,17 @@ Even within each step the nodes would transform into different structures. We co
 
 ------------------
 
-### Reason is released
+&nbsp;
 
-* Author: Jordan Walke (and Cheng Lou and others)
-* Wrote: React, Reason, and ReasonReact
+#### Reason is released
+
+```
+AUTHOR
+Jordan Walke (and Cheng Lou and others)
+
+WROTE
+React, Reason, and ReasonReact
+```
 
 ::: notes
 
