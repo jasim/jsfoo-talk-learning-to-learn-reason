@@ -19,15 +19,6 @@ OUTLINE:
     * last_user_info = None
     * Alway handle it
 (10 mins)
-* Learning
-  * Programming in the small
-  * In the large: modules
-  * Tooling:
-    * Just get it running
-    * ReasonReact webpage
-  * Types over FP
-    * This is Haskell. No Monads
-(5 mins)
 * Drama Troupe
   * Types are a tool for thought
   * Structure of data
@@ -38,15 +29,29 @@ OUTLINE:
   * Show code
   * Compare with Fowler's class based version
 (10 mins)
+* How does this make us better programmers?
+  * Most errors are not logical. They are clerical
+  * Types when they are explicit, makes the program clearer
+  * Variants
+  * The code follows the types  
 * ReasonReact
-* Systems built with ReasonReact
-  * PupilFirst
-  * Facebook Messenger
-  * Protoship
-* Learning:
-  * Reason homepage
-  * Real World OCaml
-  * learn-reason-workshop
+  * Full React
+  * Systems built with ReasonReact
+    * PupilFirst
+    * Facebook Messenger
+    * Protoship
+* Learning
+  * Programming in the small
+  * In the large: modules
+  * Tooling:
+    * Just get it running
+    * ReasonReact webpage
+  * Types over FP
+    * This is Haskell. No Monads
+  * Further learning:
+    * Reason homepage
+    * Real World OCaml
+    * learn-reason-workshop
 (5 mins)
 
 Hello,

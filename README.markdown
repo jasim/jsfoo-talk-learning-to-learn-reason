@@ -1,21 +1,9 @@
-To add to RevealJS:
+# Running
 
-        transition: 'none',
-        center: false,
+cd reveal.js && npm start
+make
 
-<style>
-    .reveal h1 {
-      font-size: 2em;
-    }
-    
-  .reveal section img {
-  box-shadow: none;
-  background-color: transparent;
-  border: none;
-}</style>
-
-
-ORIGINALLY FROM 
+# The Slide generation PDF code ORIGINALLY FROM 
 https://gist.github.com/lmullen/c3d4c7883f081ed8692a
 
 Files to create slides and handouts from the same Markdown files using
