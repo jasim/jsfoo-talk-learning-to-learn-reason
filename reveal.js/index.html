@@ -95,6 +95,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   .reveal .slides section {
     transition-duration: 200ms !important; 
   }
+
+  .sourceCode {
+    margin-top: 0 !important;
+    margin-bottom: 1em !important;
+  }
+
+  .smallFont {
+    font-size: 0.46em !important;
+  }
   </style>
   <!-- Printing and PDF exports -->
   <script>
@@ -136,8 +145,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="reason-is-ocaml" class="slide level2">
 <h2>Reason is OCaml</h2>
 <ul>
-<li><p>First released in 1990 in France</p></li>
-<li><p>Fast programs approaching C-like speeds</p></li>
+<li><p>First released in 1990</p></li>
+<li><p>C like speeds</p></li>
 <li><p>ISWIM syntax (OCaml, Haskell) not ALGOL (C, Java, Javascript etc.)</p></li>
 </ul>
 <aside class="notes">
@@ -146,31 +155,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Its syntax however is distinct from what is used in most popular languages.</p>
 </aside>
 </section>
-<section id="ocaml-sample-code" class="slide level2">
-<h2>OCaml sample code</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">let</span> <span class="kw">rec</span> read_and_accumulate accum =</span>
-<span id="cb2-2"><a href="#cb2-2"></a>  <span class="kw">let</span> line = In_channel.<span class="dt">input_line</span> In_channel.<span class="dt">stdin</span> <span class="kw">in</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a>  <span class="kw">match</span> line <span class="kw">with</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a>  | <span class="dt">None</span> -&gt; accum</span>
-<span id="cb2-5"><a href="#cb2-5"></a>  | <span class="dt">Some</span> x -&gt; read_and_accumulate (accum +. Float.of_string x)</span>
-<span id="cb2-6"><a href="#cb2-6"></a></span>
-<span id="cb2-7"><a href="#cb2-7"></a><span class="kw">let</span> () =</span>
-<span id="cb2-8"><a href="#cb2-8"></a>  printf <span class="st">&quot;Total: %F</span><span class="ch">\n</span><span class="st">&quot;</span> (read_and_accumulate <span class="dv">0</span>.)  </span></code></pre></div>
+<section class="slide level2">
+
+<div class="sourceCode" id="cb2"><pre class="sourceCode ocaml smallFont"><code class="sourceCode ocaml"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">let</span> print_html_table segments =</span>
+<span id="cb2-2"><a href="#cb2-2"></a>  printf <span class="st">&quot;&lt;table&gt;</span><span class="ch">\n</span><span class="st">&quot;</span>;</span>
+<span id="cb2-3"><a href="#cb2-3"></a>  <span class="dt">List</span>.iter (<span class="kw">fun</span> line -&gt;</span>
+<span id="cb2-4"><a href="#cb2-4"></a>    printf <span class="st">&quot;&lt;tr&gt;&quot;</span>;</span>
+<span id="cb2-5"><a href="#cb2-5"></a>    <span class="dt">List</span>.iter (<span class="kw">fun</span> c -&gt; printf <span class="st">&quot;&lt;td&gt;%s&lt;/td&gt;&quot;</span> (escape c)) line;</span>
+<span id="cb2-6"><a href="#cb2-6"></a>    printf <span class="st">&quot;&lt;/tr&gt;</span><span class="ch">\n</span><span class="st">&quot;</span>;</span>
+<span id="cb2-7"><a href="#cb2-7"></a>  ) segments;</span>
+<span id="cb2-8"><a href="#cb2-8"></a>  printf <span class="st">&quot;&lt;/table&gt;</span><span class="ch">\n</span><span class="st">&quot;</span>;</span>
+<span id="cb2-9"><a href="#cb2-9"></a>;;</span></code></pre></div>
 <aside class="notes">
-<p>Here is an OCaml program that reads a list of numbers from the standard input and prints their sum.</p>
+<p>Here is an OCaml program that prints an HTML table from a 2-dimensional list</p>
 </aside>
 </section>
-<section id="same-code-in-reason" class="slide level2">
-<h2>Same code, in Reason</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">let</span> rec read_and_accumulate <span class="op">=</span> accum <span class="kw">=&gt;</span> <span class="op">{</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a>  <span class="kw">let</span> line <span class="op">=</span> <span class="va">In_channel</span>.<span class="at">input_line</span>(<span class="va">In_channel</span>.<span class="at">stdin</span>)<span class="op">;</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a>  <span class="cf">switch</span> (line) <span class="op">{</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a>  <span class="op">|</span> None <span class="kw">=&gt;</span> accum</span>
-<span id="cb3-5"><a href="#cb3-5"></a>  <span class="op">|</span> <span class="at">Some</span>(x) <span class="kw">=&gt;</span> <span class="at">read_and_accumulate</span>(accum <span class="op">+</span>. <span class="va">Float</span>.<span class="at">of_string</span>(x))</span>
-<span id="cb3-6"><a href="#cb3-6"></a>  <span class="op">};</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="op">};</span></span>
-<span id="cb3-8"><a href="#cb3-8"></a></span>
-<span id="cb3-9"><a href="#cb3-9"></a><span class="kw">let</span> () <span class="op">=</span> <span class="at">printf</span>(<span class="st">&quot;Total: %F</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="at">read_and_accumulate</span>(<span class="fl">0.</span>))<span class="op">;</span></span></code></pre></div>
+<section class="slide level2">
+
+<div class="sourceCode" id="cb3"><pre class="sourceCode ocaml smallFont"><code class="sourceCode ocaml"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">let</span> print_html_table segments =</span>
+<span id="cb3-2"><a href="#cb3-2"></a>  printf <span class="st">&quot;&lt;table&gt;</span><span class="ch">\n</span><span class="st">&quot;</span>;</span>
+<span id="cb3-3"><a href="#cb3-3"></a>  <span class="dt">List</span>.iter (<span class="kw">fun</span> line -&gt;</span>
+<span id="cb3-4"><a href="#cb3-4"></a>    printf <span class="st">&quot;&lt;tr&gt;&quot;</span>;</span>
+<span id="cb3-5"><a href="#cb3-5"></a>    <span class="dt">List</span>.iter (<span class="kw">fun</span> c -&gt; printf <span class="st">&quot;&lt;td&gt;%s&lt;/td&gt;&quot;</span> (escape c)) line;</span>
+<span id="cb3-6"><a href="#cb3-6"></a>    printf <span class="st">&quot;&lt;/tr&gt;</span><span class="ch">\n</span><span class="st">&quot;</span>;</span>
+<span id="cb3-7"><a href="#cb3-7"></a>  ) segments;</span>
+<span id="cb3-8"><a href="#cb3-8"></a>  printf <span class="st">&quot;&lt;/table&gt;</span><span class="ch">\n</span><span class="st">&quot;</span>;</span>
+<span id="cb3-9"><a href="#cb3-9"></a>;;</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode ocaml smallFont"><code class="sourceCode ocaml"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">let</span> print_html_table = segments =&gt; {</span>
+<span id="cb4-2"><a href="#cb4-2"></a>  printf(<span class="st">&quot;&lt;table&gt;</span><span class="ch">\n</span><span class="st">&quot;</span>);</span>
+<span id="cb4-3"><a href="#cb4-3"></a>  <span class="dt">List</span>.iter(</span>
+<span id="cb4-4"><a href="#cb4-4"></a>    line =&gt; {</span>
+<span id="cb4-5"><a href="#cb4-5"></a>      printf(<span class="st">&quot;&lt;tr&gt;&quot;</span>);</span>
+<span id="cb4-6"><a href="#cb4-6"></a>      <span class="dt">List</span>.iter(c =&gt; printf(<span class="st">&quot;&lt;td&gt;%s&lt;/td&gt;&quot;</span>, escape(c)), line);</span>
+<span id="cb4-7"><a href="#cb4-7"></a>      printf(<span class="st">&quot;&lt;/tr&gt;</span><span class="ch">\n</span><span class="st">&quot;</span>);</span>
+<span id="cb4-8"><a href="#cb4-8"></a>    },</span>
+<span id="cb4-9"><a href="#cb4-9"></a>    segments,</span>
+<span id="cb4-10"><a href="#cb4-10"></a>  );</span>
+<span id="cb4-11"><a href="#cb4-11"></a>  printf(<span class="st">&quot;&lt;/table&gt;</span><span class="ch">\n</span><span class="st">&quot;</span>);</span>
+<span id="cb4-12"><a href="#cb4-12"></a>};</span></code></pre></div>
 <aside class="notes">
 <p>Here’s the same OCaml code, but in the Reason syntax. This is closer to ES6 as we know it - there are braces to denote blocks. The fat arrow operator lets us create functions and semicolons for separating lines.</p>
 <p>Underneath, however Reason and OCaml are the same language and have the same semantics. In this presentation I’ll use refer to Reason and OCaml interchangeably, depending on what fits the context better.</p>
@@ -220,23 +242,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p> </p>
 <p>Compile Reason into clean performant Javascript</p>
 <h4 id="using-the-bucklescript-compiler">using the BuckleScript compiler</h4>
+<p><img data-src="images/bloomberg-logo.png" /></p>
 <aside class="notes">
 <p>Those were the traditional applications of OCaml.</p>
-<p>OCaml can also be used to build front-end web applications, and that’s what this talk is about.</p>
-<p>The regular OCaml compiler emits executable binary, but we want Javascript so it executes on the browser. So there is an OCaml compiler called BuckleScript that emits performant Javascript. And it lets us use any npm library in the OCaml code almost seamlessly.</p>
+<p>OCaml can also be used to build front-end web applications, which is what this talk is about.</p>
+<p>There is an OCaml compiler called BuckleScrip, built at Bloomberg. Bloomberg also uses OCaml in their trading desks. BuckleScript emits performant Javascript and also lets us use any npm package with Reason almost seamlessly.</p>
 </aside>
 </section>
 <section class="slide level2">
 
-<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1"></a><span class="cf">if</span> (<span class="va">MomentRe</span>.<span class="va">Moment</span>.<span class="at">isSameWithGranularity</span>(</span>
-<span id="cb4-2"><a href="#cb4-2"></a>      <span class="va">MomentRe</span>.<span class="at">momentNow</span>()<span class="op">,</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a>      <span class="va">MomentRe</span>.<span class="at">moment</span>(<span class="st">&quot;2020-04-01&quot;</span>)<span class="op">,</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a>      <span class="vs">`day,</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="vs">    )) {</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="vs">  Js.log(&quot;It is the 1st of April!&quot;);</span></span>
-<span id="cb4-7"><a href="#cb4-7"></a><span class="vs">} else {</span></span>
-<span id="cb4-8"><a href="#cb4-8"></a><span class="vs">  Js.log(&quot;A dreary day&quot;);</span></span>
-<span id="cb4-9"><a href="#cb4-9"></a><span class="vs">};</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">if</span> (MomentRe.Moment.isSameWithGranularity(</span>
+<span id="cb5-2"><a href="#cb5-2"></a>      MomentRe.momentNow(),</span>
+<span id="cb5-3"><a href="#cb5-3"></a>      MomentRe.moment(<span class="st">&quot;2020-04-01&quot;</span>),</span>
+<span id="cb5-4"><a href="#cb5-4"></a>      `day,</span>
+<span id="cb5-5"><a href="#cb5-5"></a>    )) {</span>
+<span id="cb5-6"><a href="#cb5-6"></a>  Js.<span class="dt">log</span>(<span class="st">&quot;It is the 1st of April!&quot;</span>);</span>
+<span id="cb5-7"><a href="#cb5-7"></a>} <span class="kw">else</span> {</span>
+<span id="cb5-8"><a href="#cb5-8"></a>  Js.<span class="dt">log</span>(<span class="st">&quot;A dreary day&quot;</span>);</span>
+<span id="cb5-9"><a href="#cb5-9"></a>};</span></code></pre></div>
 <aside class="notes">
 <p>This Reason code here - it checks whether the current day is April 1st 2020, and then shows a message.</p>
 <p>It uses the momentjs Javascript library from npm. Now let’s see how the BuckleScript output looks.</p>
@@ -244,19 +267,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section class="slide level2">
 
-<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">// Generated by BUCKLESCRIPT VERSION 5.0.6, PLEASE EDIT WITH CARE</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="st">&#39;use strict&#39;</span><span class="op">;</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a></span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="kw">var</span> Moment <span class="op">=</span> <span class="at">require</span>(<span class="st">&quot;moment&quot;</span>)<span class="op">;</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="kw">var</span> MomentRe <span class="op">=</span> <span class="at">require</span>(<span class="st">&quot;bs-moment/src/MomentRe.js&quot;</span>)<span class="op">;</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a></span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="cf">if</span> (<span class="at">Moment</span>().<span class="at">isSame</span>(<span class="va">MomentRe</span>.<span class="at">moment</span>(<span class="kw">undefined</span><span class="op">,</span> <span class="st">&quot;2020-04-01&quot;</span>)<span class="op">,</span> <span class="st">&quot;day&quot;</span>)) <span class="op">{</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a>  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;It is the 1st of April!&quot;</span>)<span class="op">;</span></span>
-<span id="cb5-9"><a href="#cb5-9"></a><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb5-10"><a href="#cb5-10"></a>  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;A dreary day&quot;</span>)<span class="op">;</span></span>
-<span id="cb5-11"><a href="#cb5-11"></a><span class="op">}</span></span>
-<span id="cb5-12"><a href="#cb5-12"></a></span>
-<span id="cb5-13"><a href="#cb5-13"></a><span class="co">/*  Not a pure module */</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">if</span> (MomentRe.Moment.isSameWithGranularity(</span>
+<span id="cb6-2"><a href="#cb6-2"></a>      MomentRe.momentNow(),</span>
+<span id="cb6-3"><a href="#cb6-3"></a>      MomentRe.moment(<span class="st">&quot;2020-04-01&quot;</span>),</span>
+<span id="cb6-4"><a href="#cb6-4"></a>      `day,</span>
+<span id="cb6-5"><a href="#cb6-5"></a>    )) {</span>
+<span id="cb6-6"><a href="#cb6-6"></a>  Js.<span class="dt">log</span>(<span class="st">&quot;It is the 1st of April!&quot;</span>);</span>
+<span id="cb6-7"><a href="#cb6-7"></a>} <span class="kw">else</span> {</span>
+<span id="cb6-8"><a href="#cb6-8"></a>  Js.<span class="dt">log</span>(<span class="st">&quot;A dreary day&quot;</span>);</span>
+<span id="cb6-9"><a href="#cb6-9"></a>};</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1"></a><span class="co">// Generated by BUCKLESCRIPT VERSION 5.0.6, PLEASE EDIT WITH CARE</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="st">&#39;use strict&#39;</span><span class="op">;</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="kw">var</span> Moment <span class="op">=</span> <span class="at">require</span>(<span class="st">&quot;moment&quot;</span>)<span class="op">;</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="kw">var</span> MomentRe <span class="op">=</span> <span class="at">require</span>(<span class="st">&quot;bs-moment/src/MomentRe.js&quot;</span>)<span class="op">;</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="cf">if</span> (<span class="at">Moment</span>().<span class="at">isSame</span>(<span class="va">MomentRe</span>.<span class="at">moment</span>(<span class="kw">undefined</span><span class="op">,</span> <span class="st">&quot;2020-04-01&quot;</span>)<span class="op">,</span> <span class="st">&quot;day&quot;</span>)) <span class="op">{</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a>  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;It is the 1st of April!&quot;</span>)<span class="op">;</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a>  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;A dreary day&quot;</span>)<span class="op">;</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="op">}</span></span></code></pre></div>
 <aside class="notes">
 <p>As you can see BuckleScript required the correct npm module and compiled everything to straightforward Javascript.</p>
 </aside>
@@ -306,10 +336,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section class="slide level2">
 
-<div class="sourceCode" id="cb6"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">let</span> showNext <span class="op">=</span> lastUser <span class="kw">=&gt;</span> <span class="op">{</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a>  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;You will be user &quot;</span> <span class="op">+</span> (<span class="va">lastUser</span>.<span class="at">id</span> <span class="op">+</span> <span class="dv">1</span>))</span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="dv">16</span><span class="op">}</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">let</span> showNext <span class="op">=</span> lastUser <span class="kw">=&gt;</span> <span class="op">{</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;You will be user &quot;</span> <span class="op">+</span> (<span class="va">lastUser</span>.<span class="at">id</span> <span class="op">+</span> <span class="dv">1</span>))</span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="dv">16</span><span class="op">}</span>)</span></code></pre></div>
 <pre><code>You will be user 17</code></pre>
 <aside class="notes">
 <p>Consider this function <code>showNext</code> - it tells you what your user id could be, based on the last user in the system.</p>
@@ -319,33 +349,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section class="slide level2">
 
-<div class="sourceCode" id="cb9"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">let</span> showNext <span class="op">=</span> u <span class="kw">=&gt;</span> <span class="op">{</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a>  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;You will be user &quot;</span> <span class="op">+</span> (<span class="va">u</span>.<span class="at">id</span> <span class="op">+</span> <span class="dv">1</span>))</span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb10-1"><a href="#cb10-1"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="kw">null</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">let</span> showNext <span class="op">=</span> u <span class="kw">=&gt;</span> <span class="op">{</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;You will be user &quot;</span> <span class="op">+</span> (<span class="va">u</span>.<span class="at">id</span> <span class="op">+</span> <span class="dv">1</span>))</span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb12-1"><a href="#cb12-1"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="kw">null</span>)</span></code></pre></div>
 <aside class="notes">
 <p>What if <code>id</code> is null?</p>
 </aside>
 </section>
 <section class="slide level2">
 
-<div class="sourceCode" id="cb11"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">let</span> showNext <span class="op">=</span> u <span class="kw">=&gt;</span> <span class="op">{</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a>  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;You will be user &quot;</span> <span class="op">+</span> (<span class="va">u</span>.<span class="at">id</span> <span class="op">+</span> <span class="dv">1</span>))</span>
-<span id="cb11-3"><a href="#cb11-3"></a><span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb12-1"><a href="#cb12-1"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="kw">null</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">let</span> showNext <span class="op">=</span> u <span class="kw">=&gt;</span> <span class="op">{</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;You will be user &quot;</span> <span class="op">+</span> (<span class="va">u</span>.<span class="at">id</span> <span class="op">+</span> <span class="dv">1</span>))</span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb14-1"><a href="#cb14-1"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="kw">null</span>)</span></code></pre></div>
 <pre><code>You will be user 1</code></pre>
 <aside class="notes">
 <p>Thankfully that works. Our function is resilient to nulls.</p>
-</aside>
-</section>
-<section class="slide level2">
-
-<div class="sourceCode" id="cb14"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">let</span> showNext <span class="op">=</span> u <span class="kw">=&gt;</span> <span class="op">{</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a>  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;You will be user &quot;</span> <span class="op">+</span> (<span class="va">u</span>.<span class="at">id</span> <span class="op">+</span> <span class="dv">1</span>))</span>
-<span id="cb14-3"><a href="#cb14-3"></a><span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb15"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb15-1"><a href="#cb15-1"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="st">&quot;193&quot;</span><span class="op">}</span>)</span></code></pre></div>
-<aside class="notes">
-<p>What if id was a string?</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -354,19 +374,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb16-2"><a href="#cb16-2"></a>  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;You will be user &quot;</span> <span class="op">+</span> (<span class="va">u</span>.<span class="at">id</span> <span class="op">+</span> <span class="dv">1</span>))</span>
 <span id="cb16-3"><a href="#cb16-3"></a><span class="op">}</span></span></code></pre></div>
 <div class="sourceCode" id="cb17"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb17-1"><a href="#cb17-1"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="st">&quot;193&quot;</span><span class="op">}</span>)</span></code></pre></div>
-<pre><code>You will be user 1931</code></pre>
 <aside class="notes">
-<p>It doesn’t crash, but the result isn’t what we wanted.</p>
+<p>What if id was a string?</p>
 </aside>
 </section>
 <section class="slide level2">
 
-<div class="sourceCode" id="cb19"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw">let</span> showNext <span class="op">=</span> u <span class="kw">=&gt;</span> <span class="op">{</span></span>
-<span id="cb19-2"><a href="#cb19-2"></a>  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;You will be user &quot;</span> <span class="op">+</span> (<span class="va">u</span>.<span class="at">id</span> <span class="op">+</span> <span class="dv">1</span>))</span>
-<span id="cb19-3"><a href="#cb19-3"></a><span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb20"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb20-1"><a href="#cb20-1"></a><span class="at">showNext</span>(<span class="op">{}</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">let</span> showNext <span class="op">=</span> u <span class="kw">=&gt;</span> <span class="op">{</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a>  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;You will be user &quot;</span> <span class="op">+</span> (<span class="va">u</span>.<span class="at">id</span> <span class="op">+</span> <span class="dv">1</span>))</span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb19-1"><a href="#cb19-1"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="st">&quot;193&quot;</span><span class="op">}</span>)</span></code></pre></div>
+<pre><code>You will be user 1931</code></pre>
 <aside class="notes">
-<p>Now what happens when the object is empty?</p>
+<p>It doesn’t crash, but the result isn’t what we wanted.</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -375,23 +395,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb21-2"><a href="#cb21-2"></a>  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;You will be user &quot;</span> <span class="op">+</span> (<span class="va">u</span>.<span class="at">id</span> <span class="op">+</span> <span class="dv">1</span>))</span>
 <span id="cb21-3"><a href="#cb21-3"></a><span class="op">}</span></span></code></pre></div>
 <div class="sourceCode" id="cb22"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb22-1"><a href="#cb22-1"></a><span class="at">showNext</span>(<span class="op">{}</span>)</span></code></pre></div>
-<pre><code>You will be user NaN</code></pre>
 <aside class="notes">
-<p>This is also a wrong result.</p>
+<p>Now what happens when the object is empty?</p>
 </aside>
 </section>
 <section class="slide level2">
 
-<div class="sourceCode" id="cb24"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb24-1"><a href="#cb24-1"></a><span class="kw">let</span> showNext <span class="op">=</span> u <span class="kw">=&gt;</span> <span class="op">{</span></span>
-<span id="cb24-2"><a href="#cb24-2"></a>  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;You will be user &quot;</span> <span class="op">+</span> (<span class="va">u</span>.<span class="at">id</span> <span class="op">+</span> <span class="dv">1</span>))</span>
-<span id="cb24-3"><a href="#cb24-3"></a><span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb25"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb25-1"><a href="#cb25-1"></a><span class="kw">let</span> users <span class="op">=</span> []</span>
-<span id="cb25-2"><a href="#cb25-2"></a><span class="kw">let</span> lastUser <span class="op">=</span> users[<span class="va">users</span>.<span class="at">length</span> <span class="op">-</span> <span class="dv">1</span>]</span>
-<span id="cb25-3"><a href="#cb25-3"></a></span>
-<span id="cb25-4"><a href="#cb25-4"></a><span class="at">showNext</span>(lastUser)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb23-1"><a href="#cb23-1"></a><span class="kw">let</span> showNext <span class="op">=</span> u <span class="kw">=&gt;</span> <span class="op">{</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a>  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;You will be user &quot;</span> <span class="op">+</span> (<span class="va">u</span>.<span class="at">id</span> <span class="op">+</span> <span class="dv">1</span>))</span>
+<span id="cb23-3"><a href="#cb23-3"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb24-1"><a href="#cb24-1"></a><span class="at">showNext</span>(<span class="op">{}</span>)</span></code></pre></div>
+<pre><code>You will be user NaN</code></pre>
 <aside class="notes">
-<p>Here we have a list of users, and we’ll find the last of them and apply to <code>showNext</code></p>
-<p>But unfortunately, the list is empty. What happens now?</p>
+<p>This is also a wrong result.</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -403,6 +419,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb27-2"><a href="#cb27-2"></a><span class="kw">let</span> lastUser <span class="op">=</span> users[<span class="va">users</span>.<span class="at">length</span> <span class="op">-</span> <span class="dv">1</span>]</span>
 <span id="cb27-3"><a href="#cb27-3"></a></span>
 <span id="cb27-4"><a href="#cb27-4"></a><span class="at">showNext</span>(lastUser)</span></code></pre></div>
+<aside class="notes">
+<p>Here we have a list of users, and we’ll find the last of them and apply to <code>showNext</code></p>
+<p>But unfortunately, the list is empty. What happens now?</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode" id="cb28"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb28-1"><a href="#cb28-1"></a><span class="kw">let</span> showNext <span class="op">=</span> u <span class="kw">=&gt;</span> <span class="op">{</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a>  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;You will be user &quot;</span> <span class="op">+</span> (<span class="va">u</span>.<span class="at">id</span> <span class="op">+</span> <span class="dv">1</span>))</span>
+<span id="cb28-3"><a href="#cb28-3"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb29-1"><a href="#cb29-1"></a><span class="kw">let</span> users <span class="op">=</span> []</span>
+<span id="cb29-2"><a href="#cb29-2"></a><span class="kw">let</span> lastUser <span class="op">=</span> users[<span class="va">users</span>.<span class="at">length</span> <span class="op">-</span> <span class="dv">1</span>]</span>
+<span id="cb29-3"><a href="#cb29-3"></a></span>
+<span id="cb29-4"><a href="#cb29-4"></a><span class="at">showNext</span>(lastUser)</span></code></pre></div>
 <pre><code>Uncaught TypeError: Cannot read property &#39;id&#39; of undefined</code></pre>
 <aside class="notes">
 <p>The function actually crashes.</p>
@@ -411,23 +441,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section class="slide level2">
 
-<div class="sourceCode" id="cb29"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb29-1"><a href="#cb29-1"></a><span class="at">showNext</span>()</span>
-<span id="cb29-2"><a href="#cb29-2"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="st">&quot;a&quot;</span><span class="op">}</span>)</span>
-<span id="cb29-3"><a href="#cb29-3"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="op">{}}</span>)</span>
-<span id="cb29-4"><a href="#cb29-4"></a><span class="at">showNext</span>(<span class="kw">undefined</span>)</span>
-<span id="cb29-5"><a href="#cb29-5"></a><span class="at">showNext</span>(<span class="kw">null</span>)</span>
-<span id="cb29-6"><a href="#cb29-6"></a><span class="at">showNext</span>(<span class="dv">0</span>)</span>
-<span id="cb29-7"><a href="#cb29-7"></a><span class="at">showNext</span>(<span class="st">&quot;a&quot;</span>)</span>
-<span id="cb29-8"><a href="#cb29-8"></a><span class="at">showNext</span>([])</span>
-<span id="cb29-9"><a href="#cb29-9"></a><span class="at">showNext</span>([<span class="dv">1</span>])</span>
-<span id="cb29-10"><a href="#cb29-10"></a><span class="at">showNext</span>(a <span class="kw">=&gt;</span> a <span class="op">+</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb31-1"><a href="#cb31-1"></a><span class="at">showNext</span>()</span>
+<span id="cb31-2"><a href="#cb31-2"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="st">&quot;a&quot;</span><span class="op">}</span>)</span>
+<span id="cb31-3"><a href="#cb31-3"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="op">{}}</span>)</span>
+<span id="cb31-4"><a href="#cb31-4"></a><span class="at">showNext</span>(<span class="kw">undefined</span>)</span>
+<span id="cb31-5"><a href="#cb31-5"></a><span class="at">showNext</span>(<span class="kw">null</span>)</span>
+<span id="cb31-6"><a href="#cb31-6"></a><span class="at">showNext</span>(<span class="dv">0</span>)</span>
+<span id="cb31-7"><a href="#cb31-7"></a><span class="at">showNext</span>(<span class="st">&quot;a&quot;</span>)</span>
+<span id="cb31-8"><a href="#cb31-8"></a><span class="at">showNext</span>([])</span>
+<span id="cb31-9"><a href="#cb31-9"></a><span class="at">showNext</span>([<span class="dv">1</span>])</span>
+<span id="cb31-10"><a href="#cb31-10"></a><span class="at">showNext</span>(a <span class="kw">=&gt;</span> a <span class="op">+</span> <span class="dv">1</span>)</span></code></pre></div>
 <aside class="notes">
 <p>Okay, to make a long story short, none of the invokations here would work correctly.</p>
 </aside>
 </section>
 <section class="slide level2">
 
-<div class="sourceCode" id="cb30"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb30-1"><a href="#cb30-1"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="dv">112</span><span class="op">}</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb32-1"><a href="#cb32-1"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="dv">112</span><span class="op">}</span>)</span></code></pre></div>
 <pre><code>You will be user 113</code></pre>
 <aside class="notes">
 <p>The only way the function can succeed is when it receives an object which has a field <code>id</code>, which has an integer value.</p>
@@ -438,27 +468,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section class="slide level2">
 
-<div class="sourceCode" id="cb32"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb32-1"><a href="#cb32-1"></a>type user <span class="op">=</span> <span class="op">{</span></span>
-<span id="cb32-2"><a href="#cb32-2"></a></span>
-<span id="cb32-3"><a href="#cb32-3"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb34-1"><a href="#cb34-1"></a>type user <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a></span>
+<span id="cb34-3"><a href="#cb34-3"></a><span class="op">}</span></span></code></pre></div>
 <aside class="notes">
 <p>Here is a Reason type definition; we’re saying that there is a type called user</p>
 </aside>
 </section>
 <section class="slide level2">
 
-<div class="sourceCode" id="cb33"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb33-1"><a href="#cb33-1"></a>type user <span class="op">=</span> <span class="op">{</span></span>
-<span id="cb33-2"><a href="#cb33-2"></a>  id</span>
-<span id="cb33-3"><a href="#cb33-3"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb35-1"><a href="#cb35-1"></a>type user <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb35-2"><a href="#cb35-2"></a>  id</span>
+<span id="cb35-3"><a href="#cb35-3"></a><span class="op">}</span></span></code></pre></div>
 <aside class="notes">
 <p>which has a field <code>id</code></p>
 </aside>
 </section>
 <section class="slide level2">
 
-<div class="sourceCode" id="cb34"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb34-1"><a href="#cb34-1"></a>type user <span class="op">=</span> <span class="op">{</span></span>
-<span id="cb34-2"><a href="#cb34-2"></a>  <span class="dt">id</span><span class="op">:</span> int</span>
-<span id="cb34-3"><a href="#cb34-3"></a><span class="op">};</span></span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb36-1"><a href="#cb36-1"></a>type user <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb36-2"><a href="#cb36-2"></a>  <span class="dt">id</span><span class="op">:</span> int</span>
+<span id="cb36-3"><a href="#cb36-3"></a><span class="op">};</span></span></code></pre></div>
 <aside class="notes">
 <p>whose values are always integers.</p>
 <p>Now let’s write <code>showNext</code> in Reason.</p>
@@ -466,28 +496,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section class="slide level2">
 
-<div class="sourceCode" id="cb35"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb35-1"><a href="#cb35-1"></a>type user <span class="op">=</span> <span class="op">{</span></span>
-<span id="cb35-2"><a href="#cb35-2"></a>  <span class="dt">id</span><span class="op">:</span> int</span>
-<span id="cb35-3"><a href="#cb35-3"></a><span class="op">};</span></span>
-<span id="cb35-4"><a href="#cb35-4"></a></span>
-<span id="cb35-5"><a href="#cb35-5"></a><span class="kw">let</span> showNext <span class="op">=</span> u <span class="kw">=&gt;</span> <span class="op">{</span></span>
-<span id="cb35-6"><a href="#cb35-6"></a>  <span class="va">Js</span>.<span class="at">log</span>(<span class="st">&quot;You will be user &quot;</span> <span class="op">++</span> <span class="at">string_of_int</span>(<span class="va">u</span>.<span class="at">id</span> <span class="op">+</span> <span class="dv">1</span>))<span class="op">;</span></span>
-<span id="cb35-7"><a href="#cb35-7"></a><span class="op">};</span></span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb37-1"><a href="#cb37-1"></a>type user <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb37-2"><a href="#cb37-2"></a>  <span class="dt">id</span><span class="op">:</span> int</span>
+<span id="cb37-3"><a href="#cb37-3"></a><span class="op">};</span></span>
+<span id="cb37-4"><a href="#cb37-4"></a></span>
+<span id="cb37-5"><a href="#cb37-5"></a><span class="kw">let</span> showNext <span class="op">=</span> u <span class="kw">=&gt;</span> <span class="op">{</span></span>
+<span id="cb37-6"><a href="#cb37-6"></a>  <span class="va">Js</span>.<span class="at">log</span>(<span class="st">&quot;You will be user &quot;</span> <span class="op">++</span> <span class="at">string_of_int</span>(<span class="va">u</span>.<span class="at">id</span> <span class="op">+</span> <span class="dv">1</span>))<span class="op">;</span></span>
+<span id="cb37-7"><a href="#cb37-7"></a><span class="op">};</span></span></code></pre></div>
 <aside class="notes">
 <p>You can see that there is an explicit cast from integer to string, but otherwise the Reason version looks similar to the ES6 version. Let us run it.</p>
 </aside>
 </section>
 <section class="slide level2">
 
-<div class="sourceCode" id="cb36"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb36-1"><a href="#cb36-1"></a>type user <span class="op">=</span> <span class="op">{</span></span>
-<span id="cb36-2"><a href="#cb36-2"></a>  <span class="dt">id</span><span class="op">:</span> int</span>
-<span id="cb36-3"><a href="#cb36-3"></a><span class="op">};</span></span>
-<span id="cb36-4"><a href="#cb36-4"></a></span>
-<span id="cb36-5"><a href="#cb36-5"></a><span class="kw">let</span> showNext <span class="op">=</span> u <span class="kw">=&gt;</span> <span class="op">{</span></span>
-<span id="cb36-6"><a href="#cb36-6"></a>  <span class="va">Js</span>.<span class="at">log</span>(<span class="st">&quot;You will be user &quot;</span> <span class="op">++</span> <span class="at">string_of_int</span>(<span class="va">u</span>.<span class="at">id</span> <span class="op">+</span> <span class="dv">1</span>))<span class="op">;</span></span>
-<span id="cb36-7"><a href="#cb36-7"></a><span class="op">};</span></span>
-<span id="cb36-8"><a href="#cb36-8"></a></span>
-<span id="cb36-9"><a href="#cb36-9"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="dv">15</span><span class="op">}</span>)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb38-1"><a href="#cb38-1"></a>type user <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb38-2"><a href="#cb38-2"></a>  <span class="dt">id</span><span class="op">:</span> int</span>
+<span id="cb38-3"><a href="#cb38-3"></a><span class="op">};</span></span>
+<span id="cb38-4"><a href="#cb38-4"></a></span>
+<span id="cb38-5"><a href="#cb38-5"></a><span class="kw">let</span> showNext <span class="op">=</span> u <span class="kw">=&gt;</span> <span class="op">{</span></span>
+<span id="cb38-6"><a href="#cb38-6"></a>  <span class="va">Js</span>.<span class="at">log</span>(<span class="st">&quot;You will be user &quot;</span> <span class="op">++</span> <span class="at">string_of_int</span>(<span class="va">u</span>.<span class="at">id</span> <span class="op">+</span> <span class="dv">1</span>))<span class="op">;</span></span>
+<span id="cb38-7"><a href="#cb38-7"></a><span class="op">};</span></span>
+<span id="cb38-8"><a href="#cb38-8"></a></span>
+<span id="cb38-9"><a href="#cb38-9"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="dv">15</span><span class="op">}</span>)<span class="op">;</span></span></code></pre></div>
 <pre><code>You will be user 16</code></pre>
 <aside class="notes">
 <p>It works. Can we send this function invalid data, and break it, like we did with the JS version?</p>
@@ -495,11 +525,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section class="slide level2">
 
-<div class="sourceCode" id="cb38"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb38-1"><a href="#cb38-1"></a>type user <span class="op">=</span> <span class="op">{</span> <span class="dt">id</span><span class="op">:</span> int <span class="op">};</span></span>
-<span id="cb38-2"><a href="#cb38-2"></a><span class="kw">let</span> showNext <span class="op">=</span> u <span class="kw">=&gt;</span> <span class="op">{</span></span>
-<span id="cb38-3"><a href="#cb38-3"></a>  <span class="va">Js</span>.<span class="at">log</span>(<span class="st">&quot;You will be user &quot;</span> <span class="op">++</span> <span class="at">string_of_int</span>(<span class="va">u</span>.<span class="at">id</span> <span class="op">+</span> <span class="dv">1</span>))<span class="op">;</span></span>
-<span id="cb38-4"><a href="#cb38-4"></a><span class="op">};</span></span>
-<span id="cb38-5"><a href="#cb38-5"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="st">&quot;abc&quot;</span><span class="op">}</span>)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb40-1"><a href="#cb40-1"></a>type user <span class="op">=</span> <span class="op">{</span> <span class="dt">id</span><span class="op">:</span> int <span class="op">};</span></span>
+<span id="cb40-2"><a href="#cb40-2"></a><span class="kw">let</span> showNext <span class="op">=</span> u <span class="kw">=&gt;</span> <span class="op">{</span></span>
+<span id="cb40-3"><a href="#cb40-3"></a>  <span class="va">Js</span>.<span class="at">log</span>(<span class="st">&quot;You will be user &quot;</span> <span class="op">++</span> <span class="at">string_of_int</span>(<span class="va">u</span>.<span class="at">id</span> <span class="op">+</span> <span class="dv">1</span>))<span class="op">;</span></span>
+<span id="cb40-4"><a href="#cb40-4"></a><span class="op">};</span></span>
+<span id="cb40-5"><a href="#cb40-5"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="st">&quot;abc&quot;</span><span class="op">}</span>)<span class="op">;</span></span></code></pre></div>
 <p><img data-src="images/comp-error-string1.png" /></p>
 <aside class="notes">
 <p>Yes it breaks! But this is a compile-time breakage. This means no Javascript code was generated for this Reason program we wrote.</p>
@@ -508,11 +538,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section class="slide level2">
 
-<div class="sourceCode" id="cb39"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb39-1"><a href="#cb39-1"></a>type user <span class="op">=</span> <span class="op">{</span> <span class="dt">id</span><span class="op">:</span> int <span class="op">};</span></span>
-<span id="cb39-2"><a href="#cb39-2"></a><span class="kw">let</span> showNext <span class="op">=</span> u <span class="kw">=&gt;</span> <span class="op">{</span></span>
-<span id="cb39-3"><a href="#cb39-3"></a>  <span class="va">Js</span>.<span class="at">log</span>(<span class="st">&quot;You will be user &quot;</span> <span class="op">++</span> <span class="at">string_of_int</span>(<span class="va">u</span>.<span class="at">id</span> <span class="op">+</span> <span class="dv">1</span>))<span class="op">;</span></span>
-<span id="cb39-4"><a href="#cb39-4"></a><span class="op">};</span></span>
-<span id="cb39-5"><a href="#cb39-5"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="st">&quot;abc&quot;</span><span class="op">}</span>)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb41-1"><a href="#cb41-1"></a>type user <span class="op">=</span> <span class="op">{</span> <span class="dt">id</span><span class="op">:</span> int <span class="op">};</span></span>
+<span id="cb41-2"><a href="#cb41-2"></a><span class="kw">let</span> showNext <span class="op">=</span> u <span class="kw">=&gt;</span> <span class="op">{</span></span>
+<span id="cb41-3"><a href="#cb41-3"></a>  <span class="va">Js</span>.<span class="at">log</span>(<span class="st">&quot;You will be user &quot;</span> <span class="op">++</span> <span class="at">string_of_int</span>(<span class="va">u</span>.<span class="at">id</span> <span class="op">+</span> <span class="dv">1</span>))<span class="op">;</span></span>
+<span id="cb41-4"><a href="#cb41-4"></a><span class="op">};</span></span>
+<span id="cb41-5"><a href="#cb41-5"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="st">&quot;abc&quot;</span><span class="op">}</span>)<span class="op">;</span></span></code></pre></div>
 <p><img data-src="images/comp-error-string2.png" /></p>
 <aside class="notes">
 <p>It inferred that the function <code>showNext</code> expects a value of type <code>user</code>, and <code>user</code> should have an integer id column inside it. But instead of <code>user</code> we sent a random string. That’ll definitely break the function in runtime, so Reason wouldn’t allow it to move past compilation.</p>
@@ -523,7 +553,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section class="slide level2">
 
-<div class="sourceCode" id="cb40"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb40-1"><a href="#cb40-1"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> []<span class="op">}</span>)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb42-1"><a href="#cb42-1"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> []<span class="op">}</span>)<span class="op">;</span></span></code></pre></div>
 <p><img data-src="images/comp-error-list.png" /></p>
 <aside class="notes">
 <p>We’re passing in a list instead of an integer. Type error.</p>
@@ -531,7 +561,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section class="slide level2">
 
-<div class="sourceCode" id="cb41"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb41-1"><a href="#cb41-1"></a><span class="at">showNext</span>(a <span class="kw">=&gt;</span> a <span class="op">+</span> <span class="dv">1</span>)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb43-1"><a href="#cb43-1"></a><span class="at">showNext</span>(a <span class="kw">=&gt;</span> a <span class="op">+</span> <span class="dv">1</span>)<span class="op">;</span></span></code></pre></div>
 <p><img data-src="images/comp-error-fn.png" /></p>
 <aside class="notes">
 <p>Here’s a function instead of the entire <code>user</code> object. Type error again.</p>
@@ -539,15 +569,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section class="slide level2">
 
-<div class="sourceCode" id="cb42"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb42-1"><a href="#cb42-1"></a>type user <span class="op">=</span> <span class="op">{</span> <span class="dt">id</span><span class="op">:</span> int <span class="op">};</span></span>
-<span id="cb42-2"><a href="#cb42-2"></a></span>
-<span id="cb42-3"><a href="#cb42-3"></a><span class="kw">let</span> showNext <span class="op">=</span> u <span class="kw">=&gt;</span> <span class="op">{</span></span>
-<span id="cb42-4"><a href="#cb42-4"></a>  <span class="va">Js</span>.<span class="at">log</span>(<span class="st">&quot;You will be user &quot;</span> <span class="op">++</span> <span class="at">string_of_int</span>(<span class="va">u</span>.<span class="at">id</span> <span class="op">+</span> <span class="dv">1</span>))<span class="op">;</span></span>
-<span id="cb42-5"><a href="#cb42-5"></a><span class="op">};</span></span>
-<span id="cb42-6"><a href="#cb42-6"></a></span>
-<span id="cb42-7"><a href="#cb42-7"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="dv">44</span><span class="op">}</span>)<span class="op">;</span></span>
-<span id="cb42-8"><a href="#cb42-8"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="dv">299</span><span class="op">}</span>)<span class="op">;</span></span>
-<span id="cb42-9"><a href="#cb42-9"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="dv">-44</span><span class="op">}</span>)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb44-1"><a href="#cb44-1"></a>type user <span class="op">=</span> <span class="op">{</span> <span class="dt">id</span><span class="op">:</span> int <span class="op">};</span></span>
+<span id="cb44-2"><a href="#cb44-2"></a></span>
+<span id="cb44-3"><a href="#cb44-3"></a><span class="kw">let</span> showNext <span class="op">=</span> u <span class="kw">=&gt;</span> <span class="op">{</span></span>
+<span id="cb44-4"><a href="#cb44-4"></a>  <span class="va">Js</span>.<span class="at">log</span>(<span class="st">&quot;You will be user &quot;</span> <span class="op">++</span> <span class="at">string_of_int</span>(<span class="va">u</span>.<span class="at">id</span> <span class="op">+</span> <span class="dv">1</span>))<span class="op">;</span></span>
+<span id="cb44-5"><a href="#cb44-5"></a><span class="op">};</span></span>
+<span id="cb44-6"><a href="#cb44-6"></a></span>
+<span id="cb44-7"><a href="#cb44-7"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="dv">44</span><span class="op">}</span>)<span class="op">;</span></span>
+<span id="cb44-8"><a href="#cb44-8"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="dv">299</span><span class="op">}</span>)<span class="op">;</span></span>
+<span id="cb44-9"><a href="#cb44-9"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="dv">-44</span><span class="op">}</span>)<span class="op">;</span></span></code></pre></div>
 <pre><code>You will be user 45
 You will be user 300
 You will be user -4</code></pre>
@@ -623,6 +653,15 @@ You will be user -4</code></pre>
 <ul>
 <li>variables, data structures, iteration, functions</li>
 </ul></li>
+<li>Tooling</li>
+</ul>
+<aside class="notes">
+<p>You</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<ul>
 <li>Programming in the large
 <ul>
 <li>modules, packages</li>
@@ -634,26 +673,26 @@ You will be user -4</code></pre>
 </section>
 <section class="slide level2">
 
-<div class="sourceCode" id="cb45"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb45-1"><a href="#cb45-1"></a><span class="kw">let</span> plays <span class="op">=</span> <span class="op">{</span></span>
-<span id="cb45-2"><a href="#cb45-2"></a>  <span class="st">&quot;hamlet&quot;</span><span class="op">:</span> <span class="op">{</span> <span class="st">&quot;name&quot;</span><span class="op">:</span> <span class="st">&quot;Hamlet&quot;</span><span class="op">,</span> <span class="st">&quot;type&quot;</span><span class="op">:</span> <span class="st">&quot;tragedy&quot;</span> <span class="op">},</span></span>
-<span id="cb45-3"><a href="#cb45-3"></a>  <span class="st">&quot;as-like&quot;</span><span class="op">:</span> <span class="op">{</span> <span class="st">&quot;name&quot;</span><span class="op">:</span> <span class="st">&quot;As You Like It&quot;</span><span class="op">,</span> <span class="st">&quot;type&quot;</span><span class="op">:</span> <span class="st">&quot;comedy&quot;</span> <span class="op">},</span></span>
-<span id="cb45-4"><a href="#cb45-4"></a>  <span class="st">&quot;othello&quot;</span><span class="op">:</span> <span class="op">{</span> <span class="st">&quot;name&quot;</span><span class="op">:</span> <span class="st">&quot;Othello&quot;</span><span class="op">,</span> <span class="st">&quot;type&quot;</span><span class="op">:</span> <span class="st">&quot;tragedy&quot;</span> <span class="op">}</span></span>
-<span id="cb45-5"><a href="#cb45-5"></a><span class="op">}</span></span>
-<span id="cb45-6"><a href="#cb45-6"></a></span>
-<span id="cb45-7"><a href="#cb45-7"></a><span class="kw">let</span> invoices <span class="op">=</span> [<span class="op">{</span></span>
-<span id="cb45-8"><a href="#cb45-8"></a>  <span class="st">&quot;customer&quot;</span><span class="op">:</span> <span class="st">&quot;BigCo&quot;</span><span class="op">,</span></span>
-<span id="cb45-9"><a href="#cb45-9"></a>  <span class="st">&quot;performances&quot;</span><span class="op">:</span> [</span>
-<span id="cb45-10"><a href="#cb45-10"></a>    <span class="op">{</span> <span class="st">&quot;playID&quot;</span><span class="op">:</span> <span class="st">&quot;hamlet&quot;</span><span class="op">,</span> <span class="st">&quot;audience&quot;</span><span class="op">:</span> <span class="dv">55</span> <span class="op">},</span></span>
-<span id="cb45-11"><a href="#cb45-11"></a>    <span class="op">{</span> <span class="st">&quot;playID&quot;</span><span class="op">:</span> <span class="st">&quot;as-like&quot;</span><span class="op">,</span> <span class="st">&quot;audience&quot;</span><span class="op">:</span> <span class="dv">35</span> <span class="op">},</span></span>
-<span id="cb45-12"><a href="#cb45-12"></a>    <span class="op">{</span> <span class="st">&quot;playID&quot;</span><span class="op">:</span> <span class="st">&quot;othello&quot;</span><span class="op">,</span> <span class="st">&quot;audience&quot;</span><span class="op">:</span> <span class="dv">40</span> <span class="op">}</span>]</span>
-<span id="cb45-13"><a href="#cb45-13"></a><span class="op">}</span>]<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb47-1"><a href="#cb47-1"></a><span class="kw">let</span> plays <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb47-2"><a href="#cb47-2"></a>  <span class="st">&quot;hamlet&quot;</span><span class="op">:</span> <span class="op">{</span> <span class="st">&quot;name&quot;</span><span class="op">:</span> <span class="st">&quot;Hamlet&quot;</span><span class="op">,</span> <span class="st">&quot;type&quot;</span><span class="op">:</span> <span class="st">&quot;tragedy&quot;</span> <span class="op">},</span></span>
+<span id="cb47-3"><a href="#cb47-3"></a>  <span class="st">&quot;as-like&quot;</span><span class="op">:</span> <span class="op">{</span> <span class="st">&quot;name&quot;</span><span class="op">:</span> <span class="st">&quot;As You Like It&quot;</span><span class="op">,</span> <span class="st">&quot;type&quot;</span><span class="op">:</span> <span class="st">&quot;comedy&quot;</span> <span class="op">},</span></span>
+<span id="cb47-4"><a href="#cb47-4"></a>  <span class="st">&quot;othello&quot;</span><span class="op">:</span> <span class="op">{</span> <span class="st">&quot;name&quot;</span><span class="op">:</span> <span class="st">&quot;Othello&quot;</span><span class="op">,</span> <span class="st">&quot;type&quot;</span><span class="op">:</span> <span class="st">&quot;tragedy&quot;</span> <span class="op">}</span></span>
+<span id="cb47-5"><a href="#cb47-5"></a><span class="op">}</span></span>
+<span id="cb47-6"><a href="#cb47-6"></a></span>
+<span id="cb47-7"><a href="#cb47-7"></a><span class="kw">let</span> invoices <span class="op">=</span> [<span class="op">{</span></span>
+<span id="cb47-8"><a href="#cb47-8"></a>  <span class="st">&quot;customer&quot;</span><span class="op">:</span> <span class="st">&quot;BigCo&quot;</span><span class="op">,</span></span>
+<span id="cb47-9"><a href="#cb47-9"></a>  <span class="st">&quot;performances&quot;</span><span class="op">:</span> [</span>
+<span id="cb47-10"><a href="#cb47-10"></a>    <span class="op">{</span> <span class="st">&quot;playID&quot;</span><span class="op">:</span> <span class="st">&quot;hamlet&quot;</span><span class="op">,</span> <span class="st">&quot;audience&quot;</span><span class="op">:</span> <span class="dv">55</span> <span class="op">},</span></span>
+<span id="cb47-11"><a href="#cb47-11"></a>    <span class="op">{</span> <span class="st">&quot;playID&quot;</span><span class="op">:</span> <span class="st">&quot;as-like&quot;</span><span class="op">,</span> <span class="st">&quot;audience&quot;</span><span class="op">:</span> <span class="dv">35</span> <span class="op">},</span></span>
+<span id="cb47-12"><a href="#cb47-12"></a>    <span class="op">{</span> <span class="st">&quot;playID&quot;</span><span class="op">:</span> <span class="st">&quot;othello&quot;</span><span class="op">,</span> <span class="st">&quot;audience&quot;</span><span class="op">:</span> <span class="dv">40</span> <span class="op">}</span>]</span>
+<span id="cb47-13"><a href="#cb47-13"></a><span class="op">}</span>]<span class="op">;</span></span></code></pre></div>
 <aside class="notes">
 
 </aside>
 </section>
 <section class="slide level2">
 
-<div class="sourceCode" id="cb46"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb46-1"><a href="#cb46-1"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="kw">null</span><span class="op">}</span>)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb48-1"><a href="#cb48-1"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="kw">null</span><span class="op">}</span>)<span class="op">;</span></span></code></pre></div>
 <p><img data-src="images/comp-error-1-null.png" /></p>
 <aside class="notes">
 <p>But what about null? What if we pass null to <code>showNext</code>?</p>

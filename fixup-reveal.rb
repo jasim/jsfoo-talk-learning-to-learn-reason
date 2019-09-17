@@ -50,6 +50,15 @@ newCssLoad = <<TEXTMARK
   .reveal .slides section {
     transition-duration: 200ms !important; 
   }
+
+  .sourceCode {
+    margin-top: 0 !important;
+    margin-bottom: 1em !important;
+  }
+
+  .smallFont {
+    font-size: 0.46em !important;
+  }
   </style>
 TEXTMARK
 
