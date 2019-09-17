@@ -620,12 +620,57 @@ You will be user -4</code></pre>
 </section>
 <section class="slide level2">
 
-<p><img data-src="images/parsing-membrane.svg" /></p>
+<p><img data-src="images/parsing-membrane1.svg" /></p>
 <aside class="notes">
-<p>There is also something else to note: the program has no control over what data comes from outside - like a JSON API request, or database contents. What if they don’t match our types?</p>
-<p>We handle it in Reason by parsing all external data at the application boundary. If they don’t fit into our types, we can either handle them gracefully - like give default values for absent data – or if they are not salvageable, then we can return an error and terminate that request. It never touches our application code.</p>
-<p>The guarantee however is that if there are no issues, it gets parsed into our types, and reaches our application.</p>
-<p>At that point it is fully typed and we can work with it in the complete knowledge that there will be no data mismatch.</p>
+<p>There is also something else to note: the program has no control over what data comes from the external world - like content that we read from the database</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<p><img data-src="images/parsing-membrane2.svg" /></p>
+<aside class="notes">
+<p>or JSON API responses</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<p><img data-src="images/parsing-membrane3.svg" /></p>
+<aside class="notes">
+<p>or even user inputs from the browser.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<p><img data-src="images/parsing-membrane4.svg" /></p>
+<aside class="notes">
+<p>We handle it in Reason by parsing all external data at the application boundary. In this picture I’ve labelled it as the “application membrane”.</p>
+<p>(It is not a formal concept or anything by the way, I just made it up. But it has a nice ring to it no?)</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<p><img data-src="images/parsing-membrane5.svg" /></p>
+<aside class="notes">
+<p>If the data that hits the application doesn’t slot into their corresponding types, then we can handle it then and there. Maybe it is an old API format and we’re on a new version. So there is nothing to be done except reject it and return an HTTP error code.</p>
+<p>Or the incoming data is incomplete – but we can handle it gracefully by putting placeholder values.</p>
+<p>Or it is simply wrong data and not salvageable. The point is we cannot allow malformed data into our system. Either we handle it, or we stop the request there.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<p><img data-src="images/parsing-membrane6.svg" /></p>
+<aside class="notes">
+<p>But if there are no issues, then this data gets parsed into our application types, and it hits the core.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<p><img data-src="images/parsing-membrane7.svg" /></p>
+<aside class="notes">
+<p>We can write this core without a single defensive check; no worries about null errors; not bothered whether the objects will have the right shape. We know, thanks to types, that everything will be just perfect.</p>
+<p>You might have more question here: what happens if you have the wrong data <em>inside</em> the core application code? What if something is created internally and sent to the wrong function.</p>
+<p>These are very interesting questions. Once you get it, it is like revealing a magic trick, there is nothing mystical about it anymore.</p>
+<p>But to me, finding those answers by myself were some of the most exciting discoveries in the last couple of years of programming. I wont explain it here because I’d like you to seek it out yourselves.</p>
 </aside>
 </section>
 <section class="slide level2">

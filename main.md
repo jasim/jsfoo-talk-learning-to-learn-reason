@@ -789,20 +789,93 @@ But the Reason compiler is very good at catching those mistakes, which is why, "
 
 ------------------
 
-![](images/parsing-membrane.svg)
+![](images/parsing-membrane1.svg)
 
 ::: notes
 
-There is also something else to note: the program has no control over what data comes from outside - like a JSON API request, or database contents. What if they don't match our types?
-
-We handle it in Reason by parsing all external data at the application boundary. If they don't fit into our types, we can either handle them gracefully - like give default values for absent data -- or if they are not salvageable, then we can return an error and terminate that request. It never touches our application code.
-
-The guarantee however is that if there are no issues, it gets parsed into our types, and reaches our application.
-
-At that point it is fully typed and we can work with it in the complete knowledge that there will be no data mismatch.
+There is also something else to note: the program has no control over what data comes from the external world - like content that we read from the database
 
 :::
 
+
+------------------
+
+![](images/parsing-membrane2.svg)
+
+::: notes
+
+or JSON API responses
+
+:::
+
+
+
+------------------
+
+![](images/parsing-membrane3.svg)
+
+::: notes
+
+or even user inputs from the browser.
+
+:::
+
+
+
+------------------
+
+![](images/parsing-membrane4.svg)
+
+::: notes
+
+We handle it in Reason by parsing all external data at the application boundary. In this picture I've labelled it as the "application membrane". 
+
+(It is not a formal concept or anything by the way, I just made it up. But it has a nice ring to it no?)
+
+:::
+
+
+------------------
+
+![](images/parsing-membrane5.svg)
+
+::: notes
+
+If the data that hits the application doesn't slot into their corresponding types, then we can handle it then and there. Maybe it is an old API format and we're on a new version. So there is nothing to be done except reject it and return an HTTP error code.
+
+Or the incoming data is incomplete -- but we can handle it gracefully by putting placeholder values. 
+
+Or it is simply wrong data and not salvageable. The point is we cannot allow malformed data into our system. Either we handle it, or we stop the request there.
+
+:::
+
+
+------------------
+
+![](images/parsing-membrane6.svg)
+
+::: notes
+
+But if there are no issues, then this data gets parsed into our application types, and it hits the core.
+
+:::
+
+
+------------------
+
+![](images/parsing-membrane7.svg)
+
+::: notes
+
+We can write this core without a single defensive check; no worries about null errors; not bothered whether the objects will have the right shape. We know, thanks to types, that everything will be just perfect.
+
+You might have more question here: what happens if you have the wrong data _inside_ the core application code? What if something is created internally and sent to the wrong function. 
+
+These are very interesting questions. Once you get it, it is like revealing a magic trick, there is nothing mystical about it anymore. 
+
+But to me, finding those answers by myself were some of the most exciting discoveries in the last couple of years of programming. I wont explain it here because I'd like you to seek it out yourselves.
+
+:::
 
 ------------------
 

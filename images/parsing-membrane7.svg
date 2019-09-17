@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="768px" height="600px" viewBox="0 0 768 600" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 57.1 (83088) - https://sketch.com -->
+    <title>Desktop</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Desktop" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect fill="#FFFFFF" x="0" y="0" width="768" height="600"></rect>
+        <g id="Group-6" transform="translate(158.000000, 289.000000)">
+            <rect id="Rectangle" fill="#F4F5F2" x="68" y="0" width="448" height="260" rx="130"></rect>
+            <text id="Reject-invalid-data" font-family="SFCompactDisplay-Regular, SF Compact Display" font-size="24" font-weight="normal" fill="#4A1515">
+                <tspan x="189" y="62">Reject invalid data</tspan>
+                <tspan x="189" y="91">Parse and construct types</tspan>
+            </text>
+            <g id="Group" transform="translate(189.000000, 124.000000)">
+                <rect id="Rectangle" fill="#766BAB" x="0" y="0" width="260" height="104" rx="5"></rect>
+                <text id="Typed-Core" font-family="SFProDisplay-Bold, SF Pro Display" font-size="28" font-weight="bold" fill="#FFFFFF">
+                    <tspan x="56.4326172" y="62">Typed Core</tspan>
+                </text>
+            </g>
+            <text id="application-membrane" font-family="SFCompactDisplay-Regular, SF Compact Display" font-size="24" font-weight="normal" fill="#046A38">
+                <tspan x="9.86328125" y="68">application </tspan>
+                <tspan x="11.1464844" y="97">membrane</tspan>
+            </text>
+        </g>
+        <g id="Group-7" transform="translate(38.000000, 23.000000)">
+            <circle id="Oval" stroke="#EDEAF0" stroke-width="6" cx="133.5" cy="133" r="133"></circle>
+            <g id="Group-5" transform="translate(19.000000, 52.000000)">
+                <g id="RectBox" transform="translate(0.000000, 120.000000)">
+                    <g id="Group-4">
+                        <rect id="Rectangle" fill="#EDEAF0" x="0" y="0" width="230" height="44" rx="9"></rect>
+                        <text id="JSON-API-responses" font-family="SFCompactDisplay-Regular, SF Compact Display" font-size="20" font-weight="normal" fill="#000000">
+                            <tspan x="10.3662109" y="29">User input from browser</tspan>
+                        </text>
+                    </g>
+                </g>
+                <g id="RectBox">
+                    <g id="Group-4">
+                        <rect id="Rectangle" fill="#EDEAF0" x="0" y="0" width="230" height="44" rx="9"></rect>
+                        <text id="JSON-API-responses" font-family="SFCompactDisplay-Regular, SF Compact Display" font-size="20" font-weight="normal" fill="#000000">
+                            <tspan x="47.6757812" y="29">Database reads</tspan>
+                        </text>
+                    </g>
+                </g>
+                <g id="RectBox" transform="translate(0.000000, 60.000000)">
+                    <g id="Group-4">
+                        <rect id="Rectangle" fill="#EDEAF0" x="0" y="0" width="230" height="44" rx="9"></rect>
+                        <text id="JSON-API-responses" font-family="SFCompactDisplay-Regular, SF Compact Display" font-size="20" font-weight="normal" fill="#000000">
+                            <tspan x="28.3935547" y="29">JSON API responses</tspan>
+                        </text>
+                    </g>
+                </g>
+            </g>
+        </g>
+        <text id="external-world" font-family="SFCompactDisplay-Regular, SF Compact Display" font-size="24" font-weight="normal" fill="#046A38">
+            <tspan x="28" y="46">external </tspan>
+            <tspan x="28" y="75">world</tspan>
+        </text>
+        <path id="Line" d="M305.166811,134.670032 L397.492,273.271 L404.15033,268.836529 L406.777193,289.91613 L388.337394,279.369859 L394.995,274.934 L302.670032,136.333189 L305.166811,134.670032 Z" fill="#021428" fill-rule="nonzero"></path>
+    </g>
+</svg>
