@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="500px" height="500px" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 57.1 (83088) - https://sketch.com -->
+    <title>codegen-workflow</title>
+    <desc>Created with Sketch.</desc>
+    <g id="codegen-workflow" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect fill="#FFFFFF" x="0" y="0" width="500" height="500"></rect>
+        <g id="Group">
+            <g id="Box">
+                <g id="Group">
+                    <rect id="Rectangle" fill="#355279" x="0" y="0" width="194" height="76"></rect>
+                    <text id="Vector-design-in-Ske" font-family="SFCompactDisplay-Regular, SF Compact Display" font-size="18" font-weight="normal" letter-spacing="-0.225" fill="#FFFFFF">
+                        <tspan x="45.0699219" y="32.4489796">Vector design</tspan>
+                        <tspan x="14.6676758" y="53.4489796">in Sketch or Adobe XD</tspan>
+                    </text>
+                </g>
+            </g>
+            <g id="Box" transform="translate(0.000000, 138.845554)">
+                <g id="Group">
+                    <rect id="Rectangle" fill="#355279" x="0" y="0" width="194" height="76"></rect>
+                    <text id="Vector-design-in-Ske" font-family="SFCompactDisplay-Regular, SF Compact Display" font-size="18" font-weight="normal" letter-spacing="-0.225" fill="#FFFFFF">
+                        <tspan x="76.0083008" y="32.4489796">Apply </tspan>
+                        <tspan x="69.8128906" y="53.4489796">layouts</tspan>
+                    </text>
+                </g>
+            </g>
+            <g id="Box" transform="translate(305.597579, 0.000000)">
+                <g id="Group">
+                    <rect id="Rectangle" fill="#355279" x="0" y="0" width="194" height="76"></rect>
+                    <text id="Vector-design-in-Ske" font-family="SFCompactDisplay-Regular, SF Compact Display" font-size="18" font-weight="normal" letter-spacing="-0.225" fill="#FFFFFF">
+                        <tspan x="65.9544922" y="32.4489796">Cleanup </tspan>
+                        <tspan x="49.2842773" y="53.4489796">vector layers</tspan>
+                    </text>
+                </g>
+            </g>
+            <g id="Box" transform="translate(306.354009, 138.845554)">
+                <g id="Group">
+                    <rect id="Rectangle" fill="#355279" x="0" y="0" width="194" height="76"></rect>
+                    <text id="Vector-design-in-Ske" font-family="SFCompactDisplay-Regular, SF Compact Display" font-size="18" font-weight="normal" letter-spacing="-0.225" fill="#FFFFFF">
+                        <tspan x="64.6124023" y="32.4489796">Discover </tspan>
+                        <tspan x="69.8128906" y="53.4489796">layouts</tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+        <g id="Group" transform="translate(0.000000, 280.811232)">
+            <g id="Box">
+                <g id="Group">
+                    <rect id="Rectangle" fill="#355279" x="0" y="0" width="194" height="76"></rect>
+                    <text id="Vector-design-in-Ske" font-family="SFCompactDisplay-Regular, SF Compact Display" font-size="18" font-weight="normal" letter-spacing="-0.225" fill="#FFFFFF">
+                        <tspan x="23.6263672" y="32.4489796">Compute and apply </tspan>
+                        <tspan x="82.0806641" y="53.4489796">CSS</tspan>
+                    </text>
+                </g>
+            </g>
+            <g id="Box" transform="translate(305.597579, 0.000000)">
+                <g id="Group">
+                    <rect id="Rectangle" fill="#355279" x="0" y="0" width="194" height="76"></rect>
+                    <text id="Vector-design-in-Ske" font-family="SFCompactDisplay-Regular, SF Compact Display" font-size="18" font-weight="normal" letter-spacing="-0.225" fill="#FFFFFF">
+                        <tspan x="25.4896484" y="32.4489796">Normalize CSS and </tspan>
+                        <tspan x="16.8429687" y="53.4489796">extract design scales</tspan>
+                    </text>
+                </g>
+            </g>
+            <g id="Box" transform="translate(306.354009, 142.745710)">
+                <g id="Group">
+                    <rect id="Rectangle" fill="#355279" x="0" y="0" width="194" height="76"></rect>
+                    <text id="Vector-design-in-Ske" font-family="SFCompactDisplay-Regular, SF Compact Display" font-size="18" font-weight="normal" letter-spacing="-0.225" fill="#FFFFFF">
+                        <tspan x="28.6185547" y="32.4489796">Render final HTML </tspan>
+                        <tspan x="65.9193359" y="53.4489796">and CSS</tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+        <path id="Line" d="M277.465479,304.94307 L306.475794,319.422421 L277.486124,333.943062 L277.477,321.943 L195.00178,322.001779 L194.998221,317.00178 L277.474,316.943 L277.465479,304.94307 Z" fill="#458D95" fill-rule="nonzero"></path>
+        <path id="Line" d="M277.490859,24.0819734 L306.475794,38.6120634 L277.460761,53.0819578 L277.472,41.082 L195.997407,40.997404 L196.002596,35.9974067 L277.478,36.082 L277.490859,24.0819734 Z" fill="#458D95" fill-rule="nonzero"></path>
+        <path id="Line" d="M223,161 L223,173 L304,173 L304,178 L223,178 L223,190 L194,175.5 L223,161 Z" fill="#458D95" fill-rule="nonzero"></path>
+        <path id="Line" d="M404.90468,76.2673564 L405.117,109.94 L417.117864,109.864209 L402.801959,138.955528 L388.118446,110.048013 L400.118,109.972 L399.90478,76.2990467 L404.90468,76.2673564 Z" fill="#458D95" fill-rule="nonzero"></path>
+        <path id="Line" d="M94.7685222,216.672973 L94.981,250.345 L106.981706,250.269825 L92.6658014,279.361144 L77.9822889,250.453629 L89.981,250.377 L89.7686226,216.704663 L94.7685222,216.672973 Z" fill="#458D95" fill-rule="nonzero"></path>
+        <path id="Line" d="M404.90468,357.85862 L405.117,391.531 L417.117864,391.455472 L402.801959,420.546792 L388.118446,391.639276 L400.118,391.563 L399.90478,357.89031 L404.90468,357.85862 Z" fill="#458D95" fill-rule="nonzero"></path>
+    </g>
+</svg>

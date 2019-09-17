@@ -139,7 +139,58 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p> </p>
 <aside class="notes">
 <p>Hello, my name is Jasim, and I’m here today to talk about ReasonML.</p>
-<p>My hope through this talk is to give you a feel for the language - what makes it interesting, how is it different from Javascript, and what it feels to be programming in it on a day-to-day basis.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<p><img data-src="images/dos-ea.png" /></p>
+<aside class="notes">
+<p>A little about me, I’ve been programming professionally for over 10 years now. This is one of the earliest software that I built.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<p><img data-src="images/dos-tsm.png" /></p>
+<aside class="notes">
+<p>It is very portable - runs on any architecture that can run DOSBOX</p>
+<p>Since then I’ve worked on web applications, front-end, back-end, and different languages including Javascript.</p>
+<p>Most recently I’ve been jamming with a friend building tools for designers.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<h3 id="protoship-teleport">Protoship Teleport</h3>
+<p><img data-src="images/teleport.png" /></p>
+<aside class="notes">
+<p>One is called Teleport – it is a Chrome extension that can capture a website and create a Sketch design out of it.</p>
+<p>The other tool, that’s where this story begins. It is called Protoship Codegen.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<p><img data-src="images/codegen-sketch.png" /></p>
+<aside class="notes">
+<p>It converts designs - made in tools like Adobe XD and Sketch - into responsive HTML and CSS that programmers like you and me can use. So it’ll do static positioning, flexboxes, grids etc. And CSS that is cleaner than anything that I’d be able to manually write.</p>
+<p>On the screen is a sample Sketch design,</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<p><img data-src="images/codegen-ui.png" /></p>
+<aside class="notes">
+<p>and this is how it gets converted to code. This is the Codegen UI, and the rendering is all clean HTML and CSS.</p>
+<p>All this stuff: the Sketch plugin, the Adobe XD plugin, the converter, the web UI, and the code generator – they’re all written in Reason.</p>
+<p>But before that it was all written in plain Javascript.</p>
+<p>We didn’t know Reason or Typed FP when we first started working on this product over two years ago. We were forced to learn it. I’ll tell you why.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<p><img data-src="images/codegen-vecNode.png" /> <img data-src="images/codegen-htmlNode.png" /> <img data-src="images/codegen-cssNode.png" /></p>
+<p><img data-src="images/codegen-workflow.svg" /></p>
+<aside class="notes">
+<p>had to learn the language because we were struggling to build Codegen otherwise.</p>
+<p>We’re very happy that we switched to Reason. Even though it was a long struggle. Now when I look back on the last 10 years of programming, I wonder what I was doing for the first 8.</p>
 </aside>
 </section>
 <section id="reason-is-ocaml" class="slide level2">
@@ -247,6 +298,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Those were the traditional applications of OCaml.</p>
 <p>OCaml can also be used to build front-end web applications, which is what this talk is about.</p>
 <p>There is an OCaml compiler called BuckleScrip, built at Bloomberg. Bloomberg also uses OCaml in their trading desks. BuckleScript emits performant Javascript and also lets us use any npm package with Reason almost seamlessly.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<p><img data-src="images/pupilfirst-ui.png" /></p>
+<aside class="notes">
+<p>This is PupilFirst. It is a learning management system built here in Bangalore. It has complex interactions and a large data model. The UI is entirely written in Reason and ReasonReact, and compiled using the BuckleScript compiler.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<p><img data-src="images/pupilfirst-github.png" /></p>
+<aside class="notes">
+<p>Oh and it is fully open-source. If you want to see a real-world Reason web application, there is no better place to look. One of the authors, Hari Gopal, had also spoken at last year’s JsFoo on Reason.</p>
 </aside>
 </section>
 <section class="slide level2">

@@ -20,11 +20,119 @@ fontsize: 17pt
 
 ::: notes
 
-Hello, my name is Jasim, and I'm here today to talk about ReasonML. 
-
-My hope through this talk is to give you a feel for the language - what makes it interesting, how is it different from Javascript, and what it feels to be programming in it on a day-to-day basis.
+Hello, my name is Jasim, and I'm here today to talk about ReasonML.
 
 :::
+
+------------------
+
+![](images/dos-ea.png)
+
+::: notes
+
+A little about me, I've been programming professionally for over 10 years now. 
+This is one of the earliest software that I built.
+
+:::
+
+------------------
+
+![](images/dos-tsm.png)
+
+::: notes
+
+It is very portable - runs on any architecture that can run DOSBOX
+
+Since then I've worked on web applications, front-end, back-end, and different languages including Javascript.
+
+Most recently I've been jamming with a friend building tools for designers. 
+
+:::
+
+------------------
+
+### Protoship Teleport
+
+![](images/teleport.png)
+
+::: notes
+
+One is called Teleport -- it is a Chrome extension that can capture a website and create a Sketch design out of it.
+
+The other tool, that's where this story begins. It is called Protoship Codegen.
+
+:::
+
+------------------
+
+![](images/codegen-sketch.png)
+
+::: notes
+
+It converts designs - made in tools like Adobe XD and Sketch - into responsive HTML and CSS that programmers like you and me can use. So it'll do static positioning, flexboxes, grids etc. And CSS that is cleaner than anything that I'd be able to manually write. 
+
+On the screen is a sample Sketch design,
+
+:::
+
+
+------------------
+
+![](images/codegen-ui.png)
+
+::: notes
+
+and this is how it gets converted to code. This is the Codegen UI, and the rendering is all clean HTML and CSS. 
+
+All this stuff: the Sketch plugin, the Adobe XD plugin, the converter, the web UI, and the code generator -- they're all written in Reason. 
+
+But before that it was all written in plain Javascript.
+
+We didn't know Reason or Typed FP when we first started working on this product over two years ago. We were forced to learn it. I'll tell you why.
+
+:::
+
+
+------------------
+
+### Raw Vector Node
+
+![](images/codegen-vecNode.png)
+
+
+::: notes
+
+Codegen takes raw vector Nodes from design tools. They're absolutely positioned, and is a far way from being responsive HTML and CSS. This is a sample node we extract from Sketch.
+
+:::
+
+------------------
+
+![](images/codegen-htmlNode.png)
+![](images/codegen-cssNode.png)
+
+::: notes
+
+That raw node has to finally become this HTML and CSS. That's a multi-step process. Here's the pipeline:
+
+:::
+
+------------------
+
+![](images/codegen-workflow.svg)
+
+::: notes
+
+In each step of this pipeline, we decorate the nodes with more info, change their shapes, and generally wrangle with them.
+
+Even within each step the nodes would change their shape. We couldn't keep up with those changes and were making silly mistakes. Worse, because of our programs were muddled, our understanding of the domain was also muddled. 
+
+That was the time around when Jordan Walke, the original author of React, released the first version of Reason. And we're very happy that he did. Learning and adopting the language was a long struggle. But now when I look back on the last 10 years of my programming career, I wonder what I was doing for the first 8, before I learned Reason and Typed functional programming.
+
+:::
+
+
+------------------
 
 ## Reason is OCaml
 
@@ -178,6 +286,28 @@ Those were the traditional applications of OCaml.
 OCaml can also be used to build front-end web applications, which is what this talk is about.
 
 There is an OCaml compiler called BuckleScrip, built at Bloomberg. Bloomberg also uses OCaml in their trading desks. BuckleScript emits performant Javascript and also lets us use any npm package with Reason almost seamlessly.
+
+:::
+
+
+------------------
+
+![](images/pupilfirst-ui.png)
+
+::: notes
+
+This is PupilFirst. It is a learning management system built here in Bangalore. It has complex interactions and a large data model. The UI is entirely written in Reason and ReasonReact, and compiled using the BuckleScript compiler.
+
+:::
+
+
+------------------
+
+![](images/pupilfirst-github.png)
+
+::: notes
+
+Oh and it is fully open-source. If you want to see a real-world Reason web application, there is no better place to look. One of the authors, Hari Gopal, had also spoken at last year's JsFoo on Reason.
 
 :::
 

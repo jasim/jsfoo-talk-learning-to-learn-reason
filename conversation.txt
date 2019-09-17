@@ -7,6 +7,15 @@ INTENTION:
   * Fin.
 
 OUTLINE:
+* Protoship workflow
+  * show nodes
+* Is programming getting any easier?
+* ReasonReact
+  * Full React
+  * Systems built with ReasonReact
+    * PupilFirst
+    * Facebook Messenger
+    * Protoship
 * What is Reason
   * Sample code
   * What can we build with it
@@ -31,15 +40,12 @@ OUTLINE:
     * Original javascript
   * How to compute it in Reason
     * Variants
+      * Hidden gem! A new dimension to think about data
   * Show code
   * Compare with Fowler's class based version
+* Variants
+  * {status: "success / error / loading", error, errorResult, response }
 (10 mins)
-* ReasonReact
-  * Full React
-  * Systems built with ReasonReact
-    * PupilFirst
-    * Facebook Messenger
-    * Protoship
 * Learning
   * Programming in the small
   * In the large: modules
