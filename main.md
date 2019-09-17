@@ -588,7 +588,7 @@ But we use nulls in Javascript to represent the "absence" of something. Reason d
 
 ----
 
-![](images/parsing-membrane.svg)
+![](images/parsing-membrane.png)
 
 ::: notes
 
