@@ -239,21 +239,21 @@ The perfect computer program --
 
 "perfection".
 
-Reason functions are more "perfect" than functions written in Javascript. The word "perfection" in this context comes from a talk given by Prof. Xavier Leroy, the author of OCaml. 
+Reason functions are more "perfect" than functions written in Javascript. I'm using the word "perfection" here, based on a talk given by Prof. Xavier Leroy, who is a programming languages researcher and also the author OCaml
 
 :::
 
 ---
 
-> The one that does exactly what it should do, no more, no less, every time, with perfect reliability, and forever. The kind of perfection that you can get from mathematical definitions, which software is to a large extent, or from philosophical concepts.
+> (a perfect program is) The one that does exactly what it should do, no more, no less, every time, with perfect reliability, and forever. The kind of perfection that you can get from mathematical definitions, which software is to a large extent, or from philosophical concepts.
 
 <sub><sup>"In search of software perfection", by Dr. Xavier Leroy, author of OCaml</sub></sup>
 
 ::: notes
 
-"A perfect function does exactly what it should do, no more, no less, every time, with perfect reliability, and forever. The kind of perfection that you can get from mathematical definitions, which software is to a large extent, or from philosophical concepts."
+"A perfect program does exactly what it should do, no more, no less, every time, with perfect reliability, and forever. The kind of perfection that you can get from mathematical definitions, which software is to a large extent, or from philosophical concepts."
 
-Let's first try to apply that notion to functions written in Javascript.
+What can that mean in the context of our day-to-day programming work? Let's take a look.
 
 ::: 
 
@@ -277,11 +277,9 @@ You will be user 17
 
 Consider this function `showNext` - it tells you what your user id could be, based on the last user in the system. 
 
-The code is as simple as it can get. 
+We pass it an object with id 16, and it prints 17. The code is as simple as it can get. 
 
-But does it work perfectly reliably all the time, every time?
-
-Will it ever crash in production?
+But does it work perfectly reliably all the time, every time? Will it ever crash in production?
 
 :::
 
@@ -362,7 +360,7 @@ You will be user 1931
 
 ::: notes
 
-That's not what we expected. That's one problem with this function.
+It doesn't crash, but the result isn't what we wanted. 
 
 :::
 
@@ -402,7 +400,7 @@ You will be user NaN
 
 ::: notes
 
-This is also a wrong result. Another way the function is not perfect.
+This is also a wrong result.
 
 :::
 
@@ -421,8 +419,9 @@ showNext(lastUser)
 
 ::: notes
 
-We now have a list of users and we apply the last one to `showNext`. 
-Unfortunately, the list is empty. What happens now?
+Here we have a list of users, and we'll find the last of them and apply to `showNext`
+
+But unfortunately, the list is empty. What happens now?
 
 :::
 
@@ -447,7 +446,7 @@ Uncaught TypeError: Cannot read property 'id' of undefined
 
 The function actually crashes. 
 
-This is a common occurence - we fetch a value from an array or an object -- and it doesn't exist -- so we get a null or an undefined, and then we pass that down to other functions.. and things crash in production. To figure out why, you now have to work backwards and trace the flow of data till we find where it went wrong.
+This is a common source of error when programming in JS - we fetch a value from an array or an object -- and sometimes it doesn't exist -- which means it returns a null or an undefined. We then pass that down to other functions.. and things crash in production. Sometimes they crash far away from the place where the undefined originated, and so we have to work backwards quite a bit to debug it. 
 
 :::
 
@@ -468,7 +467,14 @@ showNext(a => a + 1)
 
 ::: notes
 
-To make a long story short, none of the invokations here would work correctly. 
+Okay, to make a long story short, none of the invokations here would work correctly. 
+
+:::
+
+----
+
+
+::: notes
 
 There is only exactly one way the function can succeed. And that is 
 
@@ -554,17 +560,33 @@ showNext({id: "abc"});
 
 ::: notes
 
-It breaks, yes, but it breaks at the compile time. The compiler inferred that the function `showNext` expects a value of type `user`. This is because showNext relies on the `id` field, and there are no other types in the vicinity that has an `id` field apart from the type `user`.
+Yes it breaks! However that is a compile-time error. Let's unpack that a bit.
+
+The Reason compiler inferred that the function `showNext` expects a value of type `user`. This is because showNext relies on the `id` field, and there are no other types in the vicinity that has an `id` field apart from the type `user`.
 
 This is called Type Inference - the compiler can figure out what the type of our data is, and the type that our functions expect, most of the times. 
 
 Now that the compiler knows the function invokation is invalid, it shows an error, and does not generate the Javascript for this. This means it can never be executed in production.
 
-It is sort of like this error - where we pass in wrong data - has become syntax errors. Just like code with syntax error don't crash on production, because they don't get to production in the first place, any code that does not typecheck will not get into production at all.
-
-In that sense this function `showNext` has become a little more perfect: it will work all the time, every time, and with perfect reliability. That is because it will never be invoked with unexpected data, thanks to the compiler.
 :::
 
+
+----
+
+``` {.javascript}
+showNext({id: []});
+```
+
+![](images/comp-error-list.png)
+
+
+----
+
+``` {.javascript}
+showNext(a => a + 1);
+```
+
+![](images/comp-error-fn.png)
 
 ----
 
@@ -579,7 +601,6 @@ showNext({id: null});
 But what about null? What if we pass null to `showNext`?
 
 Again the code does not compile. This is because Reason doesn't even have the concept of nulls. the concept of nulls. So instead of allowing to run the code and crash at runtime, it simply prevents the code from even being even executed. 
-
 
 But we use nulls in Javascript to represent the "absence" of something. Reason does have an elegant way to do that. I will show how that works soon.
 
@@ -667,4 +688,3 @@ type play = {
   type_,
 };
 ```
-

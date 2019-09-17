@@ -458,7 +458,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb32"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb32-1"><a href="#cb32-1"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="st">&quot;abc&quot;</span><span class="op">}</span>)<span class="op">;</span></span></code></pre></div>
 <p><img data-src="images/comp-error-string.png" /></p>
 <aside class="notes">
-<p>It breaks, yes, but it breaks at the compile time. The compiler inferred that the function <code>showNext</code> expects a value of type <code>user</code>. This is because showNext relies on the <code>id</code> field, and there are no other types in the vicinity that has an <code>id</code> field apart from the type <code>user</code>.</p>
+<p>Yes it breaks! However that is a compile-time error. Let’s unpack that a bit.</p>
+<p>The Reason compiler inferred that the function <code>showNext</code> expects a value of type <code>user</code>. This is because showNext relies on the <code>id</code> field, and there are no other types in the vicinity that has an <code>id</code> field apart from the type <code>user</code>.</p>
 <p>This is called Type Inference - the compiler can figure out what the type of our data is, and the type that our functions expect, most of the times.</p>
 <p>Now that the compiler knows the function invokation is invalid, it shows an error, and does not generate the Javascript for this. This means it can never be executed in production.</p>
 <p>It is sort of like this error - where we pass in wrong data - has become syntax errors. Just like code with syntax error don’t crash on production, because they don’t get to production in the first place, any code that does not typecheck will not get into production at all.</p>
@@ -467,7 +468,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section class="slide level2">
 
-<div class="sourceCode" id="cb33"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb33-1"><a href="#cb33-1"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="kw">null</span><span class="op">}</span>)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb33-1"><a href="#cb33-1"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> []<span class="op">}</span>)<span class="op">;</span></span></code></pre></div>
+<p><img data-src="images/comp-error-list.png" /></p>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode" id="cb34"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb34-1"><a href="#cb34-1"></a><span class="at">showNext</span>(a <span class="kw">=&gt;</span> a <span class="op">+</span> <span class="dv">1</span>)<span class="op">;</span></span></code></pre></div>
+<p><img data-src="images/comp-error-fn.png" /></p>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode" id="cb35"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb35-1"><a href="#cb35-1"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="kw">null</span><span class="op">}</span>)<span class="op">;</span></span></code></pre></div>
 <p><img data-src="images/comp-error-1-null.png" /></p>
 <aside class="notes">
 <p>But what about null? What if we pass null to <code>showNext</code>?</p>
@@ -484,14 +495,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section class="slide level2">
 
-<div class="sourceCode" id="cb34"><pre class="sourceCode javascript"><code class="sourceCode javascript"></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode javascript"><code class="sourceCode javascript"></code></pre></div>
 <aside class="notes">
 
 </aside>
 </section>
 <section class="slide level2">
 
-<div class="sourceCode" id="cb35"><pre class="sourceCode javascript"><code class="sourceCode javascript"></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode javascript"><code class="sourceCode javascript"></code></pre></div>
 <aside class="notes">
 
 </aside>
@@ -504,34 +515,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="first-step" class="slide level2">
 <h2>First step</h2>
-<div class="sourceCode" id="cb36"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb36-1"><a href="#cb36-1"></a><span class="cf">switch</span> (<span class="va">play</span>.<span class="at">type</span>) <span class="op">{</span></span>
-<span id="cb36-2"><a href="#cb36-2"></a>  <span class="cf">case</span> <span class="st">&quot;tragedy&quot;</span><span class="op">:</span>  </span>
-<span id="cb36-3"><a href="#cb36-3"></a>    <span class="cf">return</span> <span class="kw">new</span> <span class="at">TragedyCalculator</span>(</span>
-<span id="cb36-4"><a href="#cb36-4"></a>      aPerformance<span class="op">,</span> aPlay</span>
-<span id="cb36-5"><a href="#cb36-5"></a>    )<span class="op">;</span></span>
-<span id="cb36-6"><a href="#cb36-6"></a>    </span>
-<span id="cb36-7"><a href="#cb36-7"></a>  <span class="cf">case</span> <span class="st">&quot;comedy&quot;</span><span class="op">:</span></span>
-<span id="cb36-8"><a href="#cb36-8"></a>    thisAmount <span class="op">=</span> <span class="dv">30000</span><span class="op">;</span></span>
-<span id="cb36-9"><a href="#cb36-9"></a>    <span class="cf">if</span> (<span class="va">perf</span>.<span class="at">audience</span> <span class="op">&gt;</span> <span class="dv">20</span>) <span class="op">{</span></span>
-<span id="cb36-10"><a href="#cb36-10"></a>      thisAmount <span class="op">+=</span> <span class="dv">10000</span> <span class="op">+</span> <span class="dv">500</span> <span class="op">*</span> (<span class="va">perf</span>.<span class="at">audience</span> <span class="op">-</span> <span class="dv">20</span>)<span class="op">;</span></span>
-<span id="cb36-11"><a href="#cb36-11"></a>    <span class="op">}</span></span>
-<span id="cb36-12"><a href="#cb36-12"></a>    thisAmount <span class="op">+=</span> <span class="dv">300</span> <span class="op">*</span> <span class="va">perf</span>.<span class="at">audience</span><span class="op">;</span></span>
-<span id="cb36-13"><a href="#cb36-13"></a>    <span class="cf">break</span><span class="op">;</span></span>
-<span id="cb36-14"><a href="#cb36-14"></a>  <span class="cf">default</span><span class="op">:</span></span>
-<span id="cb36-15"><a href="#cb36-15"></a>    <span class="cf">throw</span> <span class="kw">new</span> <span class="at">Error</span>(<span class="vs">`unknown type: </span><span class="sc">${</span><span class="va">play</span>.<span class="at">type</span><span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span>
-<span id="cb36-16"><a href="#cb36-16"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb38-1"><a href="#cb38-1"></a><span class="cf">switch</span> (<span class="va">play</span>.<span class="at">type</span>) <span class="op">{</span></span>
+<span id="cb38-2"><a href="#cb38-2"></a>  <span class="cf">case</span> <span class="st">&quot;tragedy&quot;</span><span class="op">:</span>  </span>
+<span id="cb38-3"><a href="#cb38-3"></a>    <span class="cf">return</span> <span class="kw">new</span> <span class="at">TragedyCalculator</span>(</span>
+<span id="cb38-4"><a href="#cb38-4"></a>      aPerformance<span class="op">,</span> aPlay</span>
+<span id="cb38-5"><a href="#cb38-5"></a>    )<span class="op">;</span></span>
+<span id="cb38-6"><a href="#cb38-6"></a>    </span>
+<span id="cb38-7"><a href="#cb38-7"></a>  <span class="cf">case</span> <span class="st">&quot;comedy&quot;</span><span class="op">:</span></span>
+<span id="cb38-8"><a href="#cb38-8"></a>    thisAmount <span class="op">=</span> <span class="dv">30000</span><span class="op">;</span></span>
+<span id="cb38-9"><a href="#cb38-9"></a>    <span class="cf">if</span> (<span class="va">perf</span>.<span class="at">audience</span> <span class="op">&gt;</span> <span class="dv">20</span>) <span class="op">{</span></span>
+<span id="cb38-10"><a href="#cb38-10"></a>      thisAmount <span class="op">+=</span> <span class="dv">10000</span> <span class="op">+</span> <span class="dv">500</span> <span class="op">*</span> (<span class="va">perf</span>.<span class="at">audience</span> <span class="op">-</span> <span class="dv">20</span>)<span class="op">;</span></span>
+<span id="cb38-11"><a href="#cb38-11"></a>    <span class="op">}</span></span>
+<span id="cb38-12"><a href="#cb38-12"></a>    thisAmount <span class="op">+=</span> <span class="dv">300</span> <span class="op">*</span> <span class="va">perf</span>.<span class="at">audience</span><span class="op">;</span></span>
+<span id="cb38-13"><a href="#cb38-13"></a>    <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb38-14"><a href="#cb38-14"></a>  <span class="cf">default</span><span class="op">:</span></span>
+<span id="cb38-15"><a href="#cb38-15"></a>    <span class="cf">throw</span> <span class="kw">new</span> <span class="at">Error</span>(<span class="vs">`unknown type: </span><span class="sc">${</span><span class="va">play</span>.<span class="at">type</span><span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span>
+<span id="cb38-16"><a href="#cb38-16"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="code-example" class="slide level2">
 <h2>Code example</h2>
-<div class="sourceCode" id="cb37"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb37-1"><a href="#cb37-1"></a>type type_ <span class="op">=</span></span>
-<span id="cb37-2"><a href="#cb37-2"></a>  <span class="op">|</span> Tragedy</span>
-<span id="cb37-3"><a href="#cb37-3"></a>  <span class="op">|</span> Comedy<span class="op">;</span></span>
-<span id="cb37-4"><a href="#cb37-4"></a></span>
-<span id="cb37-5"><a href="#cb37-5"></a>type play <span class="op">=</span> <span class="op">{</span></span>
-<span id="cb37-6"><a href="#cb37-6"></a>  <span class="dt">name</span><span class="op">:</span> string<span class="op">,</span></span>
-<span id="cb37-7"><a href="#cb37-7"></a>  <span class="dt">audience</span><span class="op">:</span> int<span class="op">,</span></span>
-<span id="cb37-8"><a href="#cb37-8"></a>  type_<span class="op">,</span></span>
-<span id="cb37-9"><a href="#cb37-9"></a><span class="op">};</span></span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb39-1"><a href="#cb39-1"></a>type type_ <span class="op">=</span></span>
+<span id="cb39-2"><a href="#cb39-2"></a>  <span class="op">|</span> Tragedy</span>
+<span id="cb39-3"><a href="#cb39-3"></a>  <span class="op">|</span> Comedy<span class="op">;</span></span>
+<span id="cb39-4"><a href="#cb39-4"></a></span>
+<span id="cb39-5"><a href="#cb39-5"></a>type play <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb39-6"><a href="#cb39-6"></a>  <span class="dt">name</span><span class="op">:</span> string<span class="op">,</span></span>
+<span id="cb39-7"><a href="#cb39-7"></a>  <span class="dt">audience</span><span class="op">:</span> int<span class="op">,</span></span>
+<span id="cb39-8"><a href="#cb39-8"></a>  type_<span class="op">,</span></span>
+<span id="cb39-9"><a href="#cb39-9"></a><span class="op">};</span></span></code></pre></div>
 </section>
     </div>
   </div>
