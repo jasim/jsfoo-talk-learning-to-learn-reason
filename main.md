@@ -768,13 +768,13 @@ Here someone asked for a tea, and we poured them a coffee. It will compile, but 
 
 ------------------
 
-### Programming is difficult
-
 &nbsp;
 
-* because of clerical errors
+### Programming is difficult...
 
-* logical mistakes are rare
+due to clerical errors.
+
+Logical mistakes are rare!
 
 ::: notes
 
