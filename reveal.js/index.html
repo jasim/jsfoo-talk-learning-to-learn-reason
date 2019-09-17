@@ -427,9 +427,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section class="slide level2">
 
-</section>
-<section class="slide level2">
-
 <div class="sourceCode" id="cb30"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb30-1"><a href="#cb30-1"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="dv">112</span><span class="op">}</span>)</span></code></pre></div>
 <pre><code>You will be user 113</code></pre>
 <aside class="notes">
@@ -518,9 +515,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb39-5"><a href="#cb39-5"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="st">&quot;abc&quot;</span><span class="op">}</span>)<span class="op">;</span></span></code></pre></div>
 <p><img data-src="images/comp-error-string2.png" /></p>
 <aside class="notes">
-<p>It inferred that the function <code>showNext</code> expects a value of type <code>user</code>, which should have an integer id column in it. But we sent it a string. That will most definitely break the function, so Reason wouldn’t allow it to move past compilation.</p>
-<p>But how did Reason figure out that <code>showNext</code> expects a value of type <code>user</code>? When it compiled the code, it knew that were no other types in the vicinity that has an <code>id</code> field apart from the type <code>user</code>. And <code>showNext</code> was expecting its argument to have an <code>id</code>. This mechanism is called type inference.</p>
-<p>Let’s see how Reason fares with other invalid values.</p>
+<p>It inferred that the function <code>showNext</code> expects a value of type <code>user</code>, and <code>user</code> should have an integer id column inside it. But instead of <code>user</code> we sent a random string. That’ll definitely break the function in runtime, so Reason wouldn’t allow it to move past compilation.</p>
+<p>But how did Reason figure out that <code>showNext</code> expects a value of type <code>user</code>? We haven’t mentioned that explicitly anywhere. What’s happening is “type inference” – if you imagined that you’ll have to litter your codebase with type annotations, then type inference will make you happy.</p>
+<p>Based on the context, Reason figures out the types of values and arguments to functions. It works well even for large programs.</p>
+<p>Now let’s see how Reason fares with other invalid values.</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -528,54 +526,54 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb40"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb40-1"><a href="#cb40-1"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> []<span class="op">}</span>)<span class="op">;</span></span></code></pre></div>
 <p><img data-src="images/comp-error-list.png" /></p>
 <aside class="notes">
-<p>We get the similar type errors with other invalid values.</p>
+<p>We’re passing in a list instead of an integer. Type error.</p>
 </aside>
 </section>
 <section class="slide level2">
 
 <div class="sourceCode" id="cb41"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb41-1"><a href="#cb41-1"></a><span class="at">showNext</span>(a <span class="kw">=&gt;</span> a <span class="op">+</span> <span class="dv">1</span>)<span class="op">;</span></span></code></pre></div>
 <p><img data-src="images/comp-error-fn.png" /></p>
+<aside class="notes">
+<p>Here’s a function instead of the entire <code>user</code> object. Type error again. We can keep going, but the only code that gets compiled is the one that passes the right type to showNext.</p>
+</aside>
 </section>
 <section class="slide level2">
 
+<p> </p>
+<p> </p>
+<h3 id="if-it-compiles-it-works">If it compiles, it works</h3>
+<aside class="notes">
+<p>A lot of my programming anxiety went away after I started programming with Reason. Because I know that if my program compiles, it works.</p>
+<p>Its true!</p>
+<p>But, what about logical errors?</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<pre><code>  if item == &quot;tea&quot;
+    pourCoffee()
+  else
+    pourTea()</code></pre>
+<aside class="notes">
+<p>Here someone asked for a tea, and we poured them a coffee. It will compile, but it is obviously wrong. This is a logical error, not a type error, and so the compiler cannot catch it.</p>
+</aside>
 </section>
 <section class="slide level2">
 
 <h3 id="programming-is-difficult">Programming is difficult</h3>
+<p> </p>
 <ul>
-<li>because of clerical errors</li>
-<li>logical mistakes are rare</li>
+<li><p>because of clerical errors</p></li>
+<li><p>logical mistakes are rare</p></li>
 </ul>
 <aside class="notes">
-<p>So the only code that gets compiled is the one that calles showNext with the right data.</p>
-<p>So if it compiles, we can stop being anxious whether we made a mistake or not. If it compiles, it works.</p>
-<p>One insight that I learnt from this is that we are all pretty good.</p>
-</aside>
-<div class="sourceCode" id="cb42"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb42-1"><a href="#cb42-1"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="kw">null</span><span class="op">}</span>)<span class="op">;</span></span></code></pre></div>
-<p><img data-src="images/comp-error-1-null.png" /></p>
-<aside class="notes">
-<p>But what about null? What if we pass null to <code>showNext</code>?</p>
-<p>Again the code does not compile. This is because Reason doesn’t even have the concept of nulls. the concept of nulls. So instead of allowing to run the code and crash at runtime, it simply prevents the code from even being even executed.</p>
-<p>But we use nulls in Javascript to represent the “absence” of something. Reason does have an elegant way to do that. I will show how that works soon.</p>
+<p>But the interesting thing that I learnt is that we programmers are a pretty decent bunch. It is rare for us to make logical mistakes. Give ourselves some credit!</p>
+<p>Our programs are all broken, make no mistake, but they are broken not because we wrote something when we meant the other. They’re borken because of clerical mistakes. Passing the wrong data to the wrong function. The Reason compiler is very good at catching those mistakes. Which is why, “if it compiles, it works”.</p>
 </aside>
 </section>
 <section class="slide level2">
 
 <p><img data-src="images/parsing-membrane.svg" /></p>
-<aside class="notes">
-
-</aside>
-</section>
-<section class="slide level2">
-
-<div class="sourceCode" id="cb43"><pre class="sourceCode javascript"><code class="sourceCode javascript"></code></pre></div>
-<aside class="notes">
-
-</aside>
-</section>
-<section class="slide level2">
-
-<div class="sourceCode" id="cb44"><pre class="sourceCode javascript"><code class="sourceCode javascript"></code></pre></div>
 <aside class="notes">
 
 </aside>
@@ -588,34 +586,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="first-step" class="slide level2">
 <h2>First step</h2>
-<div class="sourceCode" id="cb45"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb45-1"><a href="#cb45-1"></a><span class="cf">switch</span> (<span class="va">play</span>.<span class="at">type</span>) <span class="op">{</span></span>
-<span id="cb45-2"><a href="#cb45-2"></a>  <span class="cf">case</span> <span class="st">&quot;tragedy&quot;</span><span class="op">:</span>  </span>
-<span id="cb45-3"><a href="#cb45-3"></a>    <span class="cf">return</span> <span class="kw">new</span> <span class="at">TragedyCalculator</span>(</span>
-<span id="cb45-4"><a href="#cb45-4"></a>      aPerformance<span class="op">,</span> aPlay</span>
-<span id="cb45-5"><a href="#cb45-5"></a>    )<span class="op">;</span></span>
-<span id="cb45-6"><a href="#cb45-6"></a>    </span>
-<span id="cb45-7"><a href="#cb45-7"></a>  <span class="cf">case</span> <span class="st">&quot;comedy&quot;</span><span class="op">:</span></span>
-<span id="cb45-8"><a href="#cb45-8"></a>    thisAmount <span class="op">=</span> <span class="dv">30000</span><span class="op">;</span></span>
-<span id="cb45-9"><a href="#cb45-9"></a>    <span class="cf">if</span> (<span class="va">perf</span>.<span class="at">audience</span> <span class="op">&gt;</span> <span class="dv">20</span>) <span class="op">{</span></span>
-<span id="cb45-10"><a href="#cb45-10"></a>      thisAmount <span class="op">+=</span> <span class="dv">10000</span> <span class="op">+</span> <span class="dv">500</span> <span class="op">*</span> (<span class="va">perf</span>.<span class="at">audience</span> <span class="op">-</span> <span class="dv">20</span>)<span class="op">;</span></span>
-<span id="cb45-11"><a href="#cb45-11"></a>    <span class="op">}</span></span>
-<span id="cb45-12"><a href="#cb45-12"></a>    thisAmount <span class="op">+=</span> <span class="dv">300</span> <span class="op">*</span> <span class="va">perf</span>.<span class="at">audience</span><span class="op">;</span></span>
-<span id="cb45-13"><a href="#cb45-13"></a>    <span class="cf">break</span><span class="op">;</span></span>
-<span id="cb45-14"><a href="#cb45-14"></a>  <span class="cf">default</span><span class="op">:</span></span>
-<span id="cb45-15"><a href="#cb45-15"></a>    <span class="cf">throw</span> <span class="kw">new</span> <span class="at">Error</span>(<span class="vs">`unknown type: </span><span class="sc">${</span><span class="va">play</span>.<span class="at">type</span><span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span>
-<span id="cb45-16"><a href="#cb45-16"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb43-1"><a href="#cb43-1"></a><span class="cf">switch</span> (<span class="va">play</span>.<span class="at">type</span>) <span class="op">{</span></span>
+<span id="cb43-2"><a href="#cb43-2"></a>  <span class="cf">case</span> <span class="st">&quot;tragedy&quot;</span><span class="op">:</span>  </span>
+<span id="cb43-3"><a href="#cb43-3"></a>    <span class="cf">return</span> <span class="kw">new</span> <span class="at">TragedyCalculator</span>(</span>
+<span id="cb43-4"><a href="#cb43-4"></a>      aPerformance<span class="op">,</span> aPlay</span>
+<span id="cb43-5"><a href="#cb43-5"></a>    )<span class="op">;</span></span>
+<span id="cb43-6"><a href="#cb43-6"></a>    </span>
+<span id="cb43-7"><a href="#cb43-7"></a>  <span class="cf">case</span> <span class="st">&quot;comedy&quot;</span><span class="op">:</span></span>
+<span id="cb43-8"><a href="#cb43-8"></a>    thisAmount <span class="op">=</span> <span class="dv">30000</span><span class="op">;</span></span>
+<span id="cb43-9"><a href="#cb43-9"></a>    <span class="cf">if</span> (<span class="va">perf</span>.<span class="at">audience</span> <span class="op">&gt;</span> <span class="dv">20</span>) <span class="op">{</span></span>
+<span id="cb43-10"><a href="#cb43-10"></a>      thisAmount <span class="op">+=</span> <span class="dv">10000</span> <span class="op">+</span> <span class="dv">500</span> <span class="op">*</span> (<span class="va">perf</span>.<span class="at">audience</span> <span class="op">-</span> <span class="dv">20</span>)<span class="op">;</span></span>
+<span id="cb43-11"><a href="#cb43-11"></a>    <span class="op">}</span></span>
+<span id="cb43-12"><a href="#cb43-12"></a>    thisAmount <span class="op">+=</span> <span class="dv">300</span> <span class="op">*</span> <span class="va">perf</span>.<span class="at">audience</span><span class="op">;</span></span>
+<span id="cb43-13"><a href="#cb43-13"></a>    <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb43-14"><a href="#cb43-14"></a>  <span class="cf">default</span><span class="op">:</span></span>
+<span id="cb43-15"><a href="#cb43-15"></a>    <span class="cf">throw</span> <span class="kw">new</span> <span class="at">Error</span>(<span class="vs">`unknown type: </span><span class="sc">${</span><span class="va">play</span>.<span class="at">type</span><span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span>
+<span id="cb43-16"><a href="#cb43-16"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="code-example" class="slide level2">
 <h2>Code example</h2>
-<div class="sourceCode" id="cb46"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb46-1"><a href="#cb46-1"></a>type type_ <span class="op">=</span></span>
-<span id="cb46-2"><a href="#cb46-2"></a>  <span class="op">|</span> Tragedy</span>
-<span id="cb46-3"><a href="#cb46-3"></a>  <span class="op">|</span> Comedy<span class="op">;</span></span>
-<span id="cb46-4"><a href="#cb46-4"></a></span>
-<span id="cb46-5"><a href="#cb46-5"></a>type play <span class="op">=</span> <span class="op">{</span></span>
-<span id="cb46-6"><a href="#cb46-6"></a>  <span class="dt">name</span><span class="op">:</span> string<span class="op">,</span></span>
-<span id="cb46-7"><a href="#cb46-7"></a>  <span class="dt">audience</span><span class="op">:</span> int<span class="op">,</span></span>
-<span id="cb46-8"><a href="#cb46-8"></a>  type_<span class="op">,</span></span>
-<span id="cb46-9"><a href="#cb46-9"></a><span class="op">};</span></span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb44-1"><a href="#cb44-1"></a>type type_ <span class="op">=</span></span>
+<span id="cb44-2"><a href="#cb44-2"></a>  <span class="op">|</span> Tragedy</span>
+<span id="cb44-3"><a href="#cb44-3"></a>  <span class="op">|</span> Comedy<span class="op">;</span></span>
+<span id="cb44-4"><a href="#cb44-4"></a></span>
+<span id="cb44-5"><a href="#cb44-5"></a>type play <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb44-6"><a href="#cb44-6"></a>  <span class="dt">name</span><span class="op">:</span> string<span class="op">,</span></span>
+<span id="cb44-7"><a href="#cb44-7"></a>  <span class="dt">audience</span><span class="op">:</span> int<span class="op">,</span></span>
+<span id="cb44-8"><a href="#cb44-8"></a>  type_<span class="op">,</span></span>
+<span id="cb44-9"><a href="#cb44-9"></a><span class="op">};</span></span></code></pre></div>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode" id="cb45"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb45-1"><a href="#cb45-1"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="kw">null</span><span class="op">}</span>)<span class="op">;</span></span></code></pre></div>
+<p><img data-src="images/comp-error-1-null.png" /></p>
+<aside class="notes">
+<p>But what about null? What if we pass null to <code>showNext</code>?</p>
+<p>Again the code does not compile. This is because Reason doesn’t even have the concept of nulls. the concept of nulls. So instead of allowing to run the code and crash at runtime, it simply prevents the code from even being even executed.</p>
+<p>But we use nulls in Javascript to represent the “absence” of something. Reason does have an elegant way to do that. I will show how that works soon.</p>
+</aside>
 </section>
     </div>
   </div>

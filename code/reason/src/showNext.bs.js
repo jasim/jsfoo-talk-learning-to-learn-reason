@@ -7,7 +7,7 @@ function showNext(u) {
   return /* () */0;
 }
 
-showNext(/* record */[/* id */15]);
+showNext(/* record */[/* id */1]);
 
 exports.showNext = showNext;
 /*  Not a pure module */

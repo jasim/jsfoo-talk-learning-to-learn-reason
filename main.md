@@ -666,7 +666,6 @@ We're passing in a list instead of an integer. Type error.
 
 :::
 
-
 ------------------
 
 ``` {.javascript}
@@ -677,13 +676,78 @@ showNext(a => a + 1);
 
 ::: notes
 
-Here's a function instead of the entire `user` object. Type error again. We can keep going, but the only code that gets compiled is the one that passes the right type to showNext.
+Here's a function instead of the entire `user` object. Type error again. 
 
 :::
 
+
 ------------------
 
-If it compiles, it works
+``` {.javascript}
+type user = { id: int };
+
+let showNext = u => {
+  Js.log("You will be user " ++ string_of_int(u.id + 1));
+};
+
+showNext({id: 44});
+showNext({id: 299});
+showNext({id: -44});
+```
+
+```
+You will be user 45
+You will be user 300
+You will be user -4
+```
+
+::: notes
+
+We can keep going, but the only way to get the program to compile is to pass `showNext` the correct data. That's the number one promise of Typed FP.
+
+But what about data that comes from outside the program? They might contain invalid data -- how would the compiler catch it?
+
+:::
+
+
+------------------
+
+``` {.javascript}
+type user = {
+  id: int,
+  name: string,
+};
+let show = u => Js.log(u.id);
+let parse = json => {
+  id:   json |> Json.Decode.field("last_id", Json.Decode.int),
+  name: json |> Json.Decode.field("name",    Json.Decode.string)
+};
+let validJson = {j|{"id":10, "name": "Test"}|j};
+let invalidJson = {j|{"id": 10}|j};
+
+validJson |> Json.parseOrRaise |> parse |> show;
+invalidJson |> Json.parseOrRaise |> parse |> show;
+```
+
+::: notes
+
+Take this code for example. We have defined a type `user`. There is a `show` function that prints the user's id.
+
+And then we have a `parse` function. What we're trying to do is to accept data from outside
+
+:::
+
+
+------------------
+
+
+
+
+&nbsp;
+
+&nbsp;
+
+### If it compiles, it works
 
 ::: notes
 
@@ -716,32 +780,17 @@ Here someone asked for a tea, and we poured them a coffee. It will compile, but 
 
 ### Programming is difficult
 
+&nbsp;
+
 * because of clerical errors
+
 * logical mistakes are rare
 
 ::: notes
 
-But the interesting thing that I learnt is that we programmers are a pretty decent bunch. It is rare for us to make logical mistakes. Give ourselves some credit!
+But when I started writing typed FP after about a decade of dynamically typed languages, I realized that we programmers are a pretty decent bunch. It is very rare for us to be making logical errors in our code.
 
 Our programs are all broken, make no mistake, but they are broken not because we wrote something when we meant the other. They're borken because of clerical mistakes. Passing the wrong data to the wrong function. The Reason compiler is very good at catching those mistakes. Which is why, "if it compiles, it works".
-
-:::
-
-------------------
-
-``` {.javascript}
-showNext({id: null});
-```
-
-![](images/comp-error-1-null.png)
-
-::: notes
-
-But what about null? What if we pass null to `showNext`?
-
-Again the code does not compile. This is because Reason doesn't even have the concept of nulls. the concept of nulls. So instead of allowing to run the code and crash at runtime, it simply prevents the code from even being even executed. 
-
-But we use nulls in Javascript to represent the "absence" of something. Reason does have an elegant way to do that. I will show how that works soon.
 
 :::
 
@@ -752,26 +801,6 @@ But we use nulls in Javascript to represent the "absence" of something. Reason d
 
 ::: notes
 
-
-
-:::
-
-
-------------------
-
-``` {.javascript}
-```
-
-::: notes
-:::
-
-
-------------------
-
-``` {.javascript}
-```
-
-::: notes
 :::
 
 ------------------
@@ -827,3 +856,21 @@ type play = {
   type_,
 };
 ```
+
+------------------
+
+``` {.javascript}
+showNext({id: null});
+```
+
+![](images/comp-error-1-null.png)
+
+::: notes
+
+But what about null? What if we pass null to `showNext`?
+
+Again the code does not compile. This is because Reason doesn't even have the concept of nulls. the concept of nulls. So instead of allowing to run the code and crash at runtime, it simply prevents the code from even being even executed. 
+
+But we use nulls in Javascript to represent the "absence" of something. Reason does have an elegant way to do that. I will show how that works soon.
+
+:::
