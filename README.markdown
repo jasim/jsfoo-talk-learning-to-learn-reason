@@ -1,3 +1,20 @@
+To add to RevealJS:
+
+        transition: 'none',
+        center: false,
+
+<style>
+    .reveal h1 {
+      font-size: 2em;
+    }
+    
+  .reveal section img {
+  box-shadow: none;
+  background-color: transparent;
+  border: none;
+}</style>
+
+
 ORIGINALLY FROM 
 https://gist.github.com/lmullen/c3d4c7883f081ed8692a
 

@@ -79,7 +79,7 @@ The point is, underneath, it is the same language and same semantics. So I'll us
 
 ---
 
-# What can we build with Reason/OCaml?
+## What can we build with Reason/OCaml?
 
 ::: notes
 
@@ -89,9 +89,7 @@ So is it actually useful? This language. What can we build with it? Let me take 
 
 ---
 
-## What can we build with Reason/OCaml?
-
-### High-frequency trading software
+#### High-frequency trading software
 
 &nbsp;
 
@@ -105,9 +103,7 @@ When you start reading about OCaml, you'll often come across Jane Street. They a
 
 ---
 
-## What can we build with Reason/OCaml?
-
-### World's second largest crawler
+#### World's second largest crawler
 
 &nbsp;
 
@@ -121,9 +117,7 @@ If you have done any SEO work, you might be familiar with Ahrefs. They crawl abo
 
 ---
 
-## What can we build with Reason/OCaml?
-
-### Compilers
+#### Compilers
 
 * First version of the Rust compiler
 * Flow (typechecker for Javascript)
@@ -141,9 +135,7 @@ OCaml is also particularly nice to write compilers on - in fact anything that de
 
 ---
 
-## What can we build with Reason/OCaml?
-
-### Front-end web applications!
+#### Front-end web applications!
 
 * BuckleScript compiles Reason/OCaml to Javascript
 
@@ -233,12 +225,13 @@ The way we program Reason is to write our programs as a series of pure functions
 
 But how is that an improvement over Javascript? We can write Javascript in a similar manner - with pure functions everywhere, and just an outer shell for all the I/O. That's essentially functional programming, and that's pretty nice.
 
-But Reason is not only "functional", it is also "typed", and the types guarantees something:
+But Reason is not only "functional", it is also "typed", and the types guarantee something:
+
 :::
 
 ----
 
-# Perfection
+## Perfection
 
 The perfect computer program -- 
 
@@ -252,34 +245,33 @@ Reason functions are more "perfect" than functions written in Javascript. The wo
 
 ---
 
-# Perfection
-
-The perfect computer program -- 
-
 > The one that does exactly what it should do, no more, no less, every time, with perfect reliability, and forever. The kind of perfection that you can get from mathematical definitions, which software is to a large extent, or from philosophical concepts.
 
-> -- paraphrased from "In search of software perfection", 2016 Milner Award lecture by Dr. Xavier Leroy, author of OCaml
+<sub><sup>"In search of software perfection", by Dr. Xavier Leroy, author of OCaml</sub></sup>
 
 ::: notes
 
 "A perfect function does exactly what it should do, no more, no less, every time, with perfect reliability, and forever. The kind of perfection that you can get from mathematical definitions, which software is to a large extent, or from philosophical concepts."
 
 Let's first try to apply that notion to functions written in Javascript.
+
 ::: 
 
 ----
-
-## An Imperfect Function
 
 ``` {.javascript}
 let showNext = lastUser => {
   console.log("You will be user " + (lastUser.id + 1))
 }
+```
 
+``` {.javascript}
 showNext({id: 16})
 ```
 
-**_You will be user 17_**
+```
+You will be user 17
+```
 
 ::: notes
 
@@ -295,118 +287,126 @@ Will it ever crash in production?
 
 ----
 
-## An Imperfect Function
-
 ``` {.text}
 let showNext = u => {
   console.log("You will be user " + (u.id + 1))
 }
+```
 
 ``` {.javascript}
 showNext({id: null)
 ```
 
 ::: notes
+
 What if `id` is null?
+
 :::
 
 ----
 
-## An Imperfect Function
 
 ``` {.text}
 let showNext = u => {
   console.log("You will be user " + (u.id + 1))
 }
+```
 
 ``` {.javascript}
 showNext({id: null)
 ```
 
-**_You will be user 1_**
+```
+You will be user 1
+```
 
 ::: notes
+
 Thankfully that works. Our function is resilient to nulls.
+
 :::
 
 ----
-
-## An Imperfect Function
 
 ``` {.text}
 let showNext = u => {
   console.log("You will be user " + (u.id + 1))
 }
+```
 
 ``` {.javascript}
 showNext({id: "193"})
 ```
 
 ::: notes
+
 What if id was a string?
+
 :::
 
 ----
-
-
-## An Imperfect Function
 
 ``` {.text}
 let showNext = u => {
   console.log("You will be user " + (u.id + 1))
 }
+```
 
 ``` {.javascript}
 showNext({id: "193"})
 ```
 
-**_You will be user 1931_**
+```
+You will be user 1931
+```
 
 ::: notes
+
 That's not what we expected. That's one problem with this function.
+
 :::
 
 ---
 
-## An Imperfect Function
-
 ``` {.text}
 let showNext = u => {
   console.log("You will be user " + (u.id + 1))
 }
+```
 
 ``` {.javascript}
 showNext({})
 ```
 
 ::: notes
+
 Now what happens when the object is empty?
+
 :::
 
 ----
-
-
-## An Imperfect Function
 
 ``` {.text}
 let showNext = u => {
   console.log("You will be user " + (u.id + 1))
 }
+```
 
 ``` {.javascript}
 showNext({})
 ```
 
-**_You will be user NaN_**
+```
+You will be user NaN
+```
 
 ::: notes
+
 This is also a wrong result. Another way the function is not perfect.
+
 :::
 
 ----
-
-## An Imperfect Function
-
 
 ``` {.javascript}
 let showNext = u => {
@@ -420,15 +420,13 @@ showNext(lastUser)
 ```
 
 ::: notes
+
 We now have a list of users and we apply the last one to `showNext`. 
 Unfortunately, the list is empty. What happens now?
+
 :::
 
 ----
-
-## An Imperfect Function
-
-
 
 ``` {.javascript}
 let showNext = u => {
@@ -441,18 +439,19 @@ let lastUser = users[users.length - 1]
 showNext(lastUser)
 ```
 
-**_Uncaught TypeError: Cannot read property 'id' of undefined_**
+```
+Uncaught TypeError: Cannot read property 'id' of undefined
+```
 
 ::: notes
+
 The function actually crashes. 
 
 This is a common occurence - we fetch a value from an array or an object -- and it doesn't exist -- so we get a null or an undefined, and then we pass that down to other functions.. and things crash in production. To figure out why, you now have to work backwards and trace the flow of data till we find where it went wrong.
+
 :::
 
 ----
-
-## An Imperfect Function
-
 
 ``` {.javascript}
 showNext()
@@ -468,32 +467,14 @@ showNext(a => a + 1)
 ```
 
 ::: notes
-There are even more ways this function is invalid. None of invokations here would work correctly.
+
+To make a long story short, none of the invokations here would work correctly. 
+
+There is only exactly one way the function can succeed. And that is 
+
 :::
 
 ----
-
-## An Imperfect Function
-
-
-**The Anna Karenina principle**
-
-> All happy families are alike; each unhappy family is unhappy in its own way. 
-
-``` {.javascript}
-```
-
-::: notes
-
-There are many ways our function can break. But there is exactly one one way it can succeed. 
-
-And that is 
-:::
-
-----
-
-## An Imperfect Function
-
 
 ``` {.javascript}
 type user = {
@@ -502,14 +483,12 @@ type user = {
 ```
 
 ::: notes
+
 when we pass it an object
+
 :::
 
 ----
-
-
-## An Imperfect Function
-
 
 ``` {.javascript}
 type user = {
@@ -518,11 +497,12 @@ type user = {
 ```
 
 ::: notes
+
 which has a field `id`
+
 :::
 
 ----
-## A more perfect function, in Reason
 
 ``` {.javascript}
 type user = {
@@ -531,13 +511,93 @@ type user = {
 ```
 
 ::: notes
-that is of type integer
+
+which is of type integer.
+
+This is how types are defined in Reason. Let's also write the Reason version of `showNext`.
+
 :::
 
 ----
 
-## An Imperfect Function
+``` {.javascript}
+type user = {id: int};
 
+let showNext = u => {
+  Js.log("You will be user " ++ string_of_int(u.id + 1));
+};
+
+showNext({id: 15});
+```
+
+```
+You will be user 16
+```
+
+::: notes
+
+As you can see, the Reason version of the code looks very similar to ES6. 
+
+We have just added a type definition, and a type coercion.
+
+Let's now try to break it like we did with the Javascript version.
+
+:::
+
+----
+
+``` {.javascript}
+showNext({id: "abc"});
+```
+
+![](images/comp-error-string.png)
+
+::: notes
+
+It breaks, yes, but it breaks at the compile time. The compiler inferred that the function `showNext` expects a value of type `user`. This is because showNext relies on the `id` field, and there are no other types in the vicinity that has an `id` field apart from the type `user`.
+
+This is called Type Inference - the compiler can figure out what the type of our data is, and the type that our functions expect, most of the times. 
+
+Now that the compiler knows the function invokation is invalid, it shows an error, and does not generate the Javascript for this. This means it can never be executed in production.
+
+It is sort of like this error - where we pass in wrong data - has become syntax errors. Just like code with syntax error don't crash on production, because they don't get to production in the first place, any code that does not typecheck will not get into production at all.
+
+In that sense this function `showNext` has become a little more perfect: it will work all the time, every time, and with perfect reliability. That is because it will never be invoked with unexpected data, thanks to the compiler.
+:::
+
+
+----
+
+``` {.javascript}
+showNext({id: null});
+```
+
+![](images/comp-error-1-null.png)
+
+::: notes
+
+But what about null? What if we pass null to `showNext`?
+
+Again the code does not compile. This is because Reason doesn't even have the concept of nulls. the concept of nulls. So instead of allowing to run the code and crash at runtime, it simply prevents the code from even being even executed. 
+
+
+But we use nulls in Javascript to represent the "absence" of something. Reason does have an elegant way to do that. I will show how that works soon.
+
+:::
+
+
+----
+
+![](images/parsing-membrane.svg)
+
+::: notes
+
+
+
+:::
+
+
+----
 
 ``` {.javascript}
 ```
@@ -545,46 +605,8 @@ that is of type integer
 ::: notes
 :::
 
-----
-
-## An Imperfect Function
-
-
-``` {.javascript}
-```
-
-::: notes
-:::
-
 
 ----
-
-## An Imperfect Function
-
-
-``` {.javascript}
-```
-
-::: notes
-:::
-
-
-----
-
-## An Imperfect Function
-
-
-``` {.javascript}
-```
-
-::: notes
-:::
-
-
-----
-
-## An Imperfect Function
-
 
 ``` {.javascript}
 ```
