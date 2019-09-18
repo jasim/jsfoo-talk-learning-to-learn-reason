@@ -104,6 +104,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   .smallFont {
     font-size: 0.46em !important;
   }
+
+  .tinyFont {
+    font-size: 0.4em !important;
+  }
+
+  .noMaxHeight {
+    max-height: none !important;
+  }
+
+  .noMaxHeight > code {
+    max-height: none !important;
+  }
+
+  .float {
+    float: left;
+  }
+
+  .halfWidth {
+    width: 50% !important;
+  }
   </style>
   <!-- Printing and PDF exports -->
   <script>
@@ -850,7 +870,8 @@ You will be user -4</code></pre>
 <h4 id="by-martin-fowler">by Martin Fowler</h4>
 <p><img data-src="images/refactoring-cover.jpg" /></p>
 <aside class="notes">
-<p>Okay.</p>
+<p>Alright, did you know that the venerable Refactoring book by Martin Fowler has a second edition, which uses Javascript instead of Java?</p>
+<p>The first chapter of the book was available for free download in their website. lifted the opening exercise from it, so we can contrast an object-oriented version of a solution presented in Refactoring against a Typed Functional version we’ll write in Reason.</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -869,12 +890,185 @@ You will be user -4</code></pre>
 <span id="cb48-12"><a href="#cb48-12"></a>    <span class="op">{</span> <span class="st">&quot;playID&quot;</span><span class="op">:</span> <span class="st">&quot;othello&quot;</span><span class="op">,</span> <span class="st">&quot;audience&quot;</span><span class="op">:</span> <span class="dv">40</span> <span class="op">}</span>]</span>
 <span id="cb48-13"><a href="#cb48-13"></a><span class="op">}</span>]<span class="op">;</span></span></code></pre></div>
 <aside class="notes">
-
+<p>We are a Drama troupe and we’re often hired by corporates for employee enterainment. We give them a combined invoice for all the plays we perform for them.</p>
+<p>The exercise is to compute the amount we’ll bill for each invoice. The cost depends on the size of audience. We also have a different tariff for tragedies and comedies.</p>
 </aside>
 </section>
 <section class="slide level2">
 
-<div class="sourceCode" id="cb49"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb49-1"><a href="#cb49-1"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="kw">null</span><span class="op">}</span>)<span class="op">;</span></span></code></pre></div>
+<p>amount = fn(audienceSize, playType)</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb49-1"><a href="#cb49-1"></a><span class="cf">switch</span> (<span class="va">play</span>.<span class="at">type</span>) <span class="op">{</span></span>
+<span id="cb49-2"><a href="#cb49-2"></a>  <span class="cf">case</span> <span class="st">&quot;tragedy&quot;</span><span class="op">:</span></span>
+<span id="cb49-3"><a href="#cb49-3"></a>    thisAmount <span class="op">=</span> <span class="dv">40000</span><span class="op">;</span></span>
+<span id="cb49-4"><a href="#cb49-4"></a>    <span class="cf">if</span> (<span class="va">perf</span>.<span class="at">audience</span> <span class="op">&gt;</span> <span class="dv">30</span>)</span>
+<span id="cb49-5"><a href="#cb49-5"></a>      thisAmount <span class="op">+=</span> <span class="dv">1000</span> <span class="op">*</span> (<span class="va">perf</span>.<span class="at">audience</span> <span class="op">-</span> <span class="dv">30</span>)<span class="op">;</span></span>
+<span id="cb49-6"><a href="#cb49-6"></a>    <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb49-7"><a href="#cb49-7"></a></span>
+<span id="cb49-8"><a href="#cb49-8"></a>  <span class="cf">case</span> <span class="st">&quot;comedy&quot;</span><span class="op">:</span></span>
+<span id="cb49-9"><a href="#cb49-9"></a>    thisAmount <span class="op">=</span> <span class="dv">30000</span><span class="op">;</span></span>
+<span id="cb49-10"><a href="#cb49-10"></a>    <span class="cf">if</span> (<span class="va">perf</span>.<span class="at">audience</span> <span class="op">&gt;</span> <span class="dv">20</span>)</span>
+<span id="cb49-11"><a href="#cb49-11"></a>      thisAmount <span class="op">+=</span> <span class="dv">10000</span> <span class="op">+</span> <span class="dv">500</span> <span class="op">*</span> (<span class="va">perf</span>.<span class="at">audience</span> <span class="op">-</span> <span class="dv">20</span>)<span class="op">;</span></span>
+<span id="cb49-12"><a href="#cb49-12"></a>    thisAmount <span class="op">+=</span> <span class="dv">300</span> <span class="op">*</span> <span class="va">perf</span>.<span class="at">audience</span><span class="op">;</span></span>
+<span id="cb49-13"><a href="#cb49-13"></a>    <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb49-14"><a href="#cb49-14"></a><span class="op">}</span></span></code></pre></div>
+<aside class="notes">
+<p>This is the imperative version of the billing code from the book. Don’t bother to understand the specifics - the computation logic is not relevant. Only important thing is that the bill amount depends on the size of the audience and the genre of the play.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<p>volumeCredit = fn(audienceSize, playType)</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb50-1"><a href="#cb50-1"></a><span class="co">// add volume credits</span></span>
+<span id="cb50-2"><a href="#cb50-2"></a>volumeCredits <span class="op">+=</span> <span class="va">Math</span>.<span class="at">max</span>(<span class="va">perf</span>.<span class="at">audience</span> <span class="op">-</span> <span class="dv">30</span><span class="op">,</span> <span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb50-3"><a href="#cb50-3"></a></span>
+<span id="cb50-4"><a href="#cb50-4"></a><span class="co">// add extra credit for every ten comedy attendees</span></span>
+<span id="cb50-5"><a href="#cb50-5"></a><span class="cf">if</span> (<span class="st">&quot;comedy&quot;</span> <span class="op">===</span> <span class="va">play</span>.<span class="at">type</span>) volumeCredits <span class="op">+=</span> <span class="va">Math</span>.<span class="at">floor</span>(<span class="va">perf</span>.<span class="at">audience</span> <span class="op">/</span> <span class="dv">5</span>)<span class="op">;</span></span></code></pre></div>
+<aside class="notes">
+<p>Apart from total amount, we also have to compute volumeCredits, which is some kind of loyalty point. It is also a function of the audience size and genre of the play.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<div class="columns">
+<div class="column" style="width:34%;">
+<div class="sourceCode" id="cb51"><pre class="sourceCode javascript tinyFont noMaxHeight"><code class="sourceCode javascript"><span id="cb51-1"><a href="#cb51-1"></a><span class="kw">let</span> plays <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb51-2"><a href="#cb51-2"></a>  <span class="st">&quot;hamlet&quot;</span><span class="op">:</span> <span class="op">{</span> </span>
+<span id="cb51-3"><a href="#cb51-3"></a>    <span class="st">&quot;name&quot;</span><span class="op">:</span> <span class="st">&quot;Hamlet&quot;</span><span class="op">,</span> </span>
+<span id="cb51-4"><a href="#cb51-4"></a>    <span class="st">&quot;type&quot;</span><span class="op">:</span> <span class="st">&quot;tragedy&quot;</span> </span>
+<span id="cb51-5"><a href="#cb51-5"></a>  <span class="op">},</span></span>
+<span id="cb51-6"><a href="#cb51-6"></a>  <span class="st">&quot;as-like&quot;</span><span class="op">:</span> <span class="op">{</span> </span>
+<span id="cb51-7"><a href="#cb51-7"></a>    <span class="st">&quot;name&quot;</span><span class="op">:</span> <span class="st">&quot;As You Like It&quot;</span><span class="op">,</span> </span>
+<span id="cb51-8"><a href="#cb51-8"></a>    <span class="st">&quot;type&quot;</span><span class="op">:</span> <span class="st">&quot;comedy&quot;</span> </span>
+<span id="cb51-9"><a href="#cb51-9"></a>  <span class="op">},</span></span>
+<span id="cb51-10"><a href="#cb51-10"></a>  <span class="st">&quot;othello&quot;</span><span class="op">:</span> <span class="op">{</span> </span>
+<span id="cb51-11"><a href="#cb51-11"></a>    <span class="st">&quot;name&quot;</span><span class="op">:</span> <span class="st">&quot;Othello&quot;</span><span class="op">,</span> </span>
+<span id="cb51-12"><a href="#cb51-12"></a>    <span class="st">&quot;type&quot;</span><span class="op">:</span> <span class="st">&quot;tragedy&quot;</span> </span>
+<span id="cb51-13"><a href="#cb51-13"></a>  <span class="op">}</span></span>
+<span id="cb51-14"><a href="#cb51-14"></a><span class="op">}</span></span>
+<span id="cb51-15"><a href="#cb51-15"></a></span>
+<span id="cb51-16"><a href="#cb51-16"></a><span class="kw">let</span> invoices <span class="op">=</span> [<span class="op">{</span></span>
+<span id="cb51-17"><a href="#cb51-17"></a>  <span class="st">&quot;customer&quot;</span><span class="op">:</span> <span class="st">&quot;BigCo&quot;</span><span class="op">,</span></span>
+<span id="cb51-18"><a href="#cb51-18"></a>  <span class="st">&quot;performances&quot;</span><span class="op">:</span> [<span class="op">{</span> </span>
+<span id="cb51-19"><a href="#cb51-19"></a>    <span class="st">&quot;playID&quot;</span><span class="op">:</span> <span class="st">&quot;hamlet&quot;</span><span class="op">,</span> </span>
+<span id="cb51-20"><a href="#cb51-20"></a>    <span class="st">&quot;audience&quot;</span><span class="op">:</span> <span class="dv">55</span> </span>
+<span id="cb51-21"><a href="#cb51-21"></a>  <span class="op">},{</span> </span>
+<span id="cb51-22"><a href="#cb51-22"></a>    <span class="st">&quot;playID&quot;</span><span class="op">:</span> <span class="st">&quot;as-like&quot;</span><span class="op">,</span> </span>
+<span id="cb51-23"><a href="#cb51-23"></a>    <span class="st">&quot;audience&quot;</span><span class="op">:</span> <span class="dv">35</span> </span>
+<span id="cb51-24"><a href="#cb51-24"></a>  <span class="op">},{</span> </span>
+<span id="cb51-25"><a href="#cb51-25"></a>    <span class="st">&quot;playID&quot;</span><span class="op">:</span> <span class="st">&quot;othello&quot;</span><span class="op">,</span> </span>
+<span id="cb51-26"><a href="#cb51-26"></a>    <span class="st">&quot;audience&quot;</span><span class="op">:</span> <span class="dv">40</span> </span>
+<span id="cb51-27"><a href="#cb51-27"></a>  <span class="op">}</span>]</span>
+<span id="cb51-28"><a href="#cb51-28"></a><span class="op">}</span>]<span class="op">;</span></span></code></pre></div>
+</div><div class="column" style="width:65%;">
+<div class="sourceCode" id="cb52"><pre class="sourceCode javascript tinyFont noMaxHeight"><code class="sourceCode javascript"><span id="cb52-1"><a href="#cb52-1"></a><span class="kw">function</span> <span class="at">statement</span>(invoice<span class="op">,</span> plays) <span class="op">{</span></span>
+<span id="cb52-2"><a href="#cb52-2"></a>  <span class="kw">let</span> totalAmount <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb52-3"><a href="#cb52-3"></a>  <span class="kw">let</span> volumeCredits <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb52-4"><a href="#cb52-4"></a>  <span class="cf">for</span> (<span class="kw">let</span> perf <span class="kw">of</span> <span class="va">invoice</span>.<span class="at">performances</span>) <span class="op">{</span></span>
+<span id="cb52-5"><a href="#cb52-5"></a>    <span class="kw">const</span> play <span class="op">=</span> plays[<span class="va">perf</span>.<span class="at">playID</span>]<span class="op">;</span></span>
+<span id="cb52-6"><a href="#cb52-6"></a>    <span class="kw">let</span> thisAmount <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb52-7"><a href="#cb52-7"></a>    <span class="cf">switch</span> (<span class="va">play</span>.<span class="at">type</span>) <span class="op">{</span></span>
+<span id="cb52-8"><a href="#cb52-8"></a>      <span class="cf">case</span> <span class="st">&quot;tragedy&quot;</span><span class="op">:</span></span>
+<span id="cb52-9"><a href="#cb52-9"></a>        thisAmount <span class="op">=</span> <span class="dv">40000</span><span class="op">;</span></span>
+<span id="cb52-10"><a href="#cb52-10"></a>        <span class="cf">if</span> (<span class="va">perf</span>.<span class="at">audience</span> <span class="op">&gt;</span> <span class="dv">30</span>) <span class="op">{</span></span>
+<span id="cb52-11"><a href="#cb52-11"></a>          thisAmount <span class="op">+=</span> <span class="dv">1000</span> <span class="op">*</span> (<span class="va">perf</span>.<span class="at">audience</span> <span class="op">-</span> <span class="dv">30</span>)<span class="op">;</span></span>
+<span id="cb52-12"><a href="#cb52-12"></a>        <span class="op">}</span></span>
+<span id="cb52-13"><a href="#cb52-13"></a>        <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb52-14"><a href="#cb52-14"></a>      <span class="cf">case</span> <span class="st">&quot;comedy&quot;</span><span class="op">:</span></span>
+<span id="cb52-15"><a href="#cb52-15"></a>        thisAmount <span class="op">=</span> <span class="dv">30000</span><span class="op">;</span></span>
+<span id="cb52-16"><a href="#cb52-16"></a>        <span class="cf">if</span> (<span class="va">perf</span>.<span class="at">audience</span> <span class="op">&gt;</span> <span class="dv">20</span>) <span class="op">{</span></span>
+<span id="cb52-17"><a href="#cb52-17"></a>          thisAmount <span class="op">+=</span> <span class="dv">10000</span> <span class="op">+</span> <span class="dv">500</span> <span class="op">*</span> (<span class="va">perf</span>.<span class="at">audience</span> <span class="op">-</span> <span class="dv">20</span>)<span class="op">;</span></span>
+<span id="cb52-18"><a href="#cb52-18"></a>        <span class="op">}</span></span>
+<span id="cb52-19"><a href="#cb52-19"></a>        thisAmount <span class="op">+=</span> <span class="dv">300</span> <span class="op">*</span> <span class="va">perf</span>.<span class="at">audience</span><span class="op">;</span></span>
+<span id="cb52-20"><a href="#cb52-20"></a>        <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb52-21"><a href="#cb52-21"></a>      <span class="cf">default</span><span class="op">:</span></span>
+<span id="cb52-22"><a href="#cb52-22"></a>        <span class="cf">throw</span> <span class="kw">new</span> <span class="at">Error</span>(<span class="vs">`unknown type: </span><span class="sc">${</span><span class="va">play</span>.<span class="at">type</span><span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span>
+<span id="cb52-23"><a href="#cb52-23"></a>    <span class="op">}</span></span>
+<span id="cb52-24"><a href="#cb52-24"></a>    volumeCredits <span class="op">+=</span> <span class="va">Math</span>.<span class="at">max</span>(<span class="va">perf</span>.<span class="at">audience</span> <span class="op">-</span> <span class="dv">30</span><span class="op">,</span> <span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb52-25"><a href="#cb52-25"></a>    <span class="cf">if</span> (<span class="st">&quot;comedy&quot;</span> <span class="op">===</span> <span class="va">play</span>.<span class="at">type</span>) volumeCredits <span class="op">+=</span> <span class="va">Math</span>.<span class="at">floor</span>(<span class="va">perf</span>.<span class="at">audience</span> <span class="op">/</span> <span class="dv">5</span>)<span class="op">;</span></span>
+<span id="cb52-26"><a href="#cb52-26"></a>    totalAmount <span class="op">+=</span> thisAmount<span class="op">;</span></span>
+<span id="cb52-27"><a href="#cb52-27"></a>  <span class="op">}</span></span>
+<span id="cb52-28"><a href="#cb52-28"></a>  <span class="cf">return</span> [totalAmount<span class="op">,</span> volumeCredits]<span class="op">;</span></span>
+<span id="cb52-29"><a href="#cb52-29"></a><span class="op">}</span></span></code></pre></div>
+</div>
+</div>
+<aside class="notes">
+<p>So to reiterate, on the left is the data structure. On the right is a function that loops over all the invoices, and sums up the invoice amount and volumeCredit.</p>
+<p>Now this code is not going to win anyone any job interviews. It gets the job done, but there is a reason why Martin Fowler chose it as the opening exercise of the book.</p>
+<p>In fact he goes onto refactor it into a classical object-oriented solution:</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode" id="cb53"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb53-1"><a href="#cb53-1"></a><span class="kw">class</span> TragedyCalculator <span class="kw">extends</span> PerformanceCalculator <span class="op">{</span></span>
+<span id="cb53-2"><a href="#cb53-2"></a>  get <span class="at">amount</span>() <span class="op">{</span></span>
+<span id="cb53-3"><a href="#cb53-3"></a>    <span class="kw">let</span> result <span class="op">=</span> <span class="dv">40000</span><span class="op">;</span></span>
+<span id="cb53-4"><a href="#cb53-4"></a>    <span class="cf">if</span> (<span class="kw">this</span>.<span class="va">performance</span>.<span class="at">audience</span> <span class="op">&gt;</span> <span class="dv">30</span>) <span class="op">{</span></span>
+<span id="cb53-5"><a href="#cb53-5"></a>      result <span class="op">+=</span> <span class="dv">1000</span> <span class="op">*</span> (<span class="kw">this</span>.<span class="va">performance</span>.<span class="at">audience</span> <span class="op">-</span> <span class="dv">30</span>)<span class="op">;</span></span>
+<span id="cb53-6"><a href="#cb53-6"></a>    <span class="op">}</span></span>
+<span id="cb53-7"><a href="#cb53-7"></a>    <span class="cf">return</span> result<span class="op">;</span></span>
+<span id="cb53-8"><a href="#cb53-8"></a>  <span class="op">}</span></span>
+<span id="cb53-9"><a href="#cb53-9"></a><span class="op">}</span></span></code></pre></div>
+<aside class="notes">
+<p>He makes a class to compute each type of play. Here’s the one for Tragedy.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode" id="cb54"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb54-1"><a href="#cb54-1"></a><span class="kw">class</span> ComedyCalculator <span class="kw">extends</span> PerformanceCalculator <span class="op">{</span></span>
+<span id="cb54-2"><a href="#cb54-2"></a>  get <span class="at">amount</span>() <span class="op">{</span></span>
+<span id="cb54-3"><a href="#cb54-3"></a>    <span class="kw">let</span> result <span class="op">=</span> <span class="dv">30000</span><span class="op">;</span></span>
+<span id="cb54-4"><a href="#cb54-4"></a>    <span class="cf">if</span> (<span class="kw">this</span>.<span class="va">performance</span>.<span class="at">audience</span> <span class="op">&gt;</span> <span class="dv">20</span>) <span class="op">{</span></span>
+<span id="cb54-5"><a href="#cb54-5"></a>      result <span class="op">+=</span> <span class="dv">10000</span> <span class="op">+</span> <span class="dv">500</span> <span class="op">*</span> (<span class="kw">this</span>.<span class="va">performance</span>.<span class="at">audience</span> <span class="op">-</span> <span class="dv">20</span>)<span class="op">;</span></span>
+<span id="cb54-6"><a href="#cb54-6"></a>    <span class="op">}</span></span>
+<span id="cb54-7"><a href="#cb54-7"></a>    result <span class="op">+=</span> <span class="dv">300</span> <span class="op">*</span> <span class="kw">this</span>.<span class="va">performance</span>.<span class="at">audience</span><span class="op">;</span></span>
+<span id="cb54-8"><a href="#cb54-8"></a>    <span class="cf">return</span> result<span class="op">;</span></span>
+<span id="cb54-9"><a href="#cb54-9"></a>  <span class="op">}</span></span>
+<span id="cb54-10"><a href="#cb54-10"></a>  get <span class="at">volumeCredits</span>() <span class="op">{</span></span>
+<span id="cb54-11"><a href="#cb54-11"></a>    <span class="cf">return</span> <span class="kw">super</span>.<span class="at">volumeCredits</span> <span class="op">+</span> <span class="va">Math</span>.<span class="at">floor</span>(<span class="kw">this</span>.<span class="va">performance</span>.<span class="at">audience</span> <span class="op">/</span> <span class="dv">5</span>)<span class="op">;</span></span>
+<span id="cb54-12"><a href="#cb54-12"></a>  <span class="op">}</span></span>
+<span id="cb54-13"><a href="#cb54-13"></a><span class="op">}</span></span></code></pre></div>
+<aside class="notes">
+<p>Here’s the one for comedy. Both the classes inherit from a parent class called PerformanceCalculator.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode" id="cb55"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb55-1"><a href="#cb55-1"></a><span class="kw">class</span> PerformanceCalculator <span class="op">{</span></span>
+<span id="cb55-2"><a href="#cb55-2"></a>  <span class="at">constructor</span>(aPerformance<span class="op">,</span> aPlay) <span class="op">{</span></span>
+<span id="cb55-3"><a href="#cb55-3"></a>    <span class="kw">this</span>.<span class="at">performance</span> <span class="op">=</span> aPerformance<span class="op">;</span></span>
+<span id="cb55-4"><a href="#cb55-4"></a>    <span class="kw">this</span>.<span class="at">play</span> <span class="op">=</span> aPlay<span class="op">;</span></span>
+<span id="cb55-5"><a href="#cb55-5"></a>  <span class="op">}</span></span>
+<span id="cb55-6"><a href="#cb55-6"></a></span>
+<span id="cb55-7"><a href="#cb55-7"></a>  get <span class="at">amount</span>() <span class="op">{</span></span>
+<span id="cb55-8"><a href="#cb55-8"></a>    <span class="cf">throw</span> <span class="kw">new</span> <span class="at">Error</span>(<span class="st">&#39;subclass responsibility&#39;</span>)<span class="op">;</span></span>
+<span id="cb55-9"><a href="#cb55-9"></a>  <span class="op">}</span></span>
+<span id="cb55-10"><a href="#cb55-10"></a></span>
+<span id="cb55-11"><a href="#cb55-11"></a>  get <span class="at">volumeCredits</span>() <span class="op">{</span></span>
+<span id="cb55-12"><a href="#cb55-12"></a>    <span class="cf">return</span> <span class="va">Math</span>.<span class="at">max</span>(<span class="kw">this</span>.<span class="va">performance</span>.<span class="at">audience</span> <span class="op">-</span> <span class="dv">30</span><span class="op">,</span> <span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb55-13"><a href="#cb55-13"></a>  <span class="op">}</span></span>
+<span id="cb55-14"><a href="#cb55-14"></a><span class="op">}</span></span></code></pre></div>
+<aside class="notes">
+<p>It is here that all the common behaviour sits.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode" id="cb56"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb56-1"><a href="#cb56-1"></a><span class="kw">function</span> <span class="at">createPerformanceCalculator</span>(aPerformance<span class="op">,</span> aPlay) <span class="op">{</span></span>
+<span id="cb56-2"><a href="#cb56-2"></a>  <span class="cf">switch</span> (<span class="va">aPlay</span>.<span class="at">type</span>) <span class="op">{</span></span>
+<span id="cb56-3"><a href="#cb56-3"></a>    <span class="cf">case</span> <span class="st">&quot;tragedy&quot;</span><span class="op">:</span> <span class="cf">return</span> <span class="kw">new</span> <span class="at">TragedyCalculator</span>(aPerformance<span class="op">,</span> aPlay)<span class="op">;</span></span>
+<span id="cb56-4"><a href="#cb56-4"></a>    <span class="cf">case</span> <span class="st">&quot;comedy&quot;</span><span class="op">:</span> <span class="cf">return</span> <span class="kw">new</span> <span class="at">ComedyCalculator</span>(aPerformance<span class="op">,</span> aPlay)<span class="op">;</span></span>
+<span id="cb56-5"><a href="#cb56-5"></a>    <span class="cf">default</span><span class="op">:</span></span>
+<span id="cb56-6"><a href="#cb56-6"></a>      <span class="cf">throw</span> <span class="kw">new</span> <span class="at">Error</span>(<span class="vs">`unknown type: </span><span class="sc">${</span><span class="va">aPlay</span>.<span class="at">type</span><span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span>
+<span id="cb56-7"><a href="#cb56-7"></a>  <span class="op">}</span></span>
+<span id="cb56-8"><a href="#cb56-8"></a><span class="op">}</span></span></code></pre></div>
+<aside class="notes">
+<p>And finally we have the orchestrator. Instead of all the computation bunched together, it instantiates the appropriate class based on the kind of play. And later use that to compute the values.</p>
+<p>Now, this is good OO. But I’ve always found OO difficult. I can reason about object design, and even write well-designed OO code. But that is not how I think normally. I rather think like the very first imperative version of this code.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode" id="cb57"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb57-1"><a href="#cb57-1"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="kw">null</span><span class="op">}</span>)<span class="op">;</span></span></code></pre></div>
 <p><img data-src="images/comp-error-1-null.png" /></p>
 <aside class="notes">
 <p>But what about null? What if we pass null to <code>showNext</code>?</p>

@@ -1137,8 +1137,9 @@ The missing thing usually is not knowing how to fit things into a larger canvas.
 
 ::: notes
 
-Okay.
+Alright, did you know that the venerable Refactoring book by Martin Fowler has a second edition, which uses Javascript instead of Java? 
 
+The first chapter of the book was available for free download in their website.  lifted the opening exercise from it, so we can contrast an object-oriented version of a solution presented in Refactoring against a Typed Functional version we'll write in Reason.
 
 :::
 
@@ -1165,10 +1166,234 @@ let invoices = [{
 
 ::: notes
 
+We are a Drama troupe and we're often hired by corporates for employee enterainment. We give them a combined invoice for all the plays we perform for them.
+
+The exercise is to compute the amount we'll bill for each invoice. The cost depends on the size of audience. We also have a different tariff for tragedies and comedies.
 
 :::
 
 
+------------------
+
+amount = fn(audienceSize, playType)
+
+``` {.javascript}
+switch (play.type) {
+  case "tragedy":
+    thisAmount = 40000;
+    if (perf.audience > 30)
+      thisAmount += 1000 * (perf.audience - 30);
+    break;
+
+  case "comedy":
+    thisAmount = 30000;
+    if (perf.audience > 20)
+      thisAmount += 10000 + 500 * (perf.audience - 20);
+    thisAmount += 300 * perf.audience;
+    break;
+}
+```
+
+::: notes
+
+This is the imperative version of the billing code from the book. Don't bother to understand the specifics - the computation logic is not relevant. Only important thing is that the bill amount depends on the size of the audience and the genre of the play.
+
+:::
+
+
+
+------------------
+
+volumeCredit = fn(audienceSize, playType)
+
+``` {.javascript}
+// add volume credits
+volumeCredits += Math.max(perf.audience - 30, 0);
+
+// add extra credit for every ten comedy attendees
+if ("comedy" === play.type) volumeCredits += Math.floor(perf.audience / 5);
+```
+
+::: notes
+
+Apart from total amount, we also have to compute volumeCredits, which is some kind of loyalty point. It is also a function of the audience size and genre of the play.
+
+:::
+
+
+------------------
+
+:::::::::::::: {.columns}
+::: {.column width="34%"}
+``` {.javascript .tinyFont .noMaxHeight}
+let plays = {
+  "hamlet": { 
+    "name": "Hamlet", 
+    "type": "tragedy" 
+  },
+  "as-like": { 
+    "name": "As You Like It", 
+    "type": "comedy" 
+  },
+  "othello": { 
+    "name": "Othello", 
+    "type": "tragedy" 
+  }
+}
+
+let invoices = [{
+  "customer": "BigCo",
+  "performances": [{ 
+    "playID": "hamlet", 
+    "audience": 55 
+  },{ 
+    "playID": "as-like", 
+    "audience": 35 
+  },{ 
+    "playID": "othello", 
+    "audience": 40 
+  }]
+}];
+```
+:::
+::: {.column width="65%"}
+``` {.javascript .tinyFont .noMaxHeight}
+function statement(invoice, plays) {
+  let totalAmount = 0;
+  let volumeCredits = 0;
+  for (let perf of invoice.performances) {
+    const play = plays[perf.playID];
+    let thisAmount = 0;
+    switch (play.type) {
+      case "tragedy":
+        thisAmount = 40000;
+        if (perf.audience > 30) {
+          thisAmount += 1000 * (perf.audience - 30);
+        }
+        break;
+      case "comedy":
+        thisAmount = 30000;
+        if (perf.audience > 20) {
+          thisAmount += 10000 + 500 * (perf.audience - 20);
+        }
+        thisAmount += 300 * perf.audience;
+        break;
+      default:
+        throw new Error(`unknown type: ${play.type}`);
+    }
+    volumeCredits += Math.max(perf.audience - 30, 0);
+    if ("comedy" === play.type) volumeCredits += Math.floor(perf.audience / 5);
+    totalAmount += thisAmount;
+  }
+  return [totalAmount, volumeCredits];
+}
+```
+:::
+::::::::::::::
+
+::: notes
+
+So to reiterate, on the left is the data structure. On the right is a function that loops over all the invoices, and sums up the invoice amount and volumeCredit. 
+
+Now this code is not going to win anyone any job interviews. It gets the job done, but there is a reason why Martin Fowler chose it as the opening exercise of the book. 
+
+In fact he goes onto refactor it into a classical object-oriented solution:
+
+:::
+
+
+------------------
+
+``` {.javascript}
+class TragedyCalculator extends PerformanceCalculator {
+  get amount() {
+    let result = 40000;
+    if (this.performance.audience > 30) {
+      result += 1000 * (this.performance.audience - 30);
+    }
+    return result;
+  }
+}
+```
+
+::: notes
+
+He makes a class to compute each type of play. Here's the one for Tragedy.
+
+:::
+
+
+------------------
+
+``` {.javascript}
+class ComedyCalculator extends PerformanceCalculator {
+  get amount() {
+    let result = 30000;
+    if (this.performance.audience > 20) {
+      result += 10000 + 500 * (this.performance.audience - 20);
+    }
+    result += 300 * this.performance.audience;
+    return result;
+  }
+  get volumeCredits() {
+    return super.volumeCredits + Math.floor(this.performance.audience / 5);
+  }
+}
+```
+
+::: notes
+
+Here's the one for comedy. Both the classes inherit from a parent class called PerformanceCalculator. 
+
+:::
+
+
+------------------
+
+``` {.javascript}
+class PerformanceCalculator {
+  constructor(aPerformance, aPlay) {
+    this.performance = aPerformance;
+    this.play = aPlay;
+  }
+
+  get amount() {
+    throw new Error('subclass responsibility');
+  }
+
+  get volumeCredits() {
+    return Math.max(this.performance.audience - 30, 0);
+  }
+}
+```
+
+::: notes
+
+It is here that all the common behaviour sits.
+
+:::
+
+
+------------------
+
+``` {.javascript}
+function createPerformanceCalculator(aPerformance, aPlay) {
+  switch (aPlay.type) {
+    case "tragedy": return new TragedyCalculator(aPerformance, aPlay);
+    case "comedy": return new ComedyCalculator(aPerformance, aPlay);
+    default:
+      throw new Error(`unknown type: ${aPlay.type}`);
+  }
+}
+```
+
+::: notes
+
+And finally we have the orchestrator. Instead of all the computation bunched together, it instantiates the appropriate class based on the kind of play. And later use that to compute the values.
+
+Now, this is good OO. But I've always found OO difficult. I can reason about object design, and even write well-designed OO code. But that is not how I think normally. I rather think like the very first imperative version of this code.
+
+:::
 
 
 ------------------

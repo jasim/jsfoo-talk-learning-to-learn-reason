@@ -59,6 +59,26 @@ newCssLoad = <<TEXTMARK
   .smallFont {
     font-size: 0.46em !important;
   }
+
+  .tinyFont {
+    font-size: 0.4em !important;
+  }
+
+  .noMaxHeight {
+    max-height: none !important;
+  }
+
+  .noMaxHeight > code {
+    max-height: none !important;
+  }
+
+  .float {
+    float: left;
+  }
+
+  .halfWidth {
+    width: 50% !important;
+  }
   </style>
 TEXTMARK
 
