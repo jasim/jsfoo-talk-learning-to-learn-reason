@@ -1048,11 +1048,9 @@ But if there are no issues, then this data gets parsed into our application type
 
 We can write this core without a single defensive check; no worries about null errors; not bothered whether the objects will have the right shape. We know, thanks to types, that everything will be just perfect.
 
-You might have more question here: what happens if you have the wrong data _inside_ the core application code? What if something is created internally and sent to the wrong function. 
+You might have more questions here -- what if things could go wrong inside the Typed Core? That is a very justified concern. 
 
-These are very interesting questions. Once you get it, it is like revealing a magic trick, there is nothing mystical about it anymore. 
-
-But to me, finding those answers by myself were some of the most exciting discoveries in the last couple of years of programming. I wont explain it here because I'd like you to seek it out yourselves.
+The answer is that they can't and they won't. But I won't expand on it here because when I was learning, figuring that part out was a true light-bulb moment. At least some of you here I hope will try this language sometime, and so I don't want to spoil that pleasure for any of you :)
 
 :::
 
@@ -1060,7 +1058,7 @@ But to me, finding those answers by myself were some of the most exciting discov
 
 ### Learning Reason
 
-* Programming in the small
+* **Programming in the small**
   * variables, data structures, iteration, functions
 
 ![](images/reason-official-docs.png)
@@ -1068,9 +1066,11 @@ But to me, finding those answers by myself were some of the most exciting discov
 
 ::: notes
 
-To become proficient in Reason we have to first learn how to write small programs in it. You should be able to solve a fizzbuzz, read from a file, compute an average -- all these things.
+Alright, if you had to give Reason a shot, how would you go about it.
 
-The official Reason documentation is great for this.
+First, to learn any language, we have to be able to write small programs in it. You should be able to solve a fizzbuzz, read from a file, compute an average, make an API request -- all these things. The concepts are standard: data structures, creating functions and calling them etc.
+
+The official Reason documentation is a great starting point.
 
 :::
 
@@ -1080,26 +1080,50 @@ The official Reason documentation is great for this.
 ### Learning Reason
 
 * Programming in the small
-  * variables, data structures, iteration, functions
-
-* Tooling
-
+* **Tooling**
 
 ::: notes
 
-You 
+Next, you need to get comfortable with the tooling. 
+
+You should be able to create a project, compile, and start tinkering on demand. That is a simple step but very crucial. 
+
+Knowing the tooling is the difference between wishing you had the time to play with something vs actually having fun with it.
 
 :::
 
 
+------------------
+
+### Learning Reason
+
+* **Tooling**
+  * VSCode + Reason plugin
+  * Official setup instructions
+
+![](images/tooling-bs-setup.png)
+
+::: notes
+
+In Reason's case, there isn't much to the tooling. The most supported setup is VSCode + the VSCode Reason plugin.
+
+The official setup guide works perfectly well to setup a new project. Install an npm package, start webpack and you're off to the races.
+
+:::
 
 ------------------
 
+### Learning Reason
+
 * Programming in the large
-  * modules, packages
+  * modules
 
 
 ::: notes
+
+The third thing to know is to how to Program in the Large. Have you ever been in a place where you know a thing - a language or a library - but you're not yet confident to use it in production?
+
+The missing thing usually is not knowing how to fit things into a larger canvas. In the case of Reason, the only construct you need to know is  the `module`. It is very similar to regular JS modules -- you can put a bunch of functions together, expose only a few public ones, and that's it.
 
 :::
 
@@ -1113,6 +1137,7 @@ You
 
 ::: notes
 
+Okay.
 
 
 :::
