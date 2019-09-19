@@ -1318,7 +1318,7 @@ class TragedyCalculator extends PerformanceCalculator {
 
 ::: notes
 
-He makes a class to compute each type of play. Here's the one for Tragedy.
+He makes a class to compute the cost for type of play. Here's the one for Tragedy.
 
 :::
 
@@ -1369,7 +1369,7 @@ class PerformanceCalculator {
 
 ::: notes
 
-It is here that all the common behaviour sits.
+And PerformanceCalculator is here that all the common behaviour sits.
 
 :::
 
@@ -1389,12 +1389,59 @@ function createPerformanceCalculator(aPerformance, aPlay) {
 
 ::: notes
 
-And finally we have the orchestrator. Instead of all the computation bunched together, it instantiates the appropriate class based on the kind of play. And later use that to compute the values.
+And finally we have the orchestrator. Instead of all the computation bunched together, this function creates the appropriate class based on the kind of play. And uses that to compute the values.
 
-Now, this is good OO. But I've always found OO difficult. I can reason about object design, and even write well-designed OO code. But that is not how I think normally. I rather think like the very first imperative version of this code.
+Now, this is good OO. But I've always found OO difficult. I did learn how to reason about them, with a lot of practice, and I can even write well-designed object oriented code these days. But it takes mental energy that I often don't want to spend. 
 
 :::
 
+------------------
+
+#### Object-oriented programming
+
+![](images/oo-vision.svg)
+
+
+::: notes
+
+Here, this is Alan Kay's vision of objects. It is a model of computation expressed through stateful entities that exist in space and time. 
+
+They receieve messages, respond to them, and send messages to other objects.
+
+The inner life of each of these object can be very complex. They can mutate their own, and they can contain a multitude of other stateful objects inside them.
+
+:::
+
+
+------------------
+
+> I wanted to get rid of data.  I realized that the cell/whole-computer metaphor would get rid of data. -- Alan Kay on OO
+
+&nbsp;
+
+"behaviour" (methods) over data
+
+::: notes
+
+The whole purpose of this machinery though is to _hide_ data from us. That was Alan Kay's explicit goal with OO. So how are we supposed to make sense of these  programs?
+
+:::
+
+------------------
+
+
+![](images/oo-solid.svg)
+
+
+::: notes
+
+There is help  - if only we followed the SOLID principles we could write great object-oriented code! But when was the last time in a code review someone said that this code violates the Liskov Substitution Principle? 
+
+See we think about programs informally, not through a set of abstract "principles" like SOLID, and we deserve a way to write programs, high-quality programs, in a way that is natural to the way we think. 
+
+Let me introduce you again to Typed Functional programming!
+
+:::
 
 ------------------
 

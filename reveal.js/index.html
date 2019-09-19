@@ -1063,7 +1063,35 @@ You will be user -4</code></pre>
 <span id="cb56-8"><a href="#cb56-8"></a><span class="op">}</span></span></code></pre></div>
 <aside class="notes">
 <p>And finally we have the orchestrator. Instead of all the computation bunched together, it instantiates the appropriate class based on the kind of play. And later use that to compute the values.</p>
-<p>Now, this is good OO. But I’ve always found OO difficult. I can reason about object design, and even write well-designed OO code. But that is not how I think normally. I rather think like the very first imperative version of this code.</p>
+<p>Now, this is good OO. But I’ve always found OO difficult. With great practice I learned to reason about them, and even write well-designed object oriented code. But it takes mental energy that I often don’t want to spend.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<h4 id="object-oriented-programming">Object-oriented programming</h4>
+<p><img data-src="images/oo-vision.svg" /></p>
+<aside class="notes">
+<p>Here, this is Alan Kay’s vision of objects. It is a model of computation expressed through objects. Objects receieve messages, respond to them, and send messages back.</p>
+<p>The inner life of each of these object can be very complex. They are self-contained entities that exist in both space and time. They will have their own state, and they can contain a multitude of other objects inside them.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<blockquote>
+<p>I wanted to get rid of data. I realized that the cell/whole-computer metaphor would get rid of data. – Alan Kay on OO</p>
+</blockquote>
+<p> </p>
+<p>“behaviour” (methods) over data</p>
+<aside class="notes">
+<p>The whole purpose of this machinery though is to <em>hide</em> data from us. It buries data under layers of objects, and we get to glimpse at data only through “behaviour”, which are exposed through methods on these objects.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<p><img data-src="images/oo-solid.svg" /></p>
+<aside class="notes">
+<p>There is help though - if only we followed the SOLID principles we could write great object-oriented code right? But when was the last time in a code review someone said that this code violates the Liskov Substitution Principle?</p>
+<p>We think about programs informally - and we want a way to write programs in a way that is natural to the way we think. Typed Functional programming to the rescue!</p>
 </aside>
 </section>
 <section class="slide level2">

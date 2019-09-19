@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="460px" height="478px" viewBox="0 0 460 478" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+    <title>oo-vision</title>
+    <desc>Created with Sketch.</desc>
+    <g id="oo-vision" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-2" transform="translate(18.000000, 55.000000)">
+            <g id="Group-3" transform="translate(173.000000, -0.000000)">
+                <g id="cube-svgrepo-com" transform="translate(0.000000, -0.000000)" fill-rule="nonzero">
+                    <polygon id="Path" fill="#434C6D" points="40 89.2307692 0 69.2307692 0 20 40 40"></polygon>
+                    <polygon id="Path" fill="#556080" points="40 89.2307692 80 69.2307692 80 20 40 40"></polygon>
+                    <polygon id="Path" fill="#7383BF" points="0 20 38.4615385 0 80 20 40 40"></polygon>
+                </g>
+                <text id="Main" font-family="SFCompactDisplay-Bold, SF Compact Display" font-size="18" font-weight="bold" letter-spacing="-0.225" fill="#FFFFFF">
+                    <tspan x="20.8713867" y="25">Main</tspan>
+                </text>
+            </g>
+            <path id="Line" d="M191.969717,80.9706078 L193.581,134.976 L199.579159,134.797371 L193,149 L185.585392,135.215095 L191.582,135.036 L189.970608,81.0302827 L191.969717,80.9706078 Z" fill="#8D3E3E" fill-rule="nonzero"></path>
+            <path id="Line-2" d="M236,82 L242.153223,96.3922843 L236.163,96.034 L232.938627,150.057818 L230.942182,149.938627 L234.167,95.915 L228.178106,95.557949 L236,82 Z" fill="#357D79" fill-rule="nonzero"></path>
+            <path id="Line-2" d="M212,229 L209.953653,244.518133 L204.983,241.156 L143.267974,332.388593 L141.611407,331.267974 L203.327,240.035 L198.357685,236.673802 L212,229 Z" fill="#357D79" fill-rule="nonzero"></path>
+            <g id="cube-svgrepo-com" transform="translate(173.000000, 140.000000)" fill-rule="nonzero">
+                <polygon id="Path" fill="#434C6D" points="40 89.2307692 0 69.2307692 0 20 40 40"></polygon>
+                <polygon id="Path" fill="#556080" points="40 89.2307692 80 69.2307692 80 20 40 40"></polygon>
+                <polygon id="Path" fill="#7383BF" points="0 20 38.4615385 0 80 20 40 40"></polygon>
+            </g>
+            <text id="Performance-Calculat" font-family="SFCompactDisplay-Regular, SF Compact Display" font-size="18" font-weight="normal" letter-spacing="-0.225" fill="#000000">
+                <tspan x="241.809277" y="149">Performance </tspan>
+                <tspan x="252.942383" y="170">Calculator</tspan>
+            </text>
+            <path id="Line" d="M188.929877,216.587526 L190.412474,217.929877 L132.137,282.293 L136.585547,286.320051 L122,292 L126.207369,276.923593 L130.655,280.95 L188.929877,216.587526 Z" fill="#8D3E3E" fill-rule="nonzero"></path>
+            <path id="Line" d="M242.098427,216.589216 L293.567,275.779 L298.095737,271.842272 L302,287 L287.531259,281.028774 L292.059,277.091 L240.589216,217.901573 L242.098427,216.589216 Z" fill="#8D3E3E" fill-rule="nonzero"></path>
+            <g id="cube-svgrepo-com" transform="translate(63.000000, 280.000000)" fill-rule="nonzero">
+                <polygon id="Path" fill="#434C6D" points="40 89.2307692 0 69.2307692 0 20 40 40"></polygon>
+                <polygon id="Path" fill="#556080" points="40 89.2307692 80 69.2307692 80 20 40 40"></polygon>
+                <polygon id="Path" fill="#7383BF" points="0 20 38.4615385 0 80 20 40 40"></polygon>
+            </g>
+            <text id="Tragedy-Calculator" font-family="SFCompactDisplay-Regular, SF Compact Display" font-size="18" font-weight="normal" letter-spacing="-0.225" fill="#000000">
+                <tspan x="25.2049805" y="276">Tragedy </tspan>
+                <tspan x="16.9423828" y="297">Calculator</tspan>
+            </text>
+            <g id="cube-svgrepo-com" transform="translate(283.000000, 280.000000)" fill-rule="nonzero">
+                <polygon id="Path" fill="#434C6D" points="40 89.2307692 0 69.2307692 0 20 40 40"></polygon>
+                <polygon id="Path" fill="#556080" points="40 89.2307692 80 69.2307692 80 20 40 40"></polygon>
+                <polygon id="Path" fill="#7383BF" points="0 20 38.4615385 0 80 20 40 40"></polygon>
+            </g>
+            <g id="Group" transform="translate(313.000000, 250.000000)" fill="#000000" font-family="SFCompactDisplay-Regular, SF Compact Display" font-size="18" font-weight="normal" letter-spacing="-0.225">
+                <text id="Comedy-Calculator">
+                    <tspan x="23.9235352" y="17">Comedy </tspan>
+                    <tspan x="16.9423828" y="38">Calculator</tspan>
+                </text>
+            </g>
+            <path id="Line-2" d="M213,229 L226.904463,236.1879 L222.056,239.723 L284.39718,325.218835 L282.781165,326.39718 L220.44,240.901 L215.592357,244.436311 L213,229 Z" fill="#357D79" fill-rule="nonzero"></path>
+        </g>
+    </g>
+</svg>
