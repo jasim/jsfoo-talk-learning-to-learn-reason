@@ -347,11 +347,33 @@ There is an OCaml compiler called BuckleScrip, built at Bloomberg. Bloomberg als
 
 ------------------
 
-![](images/pupilfirst-ui.png)
+![](images/pupilfirst-ui-1.png)
 
 ::: notes
 
-This is PupilFirst. It is a learning management system built here in Bangalore. It has complex interactions and a large data model. The UI is entirely written in Reason and ReasonReact, and compiled using the BuckleScript compiler.
+Here's a project built with BuckleScript and Reason and ReasonReact. It is called PupilFirst. 
+
+:::
+
+
+------------------
+
+![](images/pupilfirst-ui-2.png)
+
+::: notes
+
+It is a learning management system built here in Bangalore.
+
+:::
+
+
+------------------
+
+![](images/pupilfirst-ui-3.png)
+
+::: notes
+
+It has complex data model and advanced UI interactions.
 
 :::
 
@@ -362,7 +384,7 @@ This is PupilFirst. It is a learning management system built here in Bangalore. 
 
 ::: notes
 
-Oh and it is fully open-source. If you want to see a real-world Reason web application, there is no better place to look. One of the authors, Hari Gopal, had also spoken at last year's JsFoo on Reason.
+Oh and it is fully open-source. If you want to see a real-world Reason web application, there is no better place to look. One of the authors, Hari Gopal, had also spoken at last year's JsFoo on Reason itself.
 
 :::
 
@@ -381,6 +403,8 @@ if (MomentRe.Moment.isSameWithGranularity(
 ```
 
 ::: notes
+
+Let's now see BuckleScript in action.
 
 This Reason code here - it checks whether the current day is April 1st 2020,
 and then shows a message.
@@ -1054,10 +1078,6 @@ But if there are no issues, then this data gets parsed into our application type
 
 We can write this core without a single defensive check; no worries about null errors; not bothered whether the objects will have the right shape. We know, thanks to types, that everything will be just perfect.
 
-You might have more questions here -- what if things could go wrong inside the Typed Core? That is a very justified concern. 
-
-The answer is that they can't and they won't. But I won't expand on it here because when I was learning, figuring that part out was a true light-bulb moment. At least some of you here I hope will try this language sometime, and so I don't want to spoil that pleasure for any of you :)
-
 :::
 
 ------------------
@@ -1072,7 +1092,7 @@ The answer is that they can't and they won't. But I won't expand on it here beca
 
 ::: notes
 
-Alright, if you had to give Reason a shot, how would you go about it.
+Alright, if you had to give Reason a shot, how would you go about it?
 
 First, to learn any language, we have to be able to write small programs in it. You should be able to solve a fizzbuzz, read from a file, compute an average, make an API request -- all these things. The concepts are standard: data structures, creating functions and calling them etc.
 
@@ -1445,11 +1465,121 @@ There is help  - if only we followed the SOLID principles we could write great o
 
 See we think about programs informally, not through a set of abstract "principles" like SOLID, and we deserve a way to write programs, high-quality programs, in a way that is natural to the way we think. 
 
-Let me introduce you again to Typed Functional programming!
+The Typed Functional approach, in contrast, is centered around data.
+
+:::
+
+
+------------------
+
+``` {.javascript}
+let plays = {
+  "hamlet": { "name": "Hamlet", "type": "tragedy" },
+  "as-like": { "name": "As You Like It", "type": "comedy" },
+  "othello": { "name": "Othello", "type": "tragedy" }
+}
+```
+
+::: notes
+
+Here let's revisit the shape of our data. In Typed FP,
+we'll create a type to represent these plays.
+
+:::
+
+
+------------------
+
+``` {.javascript}
+let plays = {
+  "hamlet": { "name": "Hamlet", "type": "tragedy" },
+  "as-like": { "name": "As You Like It", "type": "comedy" },
+  "othello": { "name": "Othello", "type": "tragedy" }
+}
+```
+
+``` {.javascript}
+module Play = {
+  type t = {
+    name: string,
+    genre: Genre.t,
+  };
+};
+```
+
+::: notes
+
+Here's the type `t` inside module Play. The module is a namespace so that we can bunch together all functions that operate on the Play type into one place.
+
+The name of the type `t` is used to denote that this is the primary type of this module. This is a useful convention in OCaml and Reason codebases.
+
+Genre here is the type of the play - it could be a tragedy or a comedy. Let's now see what that module looks like.
+
+:::
+
+
+------------------
+
+``` {.javascript}
+module Play = {
+  type t = {
+    name: string,
+    genre: Genre.t,
+  };
+};
+
+module Genre = {
+  type t =
+    | Tragedy
+    | Comedy;
+}
+```
+
+::: notes
+
+This type t here are called Sum Types. Sum types is one of those concepts that you learn and then you look back and wonder where it was all your life. It lets you specify that something can be A or B. Here Genre could be either Tragedy or Comedy. It must to be either of it; it can't be empty or null. Nor can it be both Tragedy and Comedy. 
+
+:::
+
+
+------------------
+
+``` {.javascript}
+module Play = {
+  type t = {
+    name: string,
+    genre: Genre.t,
+  };
+};
+
+module Genre = {
+  type t =
+    | Tragedy
+    | Comedy;
+}
+
+module Performance = {
+  type t = {
+    play: Play.t,
+    audience: int,
+  };
+}
+
+```
+
+::: notes
+
+We now have the root type -- a Performance, which composes Play and the number of audience.
 
 :::
 
 ------------------
+
+
+# Fin.
+
+------------------
+
 
 ``` {.javascript}
 showNext({id: null});

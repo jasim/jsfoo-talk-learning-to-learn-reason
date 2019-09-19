@@ -373,16 +373,30 @@ React, Reason, and ReasonReact</code></pre>
 </section>
 <section class="slide level2">
 
-<p><img data-src="images/pupilfirst-ui.png" /></p>
+<p><img data-src="images/pupilfirst-ui-1.png" /></p>
 <aside class="notes">
-<p>This is PupilFirst. It is a learning management system built here in Bangalore. It has complex interactions and a large data model. The UI is entirely written in Reason and ReasonReact, and compiled using the BuckleScript compiler.</p>
+<p>Here’s a project built with BuckleScript and Reason and ReasonReact. It is called PupilFirst.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<p><img data-src="images/pupilfirst-ui-2.png" /></p>
+<aside class="notes">
+<p>It is a learning management system built here in Bangalore.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<p><img data-src="images/pupilfirst-ui-3.png" /></p>
+<aside class="notes">
+<p>It has complex data model and advanced UI interactions.</p>
 </aside>
 </section>
 <section class="slide level2">
 
 <p><img data-src="images/pupilfirst-github.png" /></p>
 <aside class="notes">
-<p>Oh and it is fully open-source. If you want to see a real-world Reason web application, there is no better place to look. One of the authors, Hari Gopal, had also spoken at last year’s JsFoo on Reason.</p>
+<p>Oh and it is fully open-source. If you want to see a real-world Reason web application, there is no better place to look. One of the authors, Hari Gopal, had also spoken at last year’s JsFoo on Reason itself.</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -397,6 +411,7 @@ React, Reason, and ReasonReact</code></pre>
 <span id="cb6-8"><a href="#cb6-8"></a>  Js.<span class="dt">log</span>(<span class="st">&quot;A dreary day&quot;</span>);</span>
 <span id="cb6-9"><a href="#cb6-9"></a>};</span></code></pre></div>
 <aside class="notes">
+<p>Let’s now see BuckleScript in action.</p>
 <p>This Reason code here - it checks whether the current day is April 1st 2020, and then shows a message.</p>
 <p>It uses the momentjs Javascript library from npm. Now let’s see how the BuckleScript output looks.</p>
 </aside>
@@ -1096,19 +1111,95 @@ You will be user -4</code></pre>
 <aside class="notes">
 <p>There is help - if only we followed the SOLID principles we could write great object-oriented code! But when was the last time in a code review someone said that this code violates the Liskov Substitution Principle?</p>
 <p>See we think about programs informally, not through a set of abstract “principles” like SOLID, and we deserve a way to write programs, high-quality programs, in a way that is natural to the way we think.</p>
-<p>Let me introduce you again to Typed Functional programming!</p>
+<p>The Typed Functional approach, in contrast, is centered around data.</p>
 </aside>
 </section>
 <section class="slide level2">
 
-<div class="sourceCode" id="cb57"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb57-1"><a href="#cb57-1"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="kw">null</span><span class="op">}</span>)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb57-1"><a href="#cb57-1"></a><span class="kw">let</span> plays <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb57-2"><a href="#cb57-2"></a>  <span class="st">&quot;hamlet&quot;</span><span class="op">:</span> <span class="op">{</span> <span class="st">&quot;name&quot;</span><span class="op">:</span> <span class="st">&quot;Hamlet&quot;</span><span class="op">,</span> <span class="st">&quot;type&quot;</span><span class="op">:</span> <span class="st">&quot;tragedy&quot;</span> <span class="op">},</span></span>
+<span id="cb57-3"><a href="#cb57-3"></a>  <span class="st">&quot;as-like&quot;</span><span class="op">:</span> <span class="op">{</span> <span class="st">&quot;name&quot;</span><span class="op">:</span> <span class="st">&quot;As You Like It&quot;</span><span class="op">,</span> <span class="st">&quot;type&quot;</span><span class="op">:</span> <span class="st">&quot;comedy&quot;</span> <span class="op">},</span></span>
+<span id="cb57-4"><a href="#cb57-4"></a>  <span class="st">&quot;othello&quot;</span><span class="op">:</span> <span class="op">{</span> <span class="st">&quot;name&quot;</span><span class="op">:</span> <span class="st">&quot;Othello&quot;</span><span class="op">,</span> <span class="st">&quot;type&quot;</span><span class="op">:</span> <span class="st">&quot;tragedy&quot;</span> <span class="op">}</span></span>
+<span id="cb57-5"><a href="#cb57-5"></a><span class="op">}</span></span></code></pre></div>
+<aside class="notes">
+<p>Here let’s revisit the shape of our data. In Typed FP, we’ll create a type to represent these plays.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode" id="cb58"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb58-1"><a href="#cb58-1"></a><span class="kw">let</span> plays <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb58-2"><a href="#cb58-2"></a>  <span class="st">&quot;hamlet&quot;</span><span class="op">:</span> <span class="op">{</span> <span class="st">&quot;name&quot;</span><span class="op">:</span> <span class="st">&quot;Hamlet&quot;</span><span class="op">,</span> <span class="st">&quot;type&quot;</span><span class="op">:</span> <span class="st">&quot;tragedy&quot;</span> <span class="op">},</span></span>
+<span id="cb58-3"><a href="#cb58-3"></a>  <span class="st">&quot;as-like&quot;</span><span class="op">:</span> <span class="op">{</span> <span class="st">&quot;name&quot;</span><span class="op">:</span> <span class="st">&quot;As You Like It&quot;</span><span class="op">,</span> <span class="st">&quot;type&quot;</span><span class="op">:</span> <span class="st">&quot;comedy&quot;</span> <span class="op">},</span></span>
+<span id="cb58-4"><a href="#cb58-4"></a>  <span class="st">&quot;othello&quot;</span><span class="op">:</span> <span class="op">{</span> <span class="st">&quot;name&quot;</span><span class="op">:</span> <span class="st">&quot;Othello&quot;</span><span class="op">,</span> <span class="st">&quot;type&quot;</span><span class="op">:</span> <span class="st">&quot;tragedy&quot;</span> <span class="op">}</span></span>
+<span id="cb58-5"><a href="#cb58-5"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb59-1"><a href="#cb59-1"></a>module Play <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb59-2"><a href="#cb59-2"></a>  type t <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb59-3"><a href="#cb59-3"></a>    <span class="dt">name</span><span class="op">:</span> string<span class="op">,</span></span>
+<span id="cb59-4"><a href="#cb59-4"></a>    <span class="dt">genre</span><span class="op">:</span> <span class="va">Genre</span>.<span class="at">t</span><span class="op">,</span></span>
+<span id="cb59-5"><a href="#cb59-5"></a>  <span class="op">};</span></span>
+<span id="cb59-6"><a href="#cb59-6"></a><span class="op">};</span></span></code></pre></div>
+<aside class="notes">
+<p>Here’s the type <code>t</code> inside module Play. The module is a namespace so that we can bunch together all functions that operate on the Play type into one place.</p>
+<p>The name of the type <code>t</code> is used to denote that this is the primary type of this module. This is a useful convention in OCaml and Reason codebases.</p>
+<p>Genre here is the type of the play - it could be a tragedy or a comedy. Let’s now see what that module looks like.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode" id="cb60"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb60-1"><a href="#cb60-1"></a>module Play <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb60-2"><a href="#cb60-2"></a>  type t <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb60-3"><a href="#cb60-3"></a>    <span class="dt">name</span><span class="op">:</span> string<span class="op">,</span></span>
+<span id="cb60-4"><a href="#cb60-4"></a>    <span class="dt">genre</span><span class="op">:</span> <span class="va">Genre</span>.<span class="at">t</span><span class="op">,</span></span>
+<span id="cb60-5"><a href="#cb60-5"></a>  <span class="op">};</span></span>
+<span id="cb60-6"><a href="#cb60-6"></a><span class="op">};</span></span>
+<span id="cb60-7"><a href="#cb60-7"></a></span>
+<span id="cb60-8"><a href="#cb60-8"></a>module Genre <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb60-9"><a href="#cb60-9"></a>  type t <span class="op">=</span></span>
+<span id="cb60-10"><a href="#cb60-10"></a>    <span class="op">|</span> Tragedy</span>
+<span id="cb60-11"><a href="#cb60-11"></a>    <span class="op">|</span> Comedy<span class="op">;</span></span>
+<span id="cb60-12"><a href="#cb60-12"></a><span class="op">}</span></span></code></pre></div>
+<aside class="notes">
+<p>This type t here are called Sum Types. Sum types is one of those concepts that you learn and then you look back and wonder where it was all your life. It lets you specify that something can be A or B. Here Genre could be either Tragedy or Comedy. It must to be either of it; it can’t be empty or null. Nor can it be both Tragedy and Comedy.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode" id="cb61"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb61-1"><a href="#cb61-1"></a>module Play <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb61-2"><a href="#cb61-2"></a>  type t <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb61-3"><a href="#cb61-3"></a>    <span class="dt">name</span><span class="op">:</span> string<span class="op">,</span></span>
+<span id="cb61-4"><a href="#cb61-4"></a>    <span class="dt">genre</span><span class="op">:</span> <span class="va">Genre</span>.<span class="at">t</span><span class="op">,</span></span>
+<span id="cb61-5"><a href="#cb61-5"></a>  <span class="op">};</span></span>
+<span id="cb61-6"><a href="#cb61-6"></a><span class="op">};</span></span>
+<span id="cb61-7"><a href="#cb61-7"></a></span>
+<span id="cb61-8"><a href="#cb61-8"></a>module Genre <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb61-9"><a href="#cb61-9"></a>  type t <span class="op">=</span></span>
+<span id="cb61-10"><a href="#cb61-10"></a>    <span class="op">|</span> Tragedy</span>
+<span id="cb61-11"><a href="#cb61-11"></a>    <span class="op">|</span> Comedy<span class="op">;</span></span>
+<span id="cb61-12"><a href="#cb61-12"></a><span class="op">}</span></span>
+<span id="cb61-13"><a href="#cb61-13"></a></span>
+<span id="cb61-14"><a href="#cb61-14"></a>module Performance <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb61-15"><a href="#cb61-15"></a>  type t <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb61-16"><a href="#cb61-16"></a>    <span class="dt">play</span><span class="op">:</span> <span class="va">Play</span>.<span class="at">t</span><span class="op">,</span></span>
+<span id="cb61-17"><a href="#cb61-17"></a>    <span class="dt">audience</span><span class="op">:</span> int<span class="op">,</span></span>
+<span id="cb61-18"><a href="#cb61-18"></a>  <span class="op">};</span></span>
+<span id="cb61-19"><a href="#cb61-19"></a><span class="op">}</span></span></code></pre></div>
+<aside class="notes">
+<p>We now have the root type – a Performance, which composes Play and the number of audience.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+</section>
+<section><section id="fin." class="title-slide slide level1"><h1>Fin.</h1></section><section class="slide level2">
+
+<div class="sourceCode" id="cb62"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb62-1"><a href="#cb62-1"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="kw">null</span><span class="op">}</span>)<span class="op">;</span></span></code></pre></div>
 <p><img data-src="images/comp-error-1-null.png" /></p>
 <aside class="notes">
 <p>But what about null? What if we pass null to <code>showNext</code>?</p>
 <p>Again the code does not compile. This is because Reason doesn’t even have the concept of nulls. the concept of nulls. So instead of allowing to run the code and crash at runtime, it simply prevents the code from even being even executed.</p>
 <p>But we use nulls in Javascript to represent the “absence” of something. Reason does have an elegant way to do that. I will show how that works soon.</p>
 </aside>
-</section>
+</section></section>
     </div>
   </div>
 
