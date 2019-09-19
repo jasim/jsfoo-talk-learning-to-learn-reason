@@ -172,9 +172,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <p><img data-src="images/dos-tsm.png" /></p>
 <aside class="notes">
-<p>It is very portable - runs on any architecture that can run DOSBOX</p>
-<p>Since then I’ve worked on web applications, front-end, back-end, and different languages including Javascript.</p>
-<p>Most recently I’ve been jamming with a friend building tools for designers.</p>
+<p>Here’s another. They use very old outdated technologies.</p>
+<p>But thankfully I’ve since worked on modern web applications, front-end, back-end, and also different languages including Javascript.</p>
+<p>Most recently I’ve been jamming with a friend building tools for designers &amp; front-end developers.</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -183,14 +183,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img data-src="images/teleport.png" /></p>
 <aside class="notes">
 <p>One is called Teleport – it is a Chrome extension that can capture a website and create a Sketch design out of it.</p>
-<p>The other tool, that’s where this story begins. It is called Protoship Codegen.</p>
+<p>The other tool is called Protoship Codegen.</p>
 </aside>
 </section>
 <section class="slide level2">
 
 <p><img data-src="images/codegen-sketch.png" /></p>
 <aside class="notes">
-<p>It converts designs - made in tools like Adobe XD and Sketch - into responsive HTML and CSS that programmers like you and me can use. So it’ll do static positioning, flexboxes, grids etc. And CSS that is cleaner than anything that I’d be able to manually write.</p>
+<p>It converts designs - made in tools like Adobe XD and Sketch - into responsive HTML and CSS, which programmers like you and me can use. So it’ll do static positioning, flexboxes, grids, and CSS that is cleaner than anything that I’d be able to write manually.</p>
 <p>On the screen is a sample Sketch design,</p>
 </aside>
 </section>
@@ -199,9 +199,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img data-src="images/codegen-ui.png" /></p>
 <aside class="notes">
 <p>and this is how it gets converted to code. This is the Codegen UI, and the rendering is all clean HTML and CSS.</p>
-<p>All this stuff: the Sketch plugin, the Adobe XD plugin, the converter, the web UI, and the code generator – they’re all written in Reason.</p>
-<p>But before that it was all written in plain Javascript.</p>
-<p>We didn’t know Reason or Typed FP when we first started working on this product over two years ago. We were forced to learn it. Let me tell you why.</p>
+<p>All this stuff: the Sketch plugin, the Adobe XD plugin, the converter, the web UI, and the code generator – everything, is written in Reason.</p>
+<p>But that happened only about half-way through the product. Before that it was all Javascript.</p>
+<p>We didn’t know Reason or Typed FP when began working on this product over two years ago. We were rather forced to learn it.</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -209,14 +209,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3 id="raw-vector-node">Raw Vector Node</h3>
 <p><img data-src="images/codegen-vecNode.png" /></p>
 <aside class="notes">
-<p>Here’s the raw vector node that Codegen extracts from Sketch. They’re absolutely positioned, and is a far way from being responsive HTML and CSS.</p>
+<p>See here, is the raw vector node that Codegen extracts from Sketch. They’re absolutely positioned, and it is a far way away from being responsive HTML and CSS.</p>
 </aside>
 </section>
 <section class="slide level2">
 
 <p><img data-src="images/codegen-htmlNode.png" /> <img data-src="images/codegen-cssNode.png" /></p>
 <aside class="notes">
-<p>The challenge is to convert that raw node this HTML and CSS. That’s a multi-step process. Here’s a rough pipeline of how Codegen does it:</p>
+<p>The challenge is to convert that raw node into this code. That’s a multi-step process. Here’s a rough pipeline of how Codegen does it:</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -224,7 +224,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img data-src="images/codegen-workflow.svg" /></p>
 <aside class="notes">
 <p>In each step here, we decorate the nodes with more info, sometimes change their shapes, sometimes merge it with others, and generally wrangle with them quite a bit.</p>
-<p>Even within each step the nodes would transform into different structures. We couldn’t mentally track the flow of data because of all these transformations and were making silly mistakes. Worse, because of our programs were muddled, our very understanding of the domain was degrading.</p>
+<p>But we couldn’t mentally keep track of all that as they went through these transformations. We kept making mistakes and our thinking was muddled and progress was very slow.</p>
+<p>We knew we needed a better way to deal with our data. It could not be an object-oriented approach because of reasons I’ll explain later, but we knew it had to be some form of types.</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -237,15 +238,17 @@ Jordan Walke (and Cheng Lou and others)
 WROTE
 React, Reason, and ReasonReact</code></pre>
 <aside class="notes">
-<p>That was the time around when Jordan Walke, the original author of React, released the first version of Reason. ReasonReact is the Reason adapter for the React library. This means you can build React applications with Reason and even mix and match components between Javascript and Reason.</p>
+<p>That was the time around when Jordan Walke, the original author of React, released the first version of Reason. He also shipped ReasonReact, which is the Reason adaptor for the React UI library.</p>
+<p>Reason was a typed language, and thanks to ReasonReact we could also build UIs with it and mix and match React and Javascript code.</p>
 </aside>
 </section>
 <section class="slide level2">
 
 <p><img data-src="images/rwo-cover.png" /></p>
 <aside class="notes">
-<p>Learning and adopting the language was a long struggle. It was the early days of Reason so there weren’t many resources. We spent countless hours with the Real World OCaml book - excellent book on the language as well the craft of programming itself. There are numerous resources now and much easier to learn the language.</p>
-<p>But the struggle was worth it. When I look back on the last 10 years of my programming career, I wonder what I was doing for the first 8, before I learned Reason and Typed functional programming.</p>
+<p>Learning and adopting this language was a long struggle. We spent countless hours with the Real World OCaml book - it is an excellent book on the language as well the craft of programming itself. We looked upon it with both delight at the insights on programming it gave us, and also with a fair amount of dread and frustration because of its unfamiliarity.</p>
+<p>But the struggle was worth it. See when people</p>
+<p>When I look back on the last 10 years of my programming career, I wonder what I was doing for the first 8, before I learned Reason and Typed functional programming.</p>
 <p>And that’s why I’m here today to talk about it.</p>
 </aside>
 </section>
@@ -1009,7 +1012,7 @@ You will be user -4</code></pre>
 <span id="cb53-8"><a href="#cb53-8"></a>  <span class="op">}</span></span>
 <span id="cb53-9"><a href="#cb53-9"></a><span class="op">}</span></span></code></pre></div>
 <aside class="notes">
-<p>He makes a class to compute each type of play. Here’s the one for Tragedy.</p>
+<p>He makes a class to compute the cost for type of play. Here’s the one for Tragedy.</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -1048,7 +1051,7 @@ You will be user -4</code></pre>
 <span id="cb55-13"><a href="#cb55-13"></a>  <span class="op">}</span></span>
 <span id="cb55-14"><a href="#cb55-14"></a><span class="op">}</span></span></code></pre></div>
 <aside class="notes">
-<p>It is here that all the common behaviour sits.</p>
+<p>And PerformanceCalculator is here that all the common behaviour sits.</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -1062,8 +1065,8 @@ You will be user -4</code></pre>
 <span id="cb56-7"><a href="#cb56-7"></a>  <span class="op">}</span></span>
 <span id="cb56-8"><a href="#cb56-8"></a><span class="op">}</span></span></code></pre></div>
 <aside class="notes">
-<p>And finally we have the orchestrator. Instead of all the computation bunched together, it instantiates the appropriate class based on the kind of play. And later use that to compute the values.</p>
-<p>Now, this is good OO. But I’ve always found OO difficult. With great practice I learned to reason about them, and even write well-designed object oriented code. But it takes mental energy that I often don’t want to spend.</p>
+<p>And finally we have the orchestrator. Instead of all the computation bunched together, this function creates the appropriate class based on the kind of play. And uses that to compute the values.</p>
+<p>Now, this is good OO. But I’ve always found OO difficult. I did learn how to reason about them, with a lot of practice, and I can even write well-designed object oriented code these days. But it takes mental energy that I often don’t want to spend.</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -1071,8 +1074,9 @@ You will be user -4</code></pre>
 <h4 id="object-oriented-programming">Object-oriented programming</h4>
 <p><img data-src="images/oo-vision.svg" /></p>
 <aside class="notes">
-<p>Here, this is Alan Kay’s vision of objects. It is a model of computation expressed through objects. Objects receieve messages, respond to them, and send messages back.</p>
-<p>The inner life of each of these object can be very complex. They are self-contained entities that exist in both space and time. They will have their own state, and they can contain a multitude of other objects inside them.</p>
+<p>Here, this is Alan Kay’s vision of objects. It is a model of computation expressed through stateful entities that exist in space and time.</p>
+<p>They receieve messages, respond to them, and send messages to other objects.</p>
+<p>The inner life of each of these object can be very complex. They can mutate their own, and they can contain a multitude of other stateful objects inside them.</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -1083,15 +1087,16 @@ You will be user -4</code></pre>
 <p> </p>
 <p>“behaviour” (methods) over data</p>
 <aside class="notes">
-<p>The whole purpose of this machinery though is to <em>hide</em> data from us. It buries data under layers of objects, and we get to glimpse at data only through “behaviour”, which are exposed through methods on these objects.</p>
+<p>The whole purpose of this machinery though is to <em>hide</em> data from us. That was Alan Kay’s explicit goal with OO. So how are we supposed to make sense of these programs?</p>
 </aside>
 </section>
 <section class="slide level2">
 
 <p><img data-src="images/oo-solid.svg" /></p>
 <aside class="notes">
-<p>There is help though - if only we followed the SOLID principles we could write great object-oriented code right? But when was the last time in a code review someone said that this code violates the Liskov Substitution Principle?</p>
-<p>We think about programs informally - and we want a way to write programs in a way that is natural to the way we think. Typed Functional programming to the rescue!</p>
+<p>There is help - if only we followed the SOLID principles we could write great object-oriented code! But when was the last time in a code review someone said that this code violates the Liskov Substitution Principle?</p>
+<p>See we think about programs informally, not through a set of abstract “principles” like SOLID, and we deserve a way to write programs, high-quality programs, in a way that is natural to the way we think.</p>
+<p>Let me introduce you again to Typed Functional programming!</p>
 </aside>
 </section>
 <section class="slide level2">

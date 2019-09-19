@@ -41,11 +41,11 @@ This is one of the earliest software that I built.
 
 ::: notes
 
-It is very portable - runs on any architecture that can run DOSBOX
+Here's another. They use very old outdated technologies.
 
-Since then I've worked on web applications, front-end, back-end, and different languages including Javascript.
+But thankfully I've since worked on modern web applications, front-end, back-end, and also different languages including Javascript.
 
-Most recently I've been jamming with a friend building tools for designers. 
+Most recently I've been jamming with a friend building tools for designers & front-end developers. 
 
 :::
 
@@ -59,7 +59,7 @@ Most recently I've been jamming with a friend building tools for designers.
 
 One is called Teleport -- it is a Chrome extension that can capture a website and create a Sketch design out of it.
 
-The other tool, that's where this story begins. It is called Protoship Codegen.
+The other tool is called Protoship Codegen.
 
 :::
 
@@ -69,7 +69,7 @@ The other tool, that's where this story begins. It is called Protoship Codegen.
 
 ::: notes
 
-It converts designs - made in tools like Adobe XD and Sketch - into responsive HTML and CSS that programmers like you and me can use. So it'll do static positioning, flexboxes, grids etc. And CSS that is cleaner than anything that I'd be able to manually write. 
+It converts designs - made in tools like Adobe XD and Sketch - into responsive HTML and CSS, which programmers like you and me can use. So it'll do static positioning, flexboxes, grids, and CSS that is cleaner than anything that I'd be able to write manually. 
 
 On the screen is a sample Sketch design,
 
@@ -84,11 +84,11 @@ On the screen is a sample Sketch design,
 
 and this is how it gets converted to code. This is the Codegen UI, and the rendering is all clean HTML and CSS. 
 
-All this stuff: the Sketch plugin, the Adobe XD plugin, the converter, the web UI, and the code generator -- they're all written in Reason. 
+All this stuff: the Sketch plugin, the Adobe XD plugin, the converter, the web UI, and the code generator -- everything, is written in Reason.
 
-But before that it was all written in plain Javascript.
+But that happened only about half-way through the product. Before that it was all Javascript.
 
-We didn't know Reason or Typed FP when we first started working on this product over two years ago. We were forced to learn it. Let me tell you why.
+We didn't know Reason or Typed FP when began working on this product over two years ago. We were rather forced to learn it. 
 
 :::
 
@@ -102,7 +102,7 @@ We didn't know Reason or Typed FP when we first started working on this product 
 
 ::: notes
 
-Here's the raw vector node that Codegen extracts from Sketch. They're absolutely positioned, and is a far way from being responsive HTML and CSS.
+See here, is the raw vector node that Codegen extracts from Sketch. They're absolutely positioned, and it is a far way away from being responsive HTML and CSS.
 
 :::
 
@@ -113,7 +113,7 @@ Here's the raw vector node that Codegen extracts from Sketch. They're absolutely
 
 ::: notes
 
-The challenge is to convert that raw node this HTML and CSS. That's a multi-step process. Here's a rough pipeline of how Codegen does it:
+The challenge is to convert that raw node into this code. That's a multi-step process. Here's a rough pipeline of how Codegen does it:
 
 :::
 
@@ -125,7 +125,9 @@ The challenge is to convert that raw node this HTML and CSS. That's a multi-step
 
 In each step here, we decorate the nodes with more info, sometimes change their shapes, sometimes merge it with others, and generally wrangle with them quite a bit.
 
-Even within each step the nodes would transform into different structures. We couldn't mentally track the flow of data because of all these transformations and were making silly mistakes. Worse, because of our programs were muddled, our very understanding of the domain was degrading.
+But we couldn't mentally keep track of all that as they went through these transformations. We kept making mistakes and our thinking was muddled and progress was very slow.
+
+We knew we needed a better way to deal with our data. It could not be an object-oriented approach because of reasons I'll explain later, but we knew it had to be some form of types.
 
 :::
 
@@ -146,7 +148,9 @@ React, Reason, and ReasonReact
 
 ::: notes
 
-That was the time around when Jordan Walke, the original author of React, released the first version of Reason. ReasonReact is the Reason adapter for the React library. This means you can build React applications with Reason and even mix and match components between Javascript and Reason.
+That was the time around when Jordan Walke, the original author of React, released the first version of Reason. He also shipped ReasonReact, which is the Reason adaptor for the React UI library. 
+
+Reason was a typed language, and thanks to ReasonReact we could also build UIs with it and mix and match React and Javascript code.
 
 :::
 
@@ -157,9 +161,11 @@ That was the time around when Jordan Walke, the original author of React, releas
 
 ::: notes
 
-Learning and adopting the language was a long struggle. It was the early days of Reason so there weren't many resources. We spent countless hours with the Real World OCaml book - excellent book on the language as well the craft of programming itself. There are numerous resources now and much easier to learn the language.
+Learning and adopting this language was a long struggle. We spent countless hours with the Real World OCaml book - it is an excellent book on the language as well the craft of programming itself. We looked upon it with both delight at the insights on programming it gave us, and also with a fair amount of dread and frustration because of its unfamiliarity.
 
-But the struggle was worth it. When I look back on the last 10 years of my programming career, I wonder what I was doing for the first 8, before I learned Reason and Typed functional programming.
+But the struggle was worth it. See when people 
+
+When I look back on the last 10 years of my programming career, I wonder what I was doing for the first 8, before I learned Reason and Typed functional programming.
 
 And that's why I'm here today to talk about it. 
 
