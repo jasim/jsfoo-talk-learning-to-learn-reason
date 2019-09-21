@@ -363,40 +363,22 @@ React, Reason, and ReasonReact</code></pre>
 <h2>Front-end web applications!</h2>
 <p> </p>
 <p>Compile Reason into clean performant Javascript</p>
-<h4 id="using-the-bucklescript-compiler">using the BuckleScript compiler</h4>
-<p><img data-src="images/bloomberg-logo.png" /></p>
 <aside class="notes">
 <p>Those were the traditional applications of OCaml.</p>
 <p>OCaml can also be used to build front-end web applications, which is what this talk is about.</p>
-<p>There is an OCaml compiler called BuckleScrip, built at Bloomberg. Bloomberg also uses OCaml in their trading desks. BuckleScript emits performant Javascript and also lets us use any npm package with Reason almost seamlessly.</p>
 </aside>
 </section>
 <section class="slide level2">
 
-<p><img data-src="images/pupilfirst-ui-1.png" /></p>
+<ul>
+<li><p>OCaml compiler produces <em>executable binary</em></p></li>
+<li><p>BuckleScript compiler produces <em>Javascript</em></p></li>
+</ul>
+<h4 id="bucklescript">BuckleScript</h4>
+<p><img data-src="images/bloomberg-logo.png" /></p>
 <aside class="notes">
-<p>Here’s a project built with BuckleScript and Reason and ReasonReact. It is called PupilFirst.</p>
-</aside>
-</section>
-<section class="slide level2">
-
-<p><img data-src="images/pupilfirst-ui-2.png" /></p>
-<aside class="notes">
-<p>It is a learning management system built here in Bangalore.</p>
-</aside>
-</section>
-<section class="slide level2">
-
-<p><img data-src="images/pupilfirst-ui-3.png" /></p>
-<aside class="notes">
-<p>It has complex data model and advanced UI interactions.</p>
-</aside>
-</section>
-<section class="slide level2">
-
-<p><img data-src="images/pupilfirst-github.png" /></p>
-<aside class="notes">
-<p>Oh and it is fully open-source. If you want to see a real-world Reason web application, there is no better place to look. One of the authors, Hari Gopal, had also spoken at last year’s JsFoo on Reason itself.</p>
+<p>To build front-end applications, we use BuckleScript, another compiler for OCaml which emits performant Javascript and also lets us use any npm package with Reason almost seamlessly.</p>
+<p>BuckleScript was built at Bloomberg, and Bloomberg is also a heavy OCaml user.</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -442,6 +424,48 @@ React, Reason, and ReasonReact</code></pre>
 <p>As you can see BuckleScript required the correct npm module and compiled everything to straightforward Javascript.</p>
 </aside>
 </section>
+<section class="slide level2">
+
+<h4 id="a-real-world-application-built-with-bucklescript-and-reason">A real-world application, built with BuckleScript and Reason</h4>
+<aside class="notes">
+
+</aside>
+</section>
+<section class="slide level2">
+
+<p><img data-src="images/pupilfirst-ui-1.png" /></p>
+<aside class="notes">
+<p>Here’s a project built with BuckleScript and Reason and ReasonReact. It is called PupilFirst.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<p><img data-src="images/pupilfirst-ui-2.png" /></p>
+<aside class="notes">
+<p>It is a learning management system built here in Bangalore.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<p><img data-src="images/pupilfirst-ui-3.png" /></p>
+<aside class="notes">
+<p>It has complex data model and advanced UI interactions.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<p><img data-src="images/pupilfirst-github.png" /></p>
+<aside class="notes">
+<p>Oh and it is fully open-source. If you want to see a real-world Reason web application, there is no better place to look. One of the authors, Hari Gopal, had also spoken at last year’s JsFoo on Reason itself.</p>
+</aside>
+</section>
+<section id="a-comparison" class="slide level2">
+<h2>A comparison</h2>
+<p>Concepts that carry over from Javascript to Reason</p>
+<aside class="notes">
+<p>Now let’s briefly compare Javascript and Reason – what concepts can you take from the Javascript world to the Reason world</p>
+</aside>
+</section>
 <section id="javascript-vs-reason" class="slide level2">
 <h2>Javascript vs Reason</h2>
 <ul>
@@ -449,20 +473,23 @@ React, Reason, and ReasonReact</code></pre>
 <li><p><strong>Reason</strong>: <em>functions, modules, types</em></p></li>
 </ul>
 <aside class="notes">
-<p>Javascript however is a large language – it has far too many concepts – and that is obvious if you’ve participated in any Javascript interview. You can ask and be asked so many questions. There is the concept of <code>this</code>, there is prototypes and prototype inheritance chains which have their own rules, and there are also classes, objects, and mutation. It also has functions and higher-order functions.</p>
-<p>Reason comparatively is a smaller language. It only has functions, modules, and types. We don’t, for example, concern ourselves with what <code>this</code> could be during runtime. In fact a Reason interview would be a rather unexciting event - there aren’t that many quirks to the language to deal with.</p>
+<p>Except for types, Reason is, in a sense, a subset of Javascript.</p>
+<p>Javascript is a large language – which could be obvious if you’ve participated in any Javascript job interview.</p>
+<p>You can ask and be asked so many questions. There is the concept of <code>this</code>, there are prototypes and prototype inheritance chains, and there are also classes, objects, and mutation. It also has functions and higher-order functions.</p>
+<p>Compared to a Javascript job interview, a Reason interview could be rather uneventful; because it is a much smaller language than JS. All it has are functions, modules, and types. We don’t, for example, concern ourselves with what <code>this</code> could be during runtime.</p>
 </aside>
 </section>
-<section id="programming-in-reason" class="slide level2">
-<h2>Programming in Reason</h2>
+<section class="slide level2">
+
 <p>Two principles:</p>
 <ol type="1">
 <li>Write pure functions</li>
 <li>Get their types right</li>
 </ol>
 <aside class="notes">
-<p>The way we program Reason is to write our programs as a series of pure functions. That’s it.</p>
-<p>But how is that an improvement over Javascript? We can write Javascript in a similar manner - with pure functions everywhere, and just an outer shell for all the I/O. That’s essentially functional programming, and that’s pretty nice.</p>
+<p>The tiny surface area of the language also constrains how we can program in Reason.</p>
+<p>The way to do that is to simply write our programs as a series of pure functions. That’s it.</p>
+<p>How is that an improvement over Javascript you might ask? We can write JS also in a functional manner - with pure functions everywhere, and just an outer shell for all the I/O. That’s essentially functional programming, and that’s pretty nice.</p>
 <p>But Reason is not only “functional”, it is also “typed”, and the types guarantee something:</p>
 </aside>
 </section>
@@ -821,64 +848,8 @@ You will be user -4</code></pre>
 <p>We can write this core without a single defensive check; no worries about null errors; not bothered whether the objects will have the right shape. We know, thanks to types, that everything will be just perfect.</p>
 </aside>
 </section>
-<section class="slide level2">
-
-<h3 id="learning-reason">Learning Reason</h3>
-<ul>
-<li><strong>Programming in the small</strong>
-<ul>
-<li>variables, data structures, iteration, functions</li>
-</ul></li>
-</ul>
-<p><img data-src="images/reason-official-docs.png" /></p>
-<aside class="notes">
-<p>Alright, if you had to give Reason a shot, how would you go about it?</p>
-<p>First, to learn any language, we have to be able to write small programs in it. You should be able to solve a fizzbuzz, read from a file, compute an average, make an API request – all these things. The concepts are standard: data structures, creating functions and calling them etc.</p>
-<p>The official Reason documentation is a great starting point.</p>
-</aside>
-</section>
-<section class="slide level2">
-
-<h3 id="learning-reason-1">Learning Reason</h3>
-<ul>
-<li>Programming in the small</li>
-<li><strong>Tooling</strong></li>
-</ul>
-<aside class="notes">
-<p>Next, you need to get comfortable with the tooling.</p>
-<p>You should be able to create a project, compile, and start tinkering on demand. That is a simple step but very crucial.</p>
-<p>Knowing the tooling is the difference between wishing you had the time to play with something vs actually having fun with it.</p>
-</aside>
-</section>
-<section class="slide level2">
-
-<h3 id="learning-reason-2">Learning Reason</h3>
-<ul>
-<li><strong>Tooling</strong>
-<ul>
-<li>VSCode + Reason plugin</li>
-<li>Official setup instructions</li>
-</ul></li>
-</ul>
-<p><img data-src="images/tooling-bs-setup.png" /></p>
-<aside class="notes">
-<p>In Reason’s case, there isn’t much to the tooling. The most supported setup is VSCode + the VSCode Reason plugin.</p>
-<p>The official setup guide works perfectly well to setup a new project. Install an npm package, start webpack and you’re off to the races.</p>
-</aside>
-</section>
-<section class="slide level2">
-
-<h3 id="learning-reason-3">Learning Reason</h3>
-<ul>
-<li>Programming in the large
-<ul>
-<li>modules</li>
-</ul></li>
-</ul>
-<aside class="notes">
-<p>The third thing to know is to how to Program in the Large. Have you ever been in a place where you know a thing - a language or a library - but you’re not yet confident to use it in production?</p>
-<p>The missing thing usually is not knowing how to fit things into a larger canvas. In the case of Reason, the only construct you need to know is the <code>module</code>. It is very similar to regular JS modules – you can put a bunch of functions together, expose only a few public ones, and that’s it.</p>
-</aside>
+<section id="a-larger-code-example" class="slide level2">
+<h2>A larger code example</h2>
 </section>
 <section class="slide level2">
 
@@ -1187,6 +1158,73 @@ You will be user -4</code></pre>
 </section>
 <section class="slide level2">
 
+<h3 id="learning-reason">Learning Reason</h3>
+<ul>
+<li><strong>Programming in the small</strong>
+<ul>
+<li>variables, data structures, iteration, functions</li>
+</ul></li>
+</ul>
+<p><img data-src="images/reason-official-docs.png" /></p>
+<aside class="notes">
+<p>Alright, if you had to give Reason a shot, how would you go about it?</p>
+<p>First, to learn any language, we have to be able to write small programs in it. You should be able to solve a fizzbuzz, read from a file, compute an average, make an API request – all these things. The concepts are standard: data structures, creating functions and calling them etc.</p>
+<p>The official Reason documentation is a great starting point.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<h3 id="learning-reason-1">Learning Reason</h3>
+<ul>
+<li>Programming in the small</li>
+<li><strong>Tooling</strong></li>
+</ul>
+<aside class="notes">
+<p>Next, you need to get comfortable with the tooling.</p>
+<p>You should be able to create a project, compile, and start tinkering on demand. That is a simple step but very crucial.</p>
+<p>Knowing the tooling is the difference between wishing you had the time to play with something vs actually having fun with it.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<h3 id="learning-reason-2">Learning Reason</h3>
+<ul>
+<li><strong>Tooling</strong>
+<ul>
+<li>VSCode + Reason plugin</li>
+<li>Official setup instructions</li>
+</ul></li>
+</ul>
+<p><img data-src="images/tooling-bs-setup.png" /></p>
+<aside class="notes">
+<p>In Reason’s case, there isn’t much to the tooling. The most supported setup is VSCode + the VSCode Reason plugin.</p>
+<p>The official setup guide works perfectly well to setup a new project. Install an npm package, start webpack and you’re off to the races.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<h3 id="learning-reason-3">Learning Reason</h3>
+<ul>
+<li>Programming in the large
+<ul>
+<li>modules</li>
+</ul></li>
+</ul>
+<aside class="notes">
+<p>The third thing to know is to how to Program in the Large. Have you ever been in a place where you know a thing - a language or a library - but you’re not yet confident to use it in production?</p>
+<p>The missing thing usually is not knowing how to fit things into a larger canvas. In the case of Reason, the only construct you need to know is the <code>module</code>. It is very similar to regular JS modules – you can put a bunch of functions together, expose only a few public ones, and that’s it.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<h4 id="learning-to-learn-reasonml">Learning to learn ReasonML</h4>
+<p>Jasim A Basheer</p>
+<p>twitter: <span class="citation" data-cites="jasim_ab">@jasim_ab</span></p>
+<p>email: jasim@protoship.io</p>
+<p>web: protoship.io</p>
+<aside class="notes">
+
+</aside>
 <aside class="notes">
 <ul>
 <li>Show how behaviour is added</li>

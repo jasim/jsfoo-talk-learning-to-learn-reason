@@ -476,7 +476,7 @@ Oh and it is fully open-source. If you want to see a real-world Reason web appli
 
 ------------------
 
-# A comparison
+## A comparison
 
 Concepts that carry over from Javascript to Reason
 
@@ -1127,7 +1127,7 @@ We can write this core without a single defensive check; no worries about null e
 
 ------------------
 
-# A larger code example
+## A larger code example
 
 ------------------
 
@@ -1624,6 +1624,26 @@ The missing thing usually is not knowing how to fit things into a larger canvas.
 
 
 ------------------
+
+#### Learning to learn ReasonML
+
+Jasim A Basheer
+
+twitter: 
+ @jasim_ab
+
+email:
+ jasim@protoship.io
+
+web:
+ protoship.io
+
+::: notes
+
+
+
+:::
+
 
 ::: notes
 
