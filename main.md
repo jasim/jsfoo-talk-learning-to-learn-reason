@@ -41,9 +41,9 @@ This is one of the earliest software that I built.
 
 ::: notes
 
-Here's another. They use very old outdated technologies.
+Here's another. These were fun to make and they were simpler times. But today that is an outdated stack.
 
-But thankfully I've since worked on modern web applications, front-end, back-end, and also different languages including Javascript.
+I've since worked on modern web applications, front-end, back-end, and also different languages including Javascript.
 
 Most recently I've been jamming with a friend building tools for designers & front-end developers. 
 
@@ -53,7 +53,7 @@ Most recently I've been jamming with a friend building tools for designers & fro
 
 ### Protoship Teleport
 
-![](images/teleport.png)
+![](images/teleport.mp4)
 
 ::: notes
 
@@ -65,30 +65,32 @@ The other tool is called Protoship Codegen.
 
 ------------------
 
-![](images/codegen-sketch.png)
+### Protoship Codegen
+
+![](images/codegen.png)
 
 ::: notes
 
-It converts designs - made in tools like Adobe XD and Sketch - into responsive HTML and CSS, which programmers like you and me can use. So it'll do static positioning, flexboxes, grids, and CSS that is cleaner than anything that I'd be able to write manually. 
-
-On the screen is a sample Sketch design,
+It converts designs - made in tools like Adobe XD and Sketch - into responsive HTML and CSS, which programmers like you and me can use. So it'll do static positioning, flexboxes, grids, and CSS etc.
 
 :::
 
-
 ------------------
 
-![](images/codegen-ui.png)
+![](images/codegen.mp3)
 
 ::: notes
 
-and this is how it gets converted to code. This is the Codegen UI, and the rendering is all clean HTML and CSS. 
+On the screen is a sample Sketch design, we're running it through Codegen,
+and this is the Codegen UI, and the design was rendered here as HTML & CSS.
 
-All this stuff: the Sketch plugin, the Adobe XD plugin, the converter, the web UI, and the code generator -- everything, is written in Reason.
+All this stuff: the Sketch plugin, the web UI, and the code generator -- everything, is written in Reason.
 
 But that happened only about half-way through the product. Before that it was all Javascript.
 
-We didn't know Reason or Typed FP when began working on this product over two years ago. We were rather forced to learn it. 
+We didn't know Reason or Typed FP when began working on this product over two years ago. We had to learn it so we could build this tool.
+
+For that let me tell you a bit about how Codegen works under the hood.
 
 :::
 
@@ -793,8 +795,6 @@ Let's see how that works.
 
 :::
 
-
-
 ------------------
 
 ``` {.javascript}
@@ -1127,431 +1127,22 @@ We can write this core without a single defensive check; no worries about null e
 
 ------------------
 
-## A larger code example
-
-------------------
-
-#### Refactoring (2nd edition) 
-#### by Martin Fowler
-
-![](images/refactoring-cover.jpg)
-
-::: notes
-
-Alright, did you know that the venerable Refactoring book by Martin Fowler has a second edition, which uses Javascript instead of Java? 
-
-The first chapter of the book was available for free download in their website.  lifted the opening exercise from it, so we can contrast an object-oriented version of a solution presented in Refactoring against a Typed Functional version we'll write in Reason.
-
-:::
-
-
-------------------
-
-
-
-``` {.javascript}
-let plays = {
-  "hamlet": { "name": "Hamlet", "type": "tragedy" },
-  "as-like": { "name": "As You Like It", "type": "comedy" },
-  "othello": { "name": "Othello", "type": "tragedy" }
-}
-
-let invoices = [{
-  "customer": "BigCo",
-  "performances": [
-    { "playID": "hamlet", "audience": 55 },
-    { "playID": "as-like", "audience": 35 },
-    { "playID": "othello", "audience": 40 }]
-}];
-```
-
-::: notes
-
-We are a Drama troupe and we're often hired by corporates for employee enterainment. We give them a combined invoice for all the plays we perform for them.
-
-The exercise is to compute the amount we'll bill for each invoice. The cost depends on the size of audience. We also have a different tariff for tragedies and comedies.
-
-:::
-
-
-------------------
-
-amount = fn(audienceSize, playType)
-
-``` {.javascript}
-switch (play.type) {
-  case "tragedy":
-    thisAmount = 40000;
-    if (perf.audience > 30)
-      thisAmount += 1000 * (perf.audience - 30);
-    break;
-
-  case "comedy":
-    thisAmount = 30000;
-    if (perf.audience > 20)
-      thisAmount += 10000 + 500 * (perf.audience - 20);
-    thisAmount += 300 * perf.audience;
-    break;
-}
-```
-
-::: notes
-
-This is the imperative version of the billing code from the book. Don't bother to understand the specifics - the computation logic is not relevant. Only important thing is that the bill amount depends on the size of the audience and the genre of the play.
-
-:::
-
-
-
-------------------
-
-volumeCredit = fn(audienceSize, playType)
-
-``` {.javascript}
-// add volume credits
-volumeCredits += Math.max(perf.audience - 30, 0);
-
-// add extra credit for every ten comedy attendees
-if ("comedy" === play.type) volumeCredits += Math.floor(perf.audience / 5);
-```
-
-::: notes
-
-Apart from total amount, we also have to compute volumeCredits, which is some kind of loyalty point. It is also a function of the audience size and genre of the play.
-
-:::
-
-
-------------------
-
-:::::::::::::: {.columns}
-::: {.column width="34%"}
-``` {.javascript .tinyFont .noMaxHeight}
-let plays = {
-  "hamlet": { 
-    "name": "Hamlet", 
-    "type": "tragedy" 
-  },
-  "as-like": { 
-    "name": "As You Like It", 
-    "type": "comedy" 
-  },
-  "othello": { 
-    "name": "Othello", 
-    "type": "tragedy" 
-  }
-}
-
-let invoices = [{
-  "customer": "BigCo",
-  "performances": [{ 
-    "playID": "hamlet", 
-    "audience": 55 
-  },{ 
-    "playID": "as-like", 
-    "audience": 35 
-  },{ 
-    "playID": "othello", 
-    "audience": 40 
-  }]
-}];
-```
-:::
-::: {.column width="65%"}
-``` {.javascript .tinyFont .noMaxHeight}
-function statement(invoice, plays) {
-  let totalAmount = 0;
-  let volumeCredits = 0;
-  for (let perf of invoice.performances) {
-    const play = plays[perf.playID];
-    let thisAmount = 0;
-    switch (play.type) {
-      case "tragedy":
-        thisAmount = 40000;
-        if (perf.audience > 30) {
-          thisAmount += 1000 * (perf.audience - 30);
-        }
-        break;
-      case "comedy":
-        thisAmount = 30000;
-        if (perf.audience > 20) {
-          thisAmount += 10000 + 500 * (perf.audience - 20);
-        }
-        thisAmount += 300 * perf.audience;
-        break;
-      default:
-        throw new Error(`unknown type: ${play.type}`);
-    }
-    volumeCredits += Math.max(perf.audience - 30, 0);
-    if ("comedy" === play.type) volumeCredits += Math.floor(perf.audience / 5);
-    totalAmount += thisAmount;
-  }
-  return [totalAmount, volumeCredits];
-}
-```
-:::
-::::::::::::::
-
-::: notes
-
-So to reiterate, on the left is the data structure. On the right is a function that loops over all the invoices, and sums up the invoice amount and volumeCredit. 
-
-Now this code is not going to win anyone any job interviews. It gets the job done, but there is a reason why Martin Fowler chose it as the opening exercise of the book. 
-
-In fact he goes onto refactor it into a classical object-oriented solution:
-
-:::
-
-
-------------------
-
-``` {.javascript}
-class TragedyCalculator extends PerformanceCalculator {
-  get amount() {
-    let result = 40000;
-    if (this.performance.audience > 30) {
-      result += 1000 * (this.performance.audience - 30);
-    }
-    return result;
-  }
-}
-```
-
-::: notes
-
-He makes a class to compute the cost for type of play. Here's the one for Tragedy.
-
-:::
-
-
-------------------
-
-``` {.javascript}
-class ComedyCalculator extends PerformanceCalculator {
-  get amount() {
-    let result = 30000;
-    if (this.performance.audience > 20) {
-      result += 10000 + 500 * (this.performance.audience - 20);
-    }
-    result += 300 * this.performance.audience;
-    return result;
-  }
-  get volumeCredits() {
-    return super.volumeCredits + Math.floor(this.performance.audience / 5);
-  }
-}
-```
-
-::: notes
-
-Here's the one for comedy. Both the classes inherit from a parent class called PerformanceCalculator. 
-
-:::
-
-
-------------------
-
-``` {.javascript}
-class PerformanceCalculator {
-  constructor(aPerformance, aPlay) {
-    this.performance = aPerformance;
-    this.play = aPlay;
-  }
-
-  get amount() {
-    throw new Error('subclass responsibility');
-  }
-
-  get volumeCredits() {
-    return Math.max(this.performance.audience - 30, 0);
-  }
-}
-```
-
-::: notes
-
-And PerformanceCalculator is here that all the common behaviour sits.
-
-:::
-
-
-------------------
-
-``` {.javascript}
-function createPerformanceCalculator(aPerformance, aPlay) {
-  switch (aPlay.type) {
-    case "tragedy": return new TragedyCalculator(aPerformance, aPlay);
-    case "comedy": return new ComedyCalculator(aPerformance, aPlay);
-    default:
-      throw new Error(`unknown type: ${aPlay.type}`);
-  }
-}
-```
-
-::: notes
-
-And finally we have the orchestrator. Instead of all the computation bunched together, this function creates the appropriate class based on the kind of play. And uses that to compute the values.
-
-Now, this is good OO. But I've always found OO difficult. I did learn how to reason about them, with a lot of practice, and I can even write well-designed object oriented code these days. But it takes mental energy that I often don't want to spend. 
-
-:::
-
-------------------
-
-#### Object-oriented programming
-
-![](images/oo-vision.svg)
-
-
-::: notes
-
-Here, this is Alan Kay's vision of objects. It is a model of computation expressed through stateful entities that exist in space and time. 
-
-They receieve messages, respond to them, and send messages to other objects.
-
-The inner life of each of these object can be very complex. They can mutate their own, and they can contain a multitude of other stateful objects inside them.
-
-:::
-
-
-------------------
-
-> I wanted to get rid of data.  I realized that the cell/whole-computer metaphor would get rid of data. -- Alan Kay on OO
-
-&nbsp;
-
-"behaviour" (methods) over data
-
-::: notes
-
-The whole purpose of this machinery though is to _hide_ data from us. That was Alan Kay's explicit goal with OO. So how are we supposed to make sense of these  programs?
-
-:::
-
-------------------
-
-
-![](images/oo-solid.svg)
-
-
-::: notes
-
-There is help  - if only we followed the SOLID principles we could write great object-oriented code! But when was the last time in a code review someone said that this code violates the Liskov Substitution Principle? 
-
-See we think about programs informally, not through a set of abstract "principles" like SOLID, and we deserve a way to write programs, high-quality programs, in a way that is natural to the way we think. 
-
-The Typed Functional approach, in contrast, is centered around data.
-
-:::
-
-
-------------------
-
-``` {.javascript}
-let plays = {
-  "hamlet": { "name": "Hamlet", "type": "tragedy" },
-  "as-like": { "name": "As You Like It", "type": "comedy" },
-  "othello": { "name": "Othello", "type": "tragedy" }
-}
-```
-
-::: notes
-
-Here let's revisit the shape of our data. In Typed FP,
-we'll create a type to represent these plays.
-
-:::
-
-
-------------------
-
-``` {.javascript}
-let plays = {
-  "hamlet": { "name": "Hamlet", "type": "tragedy" },
-  "as-like": { "name": "As You Like It", "type": "comedy" },
-  "othello": { "name": "Othello", "type": "tragedy" }
-}
-```
-
-``` {.javascript}
-module Play = {
-  type t = {
-    name: string,
-    genre: Genre.t,
-  };
-};
-```
-
-::: notes
-
-Here's the type `t` inside module Play. The module is a namespace so that we can bunch together all functions that operate on the Play type into one place.
-
-The name of the type `t` is used to denote that this is the primary type of this module. This is a useful convention in OCaml and Reason codebases.
-
-Genre here is the type of the play - it could be a tragedy or a comedy. Let's now see what that module looks like.
-
-:::
-
-
-------------------
-
-``` {.javascript}
-module Play = {
-  type t = {
-    name: string,
-    genre: Genre.t,
-  };
-};
-
-module Genre = {
-  type t =
-    | Tragedy
-    | Comedy;
-}
-```
-
-::: notes
-
-This type t here are called Sum Types. Sum types is one of those concepts that you learn and then you look back and wonder where it was all your life. It lets you specify that something can be A or B. Here Genre could be either Tragedy or Comedy. It must to be either of it; it can't be empty or null. Nor can it be both Tragedy and Comedy. 
-
-:::
-
-
-------------------
-
-``` {.javascript}
-module Play = {
-  type t = {
-    name: string,
-    genre: Genre.t,
-  };
-};
-
-module Genre = {
-  type t =
-    | Tragedy
-    | Comedy;
-}
-
-module Performance = {
-  type t = {
-    play: Play.t,
-    audience: int,
-  };
-}
-
-```
-
-::: notes
-
-We now have the root type -- a Performance, which composes Play and the number of audience.
-
-:::
-
-------------------
-
-
 ### Learning Reason
+
+::: notes
+
+Alright, the final segment.
+
+If you had to give Reason a shot, how would you go about it? 
+
+One common approach, which usually works well, is to learn by poking. This is instinctive to the way we learn as programmers.
+
+:::
+
+
+------------------
+
+### Reason, bottom-up learning 
 
 * **Programming in the small**
   * variables, data structures, iteration, functions
@@ -1560,8 +1151,6 @@ We now have the root type -- a Performance, which composes Play and the number o
 
 
 ::: notes
-
-Alright, if you had to give Reason a shot, how would you go about it?
 
 First, to learn any language, we have to be able to write small programs in it. You should be able to solve a fizzbuzz, read from a file, compute an average, make an API request -- all these things. The concepts are standard: data structures, creating functions and calling them etc.
 
@@ -1624,6 +1213,67 @@ The missing thing usually is not knowing how to fit things into a larger canvas.
 
 
 ------------------
+
+### Learning to program by poking
+
+> students spend most of their time reading manuals for libraries to figure out how to stitch them together **to get a job done**. 
+> (paraphrased) Gerald Jay Sussman
+
+::: notes
+
+Okay something a little meta now:
+
+We learn programming - be it a language, a tool, or a library - we learn them when we want to build something that needs it.
+
+We want to build UI applications, we learn React or Angular or Vue. We want to do complex layouts, we learn Flexbox and CSS Grids. We want to write a web application, we learn Node.
+
+All these are sort of a goal-directed learning. 
+
+:::
+
+
+------------------
+
+#### "We do programming by poking"
+
+> You grab this piece of library and you poke at it. You write programs that poke it and see what it does. And you say, ‘Can I tweak it to do the thing I want?'
+
+::: notes
+
+Sussman called this approach programming by poking. 
+
+We want to get started with a new library, we copy-paste the example code from its homepage, we poke at it, and see if we can tweak it to do something that we want..
+
+Rinse & repeat, and over time, we learn. 
+
+It works in the case of Reason as well.
+
+You should have a tiny thing that you want to make with it. a game of snake, a Todo list, a shopping cart.. anything. And then you try to poke your way into it. This is okay, this is fine. But not enough.
+
+:::
+
+
+------------------
+
+&nbsp;
+
+#### Bottom-up learning along with top-down learning
+
+
+![](images/rwo-cover.png)
+
+::: notes
+
+We also need to do some bottom-up learning -- learn language constructs without looking for immediate application. There are concepts that could be totally alient to those of us who've not done any Typed FP in the past. These we simply have to learn first, and then only it can start making sense from a practical point of view. 
+
+So tou have to combine both the top-down approach - learning by poking and also bottom-up where you learn the foundations ground up. 
+
+The best way to do that is to pursue the Real World OCaml book. The syntax is in OCaml, but that's a minor hiccup. It is a great book, and working through it will pay you great dividends. 
+
+:::
+
+------------------
+
 
 #### Learning to learn ReasonML
 

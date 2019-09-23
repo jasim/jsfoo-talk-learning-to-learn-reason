@@ -22,6 +22,7 @@ newJsRevealInit = <<TEXTMARK
         transition: 'fade',
         transitionSpeed: 'fast',
         center: false,
+        autoPlayMedia: true,
         dependencies: [
           { src: './lib/js/classList.js', condition: function() { return !document.body.classList; } },
           { src: './plugin/zoom-js/zoom.js', async: true },

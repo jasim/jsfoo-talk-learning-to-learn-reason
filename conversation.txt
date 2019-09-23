@@ -1,3 +1,30 @@
+22-Sep-2019
+-----------
+
+OUTLINE:
+  * About
+    * About product
+      * How Reason came about
+      * Why share
+  * Talk
+    * What is the language
+    * Who uses it
+    * A feeling for what it might be to program in this language
+  * Typed Functional Programming
+  * Functional Programming
+  * OO
+
+
+
+
+
+
+
+
+
+Sep mid
+-----------
+
 INTENTION:
   * Brief explanation of what the language is
   * Motivate with an increasingly compelling set of reasons to learn the language
