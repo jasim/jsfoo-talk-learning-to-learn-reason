@@ -1100,16 +1100,93 @@ You will be user -4</code></pre>
 <p><img data-src="images/rwo-cover.png" /></p>
 <aside class="notes">
 <p>The best way to do that is to try making something with Reason and pursue the Real World OCaml book in parallel. It uses the OCaml syntax, but that should only be a minor hiccup.</p>
-<p>It is a great book because it teaches not just OCaml the language. You’ll also get some very practical, very profound insights on programming itself from the book.</p>
+<p>It is a great book because it teaches not just OCaml the language. You can also expect some very practical, very profound insights on programming as a whole, from this book.</p>
+</aside>
+</section>
+<section id="typed-fp-concepts" class="slide level2">
+<h2>Typed FP Concepts</h2>
+<ul>
+<li>pure functional programming
+<ul>
+<li>linked-lists over arrays</li>
+<li>recursion over imperative loop</li>
+</ul></li>
+</ul>
+<aside class="notes">
+<p>What I covered so far in this talk is just a thin slice of the ideas in the Typed FP paradigm. Here are a few others.</p>
+</aside>
+</section>
+<section id="typed-fp-concepts-1" class="slide level2">
+<h2>Typed FP Concepts</h2>
+<ul>
+<li>pure functional programming
+<ul>
+<li>linked-lists over arrays</li>
+<li>recursion over imperative loop</li>
+</ul></li>
+<li>sum types:
+<ul>
+<li>make invalid states impossible</li>
+</ul></li>
+<li>no null, but option types!</li>
+<li>exhaustive pattern matching</li>
+</ul>
+<aside class="notes">
+<p>These are all entertaining ideas to learn, but they are also kickass in a practical manner - the improvement in the quality of life as programmers is phenomenal.</p>
 </aside>
 </section>
 <section class="slide level2">
 
-<p>   </p>
-<h3 id="come-for-the-language">Come for the language,</h3>
-<h3 id="stay-for-the-paradigm.">Stay for the paradigm.</h3>
+<ul>
+<li><p>pure functional programming</p>
+<ul>
+<li>linked-lists over arrays</li>
+<li>recursion over imperative loop</li>
+</ul></li>
+<li><p>sum types:</p>
+<ul>
+<li>make invalid states impossible</li>
+</ul></li>
+<li><p>no null, but option types!</p></li>
+<li><p>exhaustive pattern matching</p></li>
+<li><p>expose concrete types rarely</p></li>
+<li><p>interfaces before implementations</p></li>
+</ul>
 <aside class="notes">
-<p>And in closing I want to reiterate that the feel of programming in ReasonML comes from its language paradigm: Typed Functional programming.</p>
+<p>There are talks and blogs about all of these, if you want to learn. But nothing will come close to experiencing them for yourself by building something in Reason.</p>
+</aside>
+</section>
+<section id="reasonml-in-closing" class="slide level2">
+<h2>ReasonML – in closing</h2>
+<aside class="notes">
+<p>In closing, if I really had to summarize the experience of programming with Reason, I would say</p>
+</aside>
+</section>
+<section id="reasonml-in-closing-1" class="slide level2">
+<h2>ReasonML – in closing</h2>
+<h3 id="a-javascript-like-language">A Javascript-like language</h3>
+<h3 id="which-eliminates-clerical-mistakes">which eliminates clerical mistakes,</h3>
+<h3 id="and-makes-programming-fun.">and makes programming fun.</h3>
+<aside class="notes">
+<p>that it is a Javascript-like language,</p>
+</aside>
+</section>
+<section id="reasonml-in-closing-2" class="slide level2">
+<h2>ReasonML – in closing</h2>
+<h3 id="a-javascript-like-language-1">A Javascript-like language</h3>
+<h3 id="which-eliminates-clerical-mistakes-1">which eliminates clerical mistakes,</h3>
+<h3 id="and-makes-programming-fun.-1">and makes programming fun.</h3>
+<aside class="notes">
+<p>which eliminates clerical mistakes,</p>
+</aside>
+</section>
+<section id="reasonml-in-closing-3" class="slide level2">
+<h2>ReasonML – in closing</h2>
+<h3 id="a-javascript-like-language-2">A Javascript-like language</h3>
+<h3 id="which-eliminates-clerical-mistakes-2">which eliminates clerical mistakes,</h3>
+<h3 id="and-makes-programming-fun.-2">and makes programming fun.</h3>
+<aside class="notes">
+<p>and makes programming fun.</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -1120,26 +1197,11 @@ You will be user -4</code></pre>
 <p>email: jasim@protoship.io</p>
 <p>web: protoship.io</p>
 <aside class="notes">
-
-</aside>
-<aside class="notes">
-<ul>
-<li>Show how behaviour is added</li>
-<li>Be explicit on data flow</li>
-<li>No runtime errors. 1 or 2 errors in Elm Feldman.</li>
-</ul>
+<p>Thank you so much for listening!</p>
+<p>I hope you enjoyed it, and I’m also eager to hear your questions.</p>
+<p>Thank you.</p>
 </aside>
 </section>
-<section><section id="fin." class="title-slide slide level1"><h1>Fin.</h1></section><section class="slide level2">
-
-<div class="sourceCode" id="cb55"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb55-1"><a href="#cb55-1"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="kw">null</span><span class="op">}</span>)<span class="op">;</span></span></code></pre></div>
-<p><img data-src="images/comp-error-1-null.png" /></p>
-<aside class="notes">
-<p>But what about null? What if we pass null to <code>showNext</code>?</p>
-<p>Again the code does not compile. This is because Reason doesn’t even have the concept of nulls. the concept of nulls. So instead of allowing to run the code and crash at runtime, it simply prevents the code from even being even executed.</p>
-<p>But we use nulls in Javascript to represent the “absence” of something. Reason does have an elegant way to do that. I will show how that works soon.</p>
-</aside>
-</section></section>
     </div>
   </div>
 
