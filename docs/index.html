@@ -583,7 +583,7 @@ React, Reason, and ReasonReact</code></pre>
 <h2>Paradigm</h2>
 <p> </p>
 <h3 id="reasonocaml-is-a-typed-functional-language-1">Reason/OCaml is a Typed Functional language</h3>
-<p>   </p>
+<p> </p>
 <p><em>so is Haskell, Elm, F#, and PureScript</em></p>
 <aside class="notes">
 
@@ -915,6 +915,27 @@ You will be user -4</code></pre>
 </section>
 <section class="slide level2">
 
+<p> </p>
+</section>
+<section id="sum-types" class="slide level2">
+<h2>Sum Types</h2>
+<div class="sourceCode" id="cb54"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb54-1"><a href="#cb54-1"></a>type response <span class="op">=</span> </span>
+<span id="cb54-2"><a href="#cb54-2"></a>  <span class="op">|</span> Initial</span>
+<span id="cb54-3"><a href="#cb54-3"></a>  <span class="op">|</span> InProgress</span>
+<span id="cb54-4"><a href="#cb54-4"></a>  <span class="op">|</span> <span class="at">Success</span>(successResponse)</span>
+<span id="cb54-5"><a href="#cb54-5"></a>  <span class="op">|</span> <span class="at">Error</span>(errorResponse)</span></code></pre></div>
+<aside class="notes">
+
+</aside>
+</section>
+<section id="dealing-with-external-data" class="slide level2">
+<h2>Dealing with external data</h2>
+<aside class="notes">
+
+</aside>
+</section>
+<section class="slide level2">
+
 <p><img data-src="images/parsing-membrane1.svg" /></p>
 <aside class="notes">
 <p>There is also something else to note: the program has no control over what data comes from the external world - like content that we read from the database</p>
@@ -1088,7 +1109,7 @@ You will be user -4</code></pre>
 <h3 id="come-for-the-language">Come for the language,</h3>
 <h3 id="stay-for-the-paradigm.">Stay for the paradigm.</h3>
 <aside class="notes">
-
+<p>And in closing I want to reiterate that the feel of programming in ReasonML comes from its language paradigm: Typed Functional programming.</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -1111,7 +1132,7 @@ You will be user -4</code></pre>
 </section>
 <section><section id="fin." class="title-slide slide level1"><h1>Fin.</h1></section><section class="slide level2">
 
-<div class="sourceCode" id="cb54"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb54-1"><a href="#cb54-1"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="kw">null</span><span class="op">}</span>)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb55-1"><a href="#cb55-1"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="kw">null</span><span class="op">}</span>)<span class="op">;</span></span></code></pre></div>
 <p><img data-src="images/comp-error-1-null.png" /></p>
 <aside class="notes">
 <p>But what about null? What if we pass null to <code>showNext</code>?</p>

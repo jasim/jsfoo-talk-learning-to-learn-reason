@@ -662,7 +662,6 @@ Okay.
 ### Reason/OCaml is a Typed Functional language
 
 &nbsp;
-&nbsp;
 
 _so is Haskell, Elm, F#, and PureScript_
 
@@ -1153,7 +1152,6 @@ We can keep going, but the only way to get the program to compile is to pass `sh
 
 ------------------
 
-
 ### A Compilation error is a Syntax error
 #### Elevate runtime errors into compiler errors.
 #### Super! 😎
@@ -1221,6 +1219,39 @@ But the Reason compiler is very good at catching those mistakes, which is why, "
 
 
 ------------------
+
+&nbsp;
+
+## Sum Types
+
+``` {.javascript}
+type response = 
+  | Initial
+  | InProgress
+  | Success(successResponse)
+  | Error(errorResponse)
+```
+
+
+::: notes
+
+
+
+:::
+
+------------------
+
+
+## Dealing with external data
+
+::: notes
+
+
+
+:::
+
+------------------
+
 
 ![](images/parsing-membrane1.svg)
 
@@ -1463,21 +1494,114 @@ So you have to combine both the top-down approach - learning by poking and also 
 
 The best way to do that is to try making something with Reason and pursue the Real World OCaml book in parallel. It uses the OCaml syntax, but that should only be a minor hiccup. 
 
-It is a great book because it teaches not just OCaml the language. You'll also get some very practical, very profound insights on programming itself from the book.
+It is a great book because it teaches not just OCaml the language. You can also expect some very practical, very profound insights on programming as a whole, from this  book.
 
 :::
 
 ------------------
 
-&nbsp;
-&nbsp;
+## Typed FP Concepts
 
-### Come for the language,
-### Stay for the paradigm.
+* pure functional programming
+  * linked-lists over arrays
+  * recursion over imperative loop
 
 ::: notes
 
+What I covered so far in this talk is just a thin slice of the ideas in the Typed FP paradigm. Here are a few others. 
 
+:::
+
+------------------
+
+## Typed FP Concepts
+
+* pure functional programming
+  * linked-lists over arrays
+  * recursion over imperative loop
+
+* sum types:
+  * make invalid states impossible
+* no null, but option types!
+* exhaustive pattern matching
+
+::: notes
+
+These are all entertaining ideas to learn, but they are also kickass in a practical manner - the improvement in the quality of life as programmers is phenomenal.
+
+:::
+
+------------------
+
+* pure functional programming
+  * linked-lists over arrays
+  * recursion over imperative loop
+
+* sum types:
+  * make invalid states impossible
+* no null, but option types!
+* exhaustive pattern matching
+
+* expose concrete types rarely
+* interfaces before implementations
+
+::: notes
+
+There are talks and blogs about all of these, if you want to learn. But nothing will come close to experiencing them for yourself by building something in Reason.
+
+
+:::
+
+------------------
+
+## ReasonML -- in closing
+
+::: notes
+
+In closing, if I really had to summarize the experience of programming with Reason, I would say
+
+:::
+
+------------------
+
+
+## ReasonML -- in closing
+
+### A Javascript-like language
+### which eliminates clerical mistakes,
+### and makes programming fun.
+
+::: notes
+
+that it is a Javascript-like language, 
+
+:::
+
+------------------
+
+## ReasonML -- in closing
+
+### A Javascript-like language
+### which eliminates clerical mistakes,
+### and makes programming fun.
+
+::: notes
+
+which eliminates clerical mistakes, 
+
+:::
+
+------------------
+
+## ReasonML -- in closing
+
+### A Javascript-like language
+### which eliminates clerical mistakes,
+### and makes programming fun.
+
+::: notes
+
+and makes programming fun. 
 
 :::
 
@@ -1499,36 +1623,10 @@ web:
 
 ::: notes
 
+Thank you so much for listening!
 
+I hope you enjoyed it, and I'm also eager to hear your questions.
 
-:::
-
-
-::: notes
-
-* Show how behaviour is added
-* Be explicit on data flow
-* No runtime errors. 1 or 2 errors in Elm Feldman.
-
-:::
-
-# Fin.
-
-------------------
-
-
-``` {.javascript}
-showNext({id: null});
-```
-
-![](images/comp-error-1-null.png)
-
-::: notes
-
-But what about null? What if we pass null to `showNext`?
-
-Again the code does not compile. This is because Reason doesn't even have the concept of nulls. the concept of nulls. So instead of allowing to run the code and crash at runtime, it simply prevents the code from even being even executed. 
-
-But we use nulls in Javascript to represent the "absence" of something. Reason does have an elegant way to do that. I will show how that works soon.
+Thank you.
 
 :::
