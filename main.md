@@ -67,7 +67,7 @@ The other tool is called Protoship Codegen.
 
 ### Protoship Codegen
 
-![](images/codegen.png)
+![](images/codegen-ui.png)
 
 ::: notes
 
@@ -77,7 +77,7 @@ It converts designs - made in tools like Adobe XD and Sketch - into responsive H
 
 ------------------
 
-![](images/codegen.mp3)
+![](images/codegen.mp4)
 
 ::: notes
 
@@ -97,14 +97,18 @@ For that let me tell you a bit about how Codegen works under the hood.
 
 ------------------
 
-### Raw Vector Node
+### Source data: Raw Vector Node
 
 ![](images/codegen-vecNode.png)
 
 
 ::: notes
 
-See here, is the raw vector node that Codegen extracts from Sketch. They're absolutely positioned, and it is a far way away from being responsive HTML and CSS.
+See here, is the source data. 
+
+It is a node for a vector design element, that Codegen extracted from Sketch. They're absolutely positioned, as you can see from x, y, and width and height.
+
+Our goal is to convert this into responsive HTML and CSS.
 
 :::
 
@@ -115,7 +119,7 @@ See here, is the raw vector node that Codegen extracts from Sketch. They're abso
 
 ::: notes
 
-The challenge is to convert that raw node into this code. That's a multi-step process. Here's a rough pipeline of how Codegen does it:
+That's a multi-step process. Here's a rough pipeline of how Codegen does it:
 
 :::
 
@@ -125,11 +129,106 @@ The challenge is to convert that raw node into this code. That's a multi-step pr
 
 ::: notes
 
-In each step here, we decorate the nodes with more info, sometimes change their shapes, sometimes merge it with others, and generally wrangle with them quite a bit.
+In each step here, we decorate the nodes with more info, sometimes change their shapes, sometimes merge it with others, and things like that.
 
-But we couldn't mentally keep track of all that as they went through these transformations. We kept making mistakes and our thinking was muddled and progress was very slow.
+:::
 
-We knew we needed a better way to deal with our data. It could not be an object-oriented approach because of reasons I'll explain later, but we knew it had to be some form of types.
+------------------
+
+``` {.javascript}
+{
+  x: 0,
+  y: 64,
+  name: "The classics are books",
+  width: 600
+  height: 63
+}
+```
+
+::: notes
+
+For illustration, here is a possible initial shape of the node.
+
+:::
+
+
+------------------
+
+``` {.javascript}
+{
+  x: 0,
+  y: 64,
+  name: "The classics are books",
+  width: 600
+  height: 63
+}
+```
+
+``` {.javascript}
+{
+  nodeType: "text",
+  marginLeft: 0,
+  marginTop: 64,
+  width: 600,
+  height: 63
+}
+```
+
+::: notes
+
+Now this could be its next shape.
+
+:::
+
+
+------------------
+
+``` {.javascript}
+{
+  nodeType: "text",
+  marginLeft: 0,
+  marginTop: 64,
+  width: 600,
+  height: 63
+}
+```
+
+::: notes
+
+which could again take another shape,
+
+:::
+
+
+------------------
+
+``` {.javascript}
+{
+  nodeType: "text",
+  marginLeft: 0,
+  marginTop: 64,
+  width: 600,
+  height: 63
+}
+```
+
+``` {.javascript}
+{
+  nodeType: "text",
+  marginLeft: {type: "px", value: 0},
+  marginTop: {type: "px", value: 64},
+  width: {type: "px", value: 600},
+  height: {type: "px", value: 63}
+}
+```
+
+::: notes
+
+And this could be its next shape, and so on. There were hundreds of these transformations, some small, some big, and it was too much for us to mentally track. 
+
+We kept making mistakes and any progress on the product sort of halted.
+
+We knew we needed a better way to deal with our data, and had an inkling that types could be the answer.
 
 :::
 
@@ -152,7 +251,11 @@ React, Reason, and ReasonReact
 
 That was the time around when Jordan Walke, the original author of React, released the first version of Reason. He also shipped ReasonReact, which is the Reason adaptor for the React UI library. 
 
-Reason was a typed language, and thanks to ReasonReact we could also build UIs with it and mix and match React and Javascript code.
+Reason was a typed language, and it compiled to Javascript. So we could rewrite all our transformation code in Reason and have it work on both Node and the browser.
+
+Also thanks to ReasonReact, we could even build UIs and mix and match both React and Javascript code.
+
+So that's what we did!
 
 :::
 
@@ -163,13 +266,13 @@ Reason was a typed language, and thanks to ReasonReact we could also build UIs w
 
 ::: notes
 
-Learning and adopting this language was a long struggle. We spent countless hours with the Real World OCaml book - it is an excellent book on the language as well the craft of programming itself. We looked upon it with both delight at the insights on programming it gave us, and also with a fair amount of dread and frustration because of its unfamiliarity.
+But learning and adopting this language was a long struggle. We spent countless hours with the Real World OCaml book. 
 
-But the struggle was worth it. See when people 
+We looked upon it with both delight at the insights on programming it gave us, and also with a fair amount of dread and frustration. It wasn't an easy book to get through.
 
-When I look back on the last 10 years of my programming career, I wonder what I was doing for the first 8, before I learned Reason and Typed functional programming.
+But the struggle was worth it. It was worth so much that when I look back on the last 10 years of my programming career, I wonder what I was doing for the first 8 years, those years before I learned Reason and Typed functional programming.
 
-And that's why I'm here today to talk about it. 
+And that is why I'm so excited to be here today, and talk to you all about ReasonML. 
 
 :::
 
@@ -184,7 +287,11 @@ And that's why I'm here today to talk about it.
 
 ::: notes
 
-In this talk I will try to describe the interesting bits of Reason; try to give you a feel for what it is to program with it; and finally leave with a few pointers on how to get started.
+Okay, now we can begin!
+
+In this talk I will try to describe the interesting bits of Reason - the things that are different from Javascript.
+
+I'll also try to give you a feel for how it would be to program with this language, and finally leave you with a roadmap on how to learn it.
 
 :::
 
@@ -336,27 +443,77 @@ Compile Reason into clean performant Javascript
 
 Those were the traditional applications of OCaml. 
 
-OCaml can also be used to build front-end web applications, which is what this talk is about.
+OCaml can also be used to build front-end web applications, which is what this talk is about. 
+
+Let us take a look at that next.
 
 :::
 
 
 ------------------
 
-* OCaml compiler produces _executable binary_
+### OCaml has three compilers:
 
-* BuckleScript compiler produces _Javascript_
+&nbsp;
 
-#### BuckleScript
-
-![](images/bloomberg-logo.png)
+##### 1) Native `ocamlc`: produces _executable binary_
 
 
 ::: notes
 
-To build front-end applications, we use BuckleScript, another compiler for OCaml which emits performant Javascript and also lets us use any npm package with Reason almost seamlessly.
 
-BuckleScript was built at Bloomberg, and Bloomberg is also a heavy OCaml user.
+The native OCaml compiler is a thing of beauty - both the compiler and the generated binaries are extremely fast and lightweight, but they produce native binaries. So if you had something you wanted to build with say GoLang, you can use OCaml or Reason instead.
+
+
+:::
+
+------------------
+
+### OCaml has three compilers:
+
+&nbsp;
+
+##### 1) Native `ocamlc`: produces _executable binary_ {.muted}
+##### 2) `js_of_ocaml`: produces _Javascript_, can use any OCaml library
+
+::: notes
+
+Then there is js_of_ocaml -- it is a fork of the OCaml library, and it produces Javascript instead of native binaries. But it is sort of isolated from the Javascript ecosystem - it can make use of OCaml libraries, but nothing from npm.
+
+:::
+
+
+------------------
+
+### OCaml has three compilers:
+
+&nbsp;
+
+##### 1) Native `ocamlc`: produces _executable binary_ {.muted}
+##### 2) `js_of_ocaml`: produces _Javascript_, can use any OCaml library {.muted}
+##### 3) BuckleScript `bsc`: produces _Javascript_, and can use any npm package
+
+::: notes
+
+Then we have BuckleScript. This compiler produces clean, performant Javascript, and it interops nicely with npm and the rest of the Javascript ecosystem.
+
+:::
+
+------------------
+
+## BuckleScript
+
+* Clean performant Javascript
+* Build NodeJS applications
+* Build Browser applications
+
+![](images/bloomberg-logo.png)
+
+::: notes
+
+BuckleScript was written at Bloomberg, who is also a large user of OCaml.
+
+Reason uses BuckleScript for all its stuff. It generates readable and fast Javascript, and we can use it to run on either Node or on the browser.
 
 :::
 
@@ -376,12 +533,11 @@ if (MomentRe.Moment.isSameWithGranularity(
 
 ::: notes
 
-Let's now see BuckleScript in action.
+Here's BuckleScript in action.
 
-This Reason code here - it checks whether the current day is April 1st 2020,
-and then shows a message.
+The code written here, though it looks like Javascript, is actually Reason. It checks whether the current day is April 1st 2020, and then shows a message.For this it uses the momentjs Javascript library from npm. 
 
-It uses the momentjs Javascript library from npm. Now let's see how the BuckleScript output looks.
+Okay, now let's run this code through BuckleScript.
 
 :::
 
@@ -415,7 +571,9 @@ if (Moment().isSame(MomentRe.moment(undefined, "2020-04-01"), "day")) {
 
 ::: notes
 
-As you can see BuckleScript required the correct npm module and compiled everything to straightforward Javascript. 
+At the bottom is the Javascript produced by BuckleScript. It is straightforward JS, and it uses the CommonJS syntax to require the momentjs npm module.
+
+That's one of the best thing about Reason: since we're using BuckleScript, we can use any and all npm library in our code. Also, since Reason code becomes Javascript, we can export that as npm packages as well.
 
 :::
 
@@ -426,6 +584,7 @@ As you can see BuckleScript required the correct npm module and compiled everyth
 
 ::: notes
 
+Okay, before moving into the language proper, I want to show you a real-world web application built with BuckleScript and Reason.
 
 :::
 
@@ -438,7 +597,9 @@ As you can see BuckleScript required the correct npm module and compiled everyth
 
 ::: notes
 
-Here's a project built with BuckleScript and Reason and ReasonReact. It is called PupilFirst. 
+This project is called PupilFirst. It is a learning management solution - create courses, teach students, and manage their progress.
+
+The entire front-end is written in Reason and compiled with BuckleScript. It extensively uses GraphQL for data fetching, and is built with Rails on the back-end.
 
 :::
 
@@ -449,7 +610,7 @@ Here's a project built with BuckleScript and Reason and ReasonReact. It is calle
 
 ::: notes
 
-It is a learning management system built here in Bangalore.
+It has a complex data model and advanced UI patterns.
 
 :::
 
@@ -460,7 +621,7 @@ It is a learning management system built here in Bangalore.
 
 ::: notes
 
-It has complex data model and advanced UI interactions.
+It is built here in Bangalore.
 
 :::
 
@@ -471,10 +632,13 @@ It has complex data model and advanced UI interactions.
 
 ::: notes
 
-Oh and it is fully open-source. If you want to see a real-world Reason web application, there is no better place to look. One of the authors, Hari Gopal, had also spoken at last year's JsFoo on Reason itself.
+And it is fully open-source. One of the authors, Hari Gopal, is also a JsFoo speaker, he spoke about Reason in last year's conference.
+
+And this is a good reference repository if you want to see a real-world reason web applications that is used in production.
+
+Okay.
 
 :::
-
 
 ------------------
 
@@ -489,6 +653,7 @@ Now let's briefly compare Javascript and Reason -- what concepts can you take fr
 :::
 
 ------------------
+
 
 
 ## Javascript vs Reason

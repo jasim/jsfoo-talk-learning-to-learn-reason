@@ -73,6 +73,10 @@ newCssLoad = <<TEXTMARK
     max-height: none !important;
   }
 
+  .muted {
+    opacity: 0.5 !important;
+  }
+
   .float {
     float: left;
   }

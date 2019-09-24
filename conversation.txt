@@ -1,6 +1,3 @@
-22-Sep-2019
------------
-
 OUTLINE:
   * About
     * About product
@@ -11,19 +8,19 @@ OUTLINE:
     * Who uses it
     * A feeling for what it might be to program in this language
   * Typed Functional Programming
-  * Functional Programming
-  * OO
+  * Types
+  * What is Functional Programming
+    * program with functions
+    * Array.map
+    * Recursion
+    * List
+      * tail O(n)
+      * immutable prepend is O(1)
+  * Sum Types - refer Hari's talk
+    
 
 
 
-
-
-
-
-
-
-Sep mid
------------
 
 INTENTION:
   * Brief explanation of what the language is
