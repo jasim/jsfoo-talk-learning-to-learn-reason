@@ -1474,11 +1474,14 @@ This is what let's call the top-down approach to learning. We also need a bottom
 
 #### Top-down learning + Bottom-up learning
 
+* Learn language basics systematically
+* Don't look for application
+
 ::: notes
 
 What this means is that we should simply go through the catalog of language features and learn them -- without looking for any immediate application. 
 
-It is beacause in Typed FP, there are concepts that could be totally alien to those of us who've not done it before. And so when we try making something practical and get stuck, we won't even know what to look for.
+It is beacause Typed FP brings a new set of concepts than we're used to, and so  when we try making something practical and get stuck, we won't even know what to look for.
 
 So you have to combine both the top-down approach - learning by poking and also bottom-up where you learn the foundations ground up. 
 
@@ -1500,11 +1503,7 @@ It is a great book because it teaches not just OCaml the language. You can also 
 
 ------------------
 
-## Typed FP Concepts
-
-* pure functional programming
-  * linked-lists over arrays
-  * recursion over imperative loop
+## Ideas in Typed FP
 
 ::: notes
 
@@ -1514,11 +1513,24 @@ What I covered so far in this talk is just a thin slice of the ideas in the Type
 
 ------------------
 
-## Typed FP Concepts
+## Ideas in Typed FP
 
 * pure functional programming
   * linked-lists over arrays
   * recursion over imperative loop
+
+::: notes
+
+These are about functional programming. I haven't covered them at all in this talk, because most of us who write Javascript is already doing a fair amount of functional programming. 
+
+But there are a few features that make Reason a slightly better language to do FP than JS, which I've listed here, and they are worth knowing sometime.
+
+:::
+
+------------------
+
+
+## Ideas in Typed FP
 
 * sum types:
   * make invalid states impossible
@@ -1527,28 +1539,22 @@ What I covered so far in this talk is just a thin slice of the ideas in the Type
 
 ::: notes
 
-These are all entertaining ideas to learn, but they are also kickass in a practical manner - the improvement in the quality of life as programmers is phenomenal.
+These ideas are all around Reason's type system. These are great for programming and productivity, and they are also very fun. 
 
 :::
 
 ------------------
 
-* pure functional programming
-  * linked-lists over arrays
-  * recursion over imperative loop
-
-* sum types:
-  * make invalid states impossible
-* no null, but option types!
-* exhaustive pattern matching
+## Ideas in Typed FP
 
 * expose concrete types rarely
 * interfaces before implementations
 
 ::: notes
 
-There are talks and blogs about all of these, if you want to learn. But nothing will come close to experiencing them for yourself by building something in Reason.
+Here's another set of ideas - these are from the Real World OCaml book.
 
+If you want to know about all these things, you can find talks and blogs on the internet, but the best thing to do would be to build something in Reason and experience them yourself.
 
 :::
 
@@ -1558,7 +1564,7 @@ There are talks and blogs about all of these, if you want to learn. But nothing 
 
 ::: notes
 
-In closing, if I really had to summarize the experience of programming with Reason, I would say
+In closing, if I really had to summarize the experience of programming with this language, I would say
 
 :::
 
