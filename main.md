@@ -632,9 +632,9 @@ It is built here in Bangalore.
 
 ::: notes
 
-And it is fully open-source. One of the authors, Hari Gopal, is also a JsFoo speaker, he spoke about Reason in last year's conference.
+And it is fully open-source. One of the authors, Hari Gopal, is also a JsFoo speaker. He had spoken in last year's conference and that was also about Reason.
 
-And this is a good reference repository if you want to see a real-world reason web applications that is used in production.
+This is a good reference repository if you want to see a real-world reason web application that is used in production.
 
 Okay.
 
@@ -642,43 +642,44 @@ Okay.
 
 ------------------
 
-## A comparison
+## Paradigm
 
-Concepts that carry over from Javascript to Reason
+&nbsp;
+
+### Reason/OCaml is a Typed Functional language
 
 ::: notes
 
-Now let's briefly compare Javascript and Reason -- what concepts can you take from the Javascript world to the Reason world
 
 :::
 
 ------------------
 
+## Paradigm
 
+&nbsp;
 
-## Javascript vs Reason
+### Reason/OCaml is a Typed Functional language
 
-* **Javascript**: `this`, variable hoisting, prototypes, ES6 classes, objects, mutations, _functions, modules_
+&nbsp;
+&nbsp;
 
-* **Reason**: _functions, modules, types_
+_so is Haskell, Elm, F#, and PureScript_
 
 ::: notes
-Except for types, Reason is, in a sense, a subset of Javascript.
 
-Javascript is a large language -- which could be obvious if you've participated in any Javascript job interview. 
 
-You can ask and be asked so many questions. There is the concept of `this`, there are prototypes and prototype inheritance chains, and there are also classes, objects, and mutation. It also has functions and higher-order functions.
-
-Compared to a Javascript job interview, a Reason interview could be rather uneventful; because it is a much smaller language than JS. All it has are functions, modules, and types. We don't, for example, concern ourselves with what `this` could be during runtime. 
 
 :::
 
 ------------------
 
-Two principles:
+## Typed FP
 
-1) Write pure functions
-2) Get their types right
+#### has two principles:
+
+### 1. Write pure functions
+### 2. Get their types right
 
 ::: notes
 
@@ -1152,6 +1153,19 @@ We can keep going, but the only way to get the program to compile is to pass `sh
 
 ------------------
 
+
+### A Compilation error is a Syntax error
+#### Elevate runtime errors into compiler errors.
+#### Super! 😎
+
+::: notes
+
+
+
+:::
+
+------------------
+
 &nbsp;
 
 &nbsp;
@@ -1292,6 +1306,37 @@ We can write this core without a single defensive check; no worries about null e
 
 ------------------
 
+## A comparison
+
+Concepts that carry over from Javascript to Reason
+
+::: notes
+
+Now let's briefly compare Javascript and Reason -- what concepts can you take from the Javascript world to the Reason world
+
+:::
+
+------------------
+
+## Javascript vs Reason
+
+* **Javascript**: `this`, variable hoisting, prototypes, ES6 classes, objects, mutations, _functions, modules_
+
+* **Reason**: _functions, modules, types_
+
+::: notes
+Except for types, Reason is, in a sense, a subset of Javascript.
+
+Javascript is a large language -- which could be obvious if you've participated in any Javascript job interview. 
+
+You can ask and be asked so many questions. There is the concept of `this`, there are prototypes and prototype inheritance chains, and there are also classes, objects, and mutation. It also has functions and higher-order functions.
+
+Compared to a Javascript job interview, a Reason interview could be rather uneventful; because it is a much smaller language than JS. All it has are functions, modules, and types. We don't, for example, concern ourselves with what `this` could be during runtime. 
+
+:::
+
+------------------
+
 ### Learning Reason
 
 ::: notes
@@ -1379,61 +1424,60 @@ The missing thing usually is not knowing how to fit things into a larger canvas.
 
 ------------------
 
-### Learning to program by poking
-
-> students spend most of their time reading manuals for libraries to figure out how to stitch them together **to get a job done**. 
-> (paraphrased) Gerald Jay Sussman
-
-::: notes
-
-Okay something a little meta now:
-
-We learn programming - be it a language, a tool, or a library - we learn them when we want to build something that needs it.
-
-We want to build UI applications, we learn React or Angular or Vue. We want to do complex layouts, we learn Flexbox and CSS Grids. We want to write a web application, we learn Node.
-
-All these are sort of a goal-directed learning. 
-
-:::
-
-
-------------------
-
-#### "We do programming by poking"
+### Programming by poking
 
 > You grab this piece of library and you poke at it. You write programs that poke it and see what it does. And you say, ‘Can I tweak it to do the thing I want?'
 
+-- (paraphrased) Gerald Jay Sussman
+
 ::: notes
 
-Sussman called this approach programming by poking. 
+What is Sussman calls programming by poking is sort of the bread and butter of programmers now. If we want to learn a new library for example, we'll copy some sample code, tweak it, and over time we get it working, and we also learn its fundamentals through that experience.
 
-We want to get started with a new library, we copy-paste the example code from its homepage, we poke at it, and see if we can tweak it to do something that we want..
-
-Rinse & repeat, and over time, we learn. 
-
-It works in the case of Reason as well.
-
-You should have a tiny thing that you want to make with it. a game of snake, a Todo list, a shopping cart.. anything. And then you try to poke your way into it. This is okay, this is fine. But not enough.
+This is what let's call the top-down approach to learning. We also need a bottom-up approach when learning a language like Reason.
 
 :::
 
 
 ------------------
 
-&nbsp;
+#### Top-down learning + Bottom-up learning
 
-#### Bottom-up learning along with top-down learning
+::: notes
 
+What this means is that we should simply go through the catalog of language features and learn them -- without looking for any immediate application. 
+
+It is beacause in Typed FP, there are concepts that could be totally alien to those of us who've not done it before. And so when we try making something practical and get stuck, we won't even know what to look for.
+
+So you have to combine both the top-down approach - learning by poking and also bottom-up where you learn the foundations ground up. 
+
+:::
+
+------------------
+
+#### Top-down learning + Bottom-up learning
 
 ![](images/rwo-cover.png)
 
 ::: notes
 
-We also need to do some bottom-up learning -- learn language constructs without looking for immediate application. There are concepts that could be totally alient to those of us who've not done any Typed FP in the past. These we simply have to learn first, and then only it can start making sense from a practical point of view. 
+The best way to do that is to try making something with Reason and pursue the Real World OCaml book in parallel. It uses the OCaml syntax, but that should only be a minor hiccup. 
 
-So tou have to combine both the top-down approach - learning by poking and also bottom-up where you learn the foundations ground up. 
+It is a great book because it teaches not just OCaml the language. You'll also get some very practical, very profound insights on programming itself from the book.
 
-The best way to do that is to pursue the Real World OCaml book. The syntax is in OCaml, but that's a minor hiccup. It is a great book, and working through it will pay you great dividends. 
+:::
+
+------------------
+
+&nbsp;
+&nbsp;
+
+### Come for the language,
+### Stay for the paradigm.
+
+::: notes
+
+
 
 :::
 
