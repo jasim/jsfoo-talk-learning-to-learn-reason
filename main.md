@@ -1607,9 +1607,6 @@ Next I want to give you a mental model on how to approach the whole learning pro
 * **Programming in the small**
   * variables, data structures, iteration, functions
 
-![](images/reason-official-docs.png)
-
-
 ::: notes
 
 To learn any new language, we first have to be able to write small programs in it. 
