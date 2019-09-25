@@ -523,6 +523,8 @@ BuckleScript was written at Bloomberg, who is also a large user of OCaml.
 
 Reason uses BuckleScript for all its stuff. It generates readable and fast Javascript, and we can use it to run on either Node or on the browser.
 
+So for the rest of this talk, we're going to be talking about using the Reason syntax for OCaml, but with the BuckleScript compiler. Let's forget about all the other compilers for now.
+
 :::
 
 ------------------
@@ -541,11 +543,11 @@ if (MomentRe.Moment.isSameWithGranularity(
 
 ::: notes
 
-Here's BuckleScript in action.
+Okay, here's BuckleScript in action.
 
 The code written here, though it looks like Javascript, is actually Reason. It checks whether the current day is April 1st 2020, and then shows a message.For this it uses the momentjs Javascript library from npm. 
 
-Okay, now let's run this code through BuckleScript.
+Alright, now let's run this code through BuckleScript.
 
 :::
 
@@ -588,11 +590,11 @@ That's one of the best thing about Reason: since we're using BuckleScript, we ca
 
 ------------------
 
-#### A real-world application, built with BuckleScript and Reason
+## A real-world application, built with BuckleScript and Reason
 
 ::: notes
 
-Okay, before moving into the language proper, I want to show you a real-world web application built with BuckleScript and Reason.
+Next let me show you a real-world web application built with BuckleScript and Reason.
 
 :::
 
