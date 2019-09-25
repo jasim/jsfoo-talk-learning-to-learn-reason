@@ -258,10 +258,10 @@ React, Reason, and ReasonReact
 
 Which was when Jordan Walke, the original author of React, released the first version of Reason. 
 
-Reason was a typed language, and it compiled to Javascript. So we could rewrite all our transformation code in Reason and have it work on both Node and on the browser.
+Reason was a typed language, and it compiled to Javascript. So we could rewrite all our transformation code in Reason and have it work both on Node and also on the browser.
 
 
-He also shipped ReasonReact a bit later, which is the Reason adaptor for the React UI library. And thanks to that we could even build UIs in Reason and mix and match it with React components written in Javascript.
+He also shipped ReasonReact a bit later, which is the Reason adaptor for the React UI library. And thanks to that we could even build UIs in Reason and mix and match it with React components, which was written in Javascript.
 
 So that's what we did!
 
@@ -276,9 +276,14 @@ So that's what we did!
 
 But learning and adopting this new language, was a bit of a struggle. 
 
-This was our go-to book at the time. Real World OCaml. It is a delightful book - it teaches as much about programming as it teaches about OCaml itself. It can also be a frustrating book, especially for us because we were not familiar with the entire programming paradigm of OCaml. 
+This was our go-to book at the time. Real World OCaml. It is a delightful book - it teaches as much about programming as it teaches about OCaml itself. 
 
-But the struggle was worth it. It was worth so much that now when I look back on the last 10 years of my programming, I wonder what I was doing for the first 8 years, before I had discovered Reason and Typed Functional Programming. 
+It can also be a little frustrating to work through, especially for us because we were not familiar with the entire programming paradigm of OCaml. 
+
+But the struggle was worth it. 
+
+It was worth so much that now 
+when I look back on the last 10 years of my programming, I wonder what I was doing for the first 8 years, before I had discovered Reason and Typed Functional Programming. 
 
 And that is why I'm so excited to be here today, and talk to you all about ReasonML. 
 
@@ -318,7 +323,7 @@ Alright, now we can get started.
 
 Reason is a new syntax on top of the OCaml programming language. 
 
-OCaml has a long history - it was first released in 1990 - about 30 years ago. It is a compiled language and produces very fast binaries.
+OCaml has a long history - it released about 30 years ago. It is a compiled language and produces very fast binaries.
 
 Its syntax however is quite different from most languages that we're used to.
 
@@ -375,7 +380,7 @@ let print_html_table = segments => {
 
 ::: notes
 
-Here's the same OCaml code, but in the Reason syntax. This is closer to ES6 as we know it - there are braces to denote blocks. The fat arrow operator lets us create functions and semicolons for separating lines.
+Here's the same OCaml code, but in the Reason syntax. This is closer to ES6 as we know it - there are braces to denote blocks. The fat arrow operator lets us create functions,; and semicolons are used for separating lines.
 
 Underneath, however Reason and OCaml are the same language and have the same semantics. In this presentation I'll use refer to Reason and OCaml interchangeably, depending on what fits the context better.
 
@@ -415,7 +420,7 @@ When you start reading about OCaml, you'll often come across Jane Street. They a
 
 ::: notes
 
-If you have done any SEO work, you might be familiar with Ahrefs. They crawl about 5 million pages every minute, and they have the second largest index just after Google. They use native OCaml for all the back-end infra and for the front-end web they use Reason.
+If you have done any SEO work, you might be familiar with Ahrefs. They crawl about 5 million pages every minute, and they have the second largest index just after Google. They use native OCaml for all the back-end work and for the front-end web they use Reason.
 
 :::
 
@@ -433,7 +438,9 @@ If you have done any SEO work, you might be familiar with Ahrefs. They crawl abo
 
 ::: notes
 
-OCaml is also particularly nice to write compilers on - in fact anything that deals with a lot of tree manipulation is a great fit. Rust borrows many ideas from OCaml, and their first compiler was written in the language. Facebook is also a large user of OCaml internally.
+OCaml is also particularly nice to write compilers on - in fact anything that deals with a lot of tree manipulation is a great fit. 
+
+Rust borrows many ideas from OCaml, and their first compiler was written in the language. Facebook is also a large user of OCaml internally.
 
 5mins
 
@@ -451,7 +458,7 @@ Compile Reason into clean performant Javascript
 
 Those were the traditional applications of OCaml. 
 
-OCaml can also be used to build front-end web applications, which is what this talk is about. 
+It can also be used to build front-end web applications, which is what this talk is about. 
 
 Let us take a look at that next.
 
@@ -470,7 +477,7 @@ Let us take a look at that next.
 ::: notes
 
 
-The native OCaml compiler is a thing of beauty - both the compiler and the generated binaries are extremely fast and lightweight, but they produce native binaries. So if you had something you wanted to build with say GoLang, you can use OCaml or Reason instead.
+The native OCaml compiler is a thing of beauty - both the compiler and the generated binaries are extremely fast and lightweight. So if you had something you wanted to build with say GoLang, you can use OCaml or Reason instead.
 
 
 :::
@@ -523,7 +530,7 @@ BuckleScript was written at Bloomberg, who is also a large user of OCaml.
 
 Reason uses BuckleScript for all its stuff. It generates readable and fast Javascript, and we can use it to run on either Node or on the browser.
 
-So for the rest of this talk, we're going to be talking about using the Reason syntax for OCaml, but with the BuckleScript compiler. Let's forget about all the other compilers for now.
+So for the rest of this talk, we're going to be talking about using the Reason syntax for OCaml, with the BuckleScript compiler.
 
 :::
 
@@ -545,9 +552,11 @@ if (MomentRe.Moment.isSameWithGranularity(
 
 Okay, here's BuckleScript in action.
 
-The code written here, though it looks like Javascript, is actually Reason. It checks whether the current day is April 1st 2020, and then shows a message.For this it uses the momentjs Javascript library from npm. 
+The code written here, though it looks like Javascript, is actually Reason. It checks whether the current day is April 1st 2020, and then shows a message if that is so.
 
-Alright, now let's run this code through BuckleScript.
+For this it uses the momentjs Javascript library from npm. 
+
+Alright, now let's compile this.
 
 :::
 
@@ -583,14 +592,17 @@ if (Moment().isSame(MomentRe.moment(undefined, "2020-04-01"), "day")) {
 
 At the bottom is the Javascript produced by BuckleScript. It is straightforward JS, and it uses the CommonJS syntax to require the momentjs npm module.
 
-That's one of the best thing about Reason: since we're using BuckleScript, we can use any and all npm library in our code. Also, since Reason code becomes Javascript, we can export that as npm packages as well.
+That's one of the best thing about Reason: since we're using BuckleScript, we can use any and all npm library in our code. Also, since Reason code becomes Javascript, we can export that as our own npm packages as well.
 
 :::
 
 
 ------------------
 
-## A real-world application, built with BuckleScript and Reason
+&nbsp;
+&nbsp;
+
+### A real-world application, built with BuckleScript and Reason
 
 ::: notes
 
@@ -607,9 +619,9 @@ Next let me show you a real-world web application built with BuckleScript and Re
 
 ::: notes
 
-This project is called PupilFirst. It is a learning management solution - create courses, teach students, and manage their progress.
+This project is called PupilFirst. It is a learning management solution - you can create courses, teach students, and manage their progress.
 
-The entire front-end is written in Reason and compiled with BuckleScript. It extensively uses GraphQL for data fetching, and is built with Rails on the back-end.
+The entire front-end is written in Reason and compiled with BuckleScript. 
 
 :::
 
@@ -712,7 +724,7 @@ The perfect computer program --
 
 "perfection".
 
-Reason functions are more "perfect" than functions written in Javascript. I'm using the word "perfection" here, based on a talk given by Prof. Xavier Leroy, who is a programming languages researcher and also the author OCaml
+Reason functions are more "perfect" than functions written in Javascript. I'm using the word "perfection" here as a measure in degrees and not an absolute. I stole the idea from Prof. Xavier Leroy, who is a programming languages researcher and also the author OCaml
 
 :::
 
@@ -726,7 +738,9 @@ Reason functions are more "perfect" than functions written in Javascript. I'm us
 
 "A perfect program does exactly what it should do, no more, no less, every time, with perfect reliability, and forever. The kind of perfection that you can get from mathematical definitions, which software is to a large extent, or from philosophical concepts."
 
-What can that mean in the context of our day-to-day programming work? Let's take a look.
+I think this is an aspirational look at how we should program.
+
+But what can that mean in the context of our day-to-day work?
 
 ::: 
 
@@ -896,7 +910,7 @@ showNext(lastUser)
 
 Here we have a list of users, and we'll find the last of them and apply to `showNext`
 
-But unfortunately, the list is empty. What happens now?
+But unfortunately, the list is empty. What happens now? 
 
 :::
 
@@ -962,11 +976,13 @@ You will be user 113
 
 The only way the function can succeed is when it receives an object which has a field `id`, which has an integer value.
 
-So why does Javascript allow this function to be called with any other kind of argument? What if we could write functions that will always work because they always receive the right kind of data. It will change the way we write software.
+So why does Javascript allow this function to be called with any other kind of argument? What if we could write functions that will always work because they always receive the right kind of data. 
 
-This is done in Reason with type definitions - it is sort of a metadata that mentions what the shape and structure of different values in the program are.
+It can change the way we write software.
 
-Let's see how that works.
+In Reason we do this with type definitions - we can think of it is as metadata about our programs where we describe the shape and structure of all the values in the system. 
+
+So how does that work?
 
 :::
 
@@ -1054,7 +1070,7 @@ You will be user 16
 
 ::: notes
 
-It works. Can we send this function invalid data, and break it, like we did with the JS version?
+It works. Can we send this function invalid data, and break it, just like we did with the JS version?
 
 :::
 
