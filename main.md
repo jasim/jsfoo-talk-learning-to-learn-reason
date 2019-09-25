@@ -41,9 +41,9 @@ This is one of the earliest software that I built.
 
 ::: notes
 
-Here's another. These were fun to make and they were simpler times. But today that is an outdated stack.
+Here's another. These were fun to make and they were simpler times. But all good things have to come to an end. 
 
-I've since worked on modern web applications, front-end, back-end, and also different languages including Javascript.
+I've since worked on modern web applications, on the front-end, back-end, and also programmed different languages including Javascript.
 
 Most recently I've been jamming with a friend building tools for designers & front-end developers. 
 
@@ -57,9 +57,26 @@ Most recently I've been jamming with a friend building tools for designers & fro
 
 ::: notes
 
-One is called Teleport -- it is a Chrome extension that can capture a website and create a Sketch design out of it.
+One is called Teleport -- it is a Chrome extension that can capture a website and create a Sketch design out of it. Here I'm using Teleport to re-create the Reason homepage in Sketch. Designers use this to quickly recreate existing web sites and try out new ideas.
 
 The other tool is called Protoship Codegen.
+
+:::
+
+------------------
+
+
+![](images/codegen.mp4)
+
+::: notes
+
+It converts designs - made in tools like Adobe XD and Sketch - into responsive HTML and CSS
+
+Here is a sample Sketch design, and we're running it through Codegen.
+
+Here is the responsive HTML & CSS that Codegen renders. 
+
+The generated code is stuff that programmers like you and me can use. So it'll do static positioning, flexboxes, grids, and CSS etc.
 
 :::
 
@@ -71,29 +88,15 @@ The other tool is called Protoship Codegen.
 
 ::: notes
 
-It converts designs - made in tools like Adobe XD and Sketch - into responsive HTML and CSS, which programmers like you and me can use. So it'll do static positioning, flexboxes, grids, and CSS etc.
-
-:::
-
-------------------
-
-![](images/codegen.mp4)
-
-::: notes
-
-On the screen is a sample Sketch design, we're running it through Codegen,
-and this is the Codegen UI, and the design was rendered here as HTML & CSS.
-
 All this stuff: the Sketch plugin, the web UI, and the code generator -- everything, is written in Reason.
 
 But that happened only about half-way through the product. Before that it was all Javascript.
 
-We didn't know Reason or Typed FP when began working on this product over two years ago. We had to learn it so we could build this tool.
+We didn't know Reason or Typed FP when began working on this product over two years ago. We had to learn it to be able to build this tool.
 
-For that let me tell you a bit about how Codegen works under the hood.
+Let me tell you a bit about how Codegen works under the hood so you can see why it was necessary.
 
 :::
-
 
 ------------------
 
@@ -104,11 +107,11 @@ For that let me tell you a bit about how Codegen works under the hood.
 
 ::: notes
 
-See here, is the source data. 
+See here, is the source data that Codegen has to convert to code.
 
-It is a node for a vector design element, that Codegen extracted from Sketch. They're absolutely positioned, as you can see from x, y, and width and height.
+This is a node for a vector design element, which was extracted from Sketch by Codegen. They're absolutely positioned, as you can see from x, y, and width and height.
 
-Our goal is to convert this into responsive HTML and CSS.
+Our goal is to convert this vector node into responsive HTML and CSS,
 
 :::
 
@@ -119,7 +122,7 @@ Our goal is to convert this into responsive HTML and CSS.
 
 ::: notes
 
-That's a multi-step process. Here's a rough pipeline of how Codegen does it:
+something that looks like this.
 
 :::
 
@@ -128,6 +131,10 @@ That's a multi-step process. Here's a rough pipeline of how Codegen does it:
 ![](images/codegen-workflow.svg)
 
 ::: notes
+
+That's a multi-step process. Here's a rough pipeline of how we do that:
+
+We start with the Vector Design tree, which is passed through this pipeline of functions, each of which transforms the tree into something closer to the final result that we want. 
 
 In each step here, we decorate the nodes with more info, sometimes change their shapes, sometimes merge it with others, and things like that.
 
@@ -228,7 +235,7 @@ And this could be its next shape, and so on. There were hundreds of these transf
 
 We kept making mistakes and any progress on the product sort of halted.
 
-We knew we needed a better way to deal with our data, and had an inkling that types could be the answer.
+We wanted a better way to track this changing shape of the data as they went through each transformation, and had an inkling that types could be the answer.
 
 :::
 
@@ -249,11 +256,12 @@ React, Reason, and ReasonReact
 
 ::: notes
 
-That was the time around when Jordan Walke, the original author of React, released the first version of Reason. He also shipped ReasonReact, which is the Reason adaptor for the React UI library. 
+Which was when Jordan Walke, the original author of React, released the first version of Reason. 
 
-Reason was a typed language, and it compiled to Javascript. So we could rewrite all our transformation code in Reason and have it work on both Node and the browser.
+Reason was a typed language, and it compiled to Javascript. So we could rewrite all our transformation code in Reason and have it work on both Node and on the browser.
 
-Also thanks to ReasonReact, we could even build UIs and mix and match both React and Javascript code.
+
+He also shipped ReasonReact a bit later, which is the Reason adaptor for the React UI library. And thanks to that we could even build UIs in Reason and mix and match it with React components written in Javascript.
 
 So that's what we did!
 
