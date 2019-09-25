@@ -892,7 +892,7 @@ You will be user -4</code></pre>
 <h3 id="compile-time-vs-runtime-errors">compile-time vs runtime errors</h3>
 <p><em>a stitch in time saves nine</em></p>
 <aside class="notes">
-<p>Let’s pause a bit here, and take a slight detour so I can try to impress upon you the important distinction between a “compile-time error” and a “runtime error”.</p>
+<p>Let’s back up a bit here so I can try to impress upon you the important distinction between a “compile-time error” and a “runtime error”.</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -1026,32 +1026,17 @@ SyntaxError: Unexpected token !
 <p>But the Reason compiler is very good at catching those mistakes, which is why, “if it compiles, it works”.</p>
 </aside>
 </section>
-<section class="slide level2">
-
-<p> </p>
-</section>
-<section id="sum-types" class="slide level2">
-<h2>Sum Types</h2>
-<div class="sourceCode" id="cb61"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb61-1"><a href="#cb61-1"></a>type response <span class="op">=</span> </span>
-<span id="cb61-2"><a href="#cb61-2"></a>  <span class="op">|</span> Initial</span>
-<span id="cb61-3"><a href="#cb61-3"></a>  <span class="op">|</span> InProgress</span>
-<span id="cb61-4"><a href="#cb61-4"></a>  <span class="op">|</span> <span class="at">Success</span>(successResponse)</span>
-<span id="cb61-5"><a href="#cb61-5"></a>  <span class="op">|</span> <span class="at">Error</span>(errorResponse)</span></code></pre></div>
-<aside class="notes">
-
-</aside>
-</section>
 <section id="dealing-with-external-data" class="slide level2">
 <h2>Dealing with external data</h2>
 <aside class="notes">
-
+<p>If Reason can only deal with well-typed data, then how can it work with external data which our program has no control over?</p>
 </aside>
 </section>
 <section class="slide level2">
 
 <p><img data-src="images/parsing-membrane1.svg" /></p>
 <aside class="notes">
-<p>There is also something else to note: the program has no control over what data comes from the external world - like content that we read from the database</p>
+<p>like content that we read from the database</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -1072,8 +1057,7 @@ SyntaxError: Unexpected token !
 
 <p><img data-src="images/parsing-membrane4.svg" /></p>
 <aside class="notes">
-<p>We handle it in Reason by parsing all external data at the application boundary. In this picture I’ve labelled it as the “application membrane”.</p>
-<p>(It is not a formal concept or anything by the way, I just made it up. But it has a nice ring to it no?)</p>
+<p>We handle it in Reason by parsing all external data at the application boundary.</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -1099,11 +1083,66 @@ SyntaxError: Unexpected token !
 <p>We can write this core without a single defensive check; no worries about null errors; not bothered whether the objects will have the right shape. We know, thanks to types, that everything will be just perfect.</p>
 </aside>
 </section>
+<section id="ideas-in-typed-fp" class="slide level2">
+<h2>Ideas in Typed FP</h2>
+<aside class="notes">
+<p>What I covered so far in this talk is a very thin slice of the ideas in the Typed FP paradigm.</p>
+</aside>
+</section>
+<section id="ideas-in-typed-fp-1" class="slide level2">
+<h2>Ideas in Typed FP</h2>
+<ul>
+<li>pure functional programming
+<ul>
+<li>light-weight syntax for currying and partial application</li>
+<li>linked-lists over arrays</li>
+<li>recursion over imperative loops</li>
+</ul></li>
+</ul>
+<aside class="notes">
+<p>For example we haven’t looked at functional programming at all. I think that most of us who write Javascript is already doing a fair amount of FP, and especially so if you use React.</p>
+<p>But there are a few things that Reason adds that makes it a better functional language than JS.</p>
+<p>I’ve listed some them here - these are all very worth knowing.</p>
+</aside>
+</section>
+<section id="ideas-in-typed-fp-2" class="slide level2">
+<h2>Ideas in Typed FP</h2>
+<ul>
+<li>sum types:
+<ul>
+<li>make invalid states impossible</li>
+</ul></li>
+<li>no null, but option types!</li>
+<li>exhaustive pattern matching</li>
+</ul>
+<aside class="notes">
+<p>These ideas are all around Reason’s type system. They are quite fun.</p>
+</aside>
+</section>
+<section id="ideas-in-typed-fp-3" class="slide level2">
+<h2>Ideas in Typed FP</h2>
+<ul>
+<li>expose concrete types rarely</li>
+<li>interfaces before implementations</li>
+</ul>
+<aside class="notes">
+<p>Here’s another set of ideas - these are from the Real World OCaml book.</p>
+<p>If you want to know about all these things, you can find talks and blogs on the internet, but the best thing to do would be to learn Reason, build something in it and experience them yourself.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<h3 id="learning-reason">Learning Reason</h3>
+<aside class="notes">
+<p>So that’s what we’ll talk about next.</p>
+<p>If you had to give Reason a shot, how would you go about it?</p>
+</aside>
+</section>
 <section id="a-comparison" class="slide level2">
 <h2>A comparison</h2>
 <p>Concepts that carry over from Javascript to Reason</p>
 <aside class="notes">
-<p>Now let’s briefly compare Javascript and Reason – what concepts can you take from the Javascript world to the Reason world</p>
+<p>First let’s see what concepts you can take away from Javascript into Reason.</p>
 </aside>
 </section>
 <section id="javascript-vs-reason" class="slide level2">
@@ -1117,20 +1156,12 @@ SyntaxError: Unexpected token !
 <p>Javascript is a large language – which could be obvious if you’ve participated in any Javascript job interview.</p>
 <p>You can ask and be asked so many questions. There is the concept of <code>this</code>, there are prototypes and prototype inheritance chains, and there are also classes, objects, and mutation. It also has functions and higher-order functions.</p>
 <p>Compared to a Javascript job interview, a Reason interview could be rather uneventful; because it is a much smaller language than JS. All it has are functions, modules, and types. We don’t, for example, concern ourselves with what <code>this</code> could be during runtime.</p>
+<p>Next I want to give you a mental model on how to approach the whole learning process.</p>
 </aside>
 </section>
 <section class="slide level2">
 
-<h3 id="learning-reason">Learning Reason</h3>
-<aside class="notes">
-<p>Alright, the final segment.</p>
-<p>If you had to give Reason a shot, how would you go about it?</p>
-<p>One common approach, which usually works well, is to learn by poking. This is instinctive to the way we learn as programmers.</p>
-</aside>
-</section>
-<section class="slide level2">
-
-<h3 id="reason-bottom-up-learning">Reason, bottom-up learning</h3>
+<h3 id="learning-reason-1">Learning Reason</h3>
 <ul>
 <li><strong>Programming in the small</strong>
 <ul>
@@ -1139,13 +1170,28 @@ SyntaxError: Unexpected token !
 </ul>
 <p><img data-src="images/reason-official-docs.png" /></p>
 <aside class="notes">
-<p>First, to learn any language, we have to be able to write small programs in it. You should be able to solve a fizzbuzz, read from a file, compute an average, make an API request – all these things. The concepts are standard: data structures, creating functions and calling them etc.</p>
-<p>The official Reason documentation is a great starting point.</p>
+<p>To learn any new language, we first have to be able to write small programs in it.</p>
+<p>You should be able to solve a fizzbuzz, read from a file, compute an average, make an API request – all these things.</p>
+<p>The concepts they need are quite common: data structures, creating functions and calling them etc.</p>
 </aside>
 </section>
 <section class="slide level2">
 
-<h3 id="learning-reason-1">Learning Reason</h3>
+<h3 id="learning-reason-2">Learning Reason</h3>
+<ul>
+<li><strong>Programming in the small</strong>
+<ul>
+<li>variables, data structures, iteration, functions</li>
+</ul></li>
+</ul>
+<p><img data-src="images/reason-official-docs.png" /></p>
+<aside class="notes">
+<p>For this you should go over the official Reason documentation. It is specifically written for people from the Javascript world and is very accessible.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<h3 id="learning-reason-3">Learning Reason</h3>
 <ul>
 <li>Programming in the small</li>
 <li><strong>Tooling</strong></li>
@@ -1158,7 +1204,7 @@ SyntaxError: Unexpected token !
 </section>
 <section class="slide level2">
 
-<h3 id="learning-reason-2">Learning Reason</h3>
+<h3 id="learning-reason-4">Learning Reason</h3>
 <ul>
 <li><strong>Tooling</strong>
 <ul>
@@ -1174,7 +1220,7 @@ SyntaxError: Unexpected token !
 </section>
 <section class="slide level2">
 
-<h3 id="learning-reason-3">Learning Reason</h3>
+<h3 id="learning-reason-5">Learning Reason</h3>
 <ul>
 <li>Programming in the large
 <ul>
@@ -1218,51 +1264,6 @@ SyntaxError: Unexpected token !
 <aside class="notes">
 <p>The best way to do that is to try making something with Reason and pursue the Real World OCaml book in parallel. It uses the OCaml syntax, but that should only be a minor hiccup.</p>
 <p>It is a great book because it teaches not just OCaml the language. You can also expect some very practical, very profound insights on programming as a whole, from this book.</p>
-</aside>
-</section>
-<section id="ideas-in-typed-fp" class="slide level2">
-<h2>Ideas in Typed FP</h2>
-<aside class="notes">
-<p>What I covered so far in this talk is just a thin slice of the ideas in the Typed FP paradigm. Here are a few others.</p>
-</aside>
-</section>
-<section id="ideas-in-typed-fp-1" class="slide level2">
-<h2>Ideas in Typed FP</h2>
-<ul>
-<li>pure functional programming
-<ul>
-<li>linked-lists over arrays</li>
-<li>recursion over imperative loop</li>
-</ul></li>
-</ul>
-<aside class="notes">
-<p>These are about functional programming. I haven’t covered them at all in this talk, because most of us who write Javascript is already doing a fair amount of functional programming.</p>
-<p>But there are a few features that make Reason a slightly better language to do FP than JS, which I’ve listed here, and they are worth knowing sometime.</p>
-</aside>
-</section>
-<section id="ideas-in-typed-fp-2" class="slide level2">
-<h2>Ideas in Typed FP</h2>
-<ul>
-<li>sum types:
-<ul>
-<li>make invalid states impossible</li>
-</ul></li>
-<li>no null, but option types!</li>
-<li>exhaustive pattern matching</li>
-</ul>
-<aside class="notes">
-<p>These ideas are all around Reason’s type system. These are great for programming and productivity, and they are also very fun.</p>
-</aside>
-</section>
-<section id="ideas-in-typed-fp-3" class="slide level2">
-<h2>Ideas in Typed FP</h2>
-<ul>
-<li>expose concrete types rarely</li>
-<li>interfaces before implementations</li>
-</ul>
-<aside class="notes">
-<p>Here’s another set of ideas - these are from the Real World OCaml book.</p>
-<p>If you want to know about all these things, you can find talks and blogs on the internet, but the best thing to do would be to build something in Reason and experience them yourself.</p>
 </aside>
 </section>
 <section id="reasonml-in-closing" class="slide level2">

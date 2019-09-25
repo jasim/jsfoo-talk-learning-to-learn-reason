@@ -1190,7 +1190,7 @@ _a stitch in time saves nine_
 
 ::: notes
 
-Let's pause a bit here, and take a slight detour so I can try to impress upon you the important distinction between a "compile-time error" and a "runtime error".
+Let's back up a bit here so I can try to impress upon you the important distinction between a "compile-time error" and a "runtime error".
 
 :::
 
@@ -1403,33 +1403,11 @@ But the Reason compiler is very good at catching those mistakes, which is why, "
 
 ------------------
 
-&nbsp;
-
-## Sum Types
-
-``` {.javascript}
-type response = 
-  | Initial
-  | InProgress
-  | Success(successResponse)
-  | Error(errorResponse)
-```
-
-
-::: notes
-
-
-
-:::
-
-------------------
-
-
 ## Dealing with external data
 
 ::: notes
 
-
+If Reason can only deal with well-typed data, then how can it work with external data which our program has no control over?
 
 :::
 
@@ -1440,7 +1418,7 @@ type response =
 
 ::: notes
 
-There is also something else to note: the program has no control over what data comes from the external world - like content that we read from the database
+like content that we read from the database
 
 :::
 
@@ -1475,9 +1453,7 @@ or even user inputs from the browser.
 
 ::: notes
 
-We handle it in Reason by parsing all external data at the application boundary. In this picture I've labelled it as the "application membrane". 
-
-(It is not a formal concept or anything by the way, I just made it up. But it has a nice ring to it no?)
+We handle it in Reason by parsing all external data at the application boundary.
 
 :::
 
@@ -1520,13 +1496,86 @@ We can write this core without a single defensive check; no worries about null e
 
 ------------------
 
+## Ideas in Typed FP
+
+::: notes
+
+What I covered so far in this talk is a very thin slice of the ideas in the Typed FP paradigm. 
+
+:::
+
+------------------
+
+## Ideas in Typed FP
+
+* pure functional programming
+  * light-weight syntax for currying and partial application
+  * linked-lists over arrays
+  * recursion over imperative loops
+
+
+::: notes
+
+For example we haven't looked at functional programming at all. I think that most of us who write Javascript is already doing a fair amount of FP, and especially so if you use React.
+
+But there are a few things that Reason adds that makes it a better functional language than JS. 
+
+I've listed some them here - these are all very worth knowing.
+
+:::
+
+------------------
+
+
+## Ideas in Typed FP
+
+* sum types:
+  * make invalid states impossible
+* no null, but option types!
+* exhaustive pattern matching
+
+::: notes
+
+These ideas are all around Reason's type system. They are quite fun.
+
+:::
+
+------------------
+
+## Ideas in Typed FP
+
+* expose concrete types rarely
+* interfaces before implementations
+
+::: notes
+
+Here's another set of ideas - these are from the Real World OCaml book.
+
+If you want to know about all these things, you can find talks and blogs on the internet, but the best thing to do would be to learn Reason, build something in it and experience them yourself.
+
+:::
+
+------------------
+
+### Learning Reason
+
+::: notes
+
+So that's what we'll talk about next.
+
+If you had to give Reason a shot, how would you go about it? 
+
+:::
+
+------------------
+
 ## A comparison
 
 Concepts that carry over from Javascript to Reason
 
 ::: notes
 
-Now let's briefly compare Javascript and Reason -- what concepts can you take from the Javascript world to the Reason world
+First let's see what concepts you can take away from Javascript into Reason.
 
 :::
 
@@ -1547,26 +1596,13 @@ You can ask and be asked so many questions. There is the concept of `this`, ther
 
 Compared to a Javascript job interview, a Reason interview could be rather uneventful; because it is a much smaller language than JS. All it has are functions, modules, and types. We don't, for example, concern ourselves with what `this` could be during runtime. 
 
+Next I want to give you a mental model on how to approach the whole learning process.
+
 :::
 
 ------------------
 
 ### Learning Reason
-
-::: notes
-
-Alright, the final segment.
-
-If you had to give Reason a shot, how would you go about it? 
-
-One common approach, which usually works well, is to learn by poking. This is instinctive to the way we learn as programmers.
-
-:::
-
-
-------------------
-
-### Reason, bottom-up learning 
 
 * **Programming in the small**
   * variables, data structures, iteration, functions
@@ -1576,12 +1612,29 @@ One common approach, which usually works well, is to learn by poking. This is in
 
 ::: notes
 
-First, to learn any language, we have to be able to write small programs in it. You should be able to solve a fizzbuzz, read from a file, compute an average, make an API request -- all these things. The concepts are standard: data structures, creating functions and calling them etc.
+To learn any new language, we first have to be able to write small programs in it. 
 
-The official Reason documentation is a great starting point.
+You should be able to solve a fizzbuzz, read from a file, compute an average, make an API request -- all these things. 
+
+The concepts they need are quite common: data structures, creating functions and calling them etc.
 
 :::
 
+------------------
+
+### Learning Reason
+
+* **Programming in the small**
+  * variables, data structures, iteration, functions
+
+![](images/reason-official-docs.png)
+
+
+::: notes
+
+For this you should go over the official Reason documentation. It is specifically written for people from the Javascript world and is very accessible.
+
+:::
 
 ------------------
 
@@ -1681,63 +1734,6 @@ So you have to combine both the top-down approach - learning by poking and also 
 The best way to do that is to try making something with Reason and pursue the Real World OCaml book in parallel. It uses the OCaml syntax, but that should only be a minor hiccup. 
 
 It is a great book because it teaches not just OCaml the language. You can also expect some very practical, very profound insights on programming as a whole, from this  book.
-
-:::
-
-------------------
-
-## Ideas in Typed FP
-
-::: notes
-
-What I covered so far in this talk is just a thin slice of the ideas in the Typed FP paradigm. Here are a few others. 
-
-:::
-
-------------------
-
-## Ideas in Typed FP
-
-* pure functional programming
-  * linked-lists over arrays
-  * recursion over imperative loop
-
-::: notes
-
-These are about functional programming. I haven't covered them at all in this talk, because most of us who write Javascript is already doing a fair amount of functional programming. 
-
-But there are a few features that make Reason a slightly better language to do FP than JS, which I've listed here, and they are worth knowing sometime.
-
-:::
-
-------------------
-
-
-## Ideas in Typed FP
-
-* sum types:
-  * make invalid states impossible
-* no null, but option types!
-* exhaustive pattern matching
-
-::: notes
-
-These ideas are all around Reason's type system. These are great for programming and productivity, and they are also very fun. 
-
-:::
-
-------------------
-
-## Ideas in Typed FP
-
-* expose concrete types rarely
-* interfaces before implementations
-
-::: notes
-
-Here's another set of ideas - these are from the Real World OCaml book.
-
-If you want to know about all these things, you can find talks and blogs on the internet, but the best thing to do would be to build something in Reason and experience them yourself.
 
 :::
 
