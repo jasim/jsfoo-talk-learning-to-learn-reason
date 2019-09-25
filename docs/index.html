@@ -176,8 +176,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <p><img data-src="images/dos-tsm.png" /></p>
 <aside class="notes">
-<p>Here’s another. These were fun to make and they were simpler times. But today that is an outdated stack.</p>
-<p>I’ve since worked on modern web applications, front-end, back-end, and also different languages including Javascript.</p>
+<p>Here’s another. These were fun to make and they were simpler times. But all good things have to come to an end.</p>
+<p>I’ve since worked on modern web applications, on the front-end, back-end, and also programmed different languages including Javascript.</p>
 <p>Most recently I’ve been jamming with a friend building tools for designers &amp; front-end developers.</p>
 </aside>
 </section>
@@ -186,8 +186,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3 id="protoship-teleport">Protoship Teleport</h3>
 <p><video data-src="images/teleport.mp4" controls=""><a href="images/teleport.mp4">Video</a></video></p>
 <aside class="notes">
-<p>One is called Teleport – it is a Chrome extension that can capture a website and create a Sketch design out of it.</p>
+<p>One is called Teleport – it is a Chrome extension that can capture a website and create a Sketch design out of it. Here I’m using Teleport to re-create the Reason homepage in Sketch. Designers use this to quickly recreate existing web sites and try out new ideas.</p>
 <p>The other tool is called Protoship Codegen.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<p><video data-src="images/codegen.mp4" controls=""><a href="images/codegen.mp4">Video</a></video></p>
+<aside class="notes">
+<p>It converts designs - made in tools like Adobe XD and Sketch - into responsive HTML and CSS</p>
+<p>Here is a sample Sketch design, and we’re running it through Codegen.</p>
+<p>Here is the responsive HTML &amp; CSS that Codegen renders.</p>
+<p>The generated code is stuff that programmers like you and me can use. So it’ll do static positioning, flexboxes, grids, and CSS etc.</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -195,18 +205,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3 id="protoship-codegen">Protoship Codegen</h3>
 <p><img data-src="images/codegen-ui.png" /></p>
 <aside class="notes">
-<p>It converts designs - made in tools like Adobe XD and Sketch - into responsive HTML and CSS, which programmers like you and me can use. So it’ll do static positioning, flexboxes, grids, and CSS etc.</p>
-</aside>
-</section>
-<section class="slide level2">
-
-<p><video data-src="images/codegen.mp4" controls=""><a href="images/codegen.mp4">Video</a></video></p>
-<aside class="notes">
-<p>On the screen is a sample Sketch design, we’re running it through Codegen, and this is the Codegen UI, and the design was rendered here as HTML &amp; CSS.</p>
 <p>All this stuff: the Sketch plugin, the web UI, and the code generator – everything, is written in Reason.</p>
 <p>But that happened only about half-way through the product. Before that it was all Javascript.</p>
-<p>We didn’t know Reason or Typed FP when began working on this product over two years ago. We had to learn it so we could build this tool.</p>
-<p>For that let me tell you a bit about how Codegen works under the hood.</p>
+<p>We didn’t know Reason or Typed FP when began working on this product over two years ago. We had to learn it to be able to build this tool.</p>
+<p>Let me tell you a bit about how Codegen works under the hood so you can see why it was necessary.</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -214,22 +216,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3 id="source-data-raw-vector-node">Source data: Raw Vector Node</h3>
 <p><img data-src="images/codegen-vecNode.png" /></p>
 <aside class="notes">
-<p>See here, is the source data.</p>
-<p>It is a node for a vector design element, that Codegen extracted from Sketch. They’re absolutely positioned, as you can see from x, y, and width and height.</p>
-<p>Our goal is to convert this into responsive HTML and CSS.</p>
+<p>See here, is the source data that Codegen has to convert to code.</p>
+<p>This is a node for a vector design element, which was extracted from Sketch by Codegen. They’re absolutely positioned, as you can see from x, y, and width and height.</p>
+<p>Our goal is to convert this vector node into responsive HTML and CSS,</p>
 </aside>
 </section>
 <section class="slide level2">
 
 <p><img data-src="images/codegen-htmlNode.png" /> <img data-src="images/codegen-cssNode.png" /></p>
 <aside class="notes">
-<p>That’s a multi-step process. Here’s a rough pipeline of how Codegen does it:</p>
+<p>something that looks like this.</p>
 </aside>
 </section>
 <section class="slide level2">
 
 <p><img data-src="images/codegen-workflow.svg" /></p>
 <aside class="notes">
+<p>That’s a multi-step process. Here’s a rough pipeline of how we do that:</p>
+<p>We start with the Vector Design tree, which is passed through this pipeline of functions, each of which transforms the tree into something closer to the final result that we want.</p>
 <p>In each step here, we decorate the nodes with more info, sometimes change their shapes, sometimes merge it with others, and things like that.</p>
 </aside>
 </section>
@@ -298,7 +302,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <aside class="notes">
 <p>And this could be its next shape, and so on. There were hundreds of these transformations, some small, some big, and it was too much for us to mentally track.</p>
 <p>We kept making mistakes and any progress on the product sort of halted.</p>
-<p>We knew we needed a better way to deal with our data, and had an inkling that types could be the answer.</p>
+<p>We wanted a better way to track this changing shape of the data as they went through each transformation, and had an inkling that types could be the answer.</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -311,9 +315,9 @@ Jordan Walke (and Cheng Lou and others)
 WROTE
 React, Reason, and ReasonReact</code></pre>
 <aside class="notes">
-<p>That was the time around when Jordan Walke, the original author of React, released the first version of Reason. He also shipped ReasonReact, which is the Reason adaptor for the React UI library.</p>
-<p>Reason was a typed language, and it compiled to Javascript. So we could rewrite all our transformation code in Reason and have it work on both Node and the browser.</p>
-<p>Also thanks to ReasonReact, we could even build UIs and mix and match both React and Javascript code.</p>
+<p>Which was when Jordan Walke, the original author of React, released the first version of Reason.</p>
+<p>Reason was a typed language, and it compiled to Javascript. So we could rewrite all our transformation code in Reason and have it work on both Node and on the browser.</p>
+<p>He also shipped ReasonReact a bit later, which is the Reason adaptor for the React UI library. And thanks to that we could even build UIs in Reason and mix and match it with React components written in Javascript.</p>
 <p>So that’s what we did!</p>
 </aside>
 </section>
@@ -321,9 +325,9 @@ React, Reason, and ReasonReact</code></pre>
 
 <p><img data-src="images/rwo-cover.png" /></p>
 <aside class="notes">
-<p>But learning and adopting this language was a long struggle. We spent countless hours with the Real World OCaml book.</p>
-<p>We looked upon it with both delight at the insights on programming it gave us, and also with a fair amount of dread and frustration. It wasn’t an easy book to get through.</p>
-<p>But the struggle was worth it. It was worth so much that when I look back on the last 10 years of my programming career, I wonder what I was doing for the first 8 years, those years before I learned Reason and Typed functional programming.</p>
+<p>But learning and adopting this new language, was a bit of a struggle.</p>
+<p>This was our go-to book at the time. Real World OCaml. It is a delightful book - it teaches as much about programming as it teaches about OCaml itself. It can also be a frustrating book, especially for us because we were not familiar with the entire programming paradigm of OCaml.</p>
+<p>But the struggle was worth it. It was worth so much that now when I look back on the last 10 years of my programming, I wonder what I was doing for the first 8 years, before I had discovered Reason and Typed Functional Programming.</p>
 <p>And that is why I’m so excited to be here today, and talk to you all about ReasonML.</p>
 </aside>
 </section>
@@ -336,9 +340,9 @@ React, Reason, and ReasonReact</code></pre>
 <li>How to get started</li>
 </ul>
 <aside class="notes">
-<p>Okay, now we can begin!</p>
-<p>In this talk I will try to describe the interesting bits of Reason - the things that are different from Javascript.</p>
-<p>I’ll also try to give you a feel for how it would be to program with this language, and finally leave you with a roadmap on how to learn it.</p>
+<p>So in this talk I will try to describe some interesting bits of Reason - especially things that are different from Javascript.</p>
+<p>I’ll also try to give you a feel for how it would be to be programming with this language, and finally leave you with a roadmap on how to learn it.</p>
+<p>Alright, now we can get started.</p>
 </aside>
 </section>
 <section id="reason-is-ocaml" class="slide level2">
@@ -1123,7 +1127,8 @@ You will be user -4</code></pre>
 </ul></li>
 </ul>
 <aside class="notes">
-
+<p>These are about functional programming. I haven’t covered them at all in this talk, because most of us who write Javascript is already doing a fair amount of functional programming.</p>
+<p>But there are a few features that make Reason a slightly better language to do FP than JS, which I’ve listed here, and they are worth knowing sometime.</p>
 </aside>
 </section>
 <section id="ideas-in-typed-fp-2" class="slide level2">
@@ -1137,7 +1142,7 @@ You will be user -4</code></pre>
 <li>exhaustive pattern matching</li>
 </ul>
 <aside class="notes">
-<p>These are all entertaining ideas to learn, but they are also kickass in a practical manner - the improvement in the quality of life as programmers is phenomenal.</p>
+<p>These ideas are all around Reason’s type system. These are great for programming and productivity, and they are also very fun.</p>
 </aside>
 </section>
 <section id="ideas-in-typed-fp-3" class="slide level2">
@@ -1147,7 +1152,8 @@ You will be user -4</code></pre>
 <li>interfaces before implementations</li>
 </ul>
 <aside class="notes">
-<p>There are talks and blogs about all of these, if you want to learn. But nothing will come close to experiencing them for yourself by building something in Reason.</p>
+<p>Here’s another set of ideas - these are from the Real World OCaml book.</p>
+<p>If you want to know about all these things, you can find talks and blogs on the internet, but the best thing to do would be to build something in Reason and experience them yourself.</p>
 </aside>
 </section>
 <section id="reasonml-in-closing" class="slide level2">
