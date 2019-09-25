@@ -274,11 +274,11 @@ So that's what we did!
 
 ::: notes
 
-But learning and adopting this language was a long struggle. We spent countless hours with the Real World OCaml book. 
+But learning and adopting this new language, was a bit of a struggle. 
 
-We looked upon it with both delight at the insights on programming it gave us, and also with a fair amount of dread and frustration. It wasn't an easy book to get through.
+This was our go-to book at the time. Real World OCaml. It is a delightful book - it teaches as much about programming as it teaches about OCaml itself. It can also be a frustrating book, especially for us because we were not familiar with the entire programming paradigm of OCaml. 
 
-But the struggle was worth it. It was worth so much that when I look back on the last 10 years of my programming career, I wonder what I was doing for the first 8 years, those years before I learned Reason and Typed functional programming.
+But the struggle was worth it. It was worth so much that now when I look back on the last 10 years of my programming, I wonder what I was doing for the first 8 years, before I had discovered Reason and Typed Functional Programming. 
 
 And that is why I'm so excited to be here today, and talk to you all about ReasonML. 
 
@@ -295,11 +295,11 @@ And that is why I'm so excited to be here today, and talk to you all about Reaso
 
 ::: notes
 
-Okay, now we can begin!
+So in this talk I will try to describe some interesting bits of Reason - especially things that are different from Javascript.
 
-In this talk I will try to describe the interesting bits of Reason - the things that are different from Javascript.
+I'll also try to give you a feel for how it would be to be programming with this language, and finally leave you with a roadmap on how to learn it.
 
-I'll also try to give you a feel for how it would be to program with this language, and finally leave you with a roadmap on how to learn it.
+Alright, now we can get started.
 
 :::
 
