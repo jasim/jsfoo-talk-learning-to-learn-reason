@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="768px" height="373px" viewBox="0 0 768 373" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+    <title>contact</title>
+    <desc>Created with Sketch.</desc>
+    <g id="contact" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect fill="#F0F1EB" x="0" y="0" width="768" height="373"></rect>
+        <g id="Group" transform="translate(197.000000, 79.000000)" font-family="SFCompactDisplay-Regular, SF Compact Display" font-size="32" font-weight="normal" letter-spacing="-0.4">
+            <text id="jasim@protoship.io" fill="#0A2897">
+                <tspan x="114" y="88">jasim@protoship.io</tspan>
+            </text>
+            <text id="@jasim_ab" fill="#0A2897">
+                <tspan x="114" y="30">@jasim_ab</tspan>
+            </text>
+            <text id="twitter:" fill="#796767">
+                <tspan x="0" y="30">twitter:</tspan>
+            </text>
+            <text id="email:" fill="#796767">
+                <tspan x="16" y="88">email:</tspan>
+            </text>
+        </g>
+    </g>
+</svg>

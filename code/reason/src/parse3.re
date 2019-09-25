@@ -12,8 +12,8 @@ let parse = json => {
 let invalidJson = {j|{"id": 10}|j};
 
 let result = invalidJson |> Json.parse
-
+/* 
 switch (result) {
 | Some(user) => show(user)
 | None => Js.log("Sorry you sent invalid data")
-};
+}; */

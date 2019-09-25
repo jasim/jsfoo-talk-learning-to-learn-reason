@@ -18,9 +18,10 @@ function parse(json) {
 
 var invalidJson = "{\"id\": 10}";
 
-show(parse(Json.parseOrRaise(invalidJson)));
+var result = Json.parse(invalidJson);
 
 exports.show = show;
 exports.parse = parse;
 exports.invalidJson = invalidJson;
-/*  Not a pure module */
+exports.result = result;
+/* result Not a pure module */

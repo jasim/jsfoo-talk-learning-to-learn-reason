@@ -713,9 +713,10 @@ React, Reason, and ReasonReact</code></pre>
 <span id="cb33-2"><a href="#cb33-2"></a>  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;You will be user &quot;</span> <span class="op">+</span> (<span class="va">u</span>.<span class="at">id</span> <span class="op">+</span> <span class="dv">1</span>))</span>
 <span id="cb33-3"><a href="#cb33-3"></a><span class="op">}</span></span></code></pre></div>
 <div class="sourceCode" id="cb34"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb34-1"><a href="#cb34-1"></a><span class="kw">let</span> users <span class="op">=</span> []</span>
-<span id="cb34-2"><a href="#cb34-2"></a><span class="kw">let</span> lastUser <span class="op">=</span> users[<span class="va">users</span>.<span class="at">length</span> <span class="op">-</span> <span class="dv">1</span>]</span>
-<span id="cb34-3"><a href="#cb34-3"></a></span>
-<span id="cb34-4"><a href="#cb34-4"></a><span class="at">showNext</span>(lastUser)</span></code></pre></div>
+<span id="cb34-2"><a href="#cb34-2"></a><span class="kw">let</span> lastUserIndex <span class="op">=</span> <span class="va">users</span>.<span class="at">length</span> <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb34-3"><a href="#cb34-3"></a><span class="kw">let</span> lastUser <span class="op">=</span> users[lastUserIndex]</span>
+<span id="cb34-4"><a href="#cb34-4"></a></span>
+<span id="cb34-5"><a href="#cb34-5"></a><span class="at">showNext</span>(lastUser)</span></code></pre></div>
 <aside class="notes">
 <p>Here we have a list of users, and we’ll find the last of them and apply to <code>showNext</code></p>
 <p>But unfortunately, the list is empty. What happens now?</p>
@@ -727,9 +728,10 @@ React, Reason, and ReasonReact</code></pre>
 <span id="cb35-2"><a href="#cb35-2"></a>  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;You will be user &quot;</span> <span class="op">+</span> (<span class="va">u</span>.<span class="at">id</span> <span class="op">+</span> <span class="dv">1</span>))</span>
 <span id="cb35-3"><a href="#cb35-3"></a><span class="op">}</span></span></code></pre></div>
 <div class="sourceCode" id="cb36"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb36-1"><a href="#cb36-1"></a><span class="kw">let</span> users <span class="op">=</span> []</span>
-<span id="cb36-2"><a href="#cb36-2"></a><span class="kw">let</span> lastUser <span class="op">=</span> users[<span class="va">users</span>.<span class="at">length</span> <span class="op">-</span> <span class="dv">1</span>]</span>
-<span id="cb36-3"><a href="#cb36-3"></a></span>
-<span id="cb36-4"><a href="#cb36-4"></a><span class="at">showNext</span>(lastUser)</span></code></pre></div>
+<span id="cb36-2"><a href="#cb36-2"></a><span class="kw">let</span> lastUserIndex <span class="op">=</span> <span class="va">users</span>.<span class="at">length</span> <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb36-3"><a href="#cb36-3"></a><span class="kw">let</span> lastUser <span class="op">=</span> users[lastUserIndex]</span>
+<span id="cb36-4"><a href="#cb36-4"></a></span>
+<span id="cb36-5"><a href="#cb36-5"></a><span class="at">showNext</span>(lastUser)</span></code></pre></div>
 <pre><code>Uncaught TypeError: Cannot read property &#39;id&#39; of undefined</code></pre>
 <aside class="notes">
 <p>The function actually crashes.</p>
@@ -828,7 +830,7 @@ React, Reason, and ReasonReact</code></pre>
 <span id="cb47-3"><a href="#cb47-3"></a>  <span class="va">Js</span>.<span class="at">log</span>(<span class="st">&quot;You will be user &quot;</span> <span class="op">++</span> <span class="at">string_of_int</span>(<span class="va">u</span>.<span class="at">id</span> <span class="op">+</span> <span class="dv">1</span>))<span class="op">;</span></span>
 <span id="cb47-4"><a href="#cb47-4"></a><span class="op">};</span></span>
 <span id="cb47-5"><a href="#cb47-5"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="st">&quot;abc&quot;</span><span class="op">}</span>)<span class="op">;</span></span></code></pre></div>
-<p><img data-src="images/comp-error-string1.png" /></p>
+<p><img data-src="images/comp-error-string2.png" /></p>
 <aside class="notes">
 <p>Yes it breaks! But this is a compile-time breakage. This means no Javascript code was generated for this Reason program we wrote.</p>
 <p>That’s because the compiler found a type error in the code.</p>
@@ -836,6 +838,7 @@ React, Reason, and ReasonReact</code></pre>
 </section>
 <section class="slide level2">
 
+<h3 id="type-inference">Type Inference</h3>
 <div class="sourceCode" id="cb48"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb48-1"><a href="#cb48-1"></a>type user <span class="op">=</span> <span class="op">{</span> <span class="dt">id</span><span class="op">:</span> int <span class="op">};</span></span>
 <span id="cb48-2"><a href="#cb48-2"></a><span class="kw">let</span> showNext <span class="op">=</span> u <span class="kw">=&gt;</span> <span class="op">{</span></span>
 <span id="cb48-3"><a href="#cb48-3"></a>  <span class="va">Js</span>.<span class="at">log</span>(<span class="st">&quot;You will be user &quot;</span> <span class="op">++</span> <span class="at">string_of_int</span>(<span class="va">u</span>.<span class="at">id</span> <span class="op">+</span> <span class="dv">1</span>))<span class="op">;</span></span>
@@ -885,9 +888,105 @@ You will be user -4</code></pre>
 </section>
 <section class="slide level2">
 
-<h3 id="a-compilation-error-is-a-syntax-error">A Compilation error is a Syntax error</h3>
-<h4 id="elevate-runtime-errors-into-compiler-errors.">Elevate runtime errors into compiler errors.</h4>
-<h4 id="super">Super! 😎</h4>
+<p>   </p>
+<h3 id="compile-time-vs-runtime-errors">compile-time vs runtime errors</h3>
+<p><em>a stitch in time saves nine</em></p>
+<aside class="notes">
+<p>Let’s pause a bit here, and take a slight detour so I can try to impress upon you the important distinction between a “compile-time error” and a “runtime error”.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<h3 id="syntax-errors-are-caught-early">Syntax errors are caught early</h3>
+<div class="sourceCode" id="cb53"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb53-1"><a href="#cb53-1"></a><span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;program started executing&quot;</span>)</span>
+<span id="cb53-2"><a href="#cb53-2"></a><span class="kw">let</span> text <span class="op">=</span> Hello<span class="op">!</span> Is it Javascript you<span class="st">&#39;re looking for?</span></span></code></pre></div>
+<aside class="notes">
+<p>This is supposed to be a Javascript program. But it won’t even execute, because the second line has the wrong syntax. The first line is valid by the way – but it won’t print anything because the whole program will be rejected, with this error message:</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<h3 id="syntax-errors-are-caught-early-1">Syntax errors are caught early</h3>
+<div class="sourceCode" id="cb54"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb54-1"><a href="#cb54-1"></a><span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;program started executing&quot;</span>)</span>
+<span id="cb54-2"><a href="#cb54-2"></a><span class="kw">let</span> text <span class="op">=</span> Hello<span class="op">!</span> Is it Javascript you<span class="st">&#39;re looking for?</span></span></code></pre></div>
+<pre><code>let text = Hello! Is it Javascript you&#39;re looking for?
+                ^
+SyntaxError: Unexpected token !
+    at createScript (vm.js:80:10)
+    at Object.runInThisContext (vm.js:139:10)
+    at Module._compile (module.js:617:28)
+    at Object.Module._extensions..js (module.js:664:10)
+    ...</code></pre>
+<aside class="notes">
+<p>That is a good thing - it is best to know problems as early in the programming cycle as possible.</p>
+<p>But imagine if programs were executed despite syntax errors.</p>
+<p>You’ll ship the program to customers, and they’ll be in the middle of something, and then some semicolon is missing somewhere and boom! the program halts to a crash.</p>
+<p>Thankfully, modern JS engines parses the entire program and checks for syntax errors before it even starts executing.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<p>   </p>
+<h5 id="reason-moves-runtime-errors-into-compile-time-errors">Reason moves runtime errors into compile-time errors</h5>
+<p><em>like they are syntax errors…</em></p>
+<aside class="notes">
+<p>The genius of Reason and Typed Functional Programming in general is that a lot of common mistakes become compile-time errors rather than runtime errors.</p>
+<p>It is like our syntax checking became a lot more smarter - we no longer have to run and test the code manually to catch mistakes.</p>
+<p>Let’s look at an example.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode" id="cb56"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb56-1"><a href="#cb56-1"></a><span class="kw">let</span> showNext <span class="op">=</span> lastUser <span class="kw">=&gt;</span> <span class="op">{</span></span>
+<span id="cb56-2"><a href="#cb56-2"></a>  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;You will be user &quot;</span> <span class="op">+</span> (<span class="va">lastUser</span>.<span class="at">id</span> <span class="op">+</span> <span class="dv">1</span>))</span>
+<span id="cb56-3"><a href="#cb56-3"></a><span class="op">}</span></span>
+<span id="cb56-4"><a href="#cb56-4"></a></span>
+<span id="cb56-5"><a href="#cb56-5"></a><span class="kw">let</span> users <span class="op">=</span> []</span>
+<span id="cb56-6"><a href="#cb56-6"></a><span class="kw">let</span> lastUserIndex <span class="op">=</span> <span class="va">users</span>.<span class="at">length</span> <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb56-7"><a href="#cb56-7"></a><span class="kw">let</span> lastUser <span class="op">=</span> users[lastUserIndex]</span>
+<span id="cb56-8"><a href="#cb56-8"></a></span>
+<span id="cb56-9"><a href="#cb56-9"></a><span class="at">showNext</span>(lastUser)</span></code></pre></div>
+<aside class="notes">
+<p>Going back to this Javascript program – here we fetch the last user from a list, and does something with it. The list however is empty, and so <code>lastUser</code> will be undefined.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode" id="cb57"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb57-1"><a href="#cb57-1"></a><span class="kw">let</span> showNext <span class="op">=</span> lastUser <span class="kw">=&gt;</span> <span class="op">{</span></span>
+<span id="cb57-2"><a href="#cb57-2"></a>  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;You will be user &quot;</span> <span class="op">+</span> (<span class="va">lastUser</span>.<span class="at">id</span> <span class="op">+</span> <span class="dv">1</span>))</span>
+<span id="cb57-3"><a href="#cb57-3"></a><span class="op">}</span></span>
+<span id="cb57-4"><a href="#cb57-4"></a></span>
+<span id="cb57-5"><a href="#cb57-5"></a><span class="kw">let</span> users <span class="op">=</span> []</span>
+<span id="cb57-6"><a href="#cb57-6"></a><span class="kw">let</span> lastUserIndex <span class="op">=</span> <span class="va">users</span>.<span class="at">length</span> <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb57-7"><a href="#cb57-7"></a><span class="kw">let</span> lastUser <span class="op">=</span> users[lastUserIndex]</span>
+<span id="cb57-8"><a href="#cb57-8"></a></span>
+<span id="cb57-9"><a href="#cb57-9"></a><span class="at">showNext</span>(lastUser)</span></code></pre></div>
+<pre><code>Uncaught TypeError: Cannot read property &#39;id&#39; of undefined</code></pre>
+<aside class="notes">
+<p>So it will crashes during execution with a runtime error.</p>
+<p>In Reason however, this kind of errors sort of gets closer to a syntax error rather than a runtime error. The compiler will catch the mistake and we don’t have to run it to see if it breaks.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode" id="cb59"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb59-1"><a href="#cb59-1"></a>type user <span class="op">=</span> <span class="op">{</span><span class="dt">id</span><span class="op">:</span> int<span class="op">};</span></span>
+<span id="cb59-2"><a href="#cb59-2"></a></span>
+<span id="cb59-3"><a href="#cb59-3"></a><span class="kw">let</span> showNext <span class="op">=</span> u <span class="kw">=&gt;</span> <span class="op">{</span></span>
+<span id="cb59-4"><a href="#cb59-4"></a>  <span class="va">Js</span>.<span class="at">log</span>(<span class="st">&quot;You will be user &quot;</span> <span class="op">++</span> <span class="at">string_of_int</span>(<span class="va">u</span>.<span class="at">id</span> <span class="op">+</span> <span class="dv">1</span>))<span class="op">;</span></span>
+<span id="cb59-5"><a href="#cb59-5"></a><span class="op">};</span></span>
+<span id="cb59-6"><a href="#cb59-6"></a></span>
+<span id="cb59-7"><a href="#cb59-7"></a><span class="kw">let</span> users <span class="op">=</span> [<span class="op">||</span>]<span class="op">;</span>  <span class="co">/* empty array */</span></span>
+<span id="cb59-8"><a href="#cb59-8"></a><span class="kw">let</span> lastUserIndex <span class="op">=</span> users[<span class="va">Array</span>.<span class="at">length</span>(users) <span class="op">-</span> <span class="dv">1</span>]<span class="op">;</span></span>
+<span id="cb59-9"><a href="#cb59-9"></a><span class="kw">let</span> lastUser <span class="op">=</span> users[lastUserIndex]<span class="op">;</span></span>
+<span id="cb59-10"><a href="#cb59-10"></a></span>
+<span id="cb59-11"><a href="#cb59-11"></a><span class="at">showNext</span>(lastUser)<span class="op">;</span></span></code></pre></div>
+<aside class="notes">
+<p>Here’s the Reason equivalent of the previous program. This won’t even execute. Instead we’ll get this compile-time error:</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<p><img data-src="images/comp-error-optionGet.png" /></p>
 <aside class="notes">
 
 </aside>
@@ -896,10 +995,12 @@ You will be user -4</code></pre>
 
 <p> </p>
 <p> </p>
-<h3 id="if-it-compiles-it-works">If it compiles, it works</h3>
+<h3 id="refactor-confidently">Refactor confidently!</h3>
+<h3 id="because-if-it-compiles-it-works">because if it compiles, it works</h3>
 <aside class="notes">
-<p>A lot of my programming anxiety went away after I started programming with Reason. Because I know that if my program compiles, it works.</p>
-<p>Its true!</p>
+<p>A lot of my programming anxiety went away after I started programming with Reason. I can refactor large, complex codebases confidently because I know that Reason has my back. Or in other words:</p>
+<p>if the program compiles, it works.</p>
+<p>It is true!</p>
 <p>But, what about logical errors?</p>
 </aside>
 </section>
@@ -931,11 +1032,11 @@ You will be user -4</code></pre>
 </section>
 <section id="sum-types" class="slide level2">
 <h2>Sum Types</h2>
-<div class="sourceCode" id="cb54"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb54-1"><a href="#cb54-1"></a>type response <span class="op">=</span> </span>
-<span id="cb54-2"><a href="#cb54-2"></a>  <span class="op">|</span> Initial</span>
-<span id="cb54-3"><a href="#cb54-3"></a>  <span class="op">|</span> InProgress</span>
-<span id="cb54-4"><a href="#cb54-4"></a>  <span class="op">|</span> <span class="at">Success</span>(successResponse)</span>
-<span id="cb54-5"><a href="#cb54-5"></a>  <span class="op">|</span> <span class="at">Error</span>(errorResponse)</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb61-1"><a href="#cb61-1"></a>type response <span class="op">=</span> </span>
+<span id="cb61-2"><a href="#cb61-2"></a>  <span class="op">|</span> Initial</span>
+<span id="cb61-3"><a href="#cb61-3"></a>  <span class="op">|</span> InProgress</span>
+<span id="cb61-4"><a href="#cb61-4"></a>  <span class="op">|</span> <span class="at">Success</span>(successResponse)</span>
+<span id="cb61-5"><a href="#cb61-5"></a>  <span class="op">|</span> <span class="at">Error</span>(errorResponse)</span></code></pre></div>
 <aside class="notes">
 
 </aside>
@@ -1102,7 +1203,7 @@ You will be user -4</code></pre>
 <h4 id="top-down-learning-bottom-up-learning">Top-down learning + Bottom-up learning</h4>
 <ul>
 <li>Learn language basics systematically</li>
-<li>Don’t look for application</li>
+<li>Don’t worry about immediate application</li>
 </ul>
 <aside class="notes">
 <p>What this means is that we should simply go through the catalog of language features and learn them – without looking for any immediate application.</p>
@@ -1173,8 +1274,6 @@ You will be user -4</code></pre>
 <section id="reasonml-in-closing-1" class="slide level2">
 <h2>ReasonML – in closing</h2>
 <h3 id="a-javascript-like-language">A Javascript-like language</h3>
-<h3 id="which-eliminates-clerical-mistakes">which eliminates clerical mistakes,</h3>
-<h3 id="and-makes-programming-fun.">and makes programming fun.</h3>
 <aside class="notes">
 <p>that it is a Javascript-like language,</p>
 </aside>
@@ -1182,8 +1281,7 @@ You will be user -4</code></pre>
 <section id="reasonml-in-closing-2" class="slide level2">
 <h2>ReasonML – in closing</h2>
 <h3 id="a-javascript-like-language-1">A Javascript-like language</h3>
-<h3 id="which-eliminates-clerical-mistakes-1">which eliminates clerical mistakes,</h3>
-<h3 id="and-makes-programming-fun.-1">and makes programming fun.</h3>
+<h3 id="which-eliminates-clerical-mistakes">which eliminates clerical mistakes,</h3>
 <aside class="notes">
 <p>which eliminates clerical mistakes,</p>
 </aside>
@@ -1191,8 +1289,8 @@ You will be user -4</code></pre>
 <section id="reasonml-in-closing-3" class="slide level2">
 <h2>ReasonML – in closing</h2>
 <h3 id="a-javascript-like-language-2">A Javascript-like language</h3>
-<h3 id="which-eliminates-clerical-mistakes-2">which eliminates clerical mistakes,</h3>
-<h3 id="and-makes-programming-fun.-2">and makes programming fun.</h3>
+<h3 id="which-eliminates-clerical-mistakes-1">which eliminates clerical mistakes,</h3>
+<h3 id="and-makes-programming-fun.">and makes programming fun.</h3>
 <aside class="notes">
 <p>and makes programming fun.</p>
 </aside>
@@ -1200,10 +1298,7 @@ You will be user -4</code></pre>
 <section class="slide level2">
 
 <h4 id="learning-to-learn-reasonml">Learning to learn ReasonML</h4>
-<p>Jasim A Basheer</p>
-<p>twitter: <span class="citation" data-cites="jasim_ab">@jasim_ab</span></p>
-<p>email: jasim@protoship.io</p>
-<p>web: protoship.io</p>
+<p><img data-src="images/contact.svg" /></p>
 <aside class="notes">
 <p>Thank you so much for listening!</p>
 <p>I hope you enjoyed it, and I’m also eager to hear your questions.</p>

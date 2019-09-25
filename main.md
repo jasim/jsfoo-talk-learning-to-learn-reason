@@ -901,7 +901,8 @@ let showNext = u => {
 
 ``` {.javascript}
 let users = []
-let lastUser = users[users.length - 1]
+let lastUserIndex = users.length - 1
+let lastUser = users[lastUserIndex]
 
 showNext(lastUser)
 ```
@@ -924,7 +925,8 @@ let showNext = u => {
 
 ``` {.javascript}
 let users = []
-let lastUser = users[users.length - 1]
+let lastUserIndex = users.length - 1
+let lastUser = users[lastUserIndex]
 
 showNext(lastUser)
 ```
@@ -1085,18 +1087,20 @@ let showNext = u => {
 showNext({id: "abc"});
 ```
 
-![](images/comp-error-string1.png)
+![](images/comp-error-string2.png)
 
 ::: notes
 
 Yes it breaks! But this is a compile-time breakage. This means no Javascript code was generated for this Reason program we wrote.
 
-That's because the compiler found a type error in the code.
+That's because the compiler found a type error in the code. 
 
 :::
 
 
 ------------------
+
+### Type Inference
 
 ``` {.javascript}
 type user = { id: int };
@@ -1175,12 +1179,162 @@ We can keep going, but the only way to get the program to compile is to pass `sh
 
 :::
 
+------------------
+
+&nbsp;
+&nbsp;
+
+### compile-time vs runtime errors
+
+_a stitch in time saves nine_
+
+::: notes
+
+Let's pause a bit here, and take a slight detour so I can try to impress upon you the important distinction between a "compile-time error" and a "runtime error".
+
+:::
 
 ------------------
 
-### A Compilation error is a Syntax error
-#### Elevate runtime errors into compiler errors.
-#### Super! 😎
+### Syntax errors are caught early
+
+``` {.javascript}
+console.log("program started executing")
+let text = Hello! Is it Javascript you're looking for?
+```
+
+::: notes
+
+This is supposed to be a Javascript program. But it won't even execute, because the second line has the wrong syntax. The first line is valid by the way -- but it won't print anything because the whole program will be rejected, with this error message:
+
+:::
+
+------------------
+
+### Syntax errors are caught early
+
+``` {.javascript}
+console.log("program started executing")
+let text = Hello! Is it Javascript you're looking for?
+```
+
+```
+let text = Hello! Is it Javascript you're looking for?
+                ^
+SyntaxError: Unexpected token !
+    at createScript (vm.js:80:10)
+    at Object.runInThisContext (vm.js:139:10)
+    at Module._compile (module.js:617:28)
+    at Object.Module._extensions..js (module.js:664:10)
+    ...
+```
+
+::: notes
+
+That is a good thing - it is best to know problems as early in the programming cycle as possible. 
+
+But imagine if programs were executed despite syntax errors. 
+
+You'll ship the program to customers, and they'll be in the middle of something, and then some semicolon is missing somewhere and boom! the program halts to a crash.
+
+Thankfully, modern JS engines parses the entire program and checks for syntax errors before it even starts executing. 
+
+:::
+
+------------------
+
+&nbsp;
+&nbsp;
+
+##### Reason moves runtime errors into compile-time errors
+
+_like they are syntax errors..._
+
+::: notes
+
+The genius of Reason and Typed Functional Programming in general is that a lot of common mistakes become compile-time errors rather than runtime errors. 
+
+It is like our syntax checking became a lot more smarter - we no longer have to run and test the code manually to catch mistakes.
+
+Let's look at an example.
+
+:::
+
+------------------
+
+``` {.javascript}
+let showNext = lastUser => {
+  console.log("You will be user " + (lastUser.id + 1))
+}
+
+let users = []
+let lastUserIndex = users.length - 1
+let lastUser = users[lastUserIndex]
+
+showNext(lastUser)
+```
+
+::: notes
+
+Going back to this Javascript program -- here we fetch the last user from a list, and does something with it. The list however is empty, and so `lastUser` will be undefined.
+
+:::
+
+------------------
+
+
+``` {.javascript}
+let showNext = lastUser => {
+  console.log("You will be user " + (lastUser.id + 1))
+}
+
+let users = []
+let lastUserIndex = users.length - 1
+let lastUser = users[lastUserIndex]
+
+showNext(lastUser)
+```
+
+```
+Uncaught TypeError: Cannot read property 'id' of undefined
+```
+
+::: notes
+
+So it will crashes during execution with a runtime error. 
+
+In Reason however, this kind of errors sort of gets closer to a syntax error rather than a runtime error. The compiler will catch the mistake and we don't have to run it to see if it breaks.
+
+:::
+
+------------------
+
+
+``` {.javascript}
+type user = {id: int};
+
+let showNext = u => {
+  Js.log("You will be user " ++ string_of_int(u.id + 1));
+};
+
+let users = [||];  /* empty array */
+let lastUserIndex = users[Array.length(users) - 1];
+let lastUser = users[lastUserIndex];
+
+showNext(lastUser);
+
+```
+
+::: notes
+
+Here's the Reason equivalent of the previous program. This won't even execute. Instead we'll get this compile-time error:
+
+:::
+
+------------------
+
+
+![](images/comp-error-optionGet.png)
 
 ::: notes
 
@@ -1190,22 +1344,25 @@ We can keep going, but the only way to get the program to compile is to pass `sh
 
 ------------------
 
-&nbsp;
 
 &nbsp;
 
-### If it compiles, it works
+&nbsp;
+
+### Refactor confidently!
+### because if it compiles, it works
 
 ::: notes
 
-A lot of my programming anxiety went away after I started programming with Reason. Because I know that if my program compiles, it works.
+A lot of my programming anxiety went away after I started programming with Reason. I can refactor large, complex codebases confidently because I know that Reason has my back. Or in other words:
 
-Its true! 
+if the program compiles, it works.
+
+It is true! 
 
 But, what about logical errors?
 
 :::
-
 
 
 ------------------
@@ -1501,7 +1658,7 @@ This is what let's call the top-down approach to learning. We also need a bottom
 #### Top-down learning + Bottom-up learning
 
 * Learn language basics systematically
-* Don't look for application
+* Don't worry about immediate application
 
 ::: notes
 
@@ -1600,8 +1757,6 @@ In closing, if I really had to summarize the experience of programming with this
 ## ReasonML -- in closing
 
 ### A Javascript-like language
-### which eliminates clerical mistakes,
-### and makes programming fun.
 
 ::: notes
 
@@ -1615,7 +1770,6 @@ that it is a Javascript-like language,
 
 ### A Javascript-like language
 ### which eliminates clerical mistakes,
-### and makes programming fun.
 
 ::: notes
 
@@ -1642,16 +1796,9 @@ and makes programming fun.
 
 #### Learning to learn ReasonML
 
-Jasim A Basheer
 
-twitter: 
- @jasim_ab
+![](images/contact.svg)
 
-email:
- jasim@protoship.io
-
-web:
- protoship.io
 
 ::: notes
 
