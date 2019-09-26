@@ -216,7 +216,7 @@ Now this could be its next shape.
 
 And this could be its next shape, and so on. We had hundreds of these kinds of transformations - some small, and some big, and it was all too much for us to mentally track. 
 
-We kept making mistakes and progress slowed.
+Mistakes were made. Many mistakes, in fact, were made. And progress slowed.
 
 We wanted a better way to track the changing shape of the data as they went through each transformation. And we had an inkling that types could be the answer.
 
@@ -239,11 +239,11 @@ React, Reason, and ReasonReact
 
 ::: notes
 
-Which was when Jordan Walke, the original author of React, released the first version of Reason. 
+Which was when Jordan Walke, who originally wrote React, released the first version of Reason. 
 
-Reason was a typed language, and it compiled to Javascript. So we could rewrite all our transformation code in Reason and have it work both on Node and also on the browser.
+Reason was a typed language, and it compiled to Javascript. So we could rewrite all our transformation code into Reason and have it work both on Node and also on the browser.
 
-He also shipped ReasonReact a bit later, which is the Reason adaptor for the React UI library. And thanks to that we could even build UIs in Reason and mix and match it with React components and vanilla Javascript.
+He also shipped ReasonReact a bit later, which is the Reason adaptor for React. And thanks to that we could even build UIs in Reason and mix and match it with React components and vanilla Javascript.
 
 So that's what we did!
 
@@ -258,13 +258,16 @@ So that's what we did!
 
 But learning and adopting this new language, was a bit of a struggle. 
 
-This was our go-to book at the time. Real World OCaml. It is a delightful book - it teaches as much about programming as it teaches about OCaml itself. 
+This was our go-to book at the time. Real World OCaml. It taught us a fair bit of OCaml, but we also learnt as much about programming itself this book.
 
-It was also a little frustrating to work through, because OCaml's programming approach was we were not familiar with the entire programming paradigm of OCaml. 
+But it was also a little frustrating to work through. Because OCaml's programming approach is very different from all the Javascript and Ruby that we had written before.
 
 But the struggle was worth it. 
 
-It was worth so much that now 
+It was worth so much 
+
+that now 
+
 when I look back on the last 10 years of my programming, I almost wonder what I was doing for the first 8 years, before I had discovered Reason and Typed Functional Programming. 
 
 And that is why I'm so excited to be here today, and talk to you all about ReasonML. 
@@ -282,9 +285,11 @@ And that is why I'm so excited to be here today, and talk to you all about Reaso
 
 ::: notes
 
-So in this talk I will try to describe some interesting bits of Reason - especially things that are different from Javascript.
+So in this talk I will try to describe some interesting bits of the language - especially things that are different from Javascript. 
 
-I'll also try to give you a feel for how it would be to be programming with this language, and finally leave you with a roadmap on how to learn it.
+I'll not be able to cover every single feature that makes it special, but I'll try to give a feel for how it would be to be programming with it.
+
+I'll also talk about how to approach learning this language, based on my past experience.
 
 Alright, now we can get started.
 
@@ -305,7 +310,7 @@ Alright, now we can get started.
 
 Reason is a new syntax on top of the OCaml programming language. 
 
-OCaml has a long history - it released about 30 years ago. It is a compiled language and produces very fast binaries.
+OCaml has a long history - it was released about 30 years ago. It is a compiled language and produces very fast binaries.
 
 Its syntax however is quite different from most languages that we're used to.
 
@@ -595,6 +600,10 @@ That's one of the best thing about Reason: since we're using BuckleScript, we ca
 
 ## Paradigm
 
+&nbsp;
+
+### Reason/OCaml is a Typed Functional language
+
 ::: notes
 
 Let's now look at 
@@ -608,6 +617,10 @@ Let's now look at
 &nbsp;
 
 ### Reason/OCaml is a Typed Functional language
+
+&nbsp;
+
+_so is Elm, F#, Haskell, and PureScript_
 
 ::: notes
 
@@ -1522,12 +1535,55 @@ Compared to a Javascript job interview, a Reason interview could be rather uneve
 
 ------------------
 
+## Deliberate Study
+
+::: notes
+
+But don't let the fact that Reason has a smaller surface area than Javascript fool you. It is
+
+::: notes
+
+------------------
+
+#### Learn systematically
+
+* Learn language basics systematically
+* Don't worry about immediate application
+
+::: notes
+
+We usually learn new things by what is called programming by poking. Find a new library, copy paste some sample code, and start tweaking it till we make it work. That approach unfortunately doesn't scale well for Reason.
+
+It is because if we try making something with Reason, and get hit with an error, we wouldn't know where to even look. 
+
+You have to through the catalog of language features and learn them -- without looking for any immediate application. 
+
+:::
+
+------------------
+
+#### Learn systematically
+
+![](images/rwo-cover.png)
+
+::: notes
+
+The best resource for systematic study of OCaml is the book Real World OCaml. It uses the OCaml syntax, but that should only be a minor hiccup. 
+
+It is a great book because it teaches not just OCaml the language. You can also expect some very practical, very profound insights on programming as a whole, from this book.
+
+:::
+
+------------------
+
 ### Outline
 
 * **Programming in the small**
   * variables, data structures, iteration, functions
 
 ::: notes
+
+So how should you structure your learning?
 
 To learn any new language, we first have to be able to write small programs in it. 
 

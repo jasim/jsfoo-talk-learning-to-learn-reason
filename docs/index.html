@@ -289,7 +289,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb6-7"><a href="#cb6-7"></a><span class="op">}</span></span></code></pre></div>
 <aside class="notes">
 <p>And this could be its next shape, and so on. We had hundreds of these kinds of transformations - some small, and some big, and it was all too much for us to mentally track.</p>
-<p>We kept making mistakes and progress slowed.</p>
+<p>Mistakes were made. Many mistakes, in fact, were made. And progress slowed.</p>
 <p>We wanted a better way to track the changing shape of the data as they went through each transformation. And we had an inkling that types could be the answer.</p>
 </aside>
 </section>
@@ -303,9 +303,9 @@ Jordan Walke (and Cheng Lou and others)
 WROTE
 React, Reason, and ReasonReact</code></pre>
 <aside class="notes">
-<p>Which was when Jordan Walke, the original author of React, released the first version of Reason.</p>
-<p>Reason was a typed language, and it compiled to Javascript. So we could rewrite all our transformation code in Reason and have it work both on Node and also on the browser.</p>
-<p>He also shipped ReasonReact a bit later, which is the Reason adaptor for the React UI library. And thanks to that we could even build UIs in Reason and mix and match it with React components and vanilla Javascript.</p>
+<p>Which was when Jordan Walke, who originally wrote React, released the first version of Reason.</p>
+<p>Reason was a typed language, and it compiled to Javascript. So we could rewrite all our transformation code into Reason and have it work both on Node and also on the browser.</p>
+<p>He also shipped ReasonReact a bit later, which is the Reason adaptor for React. And thanks to that we could even build UIs in Reason and mix and match it with React components and vanilla Javascript.</p>
 <p>So that’s what we did!</p>
 </aside>
 </section>
@@ -314,10 +314,12 @@ React, Reason, and ReasonReact</code></pre>
 <p><img data-src="images/rwo-cover.png" /></p>
 <aside class="notes">
 <p>But learning and adopting this new language, was a bit of a struggle.</p>
-<p>This was our go-to book at the time. Real World OCaml. It is a delightful book - it teaches as much about programming as it teaches about OCaml itself.</p>
-<p>It was also a little frustrating to work through, because OCaml’s programming approach was we were not familiar with the entire programming paradigm of OCaml.</p>
+<p>This was our go-to book at the time. Real World OCaml. It taught us a fair bit of OCaml, but we also learnt as much about programming itself this book.</p>
+<p>But it was also a little frustrating to work through. Because OCaml’s programming approach is very different from all the Javascript and Ruby that we had written before.</p>
 <p>But the struggle was worth it.</p>
-<p>It was worth so much that now when I look back on the last 10 years of my programming, I almost wonder what I was doing for the first 8 years, before I had discovered Reason and Typed Functional Programming.</p>
+<p>It was worth so much</p>
+<p>that now</p>
+<p>when I look back on the last 10 years of my programming, I almost wonder what I was doing for the first 8 years, before I had discovered Reason and Typed Functional Programming.</p>
 <p>And that is why I’m so excited to be here today, and talk to you all about ReasonML.</p>
 </aside>
 </section>
@@ -330,8 +332,9 @@ React, Reason, and ReasonReact</code></pre>
 <li>How to get started</li>
 </ul>
 <aside class="notes">
-<p>So in this talk I will try to describe some interesting bits of Reason - especially things that are different from Javascript.</p>
-<p>I’ll also try to give you a feel for how it would be to be programming with this language, and finally leave you with a roadmap on how to learn it.</p>
+<p>So in this talk I will try to describe some interesting bits of the language - especially things that are different from Javascript.</p>
+<p>I’ll not be able to cover every single feature that makes it special, but I’ll try to give a feel for how it would be to be programming with it.</p>
+<p>I’ll also talk about how to approach learning this language, based on my past experience.</p>
 <p>Alright, now we can get started.</p>
 </aside>
 </section>
@@ -344,7 +347,7 @@ React, Reason, and ReasonReact</code></pre>
 </ul>
 <aside class="notes">
 <p>Reason is a new syntax on top of the OCaml programming language.</p>
-<p>OCaml has a long history - it released about 30 years ago. It is a compiled language and produces very fast binaries.</p>
+<p>OCaml has a long history - it was released about 30 years ago. It is a compiled language and produces very fast binaries.</p>
 <p>Its syntax however is quite different from most languages that we’re used to.</p>
 </aside>
 </section>
@@ -536,6 +539,8 @@ React, Reason, and ReasonReact</code></pre>
 </section>
 <section id="paradigm" class="slide level2">
 <h2>Paradigm</h2>
+<p> </p>
+<h3 id="reasonocaml-is-a-typed-functional-language">Reason/OCaml is a Typed Functional language</h3>
 <aside class="notes">
 <p>Let’s now look at</p>
 </aside>
@@ -543,7 +548,9 @@ React, Reason, and ReasonReact</code></pre>
 <section id="paradigm-1" class="slide level2">
 <h2>Paradigm</h2>
 <p> </p>
-<h3 id="reasonocaml-is-a-typed-functional-language">Reason/OCaml is a Typed Functional language</h3>
+<h3 id="reasonocaml-is-a-typed-functional-language-1">Reason/OCaml is a Typed Functional language</h3>
+<p> </p>
+<p><em>so is Elm, F#, Haskell, and PureScript</em></p>
 <aside class="notes">
 <p>Let’s now</p>
 </aside>
@@ -1107,6 +1114,34 @@ SyntaxError: Unexpected token !
 <p>Compared to a Javascript job interview, a Reason interview could be rather uneventful; because it is a much smaller language than JS. All it has are functions, modules, and types. We don’t, for example, concern ourselves with what <code>this</code> could be during runtime.</p>
 </aside>
 </section>
+<section id="deliberate-study" class="slide level2">
+<h2>Deliberate Study</h2>
+<p>::: notes</p>
+<p>But don’t let the fact that Reason has a smaller surface area than Javascript fool you. It is</p>
+<p>::: notes</p>
+</section>
+<section class="slide level2">
+
+<h4 id="learn-systematically">Learn systematically</h4>
+<ul>
+<li>Learn language basics systematically</li>
+<li>Don’t worry about immediate application</li>
+</ul>
+<aside class="notes">
+<p>We usually learn new things by what is called programming by poking. Find a new library, copy paste some sample code, and start tweaking it till we make it work. That approach unfortunately doesn’t scale well for Reason.</p>
+<p>It is because if we try making something with Reason, and get hit with an error, we wouldn’t know where to even look.</p>
+<p>You have to through the catalog of language features and learn them – without looking for any immediate application.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<h4 id="learn-systematically-1">Learn systematically</h4>
+<p><img data-src="images/rwo-cover.png" /></p>
+<aside class="notes">
+<p>The best resource for systematic study of OCaml is the book Real World OCaml. It uses the OCaml syntax, but that should only be a minor hiccup.</p>
+<p>It is a great book because it teaches not just OCaml the language. You can also expect some very practical, very profound insights on programming as a whole, from this book.</p>
+</aside>
+</section>
 <section class="slide level2">
 
 <h3 id="outline">Outline</h3>
@@ -1117,6 +1152,7 @@ SyntaxError: Unexpected token !
 </ul></li>
 </ul>
 <aside class="notes">
+<p>So how should you structure your learning?</p>
 <p>To learn any new language, we first have to be able to write small programs in it.</p>
 <p>You should be able to solve a fizzbuzz, read from a file, compute an average, make an API request – all these things.</p>
 <p>The concepts they need are quite common: data structures, creating functions and calling them etc.</p>
@@ -1179,14 +1215,19 @@ SyntaxError: Unexpected token !
 <p>The missing thing usually is not knowing how to fit things into a larger canvas. In the case of Reason, the only construct you need to know is the <code>module</code>. It is very similar to regular JS modules – you can put a bunch of functions together, expose only a few public ones, and that’s it.</p>
 </aside>
 </section>
+<section id="is-reason-ready-for-production" class="slide level2">
+<h2>Is Reason ready for production?</h2>
+<aside class="notes">
+<p>Let’s next address the elephant in the room. Is Reason commercially viable? Is it something you can use in your workplace?</p>
+</aside>
+</section>
 <section class="slide level2">
 
 <p>   </p>
-<h3 id="is-reason-ready-for-production">Is Reason ready for production?</h3>
+<h3 id="is-reason-ready-for-production-1">Is Reason ready for production?</h3>
 <aside class="notes">
-<p>I want to close this talk with a few thoughts about adopting Reason at your workplace. First is Reason ready for production?</p>
-<p>It is. Very much so. A large chunk of Facebook’s Messenger front-end runs on Reason for example.</p>
-<p>But let’s take look at a project that is closer to home..</p>
+<p>My experience with Reason has of course been great, and I think it is very much ready for production. For example a large chunk of Facebook’s Messenger front-end is already running on Reason.</p>
+<p>But Facebook is far away, let’s take look at a project that is much closer to home..</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -1219,42 +1260,26 @@ SyntaxError: Unexpected token !
 <p>This is a good reference repository if you want to see a real-world reason web application that is used in production.</p>
 </aside>
 </section>
-<section class="slide level2">
-
-<h3 id="is-reason-ready-for-production-1">Is Reason ready for production?</h3>
+<section id="adopting-reason-in-production" class="slide level2">
+<h2>Adopting Reason in production</h2>
 <ul>
-<li>::: notes</li>
+<li>start progressively</li>
+<li>interop with existing Javascript</li>
+<li>interop with React</li>
 </ul>
-<p>:::</p>
-</section>
-<section id="reasonml-in-closing" class="slide level2">
-<h2>ReasonML – in closing</h2>
 <aside class="notes">
-<p>In closing, if I really had to summarize the experience of programming with this language, I would say</p>
+<p>You don’t have to go big bang when you adopt Reason. Since Reason compiles down to straightforward Javascript, you can start using it in your existing Javascript project and incrementally port over the most complex bits of your code.</p>
 </aside>
 </section>
-<section id="reasonml-in-closing-1" class="slide level2">
-<h2>ReasonML – in closing</h2>
-<h3 id="a-javascript-like-language">A Javascript-like language</h3>
+<section id="adopting-reason-in-production-1" class="slide level2">
+<h2>Adopting Reason in production</h2>
+<ul>
+<li>build personal expertise first</li>
+<li>start in low-risk projects</li>
+</ul>
 <aside class="notes">
-<p>that it is a Javascript-like language,</p>
-</aside>
-</section>
-<section id="reasonml-in-closing-2" class="slide level2">
-<h2>ReasonML – in closing</h2>
-<h3 id="a-javascript-like-language-1">A Javascript-like language</h3>
-<h3 id="which-eliminates-clerical-mistakes">which eliminates clerical mistakes,</h3>
-<aside class="notes">
-<p>which eliminates clerical mistakes,</p>
-</aside>
-</section>
-<section id="reasonml-in-closing-3" class="slide level2">
-<h2>ReasonML – in closing</h2>
-<h3 id="a-javascript-like-language-2">A Javascript-like language</h3>
-<h3 id="which-eliminates-clerical-mistakes-1">which eliminates clerical mistakes,</h3>
-<h3 id="and-makes-programming-fun.">and makes programming fun.</h3>
-<aside class="notes">
-<p>and makes programming fun.</p>
+<p>And in case you’re smitten by the language, I would caution to not go overboard with it. You have to first built personal expertise - by building something non-trivial in it yourself before you pitch it in your workplace.</p>
+<p>Because once you are convinced that it will help increase quality and reduce cost, which I hope you would be, then your pitch will become strong and convincing.</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -1262,6 +1287,7 @@ SyntaxError: Unexpected token !
 <h4 id="learning-to-learn-reasonml">Learning to learn ReasonML</h4>
 <p><img data-src="images/contact.svg" /></p>
 <aside class="notes">
+<p>So that was the talk Learning to Learn Reason.</p>
 <p>Thank you so much for listening!</p>
 <p>I hope you enjoyed it, and I’m also eager to hear your questions.</p>
 <p>Thank you.</p>
