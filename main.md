@@ -59,7 +59,7 @@ Most recently I've been jamming with a friend building tools for designers & fro
 
 ::: notes
 
-One is called Teleport -- it is a Chrome extension that can capture a website and create a Sketch design out of it. Here I'm using Teleport to re-create the Reason homepage in Sketch. Designers use this to quickly recreate existing web sites and try out new ideas.
+One is called Teleport -- it is a Chrome extension that can capture a website and create a Sketch design out of it. Here I'm using Teleport to re-create the Reason homepage in Sketch. Designers use this to recreate existing web sites and try out things.
 
 The other tool is called Protoship Codegen.
 
@@ -78,7 +78,7 @@ Here is a sample Sketch design, and we're running it through Codegen.
 
 Here is the responsive HTML & CSS that Codegen renders. 
 
-The generated code is stuff that programmers like you and me can use. So it'll do static positioning, flexboxes, grids, and CSS etc.
+The generated code is stuff that programmers like you and me can use. So it'll do static positioning, flexboxes, and grids etc.
 
 :::
 
@@ -94,7 +94,7 @@ All this stuff: the Sketch plugin, the web UI, and the code generator -- everyth
 
 But that happened only about half-way through the product. Before that it was all Javascript.
 
-We didn't know Reason or Typed FP when began working on this product over two years ago. We had to learn it to be able to build this tool.
+We didn't know Reason or Typed FP when we began working on this product, which was about two years ago. We learnt it so we could build this tool.
 
 Let me tell you a bit about how Codegen works under the hood so you can see why it was necessary.
 
@@ -243,7 +243,7 @@ Which was when Jordan Walke, the original author of React, released the first ve
 
 Reason was a typed language, and it compiled to Javascript. So we could rewrite all our transformation code in Reason and have it work both on Node and also on the browser.
 
-He also shipped ReasonReact a bit later, which is the Reason adaptor for the React UI library. And thanks to that we could even build UIs in Reason and mix and match it with React components, which was written in Javascript.
+He also shipped ReasonReact a bit later, which is the Reason adaptor for the React UI library. And thanks to that we could even build UIs in Reason and mix and match it with React components and vanilla Javascript.
 
 So that's what we did!
 
@@ -260,7 +260,7 @@ But learning and adopting this new language, was a bit of a struggle.
 
 This was our go-to book at the time. Real World OCaml. It is a delightful book - it teaches as much about programming as it teaches about OCaml itself. 
 
-It can also be a little frustrating to work through, especially for us because we were not familiar with the entire programming paradigm of OCaml. 
+It was also a little frustrating to work through, because OCaml's programming approach was we were not familiar with the entire programming paradigm of OCaml. 
 
 But the struggle was worth it. 
 
@@ -420,9 +420,11 @@ If you have done any SEO work, you might be familiar with Ahrefs. They crawl abo
 
 ::: notes
 
-OCaml is also particularly nice to write compilers on - in fact anything that deals with a lot of tree manipulation is a great fit. 
+OCaml is also particularly nice to write compilers on - The very first version of the Rust compiler was written in OCaml.
 
-Rust borrows many ideas from OCaml, and their first compiler was written in the language. Facebook is also a large user of OCaml internally.
+It has a feature called pattern matching which makes it ideal to manipulate complex data structures and trees.
+
+Facebook is also a large user of OCaml internally, again for compiler work.
 
 5mins
 
@@ -438,11 +440,11 @@ Compile Reason into clean performant Javascript
 
 ::: notes
 
-Those were the traditional applications of OCaml. 
+Now, all these things - high frequency trading, massive web crawlers, and compilers - these are all the _traditional_ applications of OCaml. 
 
 It can also be used to build front-end web applications, which is what this talk is about. 
 
-Let us take a look at that next.
+So how is that done?
 
 :::
 
@@ -460,8 +462,9 @@ Let us take a look at that next.
 
 ::: notes
 
+OCaml has three major compilers.
 
-The native OCaml compiler generates executable binaries that are very fast and lightweight. So if you had something you wanted to build with say GoLang, you can use OCaml or Reason instead and compile it with ocamlc.
+The native OCaml compiler generates executable binaries that are very fast and lightweight. So if you had something you wanted to build with say GoLang, you can use OCaml or Reason instead and compile it with ocamlc. 
 
 
 :::
@@ -481,7 +484,7 @@ The native OCaml compiler generates executable binaries that are very fast and l
 
 ::: notes
 
-Then there is js_of_ocaml -- it is a fork of the OCaml compiler, and it produces Javascript instead of native binaries. But it is very isolated from the Javascript ecosystem - it can make use of OCaml libraries, but nothing from npm. 
+Then there is js_of_ocaml -- it is a fork of the OCaml compiler, and it produces Javascript instead of native binaries. You can use any native OCaml library here, but it is not easy to interop with the Javascript ecosystem.
 
 :::
 
@@ -503,7 +506,7 @@ Then there is js_of_ocaml -- it is a fork of the OCaml compiler, and it produces
 
 ::: notes
 
-Then we have BuckleScript, which is the only compiler we care about. It produces clean, performant Javascript, and it interops nicely with npm and the rest of the Javascript ecosystem.
+The compiler we want is BuckleScript. It produces clean, performant Javascript, and it interops nicely with npm and the rest of the Javascript ecosystem.
 
 :::
 
@@ -519,7 +522,7 @@ Then we have BuckleScript, which is the only compiler we care about. It produces
 
 ::: notes
 
-BuckleScript is the primary compiler for Reason. It generates readable and fast Javascript, and we can use it to run on either Node or on the browser.
+BuckleScript is also the primary compiler for Reason. The Javascript it produces can run either on Node or on the browser. We can insert arbitrary Javascript inside our Reaso
 
 So for the rest of this talk, we're going to be talking about using the Reason syntax for OCaml, with the BuckleScript compiler.
 
@@ -587,71 +590,6 @@ That's one of the best thing about Reason: since we're using BuckleScript, we ca
 
 :::
 
-
-------------------
-
-&nbsp;
-&nbsp;
-
-### A real-world application, built with BuckleScript and Reason
-
-::: notes
-
-Next let me show you a real-world web application built with BuckleScript and Reason.
-
-:::
-
-------------------
-
-
-
-
-![](images/pupilfirst-ui-1.png)
-
-::: notes
-
-This project is called PupilFirst. It is a learning management solution - you can create courses, teach students, and manage their progress.
-
-The entire front-end is written in Reason and compiled with BuckleScript. 
-
-:::
-
-
-------------------
-
-![](images/pupilfirst-ui-2.png)
-
-::: notes
-
-It has a complex data model and advanced UI patterns.
-
-:::
-
-
-------------------
-
-![](images/pupilfirst-ui-3.png)
-
-::: notes
-
-It is built here in Bangalore.
-
-:::
-
-
-------------------
-
-![](images/pupilfirst-github.png)
-
-::: notes
-
-And it is fully open-source. One of the authors, Hari Gopal, is also a JsFoo speaker. He had spoken in last year's conference and that was also about Reason.
-
-This is a good reference repository if you want to see a real-world reason web application that is used in production.
-
-Okay.
-
-:::
 
 ------------------
 
@@ -1669,109 +1607,103 @@ The missing thing usually is not knowing how to fit things into a larger canvas.
 
 ------------------
 
+## Is Reason ready for production?
+
+::: notes
+
+Let's next address the elephant in the room. Is Reason commercially viable? Is it something you can use in your workplace?
+
+:::
+------------------
+
+&nbsp;
 &nbsp;
 
-## Learning approaches
+### Is Reason ready for production?
 
 ::: notes
 
-There is a learning style that is very common among programmers -- we learn by making things. Gerald Sussman calls this approach "Learning by poking".
+My experience with Reason has of course been great, and I think it is very much ready for production. For example a large chunk of Facebook's Messenger front-end is already running on Reason.
+
+But Facebook is far away, let's take look at a project that is much closer to home..
 
 :::
 
 ------------------
 
-### Learn by building something
-
-> You grab this piece of library and you poke at it. You write programs that poke it and see what it does. And you say, ‘Can I tweak it to do the thing I want?'
-
--- (paraphrased) Gerald Jay Sussman
+![](images/pupilfirst-ui-1.png)
 
 ::: notes
 
-If we want to learn a new library, we usually copy some sample code, tweak it, and over time we get it working, and we also learn its fundamentals through that experience.
+The project is called PupilFirst. It is a learning management solution - you can create courses, teach students, and manage their progress.
 
-But we also need a more systematic approach when learning a language like Reason.
+The entire front-end is written in Reason and compiled with BuckleScript. 
 
 :::
 
 
 ------------------
 
-#### Learn systematically
-
-* Learn language basics systematically
-* Don't worry about immediate application
+![](images/pupilfirst-ui-2.png)
 
 ::: notes
 
-What this means is that we should simply go through the catalog of language features and learn them -- without looking for any immediate application. 
+It has a complex data model and advanced UI patterns.
 
-It is because if we try making something with Reason, and get hit with an error, we wouldn't know where to even look. 
+:::
+
+
+------------------
+
+![](images/pupilfirst-ui-3.png)
+
+::: notes
+
+It is built here in Bangalore.
+
+:::
+
+
+------------------
+
+![](images/pupilfirst-github.png)
+
+::: notes
+
+And it is fully open-source. One of the authors, Hari Gopal, is also a JsFoo speaker. He had spoken in last year's conference and that was also about Reason.
+
+This is a good reference repository if you want to see a real-world reason web application that is used in production.
 
 :::
 
 ------------------
 
-#### Learn systematically
+## Adopting Reason in production
 
-![](images/rwo-cover.png)
-
-::: notes
-
-The best resource for systematic study of OCaml is the book Real World OCaml. It uses the OCaml syntax, but that should only be a minor hiccup. 
-
-It is a great book because it teaches not just OCaml the language. You can also expect some very practical, very profound insights on programming as a whole, from this book.
-
-:::
-
-------------------
-
-## ReasonML -- in closing
+* start progressively
+* interop with existing Javascript
+* interop with React
 
 ::: notes
 
-In closing, if I really had to summarize the experience of programming with this language, I would say
+You don't have to go big bang when you adopt Reason. Since Reason compiles down to straightforward Javascript, you can start using it in your existing Javascript project and incrementally port over the most complex bits of your code.
+
 
 :::
 
 ------------------
 
 
-## ReasonML -- in closing
+## Adopting Reason in production
 
-### A Javascript-like language
-
-::: notes
-
-that it is a Javascript-like language, 
-
-:::
-
-------------------
-
-## ReasonML -- in closing
-
-### A Javascript-like language
-### which eliminates clerical mistakes,
+* build personal expertise first
+* start in low-risk projects
 
 ::: notes
 
-which eliminates clerical mistakes, 
+And in case you're smitten by the language, I would caution to not go overboard with it. You have to first built personal expertise - by building something non-trivial in it yourself before you pitch it in your workplace.
 
-:::
-
-------------------
-
-## ReasonML -- in closing
-
-### A Javascript-like language
-### which eliminates clerical mistakes,
-### and makes programming fun.
-
-::: notes
-
-and makes programming fun. 
+Because once you are convinced that it will help increase quality and reduce cost, which I hope you would be, then your pitch will become strong and convincing.
 
 :::
 
@@ -1785,6 +1717,8 @@ and makes programming fun.
 
 
 ::: notes
+
+So that was the talk Learning to Learn Reason.
 
 Thank you so much for listening!
 

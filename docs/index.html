@@ -176,7 +176,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <p><img data-src="images/dos-tsm.png" /></p>
 <aside class="notes">
-<p>They were simpler times - these things were fun to make and you didn’t even need to be a professional programmer to do that.</p>
+<p>These things were fun to make and you didn’t even need to be a professional programmer. Simpler times.</p>
 <p>But all good things have to come to an end.</p>
 <p>So I’ve since worked on modern web applications, on the front-end, back-end, and also programmed different languages including Javascript.</p>
 <p>Most recently I’ve been jamming with a friend building tools for designers &amp; front-end developers.</p>
@@ -187,7 +187,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3 id="protoship-teleport">Protoship Teleport</h3>
 <p><video data-src="images/teleport.mp4" controls=""><a href="images/teleport.mp4">Video</a></video></p>
 <aside class="notes">
-<p>One is called Teleport – it is a Chrome extension that can capture a website and create a Sketch design out of it. Here I’m using Teleport to re-create the Reason homepage in Sketch. Designers use this to quickly recreate existing web sites and try out new ideas.</p>
+<p>One is called Teleport – it is a Chrome extension that can capture a website and create a Sketch design out of it. Here I’m using Teleport to re-create the Reason homepage in Sketch. Designers use this to recreate existing web sites and try out things.</p>
 <p>The other tool is called Protoship Codegen.</p>
 </aside>
 </section>
@@ -198,7 +198,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>It converts designs - made in tools like Adobe XD and Sketch - into responsive HTML and CSS</p>
 <p>Here is a sample Sketch design, and we’re running it through Codegen.</p>
 <p>Here is the responsive HTML &amp; CSS that Codegen renders.</p>
-<p>The generated code is stuff that programmers like you and me can use. So it’ll do static positioning, flexboxes, grids, and CSS etc.</p>
+<p>The generated code is stuff that programmers like you and me can use. So it’ll do static positioning, flexboxes, and grids etc.</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -208,7 +208,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <aside class="notes">
 <p>All this stuff: the Sketch plugin, the web UI, and the code generator – everything, is written in Reason.</p>
 <p>But that happened only about half-way through the product. Before that it was all Javascript.</p>
-<p>We didn’t know Reason or Typed FP when began working on this product over two years ago. We had to learn it to be able to build this tool.</p>
+<p>We didn’t know Reason or Typed FP when we began working on this product, which was about two years ago. We learnt it so we could build this tool.</p>
 <p>Let me tell you a bit about how Codegen works under the hood so you can see why it was necessary.</p>
 </aside>
 </section>
@@ -305,7 +305,7 @@ React, Reason, and ReasonReact</code></pre>
 <aside class="notes">
 <p>Which was when Jordan Walke, the original author of React, released the first version of Reason.</p>
 <p>Reason was a typed language, and it compiled to Javascript. So we could rewrite all our transformation code in Reason and have it work both on Node and also on the browser.</p>
-<p>He also shipped ReasonReact a bit later, which is the Reason adaptor for the React UI library. And thanks to that we could even build UIs in Reason and mix and match it with React components, which was written in Javascript.</p>
+<p>He also shipped ReasonReact a bit later, which is the Reason adaptor for the React UI library. And thanks to that we could even build UIs in Reason and mix and match it with React components and vanilla Javascript.</p>
 <p>So that’s what we did!</p>
 </aside>
 </section>
@@ -315,7 +315,7 @@ React, Reason, and ReasonReact</code></pre>
 <aside class="notes">
 <p>But learning and adopting this new language, was a bit of a struggle.</p>
 <p>This was our go-to book at the time. Real World OCaml. It is a delightful book - it teaches as much about programming as it teaches about OCaml itself.</p>
-<p>It can also be a little frustrating to work through, especially for us because we were not familiar with the entire programming paradigm of OCaml.</p>
+<p>It was also a little frustrating to work through, because OCaml’s programming approach was we were not familiar with the entire programming paradigm of OCaml.</p>
 <p>But the struggle was worth it.</p>
 <p>It was worth so much that now when I look back on the last 10 years of my programming, I almost wonder what I was doing for the first 8 years, before I had discovered Reason and Typed Functional Programming.</p>
 <p>And that is why I’m so excited to be here today, and talk to you all about ReasonML.</p>
@@ -426,8 +426,9 @@ React, Reason, and ReasonReact</code></pre>
 </ul>
 <p> </p>
 <aside class="notes">
-<p>OCaml is also particularly nice to write compilers on - in fact anything that deals with a lot of tree manipulation is a great fit.</p>
-<p>Rust borrows many ideas from OCaml, and their first compiler was written in the language. Facebook is also a large user of OCaml internally.</p>
+<p>OCaml is also particularly nice to write compilers on - The very first version of the Rust compiler was written in OCaml.</p>
+<p>It has a feature called pattern matching which makes it ideal to manipulate complex data structures and trees.</p>
+<p>Facebook is also a large user of OCaml internally, again for compiler work.</p>
 <p>5mins</p>
 </aside>
 </section>
@@ -436,9 +437,9 @@ React, Reason, and ReasonReact</code></pre>
 <p> </p>
 <p>Compile Reason into clean performant Javascript</p>
 <aside class="notes">
-<p>Those were the traditional applications of OCaml.</p>
+<p>Now, all these things - high frequency trading, massive web crawlers, and compilers - these are all the <em>traditional</em> applications of OCaml.</p>
 <p>It can also be used to build front-end web applications, which is what this talk is about.</p>
-<p>Let us take a look at that next.</p>
+<p>So how is that done?</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -447,6 +448,7 @@ React, Reason, and ReasonReact</code></pre>
 <p> </p>
 <pre><code>* ocamlc: produces executable binary</code></pre>
 <aside class="notes">
+<p>OCaml has three major compilers.</p>
 <p>The native OCaml compiler generates executable binaries that are very fast and lightweight. So if you had something you wanted to build with say GoLang, you can use OCaml or Reason instead and compile it with ocamlc.</p>
 </aside>
 </section>
@@ -458,7 +460,7 @@ React, Reason, and ReasonReact</code></pre>
 
 * js_of_ocaml: produces Javascript, supports only OCaml libraries</code></pre>
 <aside class="notes">
-<p>Then there is js_of_ocaml – it is a fork of the OCaml compiler, and it produces Javascript instead of native binaries. But it is very isolated from the Javascript ecosystem - it can make use of OCaml libraries, but nothing from npm.</p>
+<p>Then there is js_of_ocaml – it is a fork of the OCaml compiler, and it produces Javascript instead of native binaries. You can use any native OCaml library here, but it is not easy to interop with the Javascript ecosystem.</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -471,7 +473,7 @@ React, Reason, and ReasonReact</code></pre>
 
 * BuckleScript produces Javascript, and can use any npm package</code></pre>
 <aside class="notes">
-<p>Then we have BuckleScript, which is the only compiler we care about. It produces clean, performant Javascript, and it interops nicely with npm and the rest of the Javascript ecosystem.</p>
+<p>The compiler we want is BuckleScript. It produces clean, performant Javascript, and it interops nicely with npm and the rest of the Javascript ecosystem.</p>
 </aside>
 </section>
 <section id="bucklescript" class="slide level2">
@@ -483,7 +485,7 @@ React, Reason, and ReasonReact</code></pre>
 </ul>
 <p><img data-src="images/bloomberg-logo.png" /></p>
 <aside class="notes">
-<p>BuckleScript is the primary compiler for Reason. It generates readable and fast Javascript, and we can use it to run on either Node or on the browser.</p>
+<p>BuckleScript is also the primary compiler for Reason. The Javascript it produces can run either on Node or on the browser. We can insert arbitrary Javascript inside our Reaso</p>
 <p>So for the rest of this talk, we’re going to be talking about using the Reason syntax for OCaml, with the BuckleScript compiler.</p>
 </aside>
 </section>
@@ -530,45 +532,6 @@ React, Reason, and ReasonReact</code></pre>
 <aside class="notes">
 <p>At the bottom is the Javascript produced by BuckleScript. It is straightforward JS, and it uses the CommonJS syntax to require the momentjs npm module.</p>
 <p>That’s one of the best thing about Reason: since we’re using BuckleScript, we can use any and all npm library in our code. Also, since Reason code becomes Javascript, we can export that as our own npm packages as well.</p>
-</aside>
-</section>
-<section class="slide level2">
-
-<p>   </p>
-<h3 id="a-real-world-application-built-with-bucklescript-and-reason">A real-world application, built with BuckleScript and Reason</h3>
-<aside class="notes">
-<p>Next let me show you a real-world web application built with BuckleScript and Reason.</p>
-</aside>
-</section>
-<section class="slide level2">
-
-<p><img data-src="images/pupilfirst-ui-1.png" /></p>
-<aside class="notes">
-<p>This project is called PupilFirst. It is a learning management solution - you can create courses, teach students, and manage their progress.</p>
-<p>The entire front-end is written in Reason and compiled with BuckleScript.</p>
-</aside>
-</section>
-<section class="slide level2">
-
-<p><img data-src="images/pupilfirst-ui-2.png" /></p>
-<aside class="notes">
-<p>It has a complex data model and advanced UI patterns.</p>
-</aside>
-</section>
-<section class="slide level2">
-
-<p><img data-src="images/pupilfirst-ui-3.png" /></p>
-<aside class="notes">
-<p>It is built here in Bangalore.</p>
-</aside>
-</section>
-<section class="slide level2">
-
-<p><img data-src="images/pupilfirst-github.png" /></p>
-<aside class="notes">
-<p>And it is fully open-source. One of the authors, Hari Gopal, is also a JsFoo speaker. He had spoken in last year’s conference and that was also about Reason.</p>
-<p>This is a good reference repository if you want to see a real-world reason web application that is used in production.</p>
-<p>Okay.</p>
 </aside>
 </section>
 <section id="paradigm" class="slide level2">
@@ -1218,46 +1181,51 @@ SyntaxError: Unexpected token !
 </section>
 <section class="slide level2">
 
-<p> </p>
-</section>
-<section id="learning-approaches" class="slide level2">
-<h2>Learning approaches</h2>
+<p>   </p>
+<h3 id="is-reason-ready-for-production">Is Reason ready for production?</h3>
 <aside class="notes">
-<p>There is a learning style that is very common among programmers – we learn by making things. Gerald Sussman calls this approach “Learning by poking”.</p>
+<p>I want to close this talk with a few thoughts about adopting Reason at your workplace. First is Reason ready for production?</p>
+<p>It is. Very much so. A large chunk of Facebook’s Messenger front-end runs on Reason for example.</p>
+<p>But let’s take look at a project that is closer to home..</p>
 </aside>
 </section>
 <section class="slide level2">
 
-<h3 id="learn-by-building-something">Learn by building something</h3>
-<blockquote>
-<p>You grab this piece of library and you poke at it. You write programs that poke it and see what it does. And you say, ‘Can I tweak it to do the thing I want?’</p>
-</blockquote>
-<p>– (paraphrased) Gerald Jay Sussman</p>
+<p><img data-src="images/pupilfirst-ui-1.png" /></p>
 <aside class="notes">
-<p>If we want to learn a new library, we usually copy some sample code, tweak it, and over time we get it working, and we also learn its fundamentals through that experience.</p>
-<p>But we also need a more systematic approach when learning a language like Reason.</p>
+<p>The project is called PupilFirst. It is a learning management solution - you can create courses, teach students, and manage their progress.</p>
+<p>The entire front-end is written in Reason and compiled with BuckleScript.</p>
 </aside>
 </section>
 <section class="slide level2">
 
-<h4 id="learn-systematically">Learn systematically</h4>
+<p><img data-src="images/pupilfirst-ui-2.png" /></p>
+<aside class="notes">
+<p>It has a complex data model and advanced UI patterns.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<p><img data-src="images/pupilfirst-ui-3.png" /></p>
+<aside class="notes">
+<p>It is built here in Bangalore.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<p><img data-src="images/pupilfirst-github.png" /></p>
+<aside class="notes">
+<p>And it is fully open-source. One of the authors, Hari Gopal, is also a JsFoo speaker. He had spoken in last year’s conference and that was also about Reason.</p>
+<p>This is a good reference repository if you want to see a real-world reason web application that is used in production.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<h3 id="is-reason-ready-for-production-1">Is Reason ready for production?</h3>
 <ul>
-<li>Learn language basics systematically</li>
-<li>Don’t worry about immediate application</li>
+<li>::: notes</li>
 </ul>
-<aside class="notes">
-<p>What this means is that we should simply go through the catalog of language features and learn them – without looking for any immediate application.</p>
-<p>It is because if we try making something with Reason, and get hit with an error, we wouldn’t know where to even look.</p>
-</aside>
-</section>
-<section class="slide level2">
-
-<h4 id="learn-systematically-1">Learn systematically</h4>
-<p><img data-src="images/rwo-cover.png" /></p>
-<aside class="notes">
-<p>The best resource for systematic study of OCaml is the book Real World OCaml. It uses the OCaml syntax, but that should only be a minor hiccup.</p>
-<p>It is a great book because it teaches not just OCaml the language. You can also expect some very practical, very profound insights on programming as a whole, from this book.</p>
-</aside>
+<p>:::</p>
 </section>
 <section id="reasonml-in-closing" class="slide level2">
 <h2>ReasonML – in closing</h2>
