@@ -169,16 +169,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <p><img data-src="images/dos-ea.png" /></p>
 <aside class="notes">
-<p>A little about me, I’ve been programming professionally for over 10 years now. This is one of the earliest software that I built.</p>
+<p>A little about me, I’ve been programming professionally for over 10 years now.</p>
+<p>This is one of the earliest software that I built.</p>
 </aside>
 </section>
 <section class="slide level2">
 
 <p><img data-src="images/dos-tsm.png" /></p>
 <aside class="notes">
-<p>These things were fun to make and you didn’t even need to be a professional programmer. Simpler times.</p>
+<p>These were easy to build. You could make software like this without having to be a professional programmer.</p>
 <p>But all good things have to come to an end.</p>
-<p>So I’ve since worked on modern web applications, on the front-end, back-end, and also programmed different languages including Javascript.</p>
+<p>So I’ve since worked on modern web applications, on the front-end, back-end, and also programmed with different languages including Javascript.</p>
 <p>Most recently I’ve been jamming with a friend building tools for designers &amp; front-end developers.</p>
 </aside>
 </section>
@@ -187,8 +188,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3 id="protoship-teleport">Protoship Teleport</h3>
 <p><video data-src="images/teleport.mp4" controls=""><a href="images/teleport.mp4">Video</a></video></p>
 <aside class="notes">
-<p>One is called Teleport – it is a Chrome extension that can capture a website and create a Sketch design out of it. Here I’m using Teleport to re-create the Reason homepage in Sketch. Designers use this to recreate existing web sites and try out things.</p>
-<p>The other tool is called Protoship Codegen.</p>
+<p>One is called Teleport – it is a Chrome extension that can capture a website and create a Sketch design out of it.</p>
+<p>Here I’m using Teleport to re-create the Reason homepage in Sketch.</p>
+<p>The other tool we’re building is called Protoship Codegen.</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -196,8 +198,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><video data-src="images/codegen.mp4" controls=""><a href="images/codegen.mp4">Video</a></video></p>
 <aside class="notes">
 <p>It converts designs - made in tools like Adobe XD and Sketch - into responsive HTML and CSS</p>
-<p>Here is a sample Sketch design, and we’re running it through Codegen.</p>
-<p>Here is the responsive HTML &amp; CSS that Codegen renders.</p>
+<p>Here we’re a running a sample Sketch design through Codegen.</p>
+<p>This is the Codegen UI.</p>
+<p>And here is the responsive HTML &amp; CSS rendered by it.</p>
 <p>The generated code is stuff that programmers like you and me can use. So it’ll do static positioning, flexboxes, and grids etc.</p>
 </aside>
 </section>
@@ -207,9 +210,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img data-src="images/codegen-ui.png" /></p>
 <aside class="notes">
 <p>All this stuff: the Sketch plugin, the web UI, and the code generator – everything, is written in Reason.</p>
-<p>But that happened only about half-way through the product. Before that it was all Javascript.</p>
-<p>We didn’t know Reason or Typed FP when we began working on this product, which was about two years ago. We learnt it so we could build this tool.</p>
-<p>Let me tell you a bit about how Codegen works under the hood so you can see why it was necessary.</p>
+<p>But that happened only when we were about half-way through the product. Before that it was all written in Javascript.</p>
+<p>We didn’t know Reason or Typed FP when we began working on Codegen, which was about two years ago.</p>
+<p>Let me tell you a bit about how Codegen works under the hood so you can see why we chose to learn and rewrite it in Reason.</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -289,7 +292,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb6-7"><a href="#cb6-7"></a><span class="op">}</span></span></code></pre></div>
 <aside class="notes">
 <p>And this could be its next shape, and so on. We had hundreds of these kinds of transformations - some small, and some big, and it was all too much for us to mentally track.</p>
-<p>Mistakes were made. Many mistakes, in fact, were made. And progress slowed.</p>
+<p>Mistakes were made. Many mistakes, in fact, were made.</p>
+<p>Progress was very slow.</p>
 <p>We wanted a better way to track the changing shape of the data as they went through each transformation. And we had an inkling that types could be the answer.</p>
 </aside>
 </section>
@@ -363,7 +367,7 @@ React, Reason, and ReasonReact</code></pre>
 <span id="cb8-8"><a href="#cb8-8"></a>  printf <span class="st">&quot;&lt;/table&gt;</span><span class="ch">\n</span><span class="st">&quot;</span>;</span>
 <span id="cb8-9"><a href="#cb8-9"></a>;;</span></code></pre></div>
 <aside class="notes">
-<p>Here is an OCaml program that prints an HTML table from a 2-dimensional list. See that function arguments are separated by spaces, and anonymous functions are created with the <code>fun</code> keyboard.</p>
+<p>Here is an OCaml program that prints an HTML table from a 2-dimensional list. See that function arguments are separated by spaces, and anonymous functions are created with the <code>fun</code> keyword.</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -406,7 +410,7 @@ React, Reason, and ReasonReact</code></pre>
 <p> </p>
 <p><img data-src="images/jane-street.png" /></p>
 <aside class="notes">
-<p>When you start reading about OCaml, you’ll often come across Jane Street. They are one of the largest production users of the language and they did $8 trillion dollars of trading in 2018, and all of that used software written in OCaml.</p>
+<p>When you start reading about OCaml, you’ll often come across Jane Street. They are one of the largest production users of the language and in 2018 about $8 trillion dollars passed through their system, and all of that used software written in OCaml.</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -430,7 +434,6 @@ React, Reason, and ReasonReact</code></pre>
 <p> </p>
 <aside class="notes">
 <p>OCaml is also particularly nice to write compilers on - The very first version of the Rust compiler was written in OCaml.</p>
-<p>It has a feature called pattern matching which makes it ideal to manipulate complex data structures and trees.</p>
 <p>Facebook is also a large user of OCaml internally, again for compiler work.</p>
 <p>5mins</p>
 </aside>
@@ -488,7 +491,7 @@ React, Reason, and ReasonReact</code></pre>
 </ul>
 <p><img data-src="images/bloomberg-logo.png" /></p>
 <aside class="notes">
-<p>BuckleScript is also the primary compiler for Reason. The Javascript it produces can run either on Node or on the browser. We can insert arbitrary Javascript inside our Reaso</p>
+<p>BuckleScript is also the primary compiler for Reason. And the Javascript it generates can run both on Node and on the Browser.</p>
 <p>So for the rest of this talk, we’re going to be talking about using the Reason syntax for OCaml, with the BuckleScript compiler.</p>
 </aside>
 </section>
@@ -534,25 +537,37 @@ React, Reason, and ReasonReact</code></pre>
 <span id="cb16-11"><a href="#cb16-11"></a><span class="op">}</span></span></code></pre></div>
 <aside class="notes">
 <p>At the bottom is the Javascript produced by BuckleScript. It is straightforward JS, and it uses the CommonJS syntax to require the momentjs npm module.</p>
-<p>That’s one of the best thing about Reason: since we’re using BuckleScript, we can use any and all npm library in our code. Also, since Reason code becomes Javascript, we can export that as our own npm packages as well.</p>
+<p>That’s one of the best thing about Reason: since we’re using BuckleScript, we can use any npm library in our code. And we can integrate it into our existing Javascript projects as well.</p>
+<p>There is some work - you have to write type definitions for the library you want to use, but otherwise it is painless.</p>
 </aside>
 </section>
 <section id="paradigm" class="slide level2">
 <h2>Paradigm</h2>
+<aside class="notes">
+<p>Let’s talk a little bit about programming language paradigms.</p>
+</aside>
+</section>
+<section class="slide level2">
+
 <p> </p>
 <h3 id="reasonocaml-is-a-typed-functional-language">Reason/OCaml is a Typed Functional language</h3>
 <aside class="notes">
-<p>Let’s now look at</p>
+<p>Reason is a Typed Functional language.</p>
 </aside>
 </section>
-<section id="paradigm-1" class="slide level2">
-<h2>Paradigm</h2>
+<section class="slide level2">
+
 <p> </p>
 <h3 id="reasonocaml-is-a-typed-functional-language-1">Reason/OCaml is a Typed Functional language</h3>
 <p> </p>
 <p><em>so is Elm, F#, Haskell, and PureScript</em></p>
+<p>Hindley–Milner type system</p>
 <aside class="notes">
-<p>Let’s now</p>
+<p>So are languages like Elm, F#, and Haskell.</p>
+<p>All these languages share the same Type System - Hindley Milner typesystem, and have a similar approach to functional programming.</p>
+<p>A great thing is that if you read say an article about Elm, it is highly probable that it also applies to Reason. And vice versa.</p>
+<p>So when you learn Reason, you’re also dipping your toes into the vast, and varied world of Typed Functional Programming.</p>
+<p>Most things that I’ll speak about in this talk will also apply equally well to the other languages in this category.</p>
 </aside>
 </section>
 <section id="typed-fp" class="slide level2">
@@ -561,10 +576,10 @@ React, Reason, and ReasonReact</code></pre>
 <h3 id="write-pure-functions">1. Write pure functions</h3>
 <h3 id="get-their-types-right">2. Get their types right</h3>
 <aside class="notes">
-<p>The tiny surface area of the language also constrains how we can program in Reason.</p>
-<p>The way to do that is to simply write our programs as a series of pure functions. That’s it.</p>
+<p>Okay, so what is Typed FP?</p>
+<p>It is just writing our programs as a series of pure functions. That’s it.</p>
 <p>How is that an improvement over Javascript you might ask? We can write JS also in a functional manner - with pure functions everywhere, and just an outer shell for all the I/O. That’s essentially functional programming, and that’s pretty nice.</p>
-<p>But Reason is not only “functional”, it is also “typed”, and the types guarantee something:</p>
+<p>But Reason is not only “functional”, it is also “typed”, and the types guarantees something:</p>
 </aside>
 </section>
 <section id="perfection" class="slide level2">
@@ -572,7 +587,8 @@ React, Reason, and ReasonReact</code></pre>
 <p>The perfect computer program –</p>
 <aside class="notes">
 <p>“perfection”.</p>
-<p>Reason functions are more “perfect” than functions written in Javascript. I’m using the word “perfection” here as a measure in degrees and not an absolute. I stole the idea from Prof. Xavier Leroy, who is a programming languages researcher and also the author OCaml</p>
+<p>Reason functions are more “perfect” than functions written in Javascript. I’m using the word “perfection” here as a degree of measure and not as an absolute.</p>
+<p>I stole the idea from Prof. Xavier Leroy, who is a programming languages researcher and also the author OCaml</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -582,9 +598,8 @@ React, Reason, and ReasonReact</code></pre>
 </blockquote>
 <p><sub><sup>“In search of software perfection”, by Dr. Xavier Leroy, author of OCaml</sub></sup></p>
 <aside class="notes">
-<p>“A perfect program does exactly what it should do, no more, no less, every time, with perfect reliability, and forever. The kind of perfection that you can get from mathematical definitions, which software is to a large extent, or from philosophical concepts.”</p>
-<p>I think this is an aspirational look at how we should program.</p>
-<p>But what can that mean in the context of our day-to-day work?</p>
+<p>Prof. Leroy says that a perfect program does exactly what it should do, no more, no less, every time, with perfect reliability, and forever. The kind of perfection that you can get from mathematical definitions, which software is to a large extent, or from philosophical concepts.</p>
+<p>But what can this mean in the context of our day-to-day work?</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -855,7 +870,7 @@ You will be user -4</code></pre>
 
 <h3 id="syntax-errors-are-caught-early">Syntax errors are caught early</h3>
 <div class="sourceCode" id="cb55"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb55-1"><a href="#cb55-1"></a><span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;program started executing&quot;</span>)</span>
-<span id="cb55-2"><a href="#cb55-2"></a><span class="kw">let</span> text <span class="op">=</span> Hello<span class="op">!</span> Is it Javascript you<span class="st">&#39;re looking for?</span></span></code></pre></div>
+<span id="cb55-2"><a href="#cb55-2"></a><span class="kw">let</span> text <span class="op">=</span> Hello<span class="op">!</span> This is a syntax <span class="va">error</span>.</span></code></pre></div>
 <aside class="notes">
 <p>This is supposed to be a Javascript program. But it won’t even execute, because the second line has the wrong syntax. The first line is valid by the way – but it won’t print anything because the whole program will be rejected, with this error message:</p>
 </aside>
@@ -877,14 +892,13 @@ SyntaxError: Unexpected token !
 <p>That is a good thing - it is best to know problems as early in the programming cycle as possible.</p>
 <p>But imagine if programs were executed despite syntax errors.</p>
 <p>You’ll ship the program to customers, and they’ll be in the middle of something, and then some semicolon is missing somewhere and boom! the program halts to a crash.</p>
-<p>Thankfully, modern JS engines parses the entire program and checks for syntax errors before it even starts executing.</p>
 </aside>
 </section>
 <section class="slide level2">
 
 <p>   </p>
-<h5 id="reason-moves-runtime-errors-into-compile-time-errors">Reason moves runtime errors into compile-time errors</h5>
-<p><em>like they are syntax errors…</em></p>
+<h4 id="reason-moves-runtime-errors-into-compile-time-errors">Reason moves runtime errors into compile-time errors</h4>
+<p><em>as if they were syntax errors…</em></p>
 <aside class="notes">
 <p>The genius of Reason and Typed Functional Programming in general is that a lot of common mistakes become compile-time errors rather than runtime errors.</p>
 <p>It is like our syntax checking became a lot more smarter - we no longer have to run and test the code manually to catch mistakes.</p>
@@ -919,8 +933,8 @@ SyntaxError: Unexpected token !
 <span id="cb59-9"><a href="#cb59-9"></a><span class="at">showNext</span>(lastUser)</span></code></pre></div>
 <pre><code>Uncaught TypeError: Cannot read property &#39;id&#39; of undefined</code></pre>
 <aside class="notes">
-<p>So it will crashes during execution with a runtime error.</p>
-<p>In Reason however, this kind of errors sort of gets closer to a syntax error rather than a runtime error. The compiler will catch the mistake and we don’t have to run it to see if it breaks.</p>
+<p>So it crashes during execution with a runtime error.</p>
+<p>In Reason however, this error sort of becomes a syntax error rather than a runtime error. The compiler will catch the mistake and we don’t have to run it to see if it breaks.</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -937,14 +951,29 @@ SyntaxError: Unexpected token !
 <span id="cb61-10"><a href="#cb61-10"></a></span>
 <span id="cb61-11"><a href="#cb61-11"></a><span class="at">showNext</span>(lastUser)<span class="op">;</span></span></code></pre></div>
 <aside class="notes">
-<p>Here’s the Reason equivalent of the previous program. This won’t even execute. Instead we’ll get this compile-time error:</p>
+<p>Here’s the Reason equivalent of the same program. This won’t even execute. Instead we’ll get this compile-time error:</p>
 </aside>
 </section>
 <section class="slide level2">
 
 <p><img data-src="images/comp-error-optionGet.png" /></p>
 <aside class="notes">
-<p>Here’s what this error message is saying:</p>
+<p>What is this error message saying?</p>
+<p>In Line 12, we’re calling showNext, and it is expecting a value of type user. But, we’re passing it something of type option(’a).</p>
+<p>What’s happening is that in line 11, we’ve tried fetching an element from the array <code>users</code>. Reason knows that whenever you fetch something from an array, using an integer index, then it is quite possible that the element might not exist.</p>
+<p>Which is why it is returning a value who has an optional type. So how would we write this instead?</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<p><img data-src="images/comp-error-optionGet.png" /></p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb62-1"><a href="#cb62-1"></a><span class="cf">switch</span>(lastUser) <span class="op">{</span></span>
+<span id="cb62-2"><a href="#cb62-2"></a>  <span class="op">|</span> None <span class="kw">=&gt;</span> <span class="va">Js</span>.<span class="at">log</span>(<span class="st">&quot;No users in the list&quot;</span>)</span>
+<span id="cb62-3"><a href="#cb62-3"></a>  <span class="op">|</span> <span class="at">Some</span>(user) <span class="kw">=&gt;</span> <span class="at">showNext</span>(user)</span>
+<span id="cb62-4"><a href="#cb62-4"></a><span class="op">};</span></span></code></pre></div>
+<aside class="notes">
+<p>We’ll replace line number 12 with this code. What we’re doing is acknowledging the fact that lastUse could be empty. And we handle both cases where it could exist or where it could be empty.</p>
+<p>So instead of null, or undefined, Reason has the option type. When something is of the option type, it means the compiler knows that it may or may not have a value during runtime. So we’re forced to deal with that situation before it will compile the code.</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -952,12 +981,22 @@ SyntaxError: Unexpected token !
 <p> </p>
 <p> </p>
 <h3 id="refactor-confidently">Refactor confidently!</h3>
-<h3 id="because-if-it-compiles-it-works">because if it compiles, it works</h3>
 <aside class="notes">
-<p>A lot of my programming anxiety went away after I started programming with Reason. I can refactor large, complex codebases confidently because I know that Reason has my back. Or in other words:</p>
+<p>Option types is one of the most amazing things about Typed FP. It gives us the kind of confidence in our code that we can refactor mercilessly, aggressively without worrying that we’ll make mistakes.</p>
+<p>Because of this a lot of my programming anxiety went away after I started programming with Reason. I can refactor large, complex codebases confidently because I know that Reason has my back.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<p> </p>
+<p> </p>
+<h3 id="refactor-confidently-1">Refactor confidently!</h3>
+<h3 id="because-if-it-compiles-it-works">because <em>if it compiles, it works</em></h3>
+<aside class="notes">
+<p>Or in other words:</p>
 <p>if the program compiles, it works.</p>
 <p>It is true!</p>
-<p>But, what about logical errors?</p>
+<p>But, what about logical mistakes?</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -967,25 +1006,25 @@ SyntaxError: Unexpected token !
   else
     pourTea()</code></pre>
 <aside class="notes">
-<p>Here someone asked for a tea, and we poured them a coffee. It will compile, but it is obviously wrong. This is a logical error, not a type error, and so the compiler cannot catch it.</p>
+<p>Here someone asked for a tea, and we poured them a coffee.</p>
+<p>This code is going to compile, but it is obviously wrong. This is a logical mistake, and not a type error, and so the compiler simply cannot catch it.</p>
 </aside>
 </section>
 <section class="slide level2">
 
 <p> </p>
-<h3 id="programming-is-difficult">Programming is difficult…</h3>
-<p>due to clerical errors.</p>
-<p>Logical mistakes are rare!</p>
+<h3 id="logical-mistakes-are-few">Logical mistakes are few,</h3>
+<h3 id="clerical-mistakes-are-many">clerical mistakes are many!</h3>
 <aside class="notes">
-<p>But when I started writing typed FP after about a decade of dynamically typed languages, I realized that we programmers are a pretty decent bunch. It is very rare for us to be making logical errors in our code.</p>
-<p>Our programs are all broken, make no mistake, but they are broken not because we wrote something when we meant the other. They’re borken because of clerical mistakes. Passing the wrong data to the wrong function.</p>
-<p>But the Reason compiler is very good at catching those mistakes, which is why, “if it compiles, it works”.</p>
+<p>But when I started writing typed FP after about a decade of dynamically typed languages, I realized that we programmers are a pretty decent bunch. We don’t make as many logical mistakes as we think we do.</p>
+<p>Our programs are all broken, make no mistake, but they are broken not because we wrote something when we meant the other. They’re borken because of clerical mistakes. Because we passed the wrong data to the wrong function.</p>
+<p>But the Reason compiler is very good at catching those kind of mistakes, which is why “if it compiles, it works” is an experience you can also look forward to when you start writing Reason.</p>
 </aside>
 </section>
 <section id="dealing-with-external-data" class="slide level2">
 <h2>Dealing with external data</h2>
 <aside class="notes">
-<p>If Reason can only deal with well-typed data, then how can it work with external data which our program has no control over?</p>
+<p>So far so good. But if we say that Reason can only deal with well-typed data, then how can it work with external data which our programs have no control over?</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -1020,9 +1059,9 @@ SyntaxError: Unexpected token !
 
 <p><img data-src="images/parsing-membrane5.svg" /></p>
 <aside class="notes">
-<p>If the data that hits the application doesn’t slot into their corresponding types, then we can handle it then and there. Maybe it is an old API format and we’re on a new version. So there is nothing to be done except reject it and return an HTTP error code.</p>
+<p>If the data that hits the application doesn’t slot into their corresponding types, then there is no way the data can proceed to the rest of the appliaction. Maybe it is an old API format and we’re on a new version. So there is nothing to be done except reject it and return an HTTP error code.</p>
 <p>Or the incoming data is incomplete – but we can handle it gracefully by putting placeholder values.</p>
-<p>Or it is simply wrong data and not salvageable. The point is we cannot allow malformed data into our system. Either we handle it, or we stop the request there.</p>
+<p>The point is we cannot allow malformed data into our system. Either we handle it, or we stop the request there.</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -1057,7 +1096,7 @@ SyntaxError: Unexpected token !
 </ul>
 <aside class="notes">
 <p>For example we haven’t looked at functional programming at all. I think that most of us who write Javascript is already doing a fair amount of FP, and especially so if you use React.</p>
-<p>But there are a few things that Reason adds that makes it a better functional language than JS.</p>
+<p>But Reason adds a few things which makes it a better functional language than JS.</p>
 <p>I’ve listed some them here - these are all very worth knowing.</p>
 </aside>
 </section>
@@ -1072,7 +1111,7 @@ SyntaxError: Unexpected token !
 <li>exhaustive pattern matching</li>
 </ul>
 <aside class="notes">
-<p>These ideas are all around Reason’s type system. They are quite fun.</p>
+<p>These ideas are all around Reason’s type system. They are also quite fun.</p>
 </aside>
 </section>
 <section id="ideas-in-typed-fp-3" class="slide level2">
@@ -1111,40 +1150,37 @@ SyntaxError: Unexpected token !
 <p>Except for types, Reason is, in a sense, a subset of Javascript.</p>
 <p>Javascript is a large language – which could be obvious if you’ve participated in any Javascript job interview.</p>
 <p>You can ask and be asked so many questions. There is the concept of <code>this</code>, there are prototypes and prototype inheritance chains, and there are also classes, objects, and mutation. It also has functions and higher-order functions.</p>
-<p>Compared to a Javascript job interview, a Reason interview could be rather uneventful; because it is a much smaller language than JS. All it has are functions, modules, and types. We don’t, for example, concern ourselves with what <code>this</code> could be during runtime.</p>
+<p>Compared to a Javascript job interview, a Reason interview could be rather uneventful; because it is a much smaller language than JS. All it has are functions, modules, and types.</p>
 </aside>
 </section>
-<section id="deliberate-study" class="slide level2">
-<h2>Deliberate Study</h2>
-<p>::: notes</p>
-<p>But don’t let the fact that Reason has a smaller surface area than Javascript fool you. It is</p>
-<p>::: notes</p>
-</section>
-<section class="slide level2">
-
-<h4 id="learn-systematically">Learn systematically</h4>
-<ul>
-<li>Learn language basics systematically</li>
-<li>Don’t worry about immediate application</li>
-</ul>
+<section id="how-to-learn" class="slide level2">
+<h2>How to learn</h2>
+<p> </p>
+<p>Start building UIs with ReasonReact</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb64-1"><a href="#cb64-1"></a>[@<span class="va">react</span>.<span class="at">component</span>]</span>
+<span id="cb64-2"><a href="#cb64-2"></a><span class="kw">let</span> make <span class="op">=</span> (<span class="op">~</span>name) <span class="kw">=&gt;</span></span>
+<span id="cb64-3"><a href="#cb64-3"></a>  <span class="op">&lt;</span>button<span class="op">&gt;</span></span>
+<span id="cb64-4"><a href="#cb64-4"></a>    <span class="op">{</span><span class="va">React</span>.<span class="at">string</span>(<span class="st">&quot;Hello!&quot;</span>)<span class="op">}</span></span>
+<span id="cb64-5"><a href="#cb64-5"></a>  &lt;/button<span class="op">&gt;;</span></span></code></pre></div>
 <aside class="notes">
-<p>We usually learn new things by what is called programming by poking. Find a new library, copy paste some sample code, and start tweaking it till we make it work. That approach unfortunately doesn’t scale well for Reason.</p>
-<p>It is because if we try making something with Reason, and get hit with an error, we wouldn’t know where to even look.</p>
-<p>You have to through the catalog of language features and learn them – without looking for any immediate application.</p>
+<p>So what is the fastest way to really learn Reason?</p>
+<p>You can start by building simple user interfaces with ReasonReact. We usually learn new things by what is called programming by poking. Find a new library, copy paste some sample code, and start tweaking it till we make it work. That approach will go a long way to get you started.</p>
+<p>But it doesn’t scale for ever.</p>
 </aside>
 </section>
 <section class="slide level2">
 
-<h4 id="learn-systematically-1">Learn systematically</h4>
-<p><img data-src="images/rwo-cover.png" /></p>
+<p>   </p>
+<h3 id="learn-systematically">Learn systematically</h3>
+<h4 id="dont-worry-about-immediate-application">Don’t worry about immediate application</h4>
 <aside class="notes">
-<p>The best resource for systematic study of OCaml is the book Real World OCaml. It uses the OCaml syntax, but that should only be a minor hiccup.</p>
-<p>It is a great book because it teaches not just OCaml the language. You can also expect some very practical, very profound insights on programming as a whole, from this book.</p>
+<p>It is because if you try building something real and hit a roadblock, you wouldn’t know what even Google for, and where to look.</p>
+<p>So initially you have to go through the catalog of language features and learn them – without looking for any immediate application.</p>
 </aside>
 </section>
 <section class="slide level2">
 
-<h3 id="outline">Outline</h3>
+<h3 id="learning-outline">Learning Outline</h3>
 <ul>
 <li><strong>Programming in the small</strong>
 <ul>
@@ -1152,15 +1188,14 @@ SyntaxError: Unexpected token !
 </ul></li>
 </ul>
 <aside class="notes">
-<p>So how should you structure your learning?</p>
-<p>To learn any new language, we first have to be able to write small programs in it.</p>
+<p>The first phase usually is to learning to program in the small.</p>
 <p>You should be able to solve a fizzbuzz, read from a file, compute an average, make an API request – all these things.</p>
 <p>The concepts they need are quite common: data structures, creating functions and calling them etc.</p>
 </aside>
 </section>
 <section class="slide level2">
 
-<h3 id="learning-reason-1">Learning Reason</h3>
+<h3 id="learning-outline-1">Learning Outline</h3>
 <ul>
 <li><strong>Programming in the small</strong>
 <ul>
@@ -1169,25 +1204,25 @@ SyntaxError: Unexpected token !
 </ul>
 <p><img data-src="images/reason-official-docs.png" /></p>
 <aside class="notes">
-<p>For this you should go over the official Reason documentation. It is specifically written for people from the Javascript world and is very accessible.</p>
+<p>For this you should comb through official Reason documentation. It is specifically written for people from the Javascript world and is very accessible.</p>
 </aside>
 </section>
 <section class="slide level2">
 
-<h3 id="learning-reason-2">Learning Reason</h3>
+<h3 id="learning-outline-2">Learning Outline</h3>
 <ul>
 <li>Programming in the small</li>
 <li><strong>Tooling</strong></li>
 </ul>
 <aside class="notes">
 <p>Next, you need to get comfortable with the tooling.</p>
-<p>You should be able to create a project, compile, and start tinkering on demand. That is a simple step but very crucial.</p>
+<p>You should be able to create a project, compile, and start tinkering on demand. That is a simple but very crucial step.</p>
 <p>Knowing the tooling is the difference between wishing you had the time to play with something vs actually having fun with it.</p>
 </aside>
 </section>
 <section class="slide level2">
 
-<h3 id="learning-reason-3">Learning Reason</h3>
+<h3 id="learning-outline-3">Learning Outline</h3>
 <ul>
 <li><strong>Tooling</strong>
 <ul>
@@ -1197,36 +1232,40 @@ SyntaxError: Unexpected token !
 </ul>
 <p><img data-src="images/tooling-bs-setup.png" /></p>
 <aside class="notes">
-<p>In Reason’s case, there isn’t much to the tooling. The most supported setup is VSCode + the VSCode Reason plugin.</p>
-<p>The official setup guide works perfectly well to setup a new project. Install an npm package, start webpack and you’re off to the races.</p>
+<p>In Reason’s case, tooling is very easy to setup.</p>
+<p>The official setup guide is about 4 lines - install an npm package, start webpack and you’re done.</p>
+<p>I would also recommend using VSCode + the VSCode Reason plugin - it is the most supported editor for Reason.</p>
 </aside>
 </section>
 <section class="slide level2">
 
-<h3 id="learning-reason-4">Learning Reason</h3>
+<h3 id="learning-outline-4">Learning Outline</h3>
 <ul>
-<li>Programming in the large
+<li><strong>Programming in the large</strong>
 <ul>
 <li>modules</li>
 </ul></li>
 </ul>
 <aside class="notes">
-<p>The third thing to know is to how to Program in the Large. Have you ever been in a place where you know a thing - a language or a library - but you’re not yet confident to use it in production?</p>
+<p>The third thing to know is to how to Program in the Large.</p>
+<p>Have you ever been in a place where you know a thing - a language or a library - but you’re not yet confident to use it in production?</p>
 <p>The missing thing usually is not knowing how to fit things into a larger canvas. In the case of Reason, the only construct you need to know is the <code>module</code>. It is very similar to regular JS modules – you can put a bunch of functions together, expose only a few public ones, and that’s it.</p>
-</aside>
-</section>
-<section id="is-reason-ready-for-production" class="slide level2">
-<h2>Is Reason ready for production?</h2>
-<aside class="notes">
-<p>Let’s next address the elephant in the room. Is Reason commercially viable? Is it something you can use in your workplace?</p>
 </aside>
 </section>
 <section class="slide level2">
 
-<p>   </p>
-<h3 id="is-reason-ready-for-production-1">Is Reason ready for production?</h3>
+<h3 id="book-recommendation">Book Recommendation</h3>
+<p><img data-src="images/rwo-cover.png" /></p>
+<p>::: notes</p>
+<p>The best resource for systematic study of OCaml is the book Real World OCaml. It uses the OCaml syntax, but you’ll get used to that soon. It is a great book because it teaches not just OCaml the language. You can also expect some very practical, very profound insights on programming as a whole, from this book.</p>
+<p>::: notes</p>
+</section>
+<section id="closing-thought" class="slide level2">
+<h2>Closing thought</h2>
+<h3 id="is-reason-ready-for-production">Is Reason ready for production?</h3>
 <aside class="notes">
-<p>My experience with Reason has of course been great, and I think it is very much ready for production. For example a large chunk of Facebook’s Messenger front-end is already running on Reason.</p>
+<p>Finally, the elephant in the room. Is Reason commercially viable? Is it something you can use in your workplace?</p>
+<p>My experience has obviously been great, and I think it is very much ready for production. For example a large chunk of Facebook’s Messenger front-end is already running on Reason.</p>
 <p>But Facebook is far away, let’s take look at a project that is much closer to home..</p>
 </aside>
 </section>
@@ -1258,28 +1297,6 @@ SyntaxError: Unexpected token !
 <aside class="notes">
 <p>And it is fully open-source. One of the authors, Hari Gopal, is also a JsFoo speaker. He had spoken in last year’s conference and that was also about Reason.</p>
 <p>This is a good reference repository if you want to see a real-world reason web application that is used in production.</p>
-</aside>
-</section>
-<section id="adopting-reason-in-production" class="slide level2">
-<h2>Adopting Reason in production</h2>
-<ul>
-<li>start progressively</li>
-<li>interop with existing Javascript</li>
-<li>interop with React</li>
-</ul>
-<aside class="notes">
-<p>You don’t have to go big bang when you adopt Reason. Since Reason compiles down to straightforward Javascript, you can start using it in your existing Javascript project and incrementally port over the most complex bits of your code.</p>
-</aside>
-</section>
-<section id="adopting-reason-in-production-1" class="slide level2">
-<h2>Adopting Reason in production</h2>
-<ul>
-<li>build personal expertise first</li>
-<li>start in low-risk projects</li>
-</ul>
-<aside class="notes">
-<p>And in case you’re smitten by the language, I would caution to not go overboard with it. You have to first built personal expertise - by building something non-trivial in it yourself before you pitch it in your workplace.</p>
-<p>Because once you are convinced that it will help increase quality and reduce cost, which I hope you would be, then your pitch will become strong and convincing.</p>
 </aside>
 </section>
 <section class="slide level2">

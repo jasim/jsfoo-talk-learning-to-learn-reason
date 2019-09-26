@@ -31,6 +31,7 @@ Hello, my name is Jasim, and I'm here today to talk about ReasonML.
 ::: notes
 
 A little about me, I've been programming professionally for over 10 years now. 
+
 This is one of the earliest software that I built.
 
 :::
@@ -41,11 +42,11 @@ This is one of the earliest software that I built.
 
 ::: notes
 
- These things were fun to make and you didn't even need to be a professional programmer. Simpler times.
+ These were easy to build. You could make software like this without having to be a professional programmer. 
 
 But all good things have to come to an end. 
 
-So I've since worked on modern web applications, on the front-end, back-end, and also programmed different languages including Javascript.
+So I've since worked on modern web applications, on the front-end, back-end, and also programmed with different languages including Javascript.
 
 Most recently I've been jamming with a friend building tools for designers & front-end developers. 
 
@@ -59,9 +60,11 @@ Most recently I've been jamming with a friend building tools for designers & fro
 
 ::: notes
 
-One is called Teleport -- it is a Chrome extension that can capture a website and create a Sketch design out of it. Here I'm using Teleport to re-create the Reason homepage in Sketch. Designers use this to recreate existing web sites and try out things.
+One is called Teleport -- it is a Chrome extension that can capture a website and create a Sketch design out of it. 
 
-The other tool is called Protoship Codegen.
+Here I'm using Teleport to re-create the Reason homepage in Sketch. 
+
+The other tool we're building is called Protoship Codegen.
 
 :::
 
@@ -74,9 +77,11 @@ The other tool is called Protoship Codegen.
 
 It converts designs - made in tools like Adobe XD and Sketch - into responsive HTML and CSS
 
-Here is a sample Sketch design, and we're running it through Codegen.
+Here we're a running a sample Sketch design through Codegen. 
 
-Here is the responsive HTML & CSS that Codegen renders. 
+This is the Codegen UI.
+
+And here is the responsive HTML & CSS rendered by it.
 
 The generated code is stuff that programmers like you and me can use. So it'll do static positioning, flexboxes, and grids etc.
 
@@ -92,11 +97,11 @@ The generated code is stuff that programmers like you and me can use. So it'll d
 
 All this stuff: the Sketch plugin, the web UI, and the code generator -- everything, is written in Reason.
 
-But that happened only about half-way through the product. Before that it was all Javascript.
+But that happened only when we were about half-way through the product. Before that it was all written in Javascript.
 
-We didn't know Reason or Typed FP when we began working on this product, which was about two years ago. We learnt it so we could build this tool.
+We didn't know Reason or Typed FP when we began working on Codegen, which was about two years ago.
 
-Let me tell you a bit about how Codegen works under the hood so you can see why it was necessary.
+Let me tell you a bit about how Codegen works under the hood so you can see why we chose to learn and rewrite it in Reason.
 
 :::
 
@@ -216,7 +221,9 @@ Now this could be its next shape.
 
 And this could be its next shape, and so on. We had hundreds of these kinds of transformations - some small, and some big, and it was all too much for us to mentally track. 
 
-Mistakes were made. Many mistakes, in fact, were made. And progress slowed.
+Mistakes were made. Many mistakes, in fact, were made. 
+
+Progress was very slow.
 
 We wanted a better way to track the changing shape of the data as they went through each transformation. And we had an inkling that types could be the answer.
 
@@ -332,7 +339,7 @@ let print_html_table segments =
 
 ::: notes
 
-Here is an OCaml program that prints an HTML table from a 2-dimensional list. See that function arguments are separated by spaces, and anonymous functions are created with the `fun` keyboard.
+Here is an OCaml program that prints an HTML table from a 2-dimensional list. See that function arguments are separated by spaces, and anonymous functions are created with the `fun` keyword.
 
 :::
 
@@ -393,7 +400,7 @@ So is it actually useful? This language. What can we build with it?
 
 ::: notes
 
-When you start reading about OCaml, you'll often come across Jane Street. They are one of the largest production users of the language and they did $8 trillion dollars of trading in 2018, and all of that used software written in OCaml.
+When you start reading about OCaml, you'll often come across Jane Street. They are one of the largest production users of the language and in 2018 about $8 trillion dollars passed through their system, and all of that used software written in OCaml.
 
 :::
 
@@ -426,8 +433,6 @@ If you have done any SEO work, you might be familiar with Ahrefs. They crawl abo
 ::: notes
 
 OCaml is also particularly nice to write compilers on - The very first version of the Rust compiler was written in OCaml.
-
-It has a feature called pattern matching which makes it ideal to manipulate complex data structures and trees.
 
 Facebook is also a large user of OCaml internally, again for compiler work.
 
@@ -527,7 +532,7 @@ The compiler we want is BuckleScript. It produces clean, performant Javascript, 
 
 ::: notes
 
-BuckleScript is also the primary compiler for Reason. The Javascript it produces can run either on Node or on the browser. We can insert arbitrary Javascript inside our Reaso
+BuckleScript is also the primary compiler for Reason. And the Javascript it generates can run both on Node and on the Browser. 
 
 So for the rest of this talk, we're going to be talking about using the Reason syntax for OCaml, with the BuckleScript compiler.
 
@@ -591,7 +596,9 @@ if (Moment().isSame(MomentRe.moment(undefined, "2020-04-01"), "day")) {
 
 At the bottom is the Javascript produced by BuckleScript. It is straightforward JS, and it uses the CommonJS syntax to require the momentjs npm module.
 
-That's one of the best thing about Reason: since we're using BuckleScript, we can use any and all npm library in our code. Also, since Reason code becomes Javascript, we can export that as our own npm packages as well.
+That's one of the best thing about Reason: since we're using BuckleScript, we can use any npm library in our code. And we can integrate it into our existing Javascript projects as well. 
+
+There is some work - you have to write type definitions for the library you want to use, but otherwise it is painless.
 
 :::
 
@@ -599,6 +606,14 @@ That's one of the best thing about Reason: since we're using BuckleScript, we ca
 ------------------
 
 ## Paradigm
+
+::: notes
+
+Let's talk a little bit about programming language paradigms.
+
+:::
+
+------------------
 
 &nbsp;
 
@@ -606,13 +621,11 @@ That's one of the best thing about Reason: since we're using BuckleScript, we ca
 
 ::: notes
 
-Let's now look at 
+Reason is a Typed Functional language. 
 
 :::
 
 ------------------
-
-## Paradigm
 
 &nbsp;
 
@@ -622,9 +635,19 @@ Let's now look at
 
 _so is Elm, F#, Haskell, and PureScript_
 
+Hindley–Milner type system
+
 ::: notes
 
-Let's now
+So are languages like Elm, F#, and Haskell.
+
+All these languages share the same Type System - Hindley Milner typesystem, and have a similar approach to functional programming. 
+
+A great thing is that if you read say an article about Elm, it is highly probable that it also applies to Reason. And vice versa. 
+
+So when you learn Reason, you're also dipping your toes into the vast, and varied world of Typed Functional Programming. 
+
+Most things that I'll speak about in this talk will also apply equally well to the other languages in this category.
 
 :::
 
@@ -639,13 +662,13 @@ Let's now
 
 ::: notes
 
-The tiny surface area of the language also constrains how we can program in Reason.
+Okay, so what is Typed FP?
 
-The way to do that is to simply write our programs as a series of pure functions. That's it. 
+It is just writing our programs as a series of pure functions. That's it. 
 
 How is that an improvement over Javascript you might ask? We can write JS also in a functional manner - with pure functions everywhere, and just an outer shell for all the I/O. That's essentially functional programming, and that's pretty nice.
 
-But Reason is not only "functional", it is also "typed", and the types guarantee something:
+But Reason is not only "functional", it is also "typed", and the types guarantees something:
 
 :::
 
@@ -659,7 +682,9 @@ The perfect computer program --
 
 "perfection".
 
-Reason functions are more "perfect" than functions written in Javascript. I'm using the word "perfection" here as a measure in degrees and not an absolute. I stole the idea from Prof. Xavier Leroy, who is a programming languages researcher and also the author OCaml
+Reason functions are more "perfect" than functions written in Javascript. I'm using the word "perfection" here as a degree of measure and not as an absolute. 
+
+I stole the idea from Prof. Xavier Leroy, who is a programming languages researcher and also the author OCaml
 
 :::
 
@@ -671,11 +696,9 @@ Reason functions are more "perfect" than functions written in Javascript. I'm us
 
 ::: notes
 
-"A perfect program does exactly what it should do, no more, no less, every time, with perfect reliability, and forever. The kind of perfection that you can get from mathematical definitions, which software is to a large extent, or from philosophical concepts."
+Prof. Leroy says that a perfect program does exactly what it should do, no more, no less, every time, with perfect reliability, and forever. The kind of perfection that you can get from mathematical definitions, which software is to a large extent, or from philosophical concepts.
 
-I think this is an aspirational look at how we should program.
-
-But what can that mean in the context of our day-to-day work?
+But what can this mean in the context of our day-to-day work?
 
 ::: 
 
@@ -1135,7 +1158,7 @@ Let's back up a bit here so I can try to impress upon you the important distinct
 
 ``` {.javascript}
 console.log("program started executing")
-let text = Hello! Is it Javascript you're looking for?
+let text = Hello! This is a syntax error.
 ```
 
 ::: notes
@@ -1172,8 +1195,6 @@ But imagine if programs were executed despite syntax errors.
 
 You'll ship the program to customers, and they'll be in the middle of something, and then some semicolon is missing somewhere and boom! the program halts to a crash.
 
-Thankfully, modern JS engines parses the entire program and checks for syntax errors before it even starts executing. 
-
 :::
 
 ------------------
@@ -1181,9 +1202,9 @@ Thankfully, modern JS engines parses the entire program and checks for syntax er
 &nbsp;
 &nbsp;
 
-##### Reason moves runtime errors into compile-time errors
+#### Reason moves runtime errors into compile-time errors
 
-_like they are syntax errors..._
+_as if they were syntax errors..._
 
 ::: notes
 
@@ -1236,9 +1257,9 @@ Uncaught TypeError: Cannot read property 'id' of undefined
 
 ::: notes
 
-So it will crashes during execution with a runtime error. 
+So it crashes during execution with a runtime error. 
 
-In Reason however, this kind of errors sort of gets closer to a syntax error rather than a runtime error. The compiler will catch the mistake and we don't have to run it to see if it breaks.
+In Reason however, this error sort of becomes a syntax error rather than a runtime error. The compiler will catch the mistake and we don't have to run it to see if it breaks.
 
 :::
 
@@ -1262,7 +1283,7 @@ showNext(lastUser);
 
 ::: notes
 
-Here's the Reason equivalent of the previous program. This won't even execute. Instead we'll get this compile-time error:
+Here's the Reason equivalent of the same program. This won't even execute. Instead we'll get this compile-time error:
 
 :::
 
@@ -1273,7 +1294,34 @@ Here's the Reason equivalent of the previous program. This won't even execute. I
 
 ::: notes
 
-Here's what this error message is saying:
+What is this error message saying?
+
+In Line 12, we're calling showNext, and it is expecting a value of type user.
+But, we're passing it something of type option('a).
+
+What's happening is that in line 11, we've tried fetching an element from the array `users`. Reason knows that whenever you fetch something from an array,  using an integer index, then it is quite possible that the element might not exist.
+
+Which is why it is returning a value who has an optional type. So how would we write this instead?
+
+:::
+
+------------------
+
+![](images/comp-error-optionGet.png)
+
+``` {.javascript}
+switch(lastUser) {
+  | None => Js.log("No users in the list")
+  | Some(user) => showNext(user)
+};
+```
+
+::: notes
+
+We'll replace line number 12 with this code. What we're doing is acknowledging the fact that lastUse could be empty. And we handle both cases where it could exist or where it could be empty.
+
+So instead of null, or undefined, Reason has the option type. When something is of the option type, it means the compiler knows that it may or may not have a value during runtime. So we're forced to deal with that situation before it will compile the code.
+
 
 :::
 
@@ -1285,17 +1333,33 @@ Here's what this error message is saying:
 &nbsp;
 
 ### Refactor confidently!
-### because if it compiles, it works
 
 ::: notes
 
-A lot of my programming anxiety went away after I started programming with Reason. I can refactor large, complex codebases confidently because I know that Reason has my back. Or in other words:
+Option types is one of the most amazing things about Typed FP. It gives us the kind of confidence in our code that we can refactor mercilessly, aggressively without worrying that we'll make mistakes.
+
+Because of this a lot of my programming anxiety went away after I started programming with Reason. I can refactor large, complex codebases confidently because I know that Reason has my back. 
+
+:::
+
+------------------
+
+&nbsp;
+
+&nbsp;
+
+### Refactor confidently!
+### because _if it compiles, it works_
+
+::: notes
+
+Or in other words:
 
 if the program compiles, it works.
 
 It is true! 
 
-But, what about logical errors?
+But, what about logical mistakes?
 
 :::
 
@@ -1311,7 +1375,9 @@ But, what about logical errors?
 
 ::: notes
 
-Here someone asked for a tea, and we poured them a coffee. It will compile, but it is obviously wrong. This is a logical error, not a type error, and so the compiler cannot catch it.
+Here someone asked for a tea, and we poured them a coffee. 
+
+This code is going to compile, but it is obviously wrong. This is a logical mistake, and not a type error, and so the compiler simply cannot catch it.
 
 :::
 
@@ -1319,19 +1385,16 @@ Here someone asked for a tea, and we poured them a coffee. It will compile, but 
 
 &nbsp;
 
-### Programming is difficult...
-
-due to clerical errors.
-
-Logical mistakes are rare!
+### Logical mistakes are few, 
+### clerical mistakes are many!
 
 ::: notes
 
-But when I started writing typed FP after about a decade of dynamically typed languages, I realized that we programmers are a pretty decent bunch. It is very rare for us to be making logical errors in our code.
+But when I started writing typed FP after about a decade of dynamically typed languages, I realized that we programmers are a pretty decent bunch. We don't make as many logical mistakes as we think we do.
 
-Our programs are all broken, make no mistake, but they are broken not because we wrote something when we meant the other. They're borken because of clerical mistakes. Passing the wrong data to the wrong function. 
+Our programs are all broken, make no mistake, but they are broken not because we wrote something when we meant the other. They're borken because of clerical mistakes. Because we passed the wrong data to the wrong function. 
 
-But the Reason compiler is very good at catching those mistakes, which is why, "if it compiles, it works".
+But the Reason compiler is very good at catching those kind of mistakes, which is why "if it compiles, it works" is an experience you can also look forward to when you start writing Reason.
 
 :::
 
@@ -1342,7 +1405,7 @@ But the Reason compiler is very good at catching those mistakes, which is why, "
 
 ::: notes
 
-If Reason can only deal with well-typed data, then how can it work with external data which our program has no control over?
+So far so good. But if we say that Reason can only deal with well-typed data, then how can it work with external data which our programs have no control over?
 
 :::
 
@@ -1399,11 +1462,11 @@ We handle it in Reason by parsing all external data at the application boundary.
 
 ::: notes
 
-If the data that hits the application doesn't slot into their corresponding types, then we can handle it then and there. Maybe it is an old API format and we're on a new version. So there is nothing to be done except reject it and return an HTTP error code.
+If the data that hits the application doesn't slot into their corresponding types, then there is no way the data can proceed to the rest of the appliaction. Maybe it is an old API format and we're on a new version. So there is nothing to be done except reject it and return an HTTP error code.
 
 Or the incoming data is incomplete -- but we can handle it gracefully by putting placeholder values. 
 
-Or it is simply wrong data and not salvageable. The point is we cannot allow malformed data into our system. Either we handle it, or we stop the request there.
+The point is we cannot allow malformed data into our system. Either we handle it, or we stop the request there.
 
 :::
 
@@ -1453,7 +1516,7 @@ What I covered so far in this talk is a very thin slice of the ideas in the Type
 
 For example we haven't looked at functional programming at all. I think that most of us who write Javascript is already doing a fair amount of FP, and especially so if you use React.
 
-But there are a few things that Reason adds that makes it a better functional language than JS. 
+But Reason adds a few things which makes it a better functional language than JS. 
 
 I've listed some them here - these are all very worth knowing.
 
@@ -1471,7 +1534,7 @@ I've listed some them here - these are all very worth knowing.
 
 ::: notes
 
-These ideas are all around Reason's type system. They are quite fun.
+These ideas are all around Reason's type system. They are also quite fun.
 
 :::
 
@@ -1529,63 +1592,63 @@ Javascript is a large language -- which could be obvious if you've participated 
 
 You can ask and be asked so many questions. There is the concept of `this`, there are prototypes and prototype inheritance chains, and there are also classes, objects, and mutation. It also has functions and higher-order functions.
 
-Compared to a Javascript job interview, a Reason interview could be rather uneventful; because it is a much smaller language than JS. All it has are functions, modules, and types. We don't, for example, concern ourselves with what `this` could be during runtime. 
+Compared to a Javascript job interview, a Reason interview could be rather uneventful; because it is a much smaller language than JS. All it has are functions, modules, and types. 
 
 :::
 
 ------------------
 
-## Deliberate Study
+## How to learn
+
+&nbsp;
+
+Start building UIs with ReasonReact
+
+``` {.javascript}
+[@react.component]
+let make = (~name) =>
+  <button>
+    {React.string("Hello!")}
+  </button>;
+```
 
 ::: notes
 
-But don't let the fact that Reason has a smaller surface area than Javascript fool you. It is
+So what is the fastest way to really learn Reason? 
 
-::: notes
+You can start by building simple user interfaces with ReasonReact. We usually learn new things by what is called programming by poking. Find a new library, copy paste some sample code, and start tweaking it till we make it work. That approach will go a long way to get you started.
 
-------------------
-
-#### Learn systematically
-
-* Learn language basics systematically
-* Don't worry about immediate application
-
-::: notes
-
-We usually learn new things by what is called programming by poking. Find a new library, copy paste some sample code, and start tweaking it till we make it work. That approach unfortunately doesn't scale well for Reason.
-
-It is because if we try making something with Reason, and get hit with an error, we wouldn't know where to even look. 
-
-You have to through the catalog of language features and learn them -- without looking for any immediate application. 
+But it doesn't scale for ever.
 
 :::
 
 ------------------
 
-#### Learn systematically
+&nbsp;
+&nbsp;
 
-![](images/rwo-cover.png)
+### Learn systematically
+
+#### Don't worry about immediate application
 
 ::: notes
 
-The best resource for systematic study of OCaml is the book Real World OCaml. It uses the OCaml syntax, but that should only be a minor hiccup. 
+It is because if you try building something real and hit a roadblock, you wouldn't know what even Google for, and where to look. 
 
-It is a great book because it teaches not just OCaml the language. You can also expect some very practical, very profound insights on programming as a whole, from this book.
+So initially you have to go through the catalog of language features and learn them -- without looking for any immediate application. 
 
 :::
 
 ------------------
 
-### Outline
+### Learning Outline
 
 * **Programming in the small**
   * variables, data structures, iteration, functions
 
 ::: notes
 
-So how should you structure your learning?
-
-To learn any new language, we first have to be able to write small programs in it. 
+The first phase usually is to learning to program in the small. 
 
 You should be able to solve a fizzbuzz, read from a file, compute an average, make an API request -- all these things. 
 
@@ -1595,7 +1658,7 @@ The concepts they need are quite common: data structures, creating functions and
 
 ------------------
 
-### Learning Reason
+### Learning Outline
 
 * **Programming in the small**
   * variables, data structures, iteration, functions
@@ -1605,13 +1668,13 @@ The concepts they need are quite common: data structures, creating functions and
 
 ::: notes
 
-For this you should go over the official Reason documentation. It is specifically written for people from the Javascript world and is very accessible.
+For this you should comb through official Reason documentation. It is specifically written for people from the Javascript world and is very accessible.
 
 :::
 
 ------------------
 
-### Learning Reason
+### Learning Outline
 
 * Programming in the small
 * **Tooling**
@@ -1620,7 +1683,7 @@ For this you should go over the official Reason documentation. It is specificall
 
 Next, you need to get comfortable with the tooling. 
 
-You should be able to create a project, compile, and start tinkering on demand. That is a simple step but very crucial. 
+You should be able to create a project, compile, and start tinkering on demand. That is a simple but very crucial step. 
 
 Knowing the tooling is the difference between wishing you had the time to play with something vs actually having fun with it.
 
@@ -1629,7 +1692,7 @@ Knowing the tooling is the difference between wishing you had the time to play w
 
 ------------------
 
-### Learning Reason
+### Learning Outline
 
 * **Tooling**
   * VSCode + Reason plugin
@@ -1639,23 +1702,26 @@ Knowing the tooling is the difference between wishing you had the time to play w
 
 ::: notes
 
-In Reason's case, there isn't much to the tooling. The most supported setup is VSCode + the VSCode Reason plugin.
+In Reason's case, tooling is very easy to setup. 
 
-The official setup guide works perfectly well to setup a new project. Install an npm package, start webpack and you're off to the races.
+The official setup guide is about 4 lines - install an npm package, start webpack and you're done.
+
+I would also recommend using VSCode + the VSCode Reason plugin - it is the most supported editor for Reason.
 
 :::
 
 ------------------
 
-### Learning Reason
+### Learning Outline
 
-* Programming in the large
+* **Programming in the large**
   * modules
-
 
 ::: notes
 
-The third thing to know is to how to Program in the Large. Have you ever been in a place where you know a thing - a language or a library - but you're not yet confident to use it in production?
+The third thing to know is to how to Program in the Large. 
+
+Have you ever been in a place where you know a thing - a language or a library - but you're not yet confident to use it in production?
 
 The missing thing usually is not knowing how to fit things into a larger canvas. In the case of Reason, the only construct you need to know is  the `module`. It is very similar to regular JS modules -- you can put a bunch of functions together, expose only a few public ones, and that's it.
 
@@ -1663,23 +1729,27 @@ The missing thing usually is not knowing how to fit things into a larger canvas.
 
 ------------------
 
-## Is Reason ready for production?
+### Book Recommendation
+
+![](images/rwo-cover.png)
 
 ::: notes
 
-Let's next address the elephant in the room. Is Reason commercially viable? Is it something you can use in your workplace?
+The best resource for systematic study of OCaml is the book Real World OCaml. It uses the OCaml syntax, but you'll get used to that soon. It is a great book because it teaches not just OCaml the language. You can also expect some very practical, very profound insights on programming as a whole, from this book.
 
-:::
+::: notes
+
 ------------------
 
-&nbsp;
-&nbsp;
+## Closing thought 
 
 ### Is Reason ready for production?
 
 ::: notes
 
-My experience with Reason has of course been great, and I think it is very much ready for production. For example a large chunk of Facebook's Messenger front-end is already running on Reason.
+Finally, the elephant in the room. Is Reason commercially viable? Is it something you can use in your workplace?
+
+My experience has obviously been great, and I think it is very much ready for production. For example a large chunk of Facebook's Messenger front-end is already running on Reason.
 
 But Facebook is far away, let's take look at a project that is much closer to home..
 
@@ -1729,37 +1799,6 @@ It is built here in Bangalore.
 And it is fully open-source. One of the authors, Hari Gopal, is also a JsFoo speaker. He had spoken in last year's conference and that was also about Reason.
 
 This is a good reference repository if you want to see a real-world reason web application that is used in production.
-
-:::
-
-------------------
-
-## Adopting Reason in production
-
-* start progressively
-* interop with existing Javascript
-* interop with React
-
-::: notes
-
-You don't have to go big bang when you adopt Reason. Since Reason compiles down to straightforward Javascript, you can start using it in your existing Javascript project and incrementally port over the most complex bits of your code.
-
-
-:::
-
-------------------
-
-
-## Adopting Reason in production
-
-* build personal expertise first
-* start in low-risk projects
-
-::: notes
-
-And in case you're smitten by the language, I would caution to not go overboard with it. You have to first built personal expertise - by building something non-trivial in it yourself before you pitch it in your workplace.
-
-Because once you are convinced that it will help increase quality and reduce cost, which I hope you would be, then your pitch will become strong and convincing.
 
 :::
 
