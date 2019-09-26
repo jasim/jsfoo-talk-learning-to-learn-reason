@@ -1053,34 +1053,10 @@ Yes it breaks! But this is a compile-time breakage. This means no Javascript cod
 
 That's because the compiler found a type error in the code. 
 
-:::
-
-
-------------------
-
-### Type Inference
-
-``` {.javascript}
-type user = { id: int };
-let showNext = u => {
-  Js.log("You will be user " ++ string_of_int(u.id + 1));
-};
-showNext({id: "abc"});
-```
-
-![](images/comp-error-string2.png)
-
-::: notes
-
 It inferred that the function `showNext` expects a value of type `user`, and `user` should have an integer id column inside it. But instead of `user` we sent a random string. That'll definitely break the function in runtime, so Reason wouldn't allow it to move past compilation.
 
-But how did Reason figure out that `showNext` expects a value of type `user`? We haven't mentioned that explicitly anywhere. What's happening is "type inference" -- if you imagined that you'll have to litter your codebase with type annotations, then type inference will make you happy.
-
-Based on the context, Reason figures out the types of values and arguments to functions. It works well even for large programs.
-
-Now let's see how Reason fares with other invalid values.
-
 :::
+
 
 ------------------
 
@@ -1092,7 +1068,7 @@ showNext({id: []});
 
 ::: notes
 
-We're passing in a list instead of an integer. Type error.
+Okay, here's another attempt. We're passing in a list instead of an integer. Type error.
 
 :::
 
@@ -1106,7 +1082,7 @@ showNext(a => a + 1);
 
 ::: notes
 
-Here's a function instead of the entire `user` object. Type error again. 
+Let's try passing a function instead of the entire `user` object. Type error again. 
 
 :::
 
@@ -1133,7 +1109,7 @@ You will be user -4
 
 ::: notes
 
-We can keep going, but the only way to get the program to compile is to pass `showNext` the correct data. That's the number one promise of Typed FP.
+We can keep going, but the only way to get this program to compile is to pass `showNext` the correct data. That's the number one promise of Typed FP.
 
 :::
 
@@ -1148,7 +1124,7 @@ _a stitch in time saves nine_
 
 ::: notes
 
-Let's back up a bit here so I can try to impress upon you the important distinction between a "compile-time error" and a "runtime error".
+I want to take this opportunity to try to impress upon you the important distinction between a "compile-time error" and a "runtime error".
 
 :::
 
@@ -1163,7 +1139,7 @@ let text = Hello! This is a syntax error.
 
 ::: notes
 
-This is supposed to be a Javascript program. But it won't even execute, because the second line has the wrong syntax. The first line is valid by the way -- but it won't print anything because the whole program will be rejected, with this error message:
+This is supposed to be a Javascript program. But it won't even execute, because the second line has an invalid syntax. The first line is valid by the way -- but it won't print anything because the whole program will be rejected.
 
 :::
 
@@ -1177,7 +1153,7 @@ let text = Hello! Is it Javascript you're looking for?
 ```
 
 ```
-let text = Hello! Is it Javascript you're looking for?
+let text = Hello! This is a syntax error.
                 ^
 SyntaxError: Unexpected token !
     at createScript (vm.js:80:10)
@@ -1189,11 +1165,13 @@ SyntaxError: Unexpected token !
 
 ::: notes
 
-That is a good thing - it is best to know problems as early in the programming cycle as possible. 
+Now this error is a good thing - it is best to know problems as early in the programming cycle as possible. 
 
 But imagine if programs were executed despite syntax errors. 
 
-You'll ship the program to customers, and they'll be in the middle of something, and then some semicolon is missing somewhere and boom! the program halts to a crash.
+You'll ship it to customers, and they'll be in the middle of something, and then some closing bracket is missing somewhere and boom! the program halts to a crash.
+
+Thankfully that doesn't happen. When was the last time we lost sleep because we worried about a syntax error in our code?
 
 :::
 
@@ -1208,9 +1186,9 @@ _as if they were syntax errors..._
 
 ::: notes
 
-The genius of Reason and Typed Functional Programming in general is that a lot of common mistakes become compile-time errors rather than runtime errors. 
+The genius of Reason and Typed Functional Programming is that a lot of common mistakes become compile-time errors rather than runtime errors. 
 
-It is like our syntax checking became a lot more smarter - we no longer have to run and test the code manually to catch mistakes.
+It is like our syntax checking became a lot more smarter and covers a lot more area than just missing parantheses.
 
 Let's look at an example.
 
@@ -1232,7 +1210,7 @@ showNext(lastUser)
 
 ::: notes
 
-Going back to this Javascript program -- here we fetch the last user from a list, and does something with it. The list however is empty, and so `lastUser` will be undefined.
+Here's a Javascript program that we had looked at before.  We fetch the last user from a list, and does something with it. The list however is empty, and so `lastUser` will be undefined.
 
 :::
 
@@ -1297,9 +1275,9 @@ Here's the Reason equivalent of the same program. This won't even execute. Inste
 What is this error message saying?
 
 In Line 12, we're calling showNext, and it is expecting a value of type user.
-But, we're passing it something of type option('a).
+But, the compiler is complaining that we're passing it something of type option('a).
 
-What's happening is that in line 11, we've tried fetching an element from the array `users`. Reason knows that whenever you fetch something from an array,  using an integer index, then it is quite possible that the element might not exist.
+What's happening here is that in line 11, we've tried fetching an element from the array `users`. Reason knows that whenever you fetch something from an array then it is quite possible that the element might not exist.
 
 Which is why it is returning a value who has an optional type. So how would we write this instead?
 
@@ -1318,7 +1296,7 @@ switch(lastUser) {
 
 ::: notes
 
-We'll replace line number 12 with this code. What we're doing is acknowledging the fact that lastUse could be empty. And we handle both cases where it could exist or where it could be empty.
+We'll replace line number 12 with this code. What we're doing is acknowledging the fact that lastUser could be empty. And we handle both cases where it can or cannot exist.
 
 So instead of null, or undefined, Reason has the option type. When something is of the option type, it means the compiler knows that it may or may not have a value during runtime. So we're forced to deal with that situation before it will compile the code.
 
@@ -1336,7 +1314,7 @@ So instead of null, or undefined, Reason has the option type. When something is 
 
 ::: notes
 
-Option types is one of the most amazing things about Typed FP. It gives us the kind of confidence in our code that we can refactor mercilessly, aggressively without worrying that we'll make mistakes.
+Option types is one of the most amazing things about Typed FP. It gives us the kind of confidence in our code that allows us to refactor mercilessly, aggressively without worrying that we'll make mistakes.
 
 Because of this a lot of my programming anxiety went away after I started programming with Reason. I can refactor large, complex codebases confidently because I know that Reason has my back. 
 
@@ -1648,11 +1626,11 @@ So initially you have to go through the catalog of language features and learn t
 
 ::: notes
 
-The first phase usually is to learning to program in the small. 
+The first phase is learning to program in the small. 
 
 You should be able to solve a fizzbuzz, read from a file, compute an average, make an API request -- all these things. 
 
-The concepts they need are quite common: data structures, creating functions and calling them etc.
+The concepts that you need here are quite standard: manipulating data structures in Reason, defining and applying functions etc.
 
 :::
 
@@ -1735,11 +1713,23 @@ The missing thing usually is not knowing how to fit things into a larger canvas.
 
 ::: notes
 
-The best resource for systematic study of OCaml is the book Real World OCaml. It uses the OCaml syntax, but you'll get used to that soon. It is a great book because it teaches not just OCaml the language. You can also expect some very practical, very profound insights on programming as a whole, from this book.
+The best resource for systematic study of OCaml is the book Real World OCaml. It uses the OCaml syntax, but that is easy to get used to. It is a great book because it teaches not only OCaml the language. You can also expect some very practical, very profound insights on programming as a whole, from this book.
 
 ::: notes
 
 ------------------
+
+
+### Systematic study
+
+::: notes
+
+I want to stress this point: when learning Typed Functional Programming, you should combine learning by poking - trying to create something and tweaking and  learning from that experience, with a proper, systematic study of the language. Otherwise it can be an extremely frustrating experience.
+
+:::
+
+------------------
+
 
 ## Closing thought 
 

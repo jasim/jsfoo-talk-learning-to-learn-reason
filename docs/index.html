@@ -805,56 +805,41 @@ React, Reason, and ReasonReact</code></pre>
 <aside class="notes">
 <p>Yes it breaks! But this is a compile-time breakage. This means no Javascript code was generated for this Reason program we wrote.</p>
 <p>That’s because the compiler found a type error in the code.</p>
-</aside>
-</section>
-<section class="slide level2">
-
-<h3 id="type-inference">Type Inference</h3>
-<div class="sourceCode" id="cb50"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb50-1"><a href="#cb50-1"></a>type user <span class="op">=</span> <span class="op">{</span> <span class="dt">id</span><span class="op">:</span> int <span class="op">};</span></span>
-<span id="cb50-2"><a href="#cb50-2"></a><span class="kw">let</span> showNext <span class="op">=</span> u <span class="kw">=&gt;</span> <span class="op">{</span></span>
-<span id="cb50-3"><a href="#cb50-3"></a>  <span class="va">Js</span>.<span class="at">log</span>(<span class="st">&quot;You will be user &quot;</span> <span class="op">++</span> <span class="at">string_of_int</span>(<span class="va">u</span>.<span class="at">id</span> <span class="op">+</span> <span class="dv">1</span>))<span class="op">;</span></span>
-<span id="cb50-4"><a href="#cb50-4"></a><span class="op">};</span></span>
-<span id="cb50-5"><a href="#cb50-5"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="st">&quot;abc&quot;</span><span class="op">}</span>)<span class="op">;</span></span></code></pre></div>
-<p><img data-src="images/comp-error-string2.png" /></p>
-<aside class="notes">
 <p>It inferred that the function <code>showNext</code> expects a value of type <code>user</code>, and <code>user</code> should have an integer id column inside it. But instead of <code>user</code> we sent a random string. That’ll definitely break the function in runtime, so Reason wouldn’t allow it to move past compilation.</p>
-<p>But how did Reason figure out that <code>showNext</code> expects a value of type <code>user</code>? We haven’t mentioned that explicitly anywhere. What’s happening is “type inference” – if you imagined that you’ll have to litter your codebase with type annotations, then type inference will make you happy.</p>
-<p>Based on the context, Reason figures out the types of values and arguments to functions. It works well even for large programs.</p>
-<p>Now let’s see how Reason fares with other invalid values.</p>
 </aside>
 </section>
 <section class="slide level2">
 
-<div class="sourceCode" id="cb51"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb51-1"><a href="#cb51-1"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> []<span class="op">}</span>)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb50-1"><a href="#cb50-1"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> []<span class="op">}</span>)<span class="op">;</span></span></code></pre></div>
 <p><img data-src="images/comp-error-list.png" /></p>
 <aside class="notes">
-<p>We’re passing in a list instead of an integer. Type error.</p>
+<p>Okay, here’s another attempt. We’re passing in a list instead of an integer. Type error.</p>
 </aside>
 </section>
 <section class="slide level2">
 
-<div class="sourceCode" id="cb52"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb52-1"><a href="#cb52-1"></a><span class="at">showNext</span>(a <span class="kw">=&gt;</span> a <span class="op">+</span> <span class="dv">1</span>)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb51-1"><a href="#cb51-1"></a><span class="at">showNext</span>(a <span class="kw">=&gt;</span> a <span class="op">+</span> <span class="dv">1</span>)<span class="op">;</span></span></code></pre></div>
 <p><img data-src="images/comp-error-fn.png" /></p>
 <aside class="notes">
-<p>Here’s a function instead of the entire <code>user</code> object. Type error again.</p>
+<p>Let’s try passing a function instead of the entire <code>user</code> object. Type error again.</p>
 </aside>
 </section>
 <section class="slide level2">
 
-<div class="sourceCode" id="cb53"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb53-1"><a href="#cb53-1"></a>type user <span class="op">=</span> <span class="op">{</span> <span class="dt">id</span><span class="op">:</span> int <span class="op">};</span></span>
-<span id="cb53-2"><a href="#cb53-2"></a></span>
-<span id="cb53-3"><a href="#cb53-3"></a><span class="kw">let</span> showNext <span class="op">=</span> u <span class="kw">=&gt;</span> <span class="op">{</span></span>
-<span id="cb53-4"><a href="#cb53-4"></a>  <span class="va">Js</span>.<span class="at">log</span>(<span class="st">&quot;You will be user &quot;</span> <span class="op">++</span> <span class="at">string_of_int</span>(<span class="va">u</span>.<span class="at">id</span> <span class="op">+</span> <span class="dv">1</span>))<span class="op">;</span></span>
-<span id="cb53-5"><a href="#cb53-5"></a><span class="op">};</span></span>
-<span id="cb53-6"><a href="#cb53-6"></a></span>
-<span id="cb53-7"><a href="#cb53-7"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="dv">44</span><span class="op">}</span>)<span class="op">;</span></span>
-<span id="cb53-8"><a href="#cb53-8"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="dv">299</span><span class="op">}</span>)<span class="op">;</span></span>
-<span id="cb53-9"><a href="#cb53-9"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="dv">-44</span><span class="op">}</span>)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb52-1"><a href="#cb52-1"></a>type user <span class="op">=</span> <span class="op">{</span> <span class="dt">id</span><span class="op">:</span> int <span class="op">};</span></span>
+<span id="cb52-2"><a href="#cb52-2"></a></span>
+<span id="cb52-3"><a href="#cb52-3"></a><span class="kw">let</span> showNext <span class="op">=</span> u <span class="kw">=&gt;</span> <span class="op">{</span></span>
+<span id="cb52-4"><a href="#cb52-4"></a>  <span class="va">Js</span>.<span class="at">log</span>(<span class="st">&quot;You will be user &quot;</span> <span class="op">++</span> <span class="at">string_of_int</span>(<span class="va">u</span>.<span class="at">id</span> <span class="op">+</span> <span class="dv">1</span>))<span class="op">;</span></span>
+<span id="cb52-5"><a href="#cb52-5"></a><span class="op">};</span></span>
+<span id="cb52-6"><a href="#cb52-6"></a></span>
+<span id="cb52-7"><a href="#cb52-7"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="dv">44</span><span class="op">}</span>)<span class="op">;</span></span>
+<span id="cb52-8"><a href="#cb52-8"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="dv">299</span><span class="op">}</span>)<span class="op">;</span></span>
+<span id="cb52-9"><a href="#cb52-9"></a><span class="at">showNext</span>(<span class="op">{</span><span class="dt">id</span><span class="op">:</span> <span class="dv">-44</span><span class="op">}</span>)<span class="op">;</span></span></code></pre></div>
 <pre><code>You will be user 45
 You will be user 300
 You will be user -4</code></pre>
 <aside class="notes">
-<p>We can keep going, but the only way to get the program to compile is to pass <code>showNext</code> the correct data. That’s the number one promise of Typed FP.</p>
+<p>We can keep going, but the only way to get this program to compile is to pass <code>showNext</code> the correct data. That’s the number one promise of Typed FP.</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -863,24 +848,24 @@ You will be user -4</code></pre>
 <h3 id="compile-time-vs-runtime-errors">compile-time vs runtime errors</h3>
 <p><em>a stitch in time saves nine</em></p>
 <aside class="notes">
-<p>Let’s back up a bit here so I can try to impress upon you the important distinction between a “compile-time error” and a “runtime error”.</p>
+<p>I want to take this opportunity to try to impress upon you the important distinction between a “compile-time error” and a “runtime error”.</p>
 </aside>
 </section>
 <section class="slide level2">
 
 <h3 id="syntax-errors-are-caught-early">Syntax errors are caught early</h3>
-<div class="sourceCode" id="cb55"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb55-1"><a href="#cb55-1"></a><span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;program started executing&quot;</span>)</span>
-<span id="cb55-2"><a href="#cb55-2"></a><span class="kw">let</span> text <span class="op">=</span> Hello<span class="op">!</span> This is a syntax <span class="va">error</span>.</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb54-1"><a href="#cb54-1"></a><span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;program started executing&quot;</span>)</span>
+<span id="cb54-2"><a href="#cb54-2"></a><span class="kw">let</span> text <span class="op">=</span> Hello<span class="op">!</span> This is a syntax <span class="va">error</span>.</span></code></pre></div>
 <aside class="notes">
-<p>This is supposed to be a Javascript program. But it won’t even execute, because the second line has the wrong syntax. The first line is valid by the way – but it won’t print anything because the whole program will be rejected, with this error message:</p>
+<p>This is supposed to be a Javascript program. But it won’t even execute, because the second line has an invalid syntax. The first line is valid by the way – but it won’t print anything because the whole program will be rejected.</p>
 </aside>
 </section>
 <section class="slide level2">
 
 <h3 id="syntax-errors-are-caught-early-1">Syntax errors are caught early</h3>
-<div class="sourceCode" id="cb56"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb56-1"><a href="#cb56-1"></a><span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;program started executing&quot;</span>)</span>
-<span id="cb56-2"><a href="#cb56-2"></a><span class="kw">let</span> text <span class="op">=</span> Hello<span class="op">!</span> Is it Javascript you<span class="st">&#39;re looking for?</span></span></code></pre></div>
-<pre><code>let text = Hello! Is it Javascript you&#39;re looking for?
+<div class="sourceCode" id="cb55"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb55-1"><a href="#cb55-1"></a><span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;program started executing&quot;</span>)</span>
+<span id="cb55-2"><a href="#cb55-2"></a><span class="kw">let</span> text <span class="op">=</span> Hello<span class="op">!</span> Is it Javascript you<span class="st">&#39;re looking for?</span></span></code></pre></div>
+<pre><code>let text = Hello! This is a syntax error.
                 ^
 SyntaxError: Unexpected token !
     at createScript (vm.js:80:10)
@@ -889,9 +874,10 @@ SyntaxError: Unexpected token !
     at Object.Module._extensions..js (module.js:664:10)
     ...</code></pre>
 <aside class="notes">
-<p>That is a good thing - it is best to know problems as early in the programming cycle as possible.</p>
+<p>Now this error is a good thing - it is best to know problems as early in the programming cycle as possible.</p>
 <p>But imagine if programs were executed despite syntax errors.</p>
-<p>You’ll ship the program to customers, and they’ll be in the middle of something, and then some semicolon is missing somewhere and boom! the program halts to a crash.</p>
+<p>You’ll ship it to customers, and they’ll be in the middle of something, and then some closing bracket is missing somewhere and boom! the program halts to a crash.</p>
+<p>Thankfully that doesn’t happen. When was the last time we lost sleep because we worried about a syntax error in our code?</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -900,9 +886,24 @@ SyntaxError: Unexpected token !
 <h4 id="reason-moves-runtime-errors-into-compile-time-errors">Reason moves runtime errors into compile-time errors</h4>
 <p><em>as if they were syntax errors…</em></p>
 <aside class="notes">
-<p>The genius of Reason and Typed Functional Programming in general is that a lot of common mistakes become compile-time errors rather than runtime errors.</p>
-<p>It is like our syntax checking became a lot more smarter - we no longer have to run and test the code manually to catch mistakes.</p>
+<p>The genius of Reason and Typed Functional Programming is that a lot of common mistakes become compile-time errors rather than runtime errors.</p>
+<p>It is like our syntax checking became a lot more smarter and covers a lot more area than just missing parantheses.</p>
 <p>Let’s look at an example.</p>
+</aside>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode" id="cb57"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb57-1"><a href="#cb57-1"></a><span class="kw">let</span> showNext <span class="op">=</span> lastUser <span class="kw">=&gt;</span> <span class="op">{</span></span>
+<span id="cb57-2"><a href="#cb57-2"></a>  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;You will be user &quot;</span> <span class="op">+</span> (<span class="va">lastUser</span>.<span class="at">id</span> <span class="op">+</span> <span class="dv">1</span>))</span>
+<span id="cb57-3"><a href="#cb57-3"></a><span class="op">}</span></span>
+<span id="cb57-4"><a href="#cb57-4"></a></span>
+<span id="cb57-5"><a href="#cb57-5"></a><span class="kw">let</span> users <span class="op">=</span> []</span>
+<span id="cb57-6"><a href="#cb57-6"></a><span class="kw">let</span> lastUserIndex <span class="op">=</span> <span class="va">users</span>.<span class="at">length</span> <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb57-7"><a href="#cb57-7"></a><span class="kw">let</span> lastUser <span class="op">=</span> users[lastUserIndex]</span>
+<span id="cb57-8"><a href="#cb57-8"></a></span>
+<span id="cb57-9"><a href="#cb57-9"></a><span class="at">showNext</span>(lastUser)</span></code></pre></div>
+<aside class="notes">
+<p>Here’s a Javascript program that we had looked at before. We fetch the last user from a list, and does something with it. The list however is empty, and so <code>lastUser</code> will be undefined.</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -916,21 +917,6 @@ SyntaxError: Unexpected token !
 <span id="cb58-7"><a href="#cb58-7"></a><span class="kw">let</span> lastUser <span class="op">=</span> users[lastUserIndex]</span>
 <span id="cb58-8"><a href="#cb58-8"></a></span>
 <span id="cb58-9"><a href="#cb58-9"></a><span class="at">showNext</span>(lastUser)</span></code></pre></div>
-<aside class="notes">
-<p>Going back to this Javascript program – here we fetch the last user from a list, and does something with it. The list however is empty, and so <code>lastUser</code> will be undefined.</p>
-</aside>
-</section>
-<section class="slide level2">
-
-<div class="sourceCode" id="cb59"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb59-1"><a href="#cb59-1"></a><span class="kw">let</span> showNext <span class="op">=</span> lastUser <span class="kw">=&gt;</span> <span class="op">{</span></span>
-<span id="cb59-2"><a href="#cb59-2"></a>  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;You will be user &quot;</span> <span class="op">+</span> (<span class="va">lastUser</span>.<span class="at">id</span> <span class="op">+</span> <span class="dv">1</span>))</span>
-<span id="cb59-3"><a href="#cb59-3"></a><span class="op">}</span></span>
-<span id="cb59-4"><a href="#cb59-4"></a></span>
-<span id="cb59-5"><a href="#cb59-5"></a><span class="kw">let</span> users <span class="op">=</span> []</span>
-<span id="cb59-6"><a href="#cb59-6"></a><span class="kw">let</span> lastUserIndex <span class="op">=</span> <span class="va">users</span>.<span class="at">length</span> <span class="op">-</span> <span class="dv">1</span></span>
-<span id="cb59-7"><a href="#cb59-7"></a><span class="kw">let</span> lastUser <span class="op">=</span> users[lastUserIndex]</span>
-<span id="cb59-8"><a href="#cb59-8"></a></span>
-<span id="cb59-9"><a href="#cb59-9"></a><span class="at">showNext</span>(lastUser)</span></code></pre></div>
 <pre><code>Uncaught TypeError: Cannot read property &#39;id&#39; of undefined</code></pre>
 <aside class="notes">
 <p>So it crashes during execution with a runtime error.</p>
@@ -939,17 +925,17 @@ SyntaxError: Unexpected token !
 </section>
 <section class="slide level2">
 
-<div class="sourceCode" id="cb61"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb61-1"><a href="#cb61-1"></a>type user <span class="op">=</span> <span class="op">{</span><span class="dt">id</span><span class="op">:</span> int<span class="op">};</span></span>
-<span id="cb61-2"><a href="#cb61-2"></a></span>
-<span id="cb61-3"><a href="#cb61-3"></a><span class="kw">let</span> showNext <span class="op">=</span> u <span class="kw">=&gt;</span> <span class="op">{</span></span>
-<span id="cb61-4"><a href="#cb61-4"></a>  <span class="va">Js</span>.<span class="at">log</span>(<span class="st">&quot;You will be user &quot;</span> <span class="op">++</span> <span class="at">string_of_int</span>(<span class="va">u</span>.<span class="at">id</span> <span class="op">+</span> <span class="dv">1</span>))<span class="op">;</span></span>
-<span id="cb61-5"><a href="#cb61-5"></a><span class="op">};</span></span>
-<span id="cb61-6"><a href="#cb61-6"></a></span>
-<span id="cb61-7"><a href="#cb61-7"></a><span class="kw">let</span> users <span class="op">=</span> [<span class="op">||</span>]<span class="op">;</span>  <span class="co">/* empty array */</span></span>
-<span id="cb61-8"><a href="#cb61-8"></a><span class="kw">let</span> lastUserIndex <span class="op">=</span> users[<span class="va">Array</span>.<span class="at">length</span>(users) <span class="op">-</span> <span class="dv">1</span>]<span class="op">;</span></span>
-<span id="cb61-9"><a href="#cb61-9"></a><span class="kw">let</span> lastUser <span class="op">=</span> users[lastUserIndex]<span class="op">;</span></span>
-<span id="cb61-10"><a href="#cb61-10"></a></span>
-<span id="cb61-11"><a href="#cb61-11"></a><span class="at">showNext</span>(lastUser)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb60-1"><a href="#cb60-1"></a>type user <span class="op">=</span> <span class="op">{</span><span class="dt">id</span><span class="op">:</span> int<span class="op">};</span></span>
+<span id="cb60-2"><a href="#cb60-2"></a></span>
+<span id="cb60-3"><a href="#cb60-3"></a><span class="kw">let</span> showNext <span class="op">=</span> u <span class="kw">=&gt;</span> <span class="op">{</span></span>
+<span id="cb60-4"><a href="#cb60-4"></a>  <span class="va">Js</span>.<span class="at">log</span>(<span class="st">&quot;You will be user &quot;</span> <span class="op">++</span> <span class="at">string_of_int</span>(<span class="va">u</span>.<span class="at">id</span> <span class="op">+</span> <span class="dv">1</span>))<span class="op">;</span></span>
+<span id="cb60-5"><a href="#cb60-5"></a><span class="op">};</span></span>
+<span id="cb60-6"><a href="#cb60-6"></a></span>
+<span id="cb60-7"><a href="#cb60-7"></a><span class="kw">let</span> users <span class="op">=</span> [<span class="op">||</span>]<span class="op">;</span>  <span class="co">/* empty array */</span></span>
+<span id="cb60-8"><a href="#cb60-8"></a><span class="kw">let</span> lastUserIndex <span class="op">=</span> users[<span class="va">Array</span>.<span class="at">length</span>(users) <span class="op">-</span> <span class="dv">1</span>]<span class="op">;</span></span>
+<span id="cb60-9"><a href="#cb60-9"></a><span class="kw">let</span> lastUser <span class="op">=</span> users[lastUserIndex]<span class="op">;</span></span>
+<span id="cb60-10"><a href="#cb60-10"></a></span>
+<span id="cb60-11"><a href="#cb60-11"></a><span class="at">showNext</span>(lastUser)<span class="op">;</span></span></code></pre></div>
 <aside class="notes">
 <p>Here’s the Reason equivalent of the same program. This won’t even execute. Instead we’ll get this compile-time error:</p>
 </aside>
@@ -959,20 +945,20 @@ SyntaxError: Unexpected token !
 <p><img data-src="images/comp-error-optionGet.png" /></p>
 <aside class="notes">
 <p>What is this error message saying?</p>
-<p>In Line 12, we’re calling showNext, and it is expecting a value of type user. But, we’re passing it something of type option(’a).</p>
-<p>What’s happening is that in line 11, we’ve tried fetching an element from the array <code>users</code>. Reason knows that whenever you fetch something from an array, using an integer index, then it is quite possible that the element might not exist.</p>
+<p>In Line 12, we’re calling showNext, and it is expecting a value of type user. But, the compiler is complaining that we’re passing it something of type option(’a).</p>
+<p>What’s happening here is that in line 11, we’ve tried fetching an element from the array <code>users</code>. Reason knows that whenever you fetch something from an array then it is quite possible that the element might not exist.</p>
 <p>Which is why it is returning a value who has an optional type. So how would we write this instead?</p>
 </aside>
 </section>
 <section class="slide level2">
 
 <p><img data-src="images/comp-error-optionGet.png" /></p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb62-1"><a href="#cb62-1"></a><span class="cf">switch</span>(lastUser) <span class="op">{</span></span>
-<span id="cb62-2"><a href="#cb62-2"></a>  <span class="op">|</span> None <span class="kw">=&gt;</span> <span class="va">Js</span>.<span class="at">log</span>(<span class="st">&quot;No users in the list&quot;</span>)</span>
-<span id="cb62-3"><a href="#cb62-3"></a>  <span class="op">|</span> <span class="at">Some</span>(user) <span class="kw">=&gt;</span> <span class="at">showNext</span>(user)</span>
-<span id="cb62-4"><a href="#cb62-4"></a><span class="op">};</span></span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb61-1"><a href="#cb61-1"></a><span class="cf">switch</span>(lastUser) <span class="op">{</span></span>
+<span id="cb61-2"><a href="#cb61-2"></a>  <span class="op">|</span> None <span class="kw">=&gt;</span> <span class="va">Js</span>.<span class="at">log</span>(<span class="st">&quot;No users in the list&quot;</span>)</span>
+<span id="cb61-3"><a href="#cb61-3"></a>  <span class="op">|</span> <span class="at">Some</span>(user) <span class="kw">=&gt;</span> <span class="at">showNext</span>(user)</span>
+<span id="cb61-4"><a href="#cb61-4"></a><span class="op">};</span></span></code></pre></div>
 <aside class="notes">
-<p>We’ll replace line number 12 with this code. What we’re doing is acknowledging the fact that lastUse could be empty. And we handle both cases where it could exist or where it could be empty.</p>
+<p>We’ll replace line number 12 with this code. What we’re doing is acknowledging the fact that lastUser could be empty. And we handle both cases where it can or cannot exist.</p>
 <p>So instead of null, or undefined, Reason has the option type. When something is of the option type, it means the compiler knows that it may or may not have a value during runtime. So we’re forced to deal with that situation before it will compile the code.</p>
 </aside>
 </section>
@@ -982,7 +968,7 @@ SyntaxError: Unexpected token !
 <p> </p>
 <h3 id="refactor-confidently">Refactor confidently!</h3>
 <aside class="notes">
-<p>Option types is one of the most amazing things about Typed FP. It gives us the kind of confidence in our code that we can refactor mercilessly, aggressively without worrying that we’ll make mistakes.</p>
+<p>Option types is one of the most amazing things about Typed FP. It gives us the kind of confidence in our code that allows us to refactor mercilessly, aggressively without worrying that we’ll make mistakes.</p>
 <p>Because of this a lot of my programming anxiety went away after I started programming with Reason. I can refactor large, complex codebases confidently because I know that Reason has my back.</p>
 </aside>
 </section>
@@ -1157,11 +1143,11 @@ SyntaxError: Unexpected token !
 <h2>How to learn</h2>
 <p> </p>
 <p>Start building UIs with ReasonReact</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb64-1"><a href="#cb64-1"></a>[@<span class="va">react</span>.<span class="at">component</span>]</span>
-<span id="cb64-2"><a href="#cb64-2"></a><span class="kw">let</span> make <span class="op">=</span> (<span class="op">~</span>name) <span class="kw">=&gt;</span></span>
-<span id="cb64-3"><a href="#cb64-3"></a>  <span class="op">&lt;</span>button<span class="op">&gt;</span></span>
-<span id="cb64-4"><a href="#cb64-4"></a>    <span class="op">{</span><span class="va">React</span>.<span class="at">string</span>(<span class="st">&quot;Hello!&quot;</span>)<span class="op">}</span></span>
-<span id="cb64-5"><a href="#cb64-5"></a>  &lt;/button<span class="op">&gt;;</span></span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb63-1"><a href="#cb63-1"></a>[@<span class="va">react</span>.<span class="at">component</span>]</span>
+<span id="cb63-2"><a href="#cb63-2"></a><span class="kw">let</span> make <span class="op">=</span> (<span class="op">~</span>name) <span class="kw">=&gt;</span></span>
+<span id="cb63-3"><a href="#cb63-3"></a>  <span class="op">&lt;</span>button<span class="op">&gt;</span></span>
+<span id="cb63-4"><a href="#cb63-4"></a>    <span class="op">{</span><span class="va">React</span>.<span class="at">string</span>(<span class="st">&quot;Hello!&quot;</span>)<span class="op">}</span></span>
+<span id="cb63-5"><a href="#cb63-5"></a>  &lt;/button<span class="op">&gt;;</span></span></code></pre></div>
 <aside class="notes">
 <p>So what is the fastest way to really learn Reason?</p>
 <p>You can start by building simple user interfaces with ReasonReact. We usually learn new things by what is called programming by poking. Find a new library, copy paste some sample code, and start tweaking it till we make it work. That approach will go a long way to get you started.</p>
@@ -1188,9 +1174,9 @@ SyntaxError: Unexpected token !
 </ul></li>
 </ul>
 <aside class="notes">
-<p>The first phase usually is to learning to program in the small.</p>
+<p>The first phase is learning to program in the small.</p>
 <p>You should be able to solve a fizzbuzz, read from a file, compute an average, make an API request – all these things.</p>
-<p>The concepts they need are quite common: data structures, creating functions and calling them etc.</p>
+<p>The concepts that you need here are quite standard: manipulating data structures in Reason, defining and applying functions etc.</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -1257,8 +1243,15 @@ SyntaxError: Unexpected token !
 <h3 id="book-recommendation">Book Recommendation</h3>
 <p><img data-src="images/rwo-cover.png" /></p>
 <p>::: notes</p>
-<p>The best resource for systematic study of OCaml is the book Real World OCaml. It uses the OCaml syntax, but you’ll get used to that soon. It is a great book because it teaches not just OCaml the language. You can also expect some very practical, very profound insights on programming as a whole, from this book.</p>
+<p>The best resource for systematic study of OCaml is the book Real World OCaml. It uses the OCaml syntax, but that is easy to get used to. It is a great book because it teaches not only OCaml the language. You can also expect some very practical, very profound insights on programming as a whole, from this book.</p>
 <p>::: notes</p>
+</section>
+<section class="slide level2">
+
+<h3 id="systematic-study">Systematic study</h3>
+<aside class="notes">
+<p>I want to stress this point: when learning Typed Functional Programming, you should combine learning by poking - trying to create something and tweaking and learning from that experience, with a proper, systematic study of the language. Otherwise it can be an extremely frustrating experience.</p>
+</aside>
 </section>
 <section id="closing-thought" class="slide level2">
 <h2>Closing thought</h2>
