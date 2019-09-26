@@ -41,9 +41,11 @@ This is one of the earliest software that I built.
 
 ::: notes
 
-Here's another. These were fun to make and they were simpler times. But all good things have to come to an end. 
+ These things were fun to make and you didn't even need to be a professional programmer. Simpler times.
 
-I've since worked on modern web applications, on the front-end, back-end, and also programmed different languages including Javascript.
+But all good things have to come to an end. 
+
+So I've since worked on modern web applications, on the front-end, back-end, and also programmed different languages including Javascript.
 
 Most recently I've been jamming with a friend building tools for designers & front-end developers. 
 
@@ -154,7 +156,7 @@ In each step here, we decorate the nodes with more info, sometimes change their 
 
 ::: notes
 
-For illustration, here is a possible initial shape of the node.
+Here's a simplified illustration. Consider this is the initial shape of the node:
 
 :::
 
@@ -200,25 +202,6 @@ Now this could be its next shape.
 }
 ```
 
-::: notes
-
-which could again take another shape,
-
-:::
-
-
-------------------
-
-``` {.javascript}
-{
-  nodeType: "text",
-  marginLeft: 0,
-  marginTop: 64,
-  width: 600,
-  height: 63
-}
-```
-
 ``` {.javascript}
 {
   nodeType: "text",
@@ -231,11 +214,11 @@ which could again take another shape,
 
 ::: notes
 
-And this could be its next shape, and so on. There were hundreds of these transformations, some small, some big, and it was too much for us to mentally track. 
+And this could be its next shape, and so on. We had hundreds of these kinds of transformations - some small, and some big, and it was all too much for us to mentally track. 
 
-We kept making mistakes and any progress on the product sort of halted.
+We kept making mistakes and progress slowed.
 
-We wanted a better way to track this changing shape of the data as they went through each transformation, and had an inkling that types could be the answer.
+We wanted a better way to track the changing shape of the data as they went through each transformation. And we had an inkling that types could be the answer.
 
 :::
 
@@ -260,7 +243,6 @@ Which was when Jordan Walke, the original author of React, released the first ve
 
 Reason was a typed language, and it compiled to Javascript. So we could rewrite all our transformation code in Reason and have it work both on Node and also on the browser.
 
-
 He also shipped ReasonReact a bit later, which is the Reason adaptor for the React UI library. And thanks to that we could even build UIs in Reason and mix and match it with React components, which was written in Javascript.
 
 So that's what we did!
@@ -283,7 +265,7 @@ It can also be a little frustrating to work through, especially for us because w
 But the struggle was worth it. 
 
 It was worth so much that now 
-when I look back on the last 10 years of my programming, I wonder what I was doing for the first 8 years, before I had discovered Reason and Typed Functional Programming. 
+when I look back on the last 10 years of my programming, I almost wonder what I was doing for the first 8 years, before I had discovered Reason and Typed Functional Programming. 
 
 And that is why I'm so excited to be here today, and talk to you all about ReasonML. 
 
@@ -382,7 +364,7 @@ let print_html_table = segments => {
 
 Here's the same OCaml code, but in the Reason syntax. This is closer to ES6 as we know it - there are braces to denote blocks. The fat arrow operator lets us create functions,; and semicolons are used for separating lines.
 
-Underneath, however Reason and OCaml are the same language and have the same semantics. In this presentation I'll use refer to Reason and OCaml interchangeably, depending on what fits the context better.
+Underneath, however Reason and OCaml are the same language and have the same semantics.
 
 :::
 
@@ -392,7 +374,7 @@ Underneath, however Reason and OCaml are the same language and have the same sem
 
 ::: notes
 
-So is it actually useful? This language. What can we build with it? Let me take you through some examples.
+So is it actually useful? This language. What can we build with it? 
 
 :::
 
@@ -406,7 +388,7 @@ So is it actually useful? This language. What can we build with it? Let me take 
 
 ::: notes
 
-When you start reading about OCaml, you'll often come across Jane Street. They are one of the largest production users of the language and they do billions of dollars worth of trading, all with software written in OCaml.
+When you start reading about OCaml, you'll often come across Jane Street. They are one of the largest production users of the language and they did $8 trillion dollars of trading in 2018, and all of that used software written in OCaml.
 
 :::
 
@@ -471,13 +453,15 @@ Let us take a look at that next.
 
 &nbsp;
 
-##### 1) Native `ocamlc`: produces _executable binary_
+```
+* ocamlc: produces executable binary
+```
 
 
 ::: notes
 
 
-The native OCaml compiler is a thing of beauty - both the compiler and the generated binaries are extremely fast and lightweight. So if you had something you wanted to build with say GoLang, you can use OCaml or Reason instead.
+The native OCaml compiler generates executable binaries that are very fast and lightweight. So if you had something you wanted to build with say GoLang, you can use OCaml or Reason instead and compile it with ocamlc.
 
 
 :::
@@ -488,12 +472,16 @@ The native OCaml compiler is a thing of beauty - both the compiler and the gener
 
 &nbsp;
 
-##### 1) Native `ocamlc`: produces _executable binary_ {.muted}
-##### 2) `js_of_ocaml`: produces _Javascript_, can use any OCaml library
+```
+* ocamlc: produces executable binary
+
+* js_of_ocaml: produces Javascript, supports only OCaml libraries
+```
+
 
 ::: notes
 
-Then there is js_of_ocaml -- it is a fork of the OCaml library, and it produces Javascript instead of native binaries. But it is sort of isolated from the Javascript ecosystem - it can make use of OCaml libraries, but nothing from npm.
+Then there is js_of_ocaml -- it is a fork of the OCaml compiler, and it produces Javascript instead of native binaries. But it is very isolated from the Javascript ecosystem - it can make use of OCaml libraries, but nothing from npm. 
 
 :::
 
@@ -504,13 +492,18 @@ Then there is js_of_ocaml -- it is a fork of the OCaml library, and it produces 
 
 &nbsp;
 
-##### 1) Native `ocamlc`: produces _executable binary_ {.muted}
-##### 2) `js_of_ocaml`: produces _Javascript_, can use any OCaml library {.muted}
-##### 3) BuckleScript `bsc`: produces _Javascript_, and can use any npm package
+```
+* ocamlc: produces executable binary
+
+* js_of_ocaml: produces Javascript, supports only OCaml libs
+
+* BuckleScript produces Javascript, and can use any npm package
+```
+
 
 ::: notes
 
-Then we have BuckleScript. This compiler produces clean, performant Javascript, and it interops nicely with npm and the rest of the Javascript ecosystem.
+Then we have BuckleScript, which is the only compiler we care about. It produces clean, performant Javascript, and it interops nicely with npm and the rest of the Javascript ecosystem.
 
 :::
 
@@ -526,9 +519,7 @@ Then we have BuckleScript. This compiler produces clean, performant Javascript, 
 
 ::: notes
 
-BuckleScript was written at Bloomberg, who is also a large user of OCaml.
-
-Reason uses BuckleScript for all its stuff. It generates readable and fast Javascript, and we can use it to run on either Node or on the browser.
+BuckleScript is the primary compiler for Reason. It generates readable and fast Javascript, and we can use it to run on either Node or on the browser.
 
 So for the rest of this talk, we're going to be talking about using the Reason syntax for OCaml, with the BuckleScript compiler.
 
@@ -666,12 +657,9 @@ Okay.
 
 ## Paradigm
 
-&nbsp;
-
-### Reason/OCaml is a Typed Functional language
-
 ::: notes
 
+Let's now look at 
 
 :::
 
@@ -683,13 +671,9 @@ Okay.
 
 ### Reason/OCaml is a Typed Functional language
 
-&nbsp;
-
-_so is Haskell, Elm, F#, and PureScript_
-
 ::: notes
 
-
+Let's now
 
 :::
 
@@ -1338,7 +1322,7 @@ Here's the Reason equivalent of the previous program. This won't even execute. I
 
 ::: notes
 
-
+Here's what this error message is saying:
 
 :::
 
@@ -1596,13 +1580,11 @@ You can ask and be asked so many questions. There is the concept of `this`, ther
 
 Compared to a Javascript job interview, a Reason interview could be rather uneventful; because it is a much smaller language than JS. All it has are functions, modules, and types. We don't, for example, concern ourselves with what `this` could be during runtime. 
 
-Next I want to give you a mental model on how to approach the whole learning process.
-
 :::
 
 ------------------
 
-### Learning Reason
+### Outline
 
 * **Programming in the small**
   * variables, data structures, iteration, functions
@@ -1685,10 +1667,21 @@ The missing thing usually is not knowing how to fit things into a larger canvas.
 
 :::
 
+------------------
+
+&nbsp;
+
+## Learning approaches
+
+::: notes
+
+There is a learning style that is very common among programmers -- we learn by making things. Gerald Sussman calls this approach "Learning by poking".
+
+:::
 
 ------------------
 
-### Programming by poking
+### Learn by building something
 
 > You grab this piece of library and you poke at it. You write programs that poke it and see what it does. And you say, ‘Can I tweak it to do the thing I want?'
 
@@ -1696,16 +1689,16 @@ The missing thing usually is not knowing how to fit things into a larger canvas.
 
 ::: notes
 
-What is Sussman calls programming by poking is sort of the bread and butter of programmers now. If we want to learn a new library for example, we'll copy some sample code, tweak it, and over time we get it working, and we also learn its fundamentals through that experience.
+If we want to learn a new library, we usually copy some sample code, tweak it, and over time we get it working, and we also learn its fundamentals through that experience.
 
-This is what let's call the top-down approach to learning. We also need a bottom-up approach when learning a language like Reason.
+But we also need a more systematic approach when learning a language like Reason.
 
 :::
 
 
 ------------------
 
-#### Top-down learning + Bottom-up learning
+#### Learn systematically
 
 * Learn language basics systematically
 * Don't worry about immediate application
@@ -1714,23 +1707,21 @@ This is what let's call the top-down approach to learning. We also need a bottom
 
 What this means is that we should simply go through the catalog of language features and learn them -- without looking for any immediate application. 
 
-It is beacause Typed FP brings a new set of concepts than we're used to, and so  when we try making something practical and get stuck, we won't even know what to look for.
-
-So you have to combine both the top-down approach - learning by poking and also bottom-up where you learn the foundations ground up. 
+It is because if we try making something with Reason, and get hit with an error, we wouldn't know where to even look. 
 
 :::
 
 ------------------
 
-#### Top-down learning + Bottom-up learning
+#### Learn systematically
 
 ![](images/rwo-cover.png)
 
 ::: notes
 
-The best way to do that is to try making something with Reason and pursue the Real World OCaml book in parallel. It uses the OCaml syntax, but that should only be a minor hiccup. 
+The best resource for systematic study of OCaml is the book Real World OCaml. It uses the OCaml syntax, but that should only be a minor hiccup. 
 
-It is a great book because it teaches not just OCaml the language. You can also expect some very practical, very profound insights on programming as a whole, from this  book.
+It is a great book because it teaches not just OCaml the language. You can also expect some very practical, very profound insights on programming as a whole, from this book.
 
 :::
 
