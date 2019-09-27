@@ -23,8 +23,16 @@ let f = (acc, line: string) => {
   };
 };
 
-let () = {
-  let lines = Stdio.In_channel.read_lines("main.md");
+let getInputFilename = () =>
+  if (Array.length(Sys.argv) == 2) {
+    Some(Sys.argv[1]);
+  } else {
+    None;
+  };
+
+let showNotes = filename => {
+  print_endline(filename);
+  let lines = Stdio.In_channel.read_lines(filename);
   let (notes, _) = List.fold(lines, ~init=([], Regular), ~f);
   let notes = List.rev(notes);
   List.iter(
@@ -34,4 +42,11 @@ let () = {
       print_string("----------\n");
     },
   );
+};
+
+let () = {
+  switch (getInputFilename()) {
+  | Some(filename) => showNotes(filename)
+  | None => print_endline("Parameter required: filename")
+  };
 };
