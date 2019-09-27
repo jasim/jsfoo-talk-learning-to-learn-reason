@@ -15,7 +15,8 @@ all : ${REVEAL}
 	pandoc -t revealjs --slide-level 2 -s -o $@ $^ -V revealjs-url="." -V theme=serif
 	ruby ./fixup-reveal.rb $@
 	mv $@ ./docs/index.html
-	cp -R images ./docs	
+	mv speaker_notes.html ./docs/speaker_notes.html
+	cp -R images ./docs		
 
 %.md.handout.pdf : %.md
 	pandoc $^ -t beamer --slide-level 2 -V handout -o $@ 
