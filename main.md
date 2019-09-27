@@ -30,7 +30,7 @@ Hello, my name is Jasim, and I'm here today to talk about ReasonML.
 
 ::: notes
 
-A little about me, I've been programming professionally for over 10 years now. 
+A little about me, I've been programming professionally for a little over 10 years now. 
 
 This is one of the earliest software that I built.
 
@@ -221,9 +221,7 @@ Now this could be its next shape.
 
 And this could be its next shape, and so on. We had hundreds of these kinds of transformations - some small, and some big, and it was all too much for us to mentally track. 
 
-Mistakes were made. Many mistakes, in fact, were made. 
-
-Progress was very slow.
+This lack of mental model made it very difficult for us to make progress. We kept making mistakes and development just slowed down.
 
 We wanted a better way to track the changing shape of the data as they went through each transformation. And we had an inkling that types could be the answer.
 
@@ -414,7 +412,7 @@ When you start reading about OCaml, you'll often come across Jane Street. They a
 
 ::: notes
 
-If you have done any SEO work, you might be familiar with Ahrefs. They crawl about 5 million pages every minute, and they have the second largest index just after Google. They use native OCaml for all the back-end work and for the front-end web they use Reason.
+If you have done any SEO work, you might be familiar with Ahrefs. They crawl about 5 million pages every minute, and they have the second largest index just after Google. All this work is done using native OCaml.
 
 :::
 
@@ -596,9 +594,7 @@ if (Moment().isSame(MomentRe.moment(undefined, "2020-04-01"), "day")) {
 
 At the bottom is the Javascript produced by BuckleScript. It is straightforward JS, and it uses the CommonJS syntax to require the momentjs npm module.
 
-That's one of the best thing about Reason: since we're using BuckleScript, we can use any npm library in our code. And we can integrate it into our existing Javascript projects as well. 
-
-There is some work - you have to write type definitions for the library you want to use, but otherwise it is painless.
+That's one of the best thing about Reason: since we're using BuckleScript, we can use any npm library in our code. And since it produces regular Javascript, we can integrate it with our existing codebase as well.
 
 :::
 
@@ -609,7 +605,7 @@ There is some work - you have to write type definitions for the library you want
 
 ::: notes
 
-Let's talk a little bit about programming language paradigms.
+Let's talk a little bit about Reason's programming language paradigm.
 
 :::
 
@@ -641,13 +637,13 @@ Hindley–Milner type system
 
 So are languages like Elm, F#, and Haskell.
 
-All these languages share the same Type System - Hindley Milner typesystem, and have a similar approach to functional programming. 
+All these languages share the same Type System - it is called the Hindley Milner typesystem, and they also share a similar approach to functional programming. 
 
-A great thing is that if you read say an article about Elm, it is highly probable that it also applies to Reason. And vice versa. 
+So if you read say an insightful article about Elm, it is highly probable that it also applies to Reason. And vice versa. 
 
-So when you learn Reason, you're also dipping your toes into the vast, and varied world of Typed Functional Programming. 
+In fact most things that I'll speak about in this talk will also apply equally well to the other Typed functional languages as well.
 
-Most things that I'll speak about in this talk will also apply equally well to the other languages in this category.
+So when you learn Reason, you're also dipping your toes into the vast, and varied world of all Typed Functional Programming languages. 
 
 :::
 

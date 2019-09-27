@@ -169,7 +169,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <p><img data-src="images/dos-ea.png" /></p>
 <aside class="notes">
-<p>A little about me, I’ve been programming professionally for over 10 years now.</p>
+<p>A little about me, I’ve been programming professionally for a little over 10 years now.</p>
 <p>This is one of the earliest software that I built.</p>
 </aside>
 </section>
@@ -292,8 +292,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb6-7"><a href="#cb6-7"></a><span class="op">}</span></span></code></pre></div>
 <aside class="notes">
 <p>And this could be its next shape, and so on. We had hundreds of these kinds of transformations - some small, and some big, and it was all too much for us to mentally track.</p>
-<p>Mistakes were made. Many mistakes, in fact, were made.</p>
-<p>Progress was very slow.</p>
+<p>This lack of mental model made it very difficult for us to make progress. We kept making mistakes and development just slowed down.</p>
 <p>We wanted a better way to track the changing shape of the data as they went through each transformation. And we had an inkling that types could be the answer.</p>
 </aside>
 </section>
@@ -419,7 +418,7 @@ React, Reason, and ReasonReact</code></pre>
 <p> </p>
 <p><img data-src="images/ahrefs.png" /></p>
 <aside class="notes">
-<p>If you have done any SEO work, you might be familiar with Ahrefs. They crawl about 5 million pages every minute, and they have the second largest index just after Google. They use native OCaml for all the back-end work and for the front-end web they use Reason.</p>
+<p>If you have done any SEO work, you might be familiar with Ahrefs. They crawl about 5 million pages every minute, and they have the second largest index just after Google. All this work is done using native OCaml.</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -537,14 +536,13 @@ React, Reason, and ReasonReact</code></pre>
 <span id="cb16-11"><a href="#cb16-11"></a><span class="op">}</span></span></code></pre></div>
 <aside class="notes">
 <p>At the bottom is the Javascript produced by BuckleScript. It is straightforward JS, and it uses the CommonJS syntax to require the momentjs npm module.</p>
-<p>That’s one of the best thing about Reason: since we’re using BuckleScript, we can use any npm library in our code. And we can integrate it into our existing Javascript projects as well.</p>
-<p>There is some work - you have to write type definitions for the library you want to use, but otherwise it is painless.</p>
+<p>That’s one of the best thing about Reason: since we’re using BuckleScript, we can use any npm library in our code. And since it produces regular Javascript, we can integrate it with our existing codebase as well.</p>
 </aside>
 </section>
 <section id="paradigm" class="slide level2">
 <h2>Paradigm</h2>
 <aside class="notes">
-<p>Let’s talk a little bit about programming language paradigms.</p>
+<p>Let’s talk a little bit about Reason’s programming language paradigm.</p>
 </aside>
 </section>
 <section class="slide level2">
@@ -564,10 +562,10 @@ React, Reason, and ReasonReact</code></pre>
 <p>Hindley–Milner type system</p>
 <aside class="notes">
 <p>So are languages like Elm, F#, and Haskell.</p>
-<p>All these languages share the same Type System - Hindley Milner typesystem, and have a similar approach to functional programming.</p>
-<p>A great thing is that if you read say an article about Elm, it is highly probable that it also applies to Reason. And vice versa.</p>
-<p>So when you learn Reason, you’re also dipping your toes into the vast, and varied world of Typed Functional Programming.</p>
-<p>Most things that I’ll speak about in this talk will also apply equally well to the other languages in this category.</p>
+<p>All these languages share the same Type System - it is called the Hindley Milner typesystem, and they also share a similar approach to functional programming.</p>
+<p>So if you read say an insightful article about Elm, it is highly probable that it also applies to Reason. And vice versa.</p>
+<p>In fact most things that I’ll speak about in this talk will also apply equally well to the other Typed functional languages as well.</p>
+<p>So when you learn Reason, you’re also dipping your toes into the vast, and varied world of all Typed Functional Programming languages.</p>
 </aside>
 </section>
 <section id="typed-fp" class="slide level2">
